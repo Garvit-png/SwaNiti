@@ -79,12 +79,11 @@ export default function Home() {
               </p>
             </div>
             <div className="footer-right">
-              <a href="#" className="let-us-go">Let us go <span className="arrow-thin-small">→</span></a>
               <a href="#contact" className="contact-link">Contact Us <span className="arrow-thin">→</span></a>
               <a href="#contact" className="join-btn">
                 Join Our Movement
                 <div className="arrow-box">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                 </div>
               </a>
             </div>
