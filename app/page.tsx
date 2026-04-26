@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { GooeyCursor, GooeyFilter } from '@/components/GooeyCursor'
-
+import ShaderBackground from '@/components/ShaderBackground'
 
 import Marquee from '@/components/Marquee'
 
@@ -41,6 +41,7 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="main-card"
         >
+          <ShaderBackground />
           <GooeyFilter id="goo-filter" strength={15} />
           <GooeyCursor />
 
