@@ -2,17 +2,12 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { GooeyCursor, GooeyFilter } from '@/components/GooeyCursor'
+
+
+import Marquee from '@/components/Marquee'
 
 export default function Home() {
-  const tags = [
-    { text: 'Inspiration', color: '#fff9e6' },
-    { text: 'Notions', color: '#e0fcf8' },
-    { text: "People's Aspiration", color: '#f0fdfc' },
-    { text: 'Unconventional', color: '#fff9e6' },
-    { text: 'Non-Partisan', color: '#e0fcf8' },
-    { text: 'Policy', color: '#f0fdfc' }
-  ];
-
   const projects = [
     {
       title: 'Sva-Bharat Movement',
@@ -46,6 +41,9 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="main-card"
         >
+          <GooeyFilter id="goo-filter" strength={15} />
+          <GooeyCursor />
+
           <header className="header">
             <div className="logo-container">
               <div className="logo-tab">
@@ -94,29 +92,11 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* TAGS SECTION */}
-      <section className="content-section tags-mesh">
-        <div className="tags-grid">
-          {tags.map((tag, i) => (
-            <motion.div 
-              key={tag.text}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ delay: i * 0.1 }}
-              className="tag-item"
-              style={{ background: tag.color }}
-            >
-              {tag.text}
-            </motion.div>
-          ))}
-          {/* Decorative circular images placeholders */}
-          {[1, 2, 3].map((n) => (
-            <div key={n} className={`decorative-circle circle-${n}`}></div>
-          ))}
-        </div>
-      </section>
+      {/* MARQUEE SECTION */}
+      <Marquee />
 
       {/* WHAT WE DO SECTION */}
+
       <section id="projects" className="content-section services-section">
         <motion.div 
           initial={{ opacity: 0 }}
