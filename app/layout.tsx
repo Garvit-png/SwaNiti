@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Inter, Lexend } from 'next/font/google'
 import './globals.css'
+import SmoothScroll from '@/components/SmoothScroll'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const lexend = Lexend({ subsets: ['latin'], variable: '--font-lexend' })
@@ -17,7 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${lexend.variable}`}>{children}</body>
+      <body className={`${inter.variable} ${lexend.variable}`}>
+        <SmoothScroll>{children}</SmoothScroll>
+      </body>
     </html>
   )
 }

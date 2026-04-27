@@ -1,5 +1,4 @@
 import React from 'react'
-import { motion } from 'framer-motion'
 
 const tags = [
   "Inspiration",
@@ -22,6 +21,13 @@ const Marquee = () => {
       <div className="marquee-content">
         {tags.map((tag, idx) => (
           <div key={idx} className="marquee-item">
+            {tag}
+            <span className="marquee-dot">•</span>
+          </div>
+        ))}
+        {/* Duplicate for seamless loop if needed, but the CSS translateX(-50%) handles it if content is wide enough */}
+        {tags.map((tag, idx) => (
+          <div key={`dup-${idx}`} className="marquee-item">
             {tag}
             <span className="marquee-dot">•</span>
           </div>

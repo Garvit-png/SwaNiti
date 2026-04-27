@@ -14,8 +14,30 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  /* scroll-behavior: smooth; */
 }
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
 
 body {
   font-family: var(--font-inter);
@@ -190,30 +212,34 @@ body {
   overflow: hidden;
   white-space: nowrap;
   background: white;
-  padding: 60px 0;
+  padding: 0;
   display: flex;
   align-items: center;
+  min-height: 100vh;
+  position: relative;
 }
 
 .marquee-content {
   display: inline-flex;
-  animation: marquee 30s linear infinite;
+  animation: marquee 12s linear infinite;
+  position: relative;
+  z-index: 10;
 }
 
 .marquee-item {
   display: inline-flex;
   align-items: center;
   font-family: var(--font-lexend);
-  font-size: 3rem;
+  font-size: 1.8rem;
   font-weight: 500;
   color: var(--primary-color);
-  margin-right: 40px;
+  margin-right: 24px;
 }
 
 .marquee-dot {
   color: #0ea5e9;
-  font-size: 2rem;
-  margin-left: 40px;
+  font-size: 1.2rem;
+  margin-left: 24px;
 }
 
 @keyframes marquee {
@@ -229,6 +255,10 @@ body {
 /* SERVICES SECTION */
 .services-section {
   padding: 100px 60px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .section-label {
@@ -271,6 +301,10 @@ body {
   background: var(--accent-teal);
   padding: 150px 60px;
   text-align: center;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .vision-content {
@@ -298,6 +332,10 @@ body {
 .contact-footer {
   padding: 100px 60px;
   background: #fdfdfd;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .contact-card {
@@ -370,3 +408,68 @@ body {
   .footer-bottom-links { flex-direction: column; gap: 40px; text-align: center; }
   .main-title { font-size: 3rem; }
 }
+
+/* TAILWIND SHIMS FOR GOOEY TEXT */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.h-screen { height: 100vh; }
+.h-0 { height: 0; }
+.w-0 { width: 0; }
+.inline-block { display: inline-block; }
+.select-none { user-select: none; }
+.text-center { text-align: center; }
+.text-foreground { color: var(--primary-color); }
+.overflow-hidden { overflow: hidden; }
+.pointer-events-none { pointer-events: none; }
+.font-lexend { font-family: var(--font-lexend); }
+.font-bold { font-weight: 700; }
+.font-medium { font-weight: 500; }
+.text-5xl { font-size: 3rem; line-height: 1; }
+.text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.mx-auto { margin-left: auto; margin-right: auto; }
+.drop-shadow-sm { filter: drop-shadow(0 1px 1px rgba(0,0,0,0.05)); }
+.shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+.rounded-2xl { border-radius: 1rem; }
+.border { border-width: 1px; border-style: solid; }
+.border-white\/30 { border-color: rgba(255, 255, 255, 0.3); }
+.bg-white\/20 { background-color: rgba(255, 255, 255, 0.2); }
+.bg-\[\#dcf8f3\] { background-color: #dcf8f3; }
+.backdrop-blur-sm { backdrop-filter: blur(4px); }
+.py-24 { padding-top: 6rem; padding-bottom: 6rem; }
+.min-h-\[60vh\] { min-height: 60vh; }
+.max-w-5xl { max-width: 64rem; }
+.h-\[300px\] { height: 300px; }
+.opacity-60 { opacity: 0.6; }
+
+.top-\[10\%\] { top: 10%; }
+.left-\[10\%\] { left: 10%; }
+.left-\[20\%\] { left: 20%; }
+.bottom-\[10\%\] { bottom: 10%; }
+.bottom-\[15\%\] { bottom: 15%; }
+.top-\[15\%\] { top: 15%; }
+.right-\[15\%\] { right: 15%; }
+.right-\[10\%\] { right: 10%; }
+.w-48 { width: 12rem; }
+.h-56 { height: 14rem; }
+.w-64 { width: 16rem; }
+.h-48 { height: 12rem; }
+.w-56 { width: 14rem; }
+.h-64 { height: 16rem; }
+.rotate-\[-8deg\] { transform: rotate(-8deg); }
+.rotate-\[6deg\] { transform: rotate(6deg); }
+.rotate-\[12deg\] { transform: rotate(12deg); }
+.rotate-\[-15deg\] { transform: rotate(-15deg); }
+
+@media (min-width: 768px) {
+  .md\:text-\[45pt\] { font-size: 45pt; }
+  .md\:text-7xl { font-size: 4.5rem; line-height: 1; }
+}
+@media (min-width: 1024px) {
+  .lg\:text-8xl { font-size: 6rem; line-height: 1; }
+}
+

@@ -5,6 +5,8 @@ import { motion } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import { GooeyCursor, GooeyFilter } from '@/components/GooeyCursor'
 import ShaderBackground from '@/components/ShaderBackground'
+import { GooeyText } from '@/components/ui/gooey-text-morphing'
+
 import Marquee from '@/components/Marquee'
 
 export default function Home() {
@@ -80,7 +82,7 @@ export default function Home() {
   return (
     <main className="main-viewport">
       {/* HERO SECTION */}
-      <section className="hero-container">
+      <section className="hero-container snap-section">
         <motion.div 
           ref={cardRef}
           initial={{ opacity: 0, scale: 0.98 }}
@@ -139,12 +141,42 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* GOOEY TEXT SECTION */}
+      <section className="relative w-full overflow-hidden bg-[#dcf8f3] flex items-center justify-center h-screen snap-section">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          {/* Photo placeholders for when you add them back */}
+          <div className="absolute top-[10%] left-[10%] w-48 h-56 rounded-2xl bg-white/20 backdrop-blur-sm border border-white/30 rotate-[-8deg] shadow-xl flex items-center justify-center text-[#0F2A33] font-medium text-sm opacity-60">Photo 1</div>
+          <div className="absolute bottom-[10%] left-[20%] w-64 h-48 rounded-2xl bg-white/20 backdrop-blur-sm border border-white/30 rotate-[6deg] shadow-xl flex items-center justify-center text-[#0F2A33] font-medium text-sm opacity-60">Photo 2</div>
+          <div className="absolute top-[15%] right-[15%] w-56 h-64 rounded-2xl bg-white/20 backdrop-blur-sm border border-white/30 rotate-[12deg] shadow-xl flex items-center justify-center text-[#0F2A33] font-medium text-sm opacity-60">Photo 3</div>
+          <div className="absolute bottom-[15%] right-[10%] w-48 h-48 rounded-2xl bg-white/20 backdrop-blur-sm border border-white/30 rotate-[-15deg] shadow-xl flex items-center justify-center text-[#0F2A33] font-medium text-sm opacity-60">Photo 4</div>
+        </div>
+
+        <div className="relative z-10 w-full h-full max-w-5xl mx-auto flex items-center justify-center">
+          <GooeyText
+            texts={[
+              "Inspiration",
+              "Notions",
+              "Unconventional",
+              "People's Aspiration",
+              "Non-Partisan",
+              "Policy"
+            ]}
+            morphTime={1.2}
+            cooldownTime={1.5}
+            className="w-full h-full"
+            textClassName="font-lexend font-bold text-[#0F2A33] drop-shadow-sm"
+          />
+        </div>
+      </section>
+
       {/* MARQUEE SECTION */}
-      <Marquee />
+      <section className="snap-section">
+        <Marquee />
+      </section>
 
       {/* WHAT WE DO SECTION */}
 
-      <section id="projects" className="content-section services-section">
+      <section id="projects" className="content-section services-section snap-section">
         <motion.div 
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -173,7 +205,7 @@ export default function Home() {
       </section>
 
       {/* VISION SECTION */}
-      <section className="vision-full">
+      <section className="vision-full snap-section">
         <motion.div 
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -189,7 +221,7 @@ export default function Home() {
       </section>
 
       {/* CONTACT & FOOTER */}
-      <section id="contact" className="content-section contact-footer">
+      <section id="contact" className="content-section contact-footer snap-section">
         <div className="contact-card">
           <div className="contact-info-panel">
             <h2>Let’s Talk,<br />What you got!</h2>
