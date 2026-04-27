@@ -1,7 +1,7 @@
 'use client'
 
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef, useEffect } from 'react'
+import { useRef } from 'react'
 
 const row1 = [
   { text: "Inspiration", type: "yellow" },
@@ -26,59 +26,24 @@ const row3 = [
 
 export default function ParallaxTicker() {
   const containerRef = useRef<HTMLDivElement>(null)
-  const mouse = useRef({ x: 0.5, y: 0.5 })
-  const smooth = useRef({ x: 0.5, y: 0.5 })
-  const rafId = useRef<number>(0)
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
   })
 
-  const xLeft = useTransform(scrollYProgress, [0, 1], [-200, 200])
-  const xRight = useTransform(scrollYProgress, [0, 1], [200, -200])
-
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const onMove = (e: MouseEvent) => {
-      const rect = container.getBoundingClientRect()
-      mouse.current = {
-        x: (e.clientX - rect.left) / rect.width,
-        y: (e.clientY - rect.top) / rect.height,
-      }
-    }
-
-    const animate = () => {
-      const lerp = 0.05
-      smooth.current.x += (mouse.current.x - smooth.current.x) * lerp
-      smooth.current.y += (mouse.current.y - smooth.current.y) * lerp
-
-      const x = (smooth.current.x * 100).toFixed(2)
-      const y = (smooth.current.y * 100).toFixed(2)
-
-      container.style.background = `
-        radial-gradient(circle at ${x}% ${y}%, rgba(180, 255, 230, 0.45) 0%, transparent 50%),
-        #ffffff
-      `
-      rafId.current = requestAnimationFrame(animate)
-    }
-
-    window.addEventListener('mousemove', onMove)
-    rafId.current = requestAnimationFrame(animate)
-
-    return () => {
-      window.removeEventListener('mousemove', onMove)
-      cancelAnimationFrame(rafId.current)
-    }
-  }, [])
+  // Using useTransform but with more optimized values
+  const xLeft = useTransform(scrollYProgress, [0, 1], ["-150px", "150px"])
+  const xRight = useTransform(scrollYProgress, [0, 1], ["150px", "-150px"])
 
   const renderRow = (data: any[], x: any) => (
-    <div className="parallax-row-wrapper">
-      <motion.div style={{ x }} className="parallax-row">
-        {[...data, ...data, ...data].map((item, idx) => (
-          <div key={idx} className="parallax-item">
+    <div className="parallax-row-wrapper" style={{ overflow: 'hidden' }}>
+      <motion.div 
+        style={{ x, willChange: 'transform' }} 
+        className="parallax-row"
+      >
+        {[...data, ...data].map((item, idx) => (
+          <div key={idx} className="parallax-item" style={{ gap: '50px' }}>
             {item.text ? (
               <div className={`parallax-tag tag-${item.type}`}>
                 {item.text}

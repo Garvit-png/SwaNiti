@@ -1,15 +1,14 @@
 "use client"
 
 import Image from 'next/image'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { useRef, useEffect } from 'react'
-import { GooeyCursor, GooeyFilter } from '@/components/GooeyCursor'
 import ShaderBackground from '@/components/ShaderBackground'
-import ImageGallery from '@/components/ImageGallery'
+import StickyNavbar from '@/components/StickyNavbar'
 import ParallaxTicker from '@/components/ParallaxTicker'
+import WhatWeDo from '@/components/WhatWeDo'
 
 export default function Home() {
-  const cardRef = useRef<HTMLDivElement>(null)
   const footerRef = useRef<HTMLDivElement>(null)
   const mouse = useRef({ x: 0.5, y: 0.5 })
   const smooth = useRef({ x: 0.5, y: 0.5 })
@@ -53,23 +52,21 @@ export default function Home() {
 
   return (
     <main className="main-viewport">
+      <StickyNavbar />
       {/* HERO SECTION */}
       <section className="hero-container">
         <motion.div 
-          ref={cardRef}
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
           className="main-card framed-card"
         >
           <ShaderBackground />
-          <GooeyFilter id="goo-filter" strength={15} />
-          <GooeyCursor />
 
           <header className="header">
             <div className="logo-container">
               <div className="logo-tab">
-                <Image src="/logo.png" alt="Logo" width={60} height={60} priority />
+                <Image src="/logo.png" alt="Logo" width={55} height={55} priority />
               </div>
               <span className="brand-name">SvaNiti Policy Research Center</span>
             </div>
@@ -118,11 +115,11 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* TICKER SECTION — Multi-row parallax */}
+      {/* TICKER SECTION */}
       <ParallaxTicker />
 
-      {/* IMAGE GALLERY SECTION */}
-      <ImageGallery />
+      {/* WHAT WE DO SECTION */}
+      <WhatWeDo />
 
       {/* FOOTER SECTION */}
       <div className="footer-container">
