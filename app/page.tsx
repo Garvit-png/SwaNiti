@@ -14,44 +14,9 @@ export default function Home() {
   const smooth = useRef({ x: 0.5, y: 0.5 })
   const rafId = useRef<number>(0)
 
-  useEffect(() => {
-    const footer = footerRef.current
-    if (!footer) return
-
-    const onMove = (e: MouseEvent) => {
-      const rect = footer.getBoundingClientRect()
-      mouse.current = {
-        x: (e.clientX - rect.left) / rect.width,
-        y: (e.clientY - rect.top) / rect.height,
-      }
-    }
-
-    const animate = () => {
-      const lerp = 0.05
-      smooth.current.x += (mouse.current.x - smooth.current.x) * lerp
-      smooth.current.y += (mouse.current.y - smooth.current.y) * lerp
-
-      const x = (smooth.current.x * 100).toFixed(2)
-      const y = (smooth.current.y * 100).toFixed(2)
-
-      footer.style.background = `
-        radial-gradient(circle at ${x}% ${y}%, rgba(180, 255, 230, 0.45) 0%, transparent 50%),
-        #ffffff
-      `
-      rafId.current = requestAnimationFrame(animate)
-    }
-
-    window.addEventListener('mousemove', onMove)
-    rafId.current = requestAnimationFrame(animate)
-
-    return () => {
-      window.removeEventListener('mousemove', onMove)
-      cancelAnimationFrame(rafId.current)
-    }
-  }, [])
-
   return (
     <main className="main-viewport">
+
       <StickyNavbar />
       {/* HERO SECTION */}
       <section className="hero-container">

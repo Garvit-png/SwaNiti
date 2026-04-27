@@ -55,9 +55,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       className={`stagger-card ${isCenter ? 'is-center' : ''}`}
       style={{
         width: cardSize,
-        height: cardSize + 180, /* Made card longer as requested */
+        height: cardSize + 180,
         borderRadius: '32px',
-        border: isCenter ? 'none' : '1px solid rgba(15, 42, 51, 0.15)',
+        /* Proper border added as requested, matching the main frame */
+        border: '5px solid rgba(15, 42, 51, 0.25)', 
         background: isCenter ? '#0B2228' : '#ffffff',
         transform: `
           translate(-50%, -50%) 
@@ -85,7 +86,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         fontSize: '1.6rem', 
         lineHeight: 1.2,
         color: isCenter ? 'white' : '#0B2228',
-        fontWeight: 300,
+        fontWeight: 400, // Slightly bolder as well
         marginBottom: '24px'
       }}>
         {project.title}
@@ -147,13 +148,13 @@ export const StaggerProjects: React.FC = () => {
       for (let i = steps; i > 0; i--) {
         const item = newList.shift();
         if (!item) return;
-        newList.push({ ...item, tempId: Math.random() });
+        newList.push(item);
       }
     } else {
       for (let i = steps; i < 0; i++) {
         const item = newList.pop();
         if (!item) return;
-        newList.unshift({ ...item, tempId: Math.random() });
+        newList.unshift(item);
       }
     }
     setProjectsList(newList);

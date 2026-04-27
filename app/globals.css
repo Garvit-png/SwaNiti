@@ -20,6 +20,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity; /* Professional soft-snapping */
 }
 
 body {
@@ -29,29 +30,35 @@ body {
   overflow-x: hidden;
 }
 
+/* SECTION ANCHORS */
 .hero-container, .parallax-ticker-container {
-  /* Removed scroll-snap for fluid motion on first 2 pages */
   min-height: 100vh;
 }
 
-.what-we-do-container, .vision-section {
+.what-we-do-container {
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.what-we-do-inner, .vision-section {
+  min-height: 100vh;
+  width: 100vw;
   scroll-snap-align: start;
-  scroll-snap-stop: always;
-  min-height: 100vh;
 }
-
-
 
 /* UTILITIES */
 .framed-card {
   margin: 20px;
   border-radius: 40px;
-  border: 4px solid rgba(15, 42, 51, 0.2); /* Bigger border box */
+  border: none;
   overflow: hidden;
   position: relative;
-  transition: background 0.1s ease;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
 }
+
+
 
 
 /* HERO SECTION */
@@ -60,16 +67,14 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
 }
 
 .main-card {
   width: calc(100% - 40px);
   height: calc(100% - 40px);
-  background: #dcf8f3;
+  background: linear-gradient(120deg, #fff9e6 0%, #e0fcf8 45%, #b2ebf2 100%);
   display: flex;
   flex-direction: column;
-  padding: 0;
 }
 
 .header {
@@ -90,12 +95,23 @@ body {
   gap: 15px;
 }
 
-.logo-tab {
+/* Only apply the cutout logic to the main Hero header, NOT the sticky navbar */
+.header .logo-container {
+  padding-left: 90px; 
+}
+
+.header .logo-tab {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 120px;
+  background: white;
+  border-bottom-right-radius: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: auto;
-  height: auto;
+  z-index: 10;
 }
 
 .brand-name {
@@ -108,7 +124,7 @@ body {
 
 .nav {
   display: flex;
-  gap: 10px; /* Reduced gap because of pill background */
+  gap: 10px;
 }
 
 .nav-link {
@@ -138,7 +154,7 @@ body {
 .main-title {
   font-family: var(--font-lexend);
   font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 300;
+  font-weight: 200; /* Made thinner */
   line-height: 1.1;
   text-align: center;
   letter-spacing: -0.02em;
@@ -218,16 +234,16 @@ body {
 .parallax-ticker-container {
   overflow: hidden;
   padding: 80px 0;
-  min-height: calc(100vh - 40px);
   margin: 20px;
   border-radius: 40px;
-  border: 2px solid rgba(15, 42, 51, 0.12);
+  border: none;
   display: flex;
+
+
   flex-direction: column;
   justify-content: center;
   gap: 120px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.03);
-  background: white; /* Changed back to white as requested */
+  background: white;
 }
 
 .parallax-row {
@@ -237,73 +253,31 @@ body {
 }
 
 .parallax-tag {
-  padding: 20px 60px; /* Refined padding */
-  border-radius: 20px;
+  padding: 30px 80px;
+  border-radius: 40px;
   font-family: var(--font-lexend);
-  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
-  font-weight: 500;
+  font-size: clamp(2.5rem, 5vw, 4rem); /* Made much bigger */
+  font-weight: 400;
   color: #0B2228;
 }
 
+.tag-yellow { background: #fffde6; border: 1px solid rgba(0,0,0,0.03); }
+.tag-cyan { background: #e0fcf8; }
+
 .parallax-img-wrapper {
-  width: 100px;
-  height: 100px;
+  width: 150px; /* Made bigger */
+  height: 150px; /* Made bigger */
   border-radius: 50%;
   overflow: hidden;
 }
 
-
-
 .parallax-img { width: 100%; height: 100%; object-fit: cover; }
-
-/* WHAT WE DO */
-.what-we-do-container {
-  padding: 0;
-}
-
-.what-we-do-inner {
-  padding: 60px;
-  min-height: 100vh;
-  margin: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.centered-heading-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 80px;
-}
-
-.heading-tag {
-  background: #0B2228;
-  color: white;
-  padding: 6px 16px;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  width: fit-content;
-}
-
-.what-we-do-heading-short {
-  font-family: var(--font-lexend);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 700;
-  color: #0B2228;
-  margin-top: 15px;
-}
 
 /* STAGGERED PROJECTS */
 .stagger-container {
   position: relative;
   width: 100%;
-  height: 750px;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .stagger-card {
@@ -313,58 +287,20 @@ body {
   cursor: pointer;
   background: white;
   color: #0B2228;
-  transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   display: flex;
   flex-direction: column;
-  padding: 40px 35px; /* Reduced from 50x40 */
-  border-radius: 30px; /* More compact radius */
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .stagger-card.is-center {
   background: #0B2228;
   color: white;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-}
-
-.card-title {
-  font-family: var(--font-lexend);
-  font-size: 1.6rem; /* Reduced from 1.8 */
-  margin-bottom: 20px;
-}
-
-.card-desc {
-  font-size: 0.95rem; /* Reduced from 1rem */
-  line-height: 1.6;
-  flex: 1;
-}
-
-
-.card-footer-info {
-  position: absolute;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.card-by {
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 0.8rem;
-}
-
-.card-arrow-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 .stagger-controls {
   position: absolute;
-  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -373,20 +309,12 @@ body {
 }
 
 .stagger-control-btn {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
-  background: white;
-  border: 1px solid rgba(15, 42, 51, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
 }
-
-.stagger-control-btn:hover { background: #0B2228; color: white; transform: translateY(-5px); }
 
 /* STICKY NAVBAR */
 .sticky-navbar {
@@ -395,7 +323,7 @@ body {
   left: 0;
   width: 100%;
   height: 90px;
-  background: #f0fdf4; /* Soft mint green */
+  background: #f0fdf4;
   border-bottom: 1px solid rgba(15, 42, 51, 0.1);
   z-index: 1000;
   display: flex;
@@ -404,7 +332,6 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
 }
 
-
 .sticky-navbar-content {
   width: 100%;
   display: flex;
@@ -412,7 +339,7 @@ body {
   align-items: center;
 }
 
-/* FOOTER MINIMAL */
+/* FOOTER */
 .footer-container { background: #fff; }
 .footer-minimal { padding: 60px; margin: 20px; }
 .footer-bottom-links { display: flex; justify-content: space-between; align-items: center; }
@@ -420,13 +347,10 @@ body {
 .footer-nav a { text-decoration: none; color: #64748b; font-weight: 600; font-size: 0.95rem; }
 .copyright { color: #94a3b8; font-size: 0.9rem; }
 
-#nextjs-portal, .nextjs-toast-errors-parent { display: none !important; }
-
-.tag-yellow { background: #fffde6; border: 1px solid rgba(0,0,0,0.03); }
-.tag-cyan { background: #e0fcf8; }
-
+/* OPTIMIZATIONS */
 .parallax-row, .parallax-item, .parallax-tag, .parallax-img-wrapper {
   transform: translateZ(0);
   backface-visibility: hidden;
-  perspective: 1000;
 }
+
+#nextjs-portal, .nextjs-toast-errors-parent { display: none !important; }

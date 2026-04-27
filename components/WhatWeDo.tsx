@@ -3,51 +3,47 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { StaggerProjects } from '@/components/ui/stagger-testimonials'
-import FloatingPaths from '@/components/FloatingPaths'
 
 export default function WhatWeDo() {
   const title = "What We Do"
   const words = title.split(" ")
 
   return (
-    <section className="what-we-do-container">
+    <section className="what-we-do-container" style={{ background: 'linear-gradient(to bottom, #fff9e6 0%, #fff9e6 50%, #e0fcf8 100%)' }}>
       <div 
-        className="what-we-do-inner framed-card" 
+        className="what-we-do-inner" 
         style={{ 
           minHeight: '100vh', 
+          width: '100%',
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
-          justifyContent: 'flex-start',
-          padding: '50px 60px',
-          background: '#fff9e6',
-          position: 'relative'
+          justifyContent: 'center',
+          padding: '60px',
+          background: 'transparent'
         }}
       >
-        {/* BACKGROUND ANIMATION */}
-        <FloatingPaths position={1} />
-        <FloatingPaths position={-1} />
-
-        <div className="centered-heading-wrapper" style={{ marginBottom: '50px', position: 'relative', zIndex: 10 }}>
+        <div style={{ position: 'absolute', top: '60px', left: '60px' }}>
           <span className="heading-tag" style={{ 
-            letterSpacing: '0.2em', 
-            background: 'transparent', 
-            color: '#0B2228', 
-            border: '2px solid rgba(11, 34, 40, 0.4)',
-            padding: '10px 24px',
-            fontSize: '0.75rem',
-            fontWeight: 700
+            letterSpacing: '0.15em', 
+            background: '#0B2228', 
+            color: 'white', 
+            padding: '12px 20px',
+            fontSize: '0.8rem',
+            fontWeight: 700,
+            borderRadius: '6px'
           }}>
             OUR IMPACT
           </span>
+        </div>
+        <div className="centered-heading-wrapper" style={{ marginBottom: '60px', marginTop: '20px' }}>
           <h2 className="what-we-do-heading-short" style={{ 
             display: 'flex', 
             justifyContent: 'center', 
             flexWrap: 'wrap',
             fontWeight: 500,
-            fontSize: '3.4rem', 
-            letterSpacing: '0.01em',
-            marginTop: '25px',
+            fontSize: '3.8rem', 
+            letterSpacing: '-0.01em',
             color: '#0B2228'
           }}>
             {words.map((word, wordIndex) => (
@@ -73,29 +69,31 @@ export default function WhatWeDo() {
           </h2>
         </div>
         
-        <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto', position: 'relative', zIndex: 10 }}>
+        <motion.div 
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
+          style={{ width: '100%', maxWidth: '1400px', margin: '0 auto' }}
+        >
           <StaggerProjects />
-        </div>
+        </motion.div>
       </div>
 
-      <div className="vision-section framed-card" style={{ 
-        background: '#e0fcf8', 
+      <div className="vision-section" style={{ 
+        background: 'transparent', 
         minHeight: '100vh', 
         display: 'flex', 
         flexDirection: 'column', 
         justifyContent: 'center', 
         alignItems: 'center',
-        padding: '100px',
-        position: 'relative',
-        overflow: 'hidden'
+        padding: '100px'
       }}>
-         <FloatingPaths position={1} />
-         
-         <div className="centered-heading-wrapper" style={{ position: 'relative', zIndex: 10 }}>
-          <span className="heading-tag" style={{ fontWeight: 700 }}>THE FUTURE</span>
+         <div className="centered-heading-wrapper">
+          <span className="heading-tag" style={{ background: '#0B2228', color: 'white', padding: '10px 24px', borderRadius: '8px', fontWeight: 700 }}>THE FUTURE</span>
           <h2 className="what-we-do-heading-short" style={{ fontWeight: 500, fontSize: '3.4rem', marginTop: '30px', color: '#0B2228' }}>Our Vision</h2>
         </div>
-         <div style={{ maxWidth: '800px', textAlign: 'center', position: 'relative', zIndex: 10 }}>
+         <div style={{ maxWidth: '800px', textAlign: 'center' }}>
             <p style={{ 
               fontSize: '1.4rem', 
               lineHeight: 1.8, 

@@ -1,6 +1,6 @@
 'use client'
 
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { useRef } from 'react'
 
 const row1 = [
@@ -32,9 +32,14 @@ export default function ParallaxTicker() {
     offset: ["start end", "end start"]
   })
 
-  // Using useTransform but with more optimized values
-  const xLeft = useTransform(scrollYProgress, [0, 1], ["-150px", "150px"])
-  const xRight = useTransform(scrollYProgress, [0, 1], ["150px", "-150px"])
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  })
+
+  const xLeft = useTransform(smoothProgress, [0, 1], ["-150px", "150px"])
+  const xRight = useTransform(smoothProgress, [0, 1], ["150px", "-150px"])
 
   const renderRow = (data: any[], x: any) => (
     <div className="parallax-row-wrapper" style={{ overflow: 'hidden' }}>
@@ -60,7 +65,18 @@ export default function ParallaxTicker() {
   )
 
   return (
-    <div ref={containerRef} className="parallax-ticker-container framed-card">
+    <div ref={containerRef} className="parallax-ticker-container" style={{ 
+      background: '#fff', 
+      minHeight: '100vh', 
+      width: '100vw',
+      display: 'flex', 
+      flexDirection: 'column',
+      justifyContent: 'center',
+      gap: '80px',
+      overflow: 'hidden',
+      padding: '100px 0',
+      margin: 0
+    }}>
       {renderRow(row1, xLeft)}
       {renderRow(row2, xRight)}
       {renderRow(row3, xLeft)}
