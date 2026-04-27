@@ -62,14 +62,14 @@ export default function ParallaxTicker() {
   return (
     <div ref={containerRef} className="parallax-ticker-container" style={{ 
       background: '#fff', 
-      minHeight: '100vh', 
+      height: '100vh', 
       width: '100vw',
       display: 'flex', 
       flexDirection: 'column',
       justifyContent: 'center',
       gap: '80px',
       overflow: 'hidden',
-      padding: '100px 0',
+      padding: '0',
       margin: 0
     }}>
       {renderRow(row1, xLeft)}

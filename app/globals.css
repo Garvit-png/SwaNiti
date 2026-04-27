@@ -20,31 +20,48 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+
+.main-viewport {
+  width: 100vw;
+  position: relative;
 }
 
 body {
   font-family: var(--font-inter);
   color: var(--primary-color);
   background: white;
-  overflow-x: hidden;
+  /* Removed overflow-x: hidden here because it breaks scroll snapping on the parent! */
 }
 
 /* SECTION ANCHORS */
-.hero-container, .parallax-ticker-container {
-  min-height: 100vh;
+.hero-container, 
+.parallax-ticker-container, 
+.vision-section,
+.footer-container {
+  height: 100vh;
+  width: 100vw;
+  /* Removed scroll-snap to prevent getting stuck */
+  overflow: hidden;
+  position: relative;
 }
+
+.what-we-do-inner {
+  height: 100vh;
+  width: 100vw;
+  scroll-snap-align: center;
+  overflow: visible; /* Allow cards to bleed out smoothly */
+  position: relative;
+}
+
 
 .what-we-do-container {
   width: 100vw;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
-.what-we-do-inner, .vision-section {
-  min-height: 100vh;
-  width: 100vw;
-}
 
 
 /* UTILITIES */
@@ -304,7 +321,7 @@ body {
   transform: translateX(-50%);
   display: flex;
   gap: 20px;
-  z-index: 100;
+  z-index: 999; /* Boosted to ensure it's always on top */
 }
 
 .stagger-control-btn {

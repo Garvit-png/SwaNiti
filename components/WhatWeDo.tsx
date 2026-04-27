@@ -1,105 +1,102 @@
-'use client'
-
 import React from 'react'
-import { motion } from 'framer-motion'
 import { StaggerProjects } from '@/components/ui/stagger-testimonials'
 
 export default function WhatWeDo() {
-  const title = "What We Do"
-  const words = title.split(" ")
-
   return (
-    <section className="what-we-do-container" style={{ background: 'linear-gradient(to bottom, #fff9e6 0%, #fff9e6 50%, #e0fcf8 100%)' }}>
-      <div 
-        className="what-we-do-inner" 
-        style={{ 
-          minHeight: '100vh', 
-          width: '100%',
-          position: 'relative', /* Fix: Contain the absolute tag */
-          overflow: 'hidden',
+    <div 
+      className="what-we-do-inner"
+      style={{ 
+        height: '100vh', 
+        width: '100vw',
+        background: 'white',
+        padding: '20px',
+        boxSizing: 'border-box',
+        display: 'flex',
+      }}
+    >
+      {/* Wrapper to allow the white cutout to sit perfectly on top of the bordered yellow card */}
+      <div style={{ position: 'relative', flex: 1, display: 'flex' }}>
+        
+        {/* YELLOW CARD */}
+        <div style={{
+          flex: 1,
+          background: '#fff3c4',
+          border: '2px solid #0B2228',
+          borderRadius: '32px',
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
+          alignItems: 'center',
           padding: '60px',
-          background: 'transparent'
-        }}
-      >
-        <div style={{ position: 'absolute', top: '60px', left: '60px' }}>
-          <span className="heading-tag" style={{ 
-            letterSpacing: '0.15em', 
-            background: '#0B2228', 
-            color: 'white', 
-            padding: '12px 20px',
-            fontSize: '0.8rem',
-            fontWeight: 700,
-            borderRadius: '6px'
-          }}>
-            OUR IMPACT
-          </span>
-        </div>
-        <div className="centered-heading-wrapper" style={{ marginBottom: '60px', marginTop: '20px' }}>
-          <h2 className="what-we-do-heading-short" style={{ 
+          overflow: 'hidden', // Keeps carousel cards inside the yellow card
+        }}>
+          {/* Curved "What We Do" heading — SVG textPath arc */}
+          <svg
+            viewBox="0 0 800 120"
+            style={{ width: '80%', maxWidth: '700px', marginBottom: '30px', overflow: 'visible', zIndex: 6, position: 'relative' }}
+          >
+            <defs>
+              <path
+                id="textCurve"
+                d="M 50,90 Q 400,10 750,90"
+              />
+            </defs>
+            <text
+              fill="#0B2228"
+              fontSize="62"
+              fontWeight="500"
+              fontFamily="var(--font-inter), sans-serif"
+              letterSpacing="-1"
+            >
+              <textPath href="#textCurve" startOffset="50%" textAnchor="middle">
+                What We Do
+              </textPath>
+            </text>
+          </svg>
+
+          <div style={{ 
+            width: '100%', 
             display: 'flex', 
             justifyContent: 'center', 
-            flexWrap: 'wrap',
-            fontWeight: 500,
-            fontSize: '3.8rem', 
-            letterSpacing: '-0.01em',
-            color: '#0B2228'
+            position: 'relative',
+            zIndex: 6,
           }}>
-            {words.map((word, wordIndex) => (
-                <span key={wordIndex} style={{ display: 'inline-block', marginRight: '15px' }}>
-                    {word.split("").map((letter, letterIndex) => (
-                        <motion.span
-                            key={`${wordIndex}-${letterIndex}`}
-                            initial={{ y: 20, opacity: 0 }}
-                            whileInView={{ y: 0, opacity: 1 }}
-                            viewport={{ once: true }}
-                            transition={{
-                                delay: wordIndex * 0.1 + letterIndex * 0.03,
-                                duration: 0.8,
-                                ease: [0.22, 1, 0.36, 1]
-                            }}
-                            style={{ display: 'inline-block' }}
-                        >
-                            {letter}
-                        </motion.span>
-                    ))}
-                </span>
-            ))}
-          </h2>
+            <StaggerProjects />
+          </div>
         </div>
-        
-        <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
-          <StaggerProjects />
-        </div>
-      </div>
 
-      <div className="vision-section" style={{ 
-        background: 'transparent', 
-        minHeight: '100vh', 
-        display: 'flex', 
-        flexDirection: 'column', 
-        justifyContent: 'center', 
-        alignItems: 'center',
-        padding: '100px'
-      }}>
-         <div className="centered-heading-wrapper">
-          <span className="heading-tag" style={{ background: '#0B2228', color: 'white', padding: '10px 24px', borderRadius: '8px', fontWeight: 700 }}>THE FUTURE</span>
-          <h2 className="what-we-do-heading-short" style={{ fontWeight: 500, fontSize: '3.4rem', marginTop: '30px', color: '#0B2228' }}>Our Vision</h2>
-        </div>
-         <div style={{ maxWidth: '800px', textAlign: 'center' }}>
-            <p style={{ 
-              fontSize: '1.4rem', 
-              lineHeight: 1.8, 
-              color: '#0B2228', 
-              fontWeight: 400,
-              opacity: 0.8 
+        {/* WHITE CUTOUT BOX WITH BORDERS */}
+        <div style={{
+          position: 'absolute',
+          top: '-2px', // Pulls up to perfectly cover the yellow card's top border
+          left: '-2px', // Pulls left to perfectly cover the yellow card's left border
+          padding: '0 32px 32px 0', // Creates the white gap around the dark pill
+          background: 'white',
+          borderRight: '2px solid #0B2228', // Draws the notch's right border
+          borderBottom: '2px solid #0B2228', // Draws the notch's bottom border
+          borderBottomRightRadius: '40px', // The smooth curve of the notch
+          zIndex: 10,
+        }}>
+          {/* Dark Pill "Our Impact" */}
+          <div style={{
+            background: '#0B2228',
+            padding: '16px 32px',
+            borderRadius: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            <span style={{
+              color: 'white',
+              fontSize: '1.1rem',
+              fontWeight: 600,
             }}>
-              To redefine the policy landscape of Bharat by bridging the gap between grassroots aspirations and national governance through evidence-based research and creative economic affairs.
-            </p>
-         </div>
+              Our Impact
+            </span>
+          </div>
+        </div>
+
       </div>
-    </section>
+    </div>
   )
 }
