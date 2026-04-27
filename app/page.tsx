@@ -2,12 +2,58 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 import { GooeyCursor, GooeyFilter } from '@/components/GooeyCursor'
 import ShaderBackground from '@/components/ShaderBackground'
-
 import Marquee from '@/components/Marquee'
 
 export default function Home() {
+  const cardRef = useRef<HTMLDivElement>(null)
+  const mouse = useRef({ x: 0.15, y: 0.45 })
+  const smooth = useRef({ x: 0.15, y: 0.45 })
+  const rafId = useRef<number>(0)
+
+  useEffect(() => {
+    const card = cardRef.current
+    if (!card) return
+
+    const onMove = (e: MouseEvent) => {
+      const rect = card.getBoundingClientRect()
+      mouse.current = {
+        x: (e.clientX - rect.left) / rect.width,
+        y: (e.clientY - rect.top) / rect.height,
+      }
+    }
+
+    const animate = () => {
+      const lerp = 0.05
+      smooth.current.x += (mouse.current.x - smooth.current.x) * lerp
+      smooth.current.y += (mouse.current.y - smooth.current.y) * lerp
+
+      const x = (smooth.current.x * 100).toFixed(2)
+      const y = (smooth.current.y * 100).toFixed(2)
+
+      // Secondary orb — offset a bit from cursor for depth
+      const x2 = ((smooth.current.x * 0.6 + 0.2) * 100).toFixed(2)
+      const y2 = ((smooth.current.y * 0.6 + 0.1) * 100).toFixed(2)
+
+      card.style.background = `
+        radial-gradient(circle at ${x}% ${y}%, rgba(180, 255, 230, 0.55) 0%, transparent 45%),
+        radial-gradient(circle at ${x2}% ${y2}%, rgba(255, 245, 130, 0.28) 0%, transparent 50%),
+        #dcf8f3
+      `
+      rafId.current = requestAnimationFrame(animate)
+    }
+
+    window.addEventListener('mousemove', onMove)
+    rafId.current = requestAnimationFrame(animate)
+
+    return () => {
+      window.removeEventListener('mousemove', onMove)
+      cancelAnimationFrame(rafId.current)
+    }
+  }, [])
+
   const projects = [
     {
       title: 'Sva-Bharat Movement',
@@ -36,6 +82,7 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="hero-container">
         <motion.div 
+          ref={cardRef}
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}

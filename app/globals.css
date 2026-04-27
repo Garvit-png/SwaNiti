@@ -30,22 +30,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px;
 }
 
 .main-card {
-  width: 96vw;
-  height: 92vh;
-  background: 
-    radial-gradient(circle at 10% 50%, rgba(255, 245, 157, 0.3) 0%, transparent 60%),
-    #dcf8f3;
-  border-radius: 40px;
+  width: 100vw;
+  height: 100vh;
+  background: #dcf8f3;
+  border-radius: 0;
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: 0; /* Remove padding to handle header tab properly */
-  box-shadow: 0 40px 100px rgba(0,0,0,0.05);
+  padding: 0;
   overflow: hidden;
+  transition: background 0.1s ease;
 }
 
 
@@ -55,7 +52,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 60px 0 60px;
+  padding: 18px 60px 0 36px;
   z-index: 20;
 }
 
