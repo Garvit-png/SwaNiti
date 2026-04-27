@@ -1,10 +1,14 @@
-import type { Metadata } from 'next'
-import { Inter, Lexend } from 'next/font/google'
+import { Inter, Lexend, Poppins } from 'next/font/google'
 import './globals.css'
 import SmoothScroll from '@/components/SmoothScroll'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const lexend = Lexend({ subsets: ['latin'], variable: '--font-lexend' })
+const poppins = Poppins({ 
+  subsets: ['latin'], 
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: '--font-poppins' 
+})
 
 export const metadata: Metadata = {
   title: 'SvaNiti Policy Research Center',
@@ -18,8 +22,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${lexend.variable}`}>
-        <SmoothScroll>{children}</SmoothScroll>
+      <body className={`${inter.variable} ${lexend.variable} ${poppins.variable}`}>
+        {children}
       </body>
     </html>
   )

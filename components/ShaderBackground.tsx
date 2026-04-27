@@ -42,7 +42,7 @@ const ShaderBackground = () => {
     const float offsetSpeed = 1.33 * overallSpeed;
     const float minOffsetSpread = 0.6;
     const float maxOffsetSpread = 2.0;
-    const int linesPerGroup = 8;
+    const int linesPerGroup = 5;
 
     #define drawCircle(pos, radius, coord) smoothstep(radius + gridSmoothWidth, radius, length(coord - (pos)))
     #define drawSmoothLine(pos, halfWidth, t) smoothstep(halfWidth, 0.0, abs(pos - (t)))
