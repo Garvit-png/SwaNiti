@@ -15,6 +15,7 @@ export default function WhatWeDo() {
         style={{ 
           minHeight: '100vh', 
           width: '100%',
+          position: 'relative', /* Fix: Contain the absolute tag */
           overflow: 'hidden',
           display: 'flex',
           flexDirection: 'column',
@@ -69,15 +70,9 @@ export default function WhatWeDo() {
           </h2>
         </div>
         
-        <motion.div 
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-          style={{ width: '100%', maxWidth: '1400px', margin: '0 auto' }}
-        >
+        <div style={{ width: '100%', maxWidth: '1400px', margin: '0 auto' }}>
           <StaggerProjects />
-        </motion.div>
+        </div>
       </div>
 
       <div className="vision-section" style={{ 
