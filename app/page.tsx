@@ -24,8 +24,7 @@ export default function Home() {
     offset: ["start start", "end start"]
   })
 
-  // Simple Layered Transition: Photo stays solid, Testimonials rise over it
-  const testimonialsY = useTransform(scrollYProgress, [0.1, 0.95], ["100vh", "0vh"])
+  // Clean Transition: Just the contact rise
 
   const contactRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress: contactProgress } = useScroll({
@@ -206,70 +205,44 @@ export default function Home() {
 
         </div>
       </div>
-
-      {/* LAYERED TRANSITION SECTION: PHOTO FADES / TESTIMONIALS RISE */}
       <div ref={teamRef} style={{
-        height: '150vh', // Shorter height for a snappier experience
+        height: '150vh', 
         width: '100vw',
         background: '#f8fafc', 
         position: 'relative',
-        scrollSnapAlign: 'start', // Locks the viewport to the solid photo arrival
+        scrollSnapAlign: 'start', 
       }}>
-        {/* Sticky Background Layer: Team Photo */}
         <div style={{
           position: 'sticky',
           top: 0,
           height: '100vh',
           width: '100%',
           overflow: 'hidden',
-          zIndex: 5
+          zIndex: 5,
+          padding: '40px',
+          boxSizing: 'border-box'
         }}>
-          <motion.div 
-            style={{ 
-              width: '100%',
-              height: '100%',
-              position: 'relative',
-              padding: '40px', 
-              boxSizing: 'border-box'
-            }}
-          >
-            <div style={{ 
-              width: '100%', 
-              height: '100%', 
-              position: 'relative', 
-              borderRadius: '32px', 
-              overflow: 'hidden',
-              background: '#fff'
-            }}>
-              <Image 
-                src="/gallery/SvanitiPhoto.png" 
-                alt="SvaNiti Team" 
-                fill 
-                style={{ objectFit: 'cover', objectPosition: '49% 47%' }}
-                unoptimized
-                priority
-              />
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Rising Foreground Layer: Testimonial Carousel */}
-        <motion.div 
-          style={{
-            position: 'sticky',
-            top: 0,
-            height: '100vh',
-            width: '100vw',
-            zIndex: 10,
-            y: testimonialsY,
-            pointerEvents: 'none', 
-          }}
-        >
-          <div style={{ height: '100%', width: '100%', pointerEvents: 'auto' }}>
-            <TestimonialCarousel />
+          <div style={{ 
+            width: '100%', 
+            height: '100%', 
+            position: 'relative', 
+            borderRadius: '32px', 
+            overflow: 'hidden',
+            background: '#fff'
+          }}>
+            <Image 
+              src="/gallery/SvanitiPhoto.png" 
+              alt="SvaNiti Team" 
+              fill 
+              style={{ objectFit: 'cover', objectPosition: '49% 47%' }}
+              unoptimized
+              priority
+            />
           </div>
-        </motion.div>
+        </div>
       </div>
+
+      <TestimonialCarousel />
 
       {/* CONTACT SECTION WITH RISE EFFECT */}
       <motion.div 
