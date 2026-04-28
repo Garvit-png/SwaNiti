@@ -3,26 +3,28 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Image from 'next/image';
 
 const testimonials = [
   {
     id: 0,
     quote: "The idea of SvaNiti is much needed and Aadil has much more clarity on this idea at this initial stage.",
-    author: "Jigar Inamdar (Youth Leader & Politician)",
-    subtitle: "PBC 2024, Rishihood University."
+    author: "Jigar Inamdar",
+    role: "Youth Leader & Politician",
+    event: "PBC 2024, Rishihood University"
   },
   {
     id: 1,
     quote: "It's need of time that our country needs Creative Economy Ministry. SvaNiti is Bang on promoting idea and research on the same.",
-    author: "Sheron (Creative Artist)",
-    subtitle: "Nudge Charcha 2024"
+    author: "Sheron",
+    role: "Creative Artist",
+    event: "Nudge Charcha 2024"
   },
   {
     id: 2,
     quote: "SvaNiti's approach to local governance and policy research is exactly what we need for a Viksit Bharat.",
-    author: "Rohan Gupta (Policy Analyst)",
-    subtitle: "NITI Aayog Workshop 2024"
+    author: "Rohan Gupta",
+    role: "Policy Analyst",
+    event: "NITI Aayog Workshop 2024"
   }
 ];
 
@@ -34,126 +36,157 @@ export default function TestimonialCarousel() {
 
   return (
     <div style={{
-      height: '60vh', // Even shorter height
+      height: '100vh',
       width: '100vw',
       padding: '40px',
       boxSizing: 'border-box',
       background: '#f8fafc',
     }}>
-      <motion.div 
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        style={{
-          width: '100%',
-          height: '100%',
-          position: 'relative',
-          borderRadius: '32px',
-          overflow: 'hidden',
-          display: 'flex',
-          alignItems: 'center',
-          padding: '30px' // Tighter padding
-        }}
-      >
-        {/* Skyblue Gradient Background */}
-        <div style={{ 
-          position: 'absolute', 
-          inset: 0, 
-          zIndex: 0,
-          background: 'linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%)'
-        }} />
+      {/* Framed card with skyblue gradient */}
+      <div style={{
+        width: '100%',
+        height: '100%',
+        borderRadius: '32px',
+        overflow: 'hidden',
+        background: 'linear-gradient(135deg, #bfecff 0%, #dff6ff 50%, #f0fbff 100%)',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        padding: '60px',
+        boxSizing: 'border-box',
+      }}>
 
-        {/* Label */}
+        {/* Top-left label */}
         <div style={{
           position: 'absolute',
-          top: '30px',
-          left: '30px',
-          zIndex: 10
+          top: '50px',
+          left: '60px',
+          zIndex: 10,
         }}>
-          <span style={{ color: '#0B2228', fontSize: '0.85rem', fontWeight: 600, opacity: 0.6 }}>
+          <span style={{
+            color: '#0B2228',
+            fontSize: '0.95rem',
+            fontWeight: 600,
+            opacity: 0.55,
+            letterSpacing: '0.02em',
+          }}>
             What people tell about us?
           </span>
         </div>
 
+        {/* Dot indicator - bottom left */}
+        <div style={{
+          position: 'absolute',
+          bottom: '50px',
+          left: '60px',
+          display: 'flex',
+          gap: '8px',
+          zIndex: 10,
+        }}>
+          {testimonials.map((_, i) => (
+            <div
+              key={i}
+              onClick={() => setIndex(i)}
+              style={{
+                width: i === index ? '24px' : '8px',
+                height: '8px',
+                borderRadius: '4px',
+                background: i === index ? '#0B2228' : 'rgba(11,34,40,0.2)',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease'
+              }}
+            />
+          ))}
+        </div>
+
         {/* Testimonial Card */}
-        <div style={{ position: 'relative', zIndex: 10, width: '100%', maxWidth: '600px' }}>
+        <div style={{
+          position: 'relative',
+          zIndex: 10,
+          width: '100%',
+          maxWidth: '700px',
+        }}>
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
               style={{
                 background: 'white',
-                padding: '30px 50px',
-                borderRadius: '20px',
-                boxShadow: '0 15px 30px rgba(0,0,0,0.08)'
+                padding: '60px',
+                borderRadius: '24px',
+                boxShadow: '0 24px 60px rgba(11,34,40,0.1)',
               }}
             >
               <p style={{
-                fontSize: '1.4rem',
-                lineHeight: 1.4,
+                fontSize: '1.75rem',
+                lineHeight: 1.45,
                 color: '#0B2228',
                 fontFamily: 'var(--font-inter)',
                 fontWeight: 500,
-                marginBottom: '24px'
+                marginBottom: '40px',
               }}>
                 "{testimonials[index].quote}"
               </p>
               <div>
-                <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#0B2228' }}>{testimonials[index].author}</h4>
-                <p style={{ color: '#64748b', fontSize: '0.85rem' }}>{testimonials[index].subtitle}</p>
+                <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#0B2228', marginBottom: '4px' }}>
+                  {testimonials[index].author}
+                </h4>
+                <p style={{ color: '#64748b', fontSize: '0.85rem', fontWeight: 500 }}>
+                  {testimonials[index].role} · {testimonials[index].event}
+                </p>
               </div>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Navigation Buttons (Vertical on Right) */}
+        {/* Navigation Buttons — vertical stack on the right */}
         <div style={{
           position: 'absolute',
-          right: '30px',
+          right: '60px',
+          top: '50%',
+          transform: 'translateY(-50%)',
           display: 'flex',
           flexDirection: 'column',
-          gap: '10px',
-          zIndex: 10
+          gap: '12px',
+          zIndex: 10,
         }}>
-          <button 
+          <button
             onClick={next}
-            style={{ 
-              width: '48px', 
-              height: '48px', 
-              borderRadius: '10px', 
-              background: '#E0FCF8', 
-              border: 'none', 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center', 
-              cursor: 'pointer' 
+            style={{
+              width: '56px',
+              height: '56px',
+              borderRadius: '14px',
+              background: '#0B2228',
+              border: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
             }}
           >
-            <ChevronRight color="#0B2228" size={20} />
+            <ChevronRight color="white" size={22} />
           </button>
-          <button 
+          <button
             onClick={prev}
-            style={{ 
-              width: '48px', 
-              height: '48px', 
-              borderRadius: '10px', 
-              background: 'rgba(255,255,255,0.4)', 
-              backdropFilter: 'blur(10px)',
-              border: '1px solid rgba(0,0,0,0.05)', 
-              display: 'flex', 
-              alignItems: 'center', 
-              justifyContent: 'center', 
-              cursor: 'pointer' 
+            style={{
+              width: '56px',
+              height: '56px',
+              borderRadius: '14px',
+              background: 'rgba(11,34,40,0.1)',
+              border: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
             }}
           >
-            <ChevronLeft color="#0B2228" size={20} />
+            <ChevronLeft color="#0B2228" size={22} />
           </button>
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 }

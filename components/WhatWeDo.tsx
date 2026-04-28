@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { StaggerProjects } from '@/components/ui/stagger-testimonials'
-import { AnimatedText } from '@/components/ui/animated-underline-text'
+import { StaggerProjects } from './ui/stagger-testimonials'
+import { AnimatedText } from './ui/animated-underline-text'
 
 export default function WhatWeDo() {
   const [gradientIndex, setGradientIndex] = useState(0)
@@ -40,17 +40,17 @@ export default function WhatWeDo() {
             borderRadius: '32px',
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
             alignItems: 'center',
-            padding: '100px 60px 60px 60px',
-            overflow: 'hidden', // Keeps carousel cards inside the yellow card
+            padding: '80px 60px 60px 60px',
+            overflow: 'visible', // Allow cards to extend slightly beyond
           }}
         >
           <AnimatedText 
             text="What We Do"
-            textClassName="text-6xl font-normal tracking-tight text-[#0B2228]"
+            textClassName="text-4xl font-normal tracking-tight text-[#0B2228]"
             underlineClassName="text-[#0B2228] opacity-30"
-            className="mb-12"
+            className="mb-4"
             style={{ fontFamily: 'var(--font-lexend)' }}
           />
 

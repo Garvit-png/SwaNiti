@@ -1,240 +1,215 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 
-const projects = [
-  {
-    id: 0,
-    title: "Sva-Bharat Movement",
-    description: "Change in Bharat begins with a movement, not just a policy. Sva-Bharat Movement by SvaNiti channels the aspirations of the people, uniting ideas and voices through regional and campus ambassadors to shape a transformative future.",
-    by: "Initiative"
-  },
+const projectsData = [
   {
     id: 1,
-    title: "Viksit Bharat Darshan Yatra",
-    description: "Viksit Bharat Darshan Yatra honors the Prime Minister's mission for a Developed India by 2047, emphasizing self-discovery through solo, purposeful, and philosophical journeys, shaping individuals with purpose for Viksit Yuva for Viksit Bharat.",
-    by: "National Program"
+    title: "Sva-Bharat Movement",
+    description: "Change in Bharat begins with a movement, not just a policy. Sva-Bharat Movement by SvaNiti channels the aspirations of the people, uniting ideas and voices through regional and campus ambassadors to shape a transformative future.",
   },
   {
     id: 2,
-    title: "LifeSite (जीवन-स्थल) Conceptualization",
-    description: "LifeSite originated from a seven-year pilot research project initiated by our founder, aimed at exploring an education system that transcends traditional schools, colleges, and universities, addressing the needs of the current era.",
-    by: "Education Reform"
+    title: "Viksit Bharat Darshan Yatra",
+    description: "Viksit Bharat Darshan Yatra honors the Prime Minister's mission for a Developed India by 2047, emphasizing self-discovery through solo, purposeful, and philosophical journeys, shaping individuals with purpose for Viksit Yuva for Viksit Bharat.",
   },
   {
     id: 3,
+    title: "LifeSite (जीवन-स्थल) Conceptualization",
+    description: "LifeSite originated from a seven-year pilot research project initiated by our founder, aimed at exploring an education system that transcends traditional schools, colleges, and universities, addressing the needs of the current era.",
+  },
+  {
+    id: 4,
     title: "Notion of Ministry of Creative Economy Affairs",
     description: "The creative economy holds the potential to be a powerful multiplier for our economy, unlocking new opportunities in employment, tourism, exports, innovation, and social inclusion. Our proposal to establish a dedicated ministry aims to strengthen initiatives and streamline regulations within this dynamic sector.",
-    by: "Policy Proposal"
   }
 ];
 
-interface ProjectCardProps {
-  position: number;
-  project: any;
-  handleMove: (steps: number) => void;
-  cardSize: number;
-}
-
-const ProjectCard: React.FC<ProjectCardProps> = ({ 
-  position, 
-  project, 
-  handleMove, 
-  cardSize 
-}) => {
-  const isCenter = position === 0;
-  const isVisible = Math.abs(position) <= 1;
-
-  return (
-    <motion.div
-      onClick={() => handleMove(position)}
-      initial={false}
-      animate={{
-        x: (cardSize / 1.05) * position,
-        y: isCenter ? -15 : 0,
-        scale: isCenter ? 1 : 0.85,
-        rotate: isCenter ? 0 : position > 0 ? 2 : -2,
-        opacity: isVisible ? (isCenter ? 1 : 0.8) : 0,
-        backgroundColor: isCenter ? '#FDFBF0' : '#E0FCF8',
-        color: '#0B2228',
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 260,
-        damping: 25
-      }}
-      className={`stagger-card ${isCenter ? 'is-center' : ''}`}
-      style={{
-        width: cardSize,
-        height: cardSize + 180,
-        borderRadius: '32px',
-        border: '1px solid rgba(15, 42, 51, 0.1)', 
-        zIndex: isCenter ? 10 : 5 - Math.abs(position),
-        pointerEvents: isVisible ? 'auto' : 'none',
-        padding: '50px 45px',
-        boxShadow: isCenter ? '0 40px 80px rgba(0,0,0,0.08)' : '0 10px 30px rgba(0,0,0,0.02)',
-        position: 'absolute',
-        left: '50%',
-        top: '50%',
-        translateX: '-50%',
-        translateY: '-50%'
-      }}
-    >
-      <h3 className="card-title" style={{ 
-        fontFamily: 'var(--font-lexend)',
-        fontSize: '1.85rem', 
-        lineHeight: 1.2,
-        fontWeight: 400,
-        marginBottom: '28px',
-        letterSpacing: '-0.02em',
-        color: '#0B2228'
-      }}>
-        {project.title}
-      </h3>
-      
-      <p className="card-desc" style={{ 
-        fontFamily: 'var(--font-inter)',
-        fontSize: '1.05rem',
-        opacity: isCenter ? 0.9 : 0.6,
-        lineHeight: 1.7,
-        fontWeight: 400,
-        color: '#0B2228',
-      }}>
-        {project.description}
-      </p>
-
-      <div className="card-footer-info" style={{ 
-        position: 'absolute',
-        bottom: '40px', 
-        left: '45px', 
-        right: '45px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        borderTop: '1px solid rgba(11,34,40,0.1)',
-        paddingTop: '25px'
-      }}>
-        <span className="card-by" style={{ 
-          fontFamily: 'var(--font-inter)',
-          fontSize: '0.75rem',
-          fontWeight: 600,
-          textTransform: 'uppercase',
-          letterSpacing: '0.15em',
-          opacity: 0.6,
-          color: '#0B2228'
-        }}>
-          Learn More
-        </span>
-        <div className="card-arrow-icon" style={{ 
-            width: '44px',
-            height: '44px',
-            borderRadius: '14px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            background: isCenter ? '#0B2228' : 'rgba(11,34,40,0.05)',
-            color: isCenter ? 'white' : '#0B2228',
-            transition: 'all 0.3s ease'
-        }}>
-            <ChevronRight size={20} />
-        </div>
-      </div>
-    </motion.div>
-  );
+type Props = {
+  onMove?: () => void;
 };
 
-export const StaggerProjects: React.FC<{ onMove?: () => void }> = ({ onMove }) => {
-  const [cardSize, setCardSize] = useState(400);
-  const [projectsList, setProjectsList] = useState(projects.map(p => ({ ...p, tempId: p.id })));
+export function StaggerProjects({ onMove }: Props) {
+  const [index, setIndex] = useState(0);
+  const [cardWidth, setCardWidth] = useState(320);
 
-  const handleMove = (steps: number) => {
-    const newList = [...projectsList];
-    if (steps > 0) {
-      for (let i = 0; i < steps; i++) {
-        const item = newList.shift();
-        if (item) newList.push({ ...item, tempId: Math.random() });
-      }
-    } else {
-      for (let i = 0; i < Math.abs(steps); i++) {
-        const item = newList.pop();
-        if (item) newList.unshift({ ...item, tempId: Math.random() });
-      }
-    }
-    setProjectsList(newList);
+  useEffect(() => {
+    const update = () => {
+      setCardWidth(window.innerWidth < 640 ? 340 : 440);
+    };
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
+
+  const next = () => {
+    setIndex((i) => (i + 1) % projectsData.length);
     onMove?.();
   };
 
-  useEffect(() => {
-    const updateSize = () => {
-      const { matches } = window.matchMedia("(min-width: 640px)");
-      setCardSize(matches ? 400 : 280);
-    };
+  const prev = () => {
+    setIndex((i) => (i - 1 + projectsData.length) % projectsData.length);
+    onMove?.();
+  };
 
-    updateSize();
-    window.addEventListener("resize", updateSize);
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
+  const getOffset = (i: number) => {
+    let diff = i - index;
+    if (diff > projectsData.length / 2) diff -= projectsData.length;
+    if (diff < -projectsData.length / 2) diff += projectsData.length;
+    return diff;
+  };
+
+  // Visible positions: -1, 0, +1 (only 3 cards)
+  const visibleCards = projectsData
+    .map((project, i) => ({ project, offset: getOffset(i) }))
+    .filter(({ offset }) => Math.abs(offset) <= 1);
 
   return (
-    <div className="stagger-container" style={{ height: '700px', position: 'relative', width: '100%', overflow: 'visible' }}>
-      {projectsList.map((project: any, index) => {
-        const position = projectsList.length % 2
-          ? index - (projectsList.length - 1) / 2
-          : index - projectsList.length / 2;
-          
+    <div style={{ 
+      position: 'relative', 
+      width: '100%', 
+      height: 580,
+    }}>
+      {visibleCards.map(({ project, offset }) => {
+        const isCenter = offset === 0;
+
+        const translateX = offset * (cardWidth * 0.7);
+        const translateY = isCenter ? 0 : 15;
+        const rotate = isCenter ? 0 : (offset > 0 ? 3 : -3);
+        const scale = isCenter ? 1 : 0.92;
+        const zIndex = isCenter ? 10 : 5;
+
+        // Center = soft green, sides = soft yellow
+        const bgColor = isCenter ? '#e8f5e9' : '#fff8e1';
+
         return (
-          <ProjectCard
-            key={project.tempId}
-            project={project}
-            handleMove={handleMove}
-            position={position}
-            cardSize={cardSize}
-          />
+          <div
+            key={project.id}
+            onClick={() => {
+              if (offset > 0) next();
+              else if (offset < 0) prev();
+            }}
+            style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              width: cardWidth,
+              height: 520,
+              borderRadius: 28,
+              padding: 36,
+              background: bgColor,
+              color: '#0B2228',
+              cursor: isCenter ? 'default' : 'pointer',
+              display: 'flex',
+              flexDirection: 'column',
+              boxShadow: isCenter
+                ? '0 20px 50px rgba(11,34,40,0.10)'
+                : '0 8px 24px rgba(0,0,0,0.05)',
+              transform: `translate(-50%, -50%) translateX(${translateX}px) translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`,
+              zIndex,
+              transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
+            }}
+          >
+            <div style={{ flex: 1, overflow: 'hidden' }}>
+              <h3 style={{
+                margin: 0,
+                fontSize: '1.5rem',
+                fontWeight: 600,
+                lineHeight: 1.3,
+                fontFamily: 'var(--font-lexend)',
+                color: '#0B2228',
+                marginBottom: 20,
+              }}>
+                {project.title}
+              </h3>
+              <p style={{
+                margin: 0,
+                fontSize: '0.95rem',
+                lineHeight: 1.65,
+                color: 'rgba(11,34,40,0.6)',
+              }}>
+                {project.description}
+              </p>
+            </div>
+
+            <div style={{
+              marginTop: 'auto',
+              display: 'flex',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              paddingTop: 16,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>Learn More</span>
+                <div style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: 10,
+                  background: '#C1F1F1',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  <ArrowRight size={15} color="#0B2228" />
+                </div>
+              </div>
+            </div>
+          </div>
         );
       })}
-      
-      <div className="stagger-controls" style={{ bottom: '20px', zIndex: 1000 }}>
+
+      {/* Navigation controls */}
+      <div style={{
+        position: 'absolute',
+        bottom: 10,
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex',
+        gap: 12,
+        zIndex: 20,
+      }}>
         <button
-          onClick={(e) => { e.stopPropagation(); handleMove(-1); }}
-          className="stagger-control-btn"
-          style={{ 
-            width: '60px', 
-            height: '60px', 
-            borderRadius: '50%', 
-            background: 'white', 
-            border: '1px solid rgba(15, 42, 51, 0.1)',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+          onClick={prev}
+          aria-label="Previous project"
+          style={{
+            width: 48,
+            height: 48,
+            borderRadius: 14,
+            border: '1px solid rgba(11,34,40,0.12)',
+            background: 'white',
+            cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            cursor: 'pointer',
-            pointerEvents: 'auto'
+            boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
+            transition: 'all 0.3s ease',
           }}
         >
-          <ChevronLeft size={24} color="#0B2228" />
+          <ChevronLeft size={20} color="#0B2228" />
         </button>
         <button
-          onClick={(e) => { e.stopPropagation(); handleMove(1); }}
-          className="stagger-control-btn"
-          style={{ 
-            width: '60px', 
-            height: '60px', 
-            borderRadius: '50%', 
-            background: 'white', 
-            border: '1px solid rgba(15, 42, 51, 0.1)',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+          onClick={next}
+          aria-label="Next project"
+          style={{
+            width: 48,
+            height: 48,
+            borderRadius: 14,
+            border: '1px solid rgba(11,34,40,0.12)',
+            background: 'white',
+            cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            cursor: 'pointer',
-            pointerEvents: 'auto'
+            boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
+            transition: 'all 0.3s ease',
           }}
         >
-          <ChevronRight size={24} color="#0B2228" />
+          <ChevronRight size={20} color="#0B2228" />
         </button>
       </div>
     </div>
   );
-};
+}
+
+export default StaggerProjects;

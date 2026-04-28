@@ -48,10 +48,9 @@ body {
 }
 
 .what-we-do-inner {
-  height: auto;
-  min-height: 100vh;
+  height: 100vh;
   width: 100vw;
-  overflow: visible; /* Allow cards to bleed out smoothly */
+  overflow: hidden; /* Clip cards strictly within section */
   position: relative;
 }
 
