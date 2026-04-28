@@ -11,6 +11,7 @@ import ImpactSection from '@/components/ImpactSection'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
 import { useScroll, useTransform } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
+import Footer from '@/components/Footer'
 
 export default function Home() {
   const footerRef = useRef<HTMLDivElement>(null)
@@ -109,7 +110,7 @@ export default function Home() {
       <WhatWeDo />
 
       {/* VISION SECTION */}
-      <div style={{
+      <div id="about" style={{
         height: '65vh', /* Reduced from 100vh to make it smaller and tighter */
         width: '100vw',
         background: 'linear-gradient(to bottom, #fdfcf0, #f8fafc)',
@@ -244,6 +245,7 @@ export default function Home() {
 
       {/* CONTACT SECTION WITH RISE EFFECT */}
       <motion.div 
+        id="contact"
         ref={contactRef}
         style={{
           padding: '20px',
@@ -278,8 +280,9 @@ export default function Home() {
               <motion.input 
                 whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
                 whileFocus={{ borderColor: '#0B2228', boxShadow: '0 0 0 2px rgba(11, 34, 40, 0.05)' }}
+                transition={{ duration: 0.1 }}
                 type="text" 
-                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none', transition: 'all 0.1s ease-in-out' }} 
+                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none' }} 
               />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
@@ -287,8 +290,9 @@ export default function Home() {
               <motion.input 
                 whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
                 whileFocus={{ borderColor: '#0B2228', boxShadow: '0 0 0 2px rgba(11, 34, 40, 0.05)' }}
+                transition={{ duration: 0.1 }}
                 type="text" 
-                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none', transition: 'all 0.1s ease-in-out' }} 
+                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none' }} 
               />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', gridColumn: 'span 2' }}>
@@ -296,8 +300,9 @@ export default function Home() {
               <motion.input 
                 whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
                 whileFocus={{ borderColor: '#0B2228', boxShadow: '0 0 0 2px rgba(11, 34, 40, 0.05)' }}
+                transition={{ duration: 0.1 }}
                 type="email" 
-                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none', transition: 'all 0.1s ease-in-out' }} 
+                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none' }} 
               />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', gridColumn: 'span 2' }}>
@@ -305,7 +310,8 @@ export default function Home() {
               <motion.textarea 
                 whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
                 whileFocus={{ borderColor: '#0B2228', boxShadow: '0 0 0 2px rgba(11, 34, 40, 0.05)' }}
-                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', minHeight: '120px', fontSize: '1rem', fontFamily: 'inherit', outline: 'none', transition: 'all 0.1s ease-in-out' }} 
+                transition={{ duration: 0.1 }}
+                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', minHeight: '120px', fontSize: '1rem', fontFamily: 'inherit', outline: 'none' }} 
               />
             </div>
 
@@ -316,6 +322,7 @@ export default function Home() {
                 scale: 1.02
               }}
               whileTap={{ scale: 0.98 }}
+              transition={{ duration: 0.1, ease: 'easeInOut' }}
               style={{
                 gridColumn: 'span 2',
                 background: '#0B2228',
@@ -327,8 +334,7 @@ export default function Home() {
                 fontSize: '1rem',
                 cursor: 'pointer',
                 marginTop: '10px',
-                width: 'fit-content',
-                transition: 'all 0.1s ease-in-out'
+                width: 'fit-content'
               }}
             >
               Contact Now
@@ -336,23 +342,7 @@ export default function Home() {
           </div>
         </div>
       </motion.div>
-      <div className="footer-container">
-        <footer ref={footerRef} className="footer-minimal framed-card">
-          <div className="footer-bottom-links">
-            <div className="footer-brand">
-              <Image src="/logo.png" alt="Logo" width={40} height={40} />
-              <span>SvaNiti Policy Research Center</span>
-            </div>
-            <div className="footer-nav">
-              <a href="#">About</a>
-              <a href="#">Projects</a>
-              <a href="#">Insights</a>
-              <a href="#">Privacy Policy</a>
-            </div>
-            <p className="copyright">© 2024 Think-Tank for Education & Public Policy</p>
-          </div>
-        </footer>
-      </div>
+      <Footer />
     </main>
   )
 }

@@ -15,6 +15,7 @@ export default function WhatWeDo() {
 
   return (
     <div 
+      id="governance"
       className="what-we-do-inner"
       style={{ 
         height: '100vh', 
