@@ -71,7 +71,8 @@ export default function ParallaxTicker() {
       justifyContent: 'center',
       overflow: 'hidden',
       padding: '0',
-      margin: 0
+      margin: 0,
+      gap: '40px' // Reduced gap for mobile
     }}>
       {renderRow(row1, xLeft)}
       {renderRow(row2, xRight)}

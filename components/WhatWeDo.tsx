@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { StaggerProjects } from './ui/stagger-testimonials'
 import { AnimatedText } from './ui/animated-underline-text'
+import { useIsMobile } from './hooks/useIsMobile'
 
 export default function WhatWeDo() {
   const [gradientIndex, setGradientIndex] = useState(0)
+  const isMobile = useIsMobile()
 
   const gradients = [
     'radial-gradient(at 0% 0%, #fff1cc 0, transparent 60%), radial-gradient(at 100% 100%, #aed6f1 0, transparent 60%), #d1f2eb',
@@ -18,12 +20,14 @@ export default function WhatWeDo() {
       id="governance"
       className="what-we-do-inner section-padding"
       style={{ 
-        minHeight: '100vh', 
+        minHeight: isMobile ? 'auto' : '100vh', 
         width: '100vw',
         background: 'linear-gradient(to bottom, #f0f9ff, #fdfcf0)',
-        padding: '60px',
+        padding: isMobile ? '20px' : '60px',
         boxSizing: 'border-box',
         display: 'flex',
+        paddingTop: isMobile ? '40px' : '60px',
+        paddingBottom: isMobile ? '40px' : '60px',
       }}
     >
       {/* Wrapper to allow the white cutout to sit perfectly on top of the bordered yellow card */}
@@ -45,7 +49,7 @@ export default function WhatWeDo() {
             flexDirection: 'column',
             justifyContent: 'flex-start',
             alignItems: 'center',
-            padding: '80px 60px 60px 60px',
+            padding: isMobile ? '40px 20px' : '80px 60px 60px 60px',
             overflow: 'visible', // Allow cards to extend slightly beyond
             position: 'relative',
           }}
@@ -72,6 +76,7 @@ export default function WhatWeDo() {
             background: 'rgba(193, 241, 241, 0.2)',
             filter: 'blur(80px)',
             zIndex: 1,
+            display: isMobile ? 'none' : 'block',
           }} />
 
           <div style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
@@ -96,34 +101,36 @@ export default function WhatWeDo() {
           </div>
         </motion.div>
 
-        {/* WHITE CUTOUT BOX WITH BORDERS */}
-        <div style={{
-          position: 'absolute',
-          top: '-2px', // Pulls up to perfectly cover the yellow card's top border
-          left: '-2px', // Pulls left to perfectly cover the yellow card's left border
-          padding: '0 32px 32px 0', // Creates the white gap around the dark pill
-          background: '#f8fafc',
-          borderBottomRightRadius: '40px', // The smooth curve of the notch
-          zIndex: 10,
-        }}>
-          {/* Dark Pill "Our Impact" */}
+        {/* WHITE CUTOUT BOX WITH BORDERS - Hidden on mobile for performance */}
+        {!isMobile && (
           <div style={{
-            background: '#0B2228',
-            padding: '16px 32px',
-            borderRadius: '16px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
+            position: 'absolute',
+            top: '-2px', // Pulls up to perfectly cover the yellow card's top border
+            left: '-2px', // Pulls left to perfectly cover the yellow card's left border
+            padding: '0 32px 32px 0', // Creates the white gap around the dark pill
+            background: '#f8fafc',
+            borderBottomRightRadius: '40px', // The smooth curve of the notch
+            zIndex: 10,
           }}>
-            <span style={{
-              color: 'white',
-              fontSize: '1.1rem',
-              fontWeight: 600,
+            {/* Dark Pill "Our Impact" */}
+            <div style={{
+              background: '#0B2228',
+              padding: '16px 32px',
+              borderRadius: '16px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
             }}>
-              Our Impact
-            </span>
+              <span style={{
+                color: 'white',
+                fontSize: '1.1rem',
+                fontWeight: 600,
+              }}>
+                Our Impact
+              </span>
+            </div>
           </div>
-        </div>
+        )}
 
       </div>
     </div>

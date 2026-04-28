@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useIsMobile } from './hooks/useIsMobile';
 
 const testimonials = [
   {
@@ -26,15 +27,16 @@ const testimonials = [
 
 export default function TestimonialCarousel() {
   const [index, setIndex] = useState(0);
+  const isMobile = useIsMobile();
 
   const next = () => setIndex((prev) => (prev + 1) % testimonials.length);
   const prev = () => setIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
     <div className="testimonial-section-container" style={{
-      minHeight: '75vh',
+      minHeight: isMobile ? 'auto' : '75vh',
       width: '100vw',
-      padding: '40px',
+      padding: isMobile ? '10px' : '40px',
       boxSizing: 'border-box',
       background: '#f8fafc',
     }}>
@@ -42,22 +44,22 @@ export default function TestimonialCarousel() {
       <div className="testimonial-card-frame" style={{
         width: '100%',
         height: '100%',
-        borderRadius: '32px',
+        borderRadius: isMobile ? '24px' : '32px',
         border: '2px solid #0B2228',
         overflow: 'hidden',
         background: 'linear-gradient(135deg, #bfecff 0%, #dff6ff 50%, #f0fbff 100%)',
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
-        padding: '60px 60px 60px 140px',
+        padding: isMobile ? '60px 20px 40px 20px' : '60px 60px 60px 140px',
         boxSizing: 'border-box',
       }}>
 
         {/* Top-left label */}
         <div className="testimonial-label" style={{
           position: 'absolute',
-          top: '50px',
-          left: '60px',
+          top: isMobile ? '30px' : '50px',
+          left: isMobile ? '20px' : '60px',
           zIndex: 10,
         }}>
           <span style={{
@@ -74,8 +76,8 @@ export default function TestimonialCarousel() {
         {/* Dot indicator - bottom left */}
         <div className="testimonial-dots" style={{
           position: 'absolute',
-          bottom: '50px',
-          left: '60px',
+          bottom: isMobile ? '20px' : '50px',
+          left: isMobile ? '20px' : '60px',
           display: 'flex',
           gap: '8px',
           zIndex: 10,
@@ -113,7 +115,8 @@ export default function TestimonialCarousel() {
               className="testimonial-content-wrapper"
               style={{
                 display: 'flex',
-                alignItems: 'stretch',
+                alignItems: isMobile ? 'center' : 'stretch',
+                flexDirection: isMobile ? 'column' : 'row',
                 gap: '24px',
                 width: '100%',
               }}
@@ -122,19 +125,19 @@ export default function TestimonialCarousel() {
               <div className="testimonial-text-card" style={{ 
                 flex: 1,
                 background: 'white',
-                padding: '60px',
+                padding: isMobile ? '30px' : '60px',
                 borderRadius: '24px',
                 boxShadow: '0 24px 60px rgba(11, 34, 40, 0.08)',
                 display: 'flex',
                 flexDirection: 'column',
               }}>
                 <p style={{
-                  fontSize: '1.6rem',
+                  fontSize: isMobile ? '1.2rem' : '1.6rem',
                   lineHeight: 1.45,
                   color: '#0B2228',
                   fontFamily: 'var(--font-inter)',
                   fontWeight: 500,
-                  marginBottom: '40px',
+                  marginBottom: isMobile ? '20px' : '40px',
                 }}>
                   "{testimonials[index % testimonials.length]?.quote || ''}"
                 </p>
@@ -150,8 +153,8 @@ export default function TestimonialCarousel() {
               
               {/* Photo Card */}
               <div className="testimonial-photo-card" style={{
-                width: '360px',
-                height: '460px',
+                width: isMobile ? '100%' : '360px',
+                height: isMobile ? '300px' : '460px',
                 background: 'white',
                 padding: '16px',
                 borderRadius: '24px',
@@ -184,11 +187,11 @@ export default function TestimonialCarousel() {
 
         {/* Navigation Buttons — vertical stack on the right */}
         <div className="testimonial-nav-btns" style={{
-          position: 'absolute',
-          right: '60px',
-          top: '50%',
-          transform: 'translateY(-50%)',
-          display: 'flex',
+          position: isMobile ? 'static' : 'absolute',
+          right: isMobile ? 'auto' : '60px',
+          top: isMobile ? 'auto' : '50%',
+          transform: isMobile ? 'none' : 'translateY(-50%)',
+          display: isMobile ? 'none' : 'flex',
           flexDirection: 'column',
           gap: '12px',
           zIndex: 10,

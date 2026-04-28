@@ -4,14 +4,16 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin } from 'lucide-react'
 import Image from 'next/image'
+import { useIsMobile } from './hooks/useIsMobile'
 
 export default function Footer() {
+  const isMobile = useIsMobile();
   const currentYear = new Date().getFullYear();
 
   return (
     <footer style={{
       background: '#f8fafc',
-      padding: '40px 60px 20px 60px',
+      padding: isMobile ? '40px 20px 20px 20px' : '40px 60px 20px 60px',
       fontFamily: 'var(--font-lexend)',
       color: '#0B2228'
     }}>
@@ -20,7 +22,7 @@ export default function Footer() {
         justifyContent: 'space-between',
         alignItems: 'flex-start',
         flexWrap: 'wrap',
-        gap: '60px',
+        gap: isMobile ? '40px' : '60px',
         marginBottom: '60px'
       }}>
         {/* Left Column: Brand & Socials */}
@@ -138,9 +140,10 @@ export default function Footer() {
         padding: '16px 32px',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center',
+        alignItems: isMobile ? 'center' : 'center',
         flexWrap: 'wrap',
-        gap: '16px'
+        gap: '16px',
+        textAlign: isMobile ? 'center' : 'left'
       }}>
         <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0, fontSize: '0.85rem' }}>
           © 2024-{currentYear+4} by Creative Studio SvaNiti Policy Research Center

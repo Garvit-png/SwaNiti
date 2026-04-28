@@ -20,6 +20,7 @@
 
 html {
   scroll-behavior: smooth;
+  height: -webkit-fill-available;
 }
 
 .main-viewport {
@@ -31,7 +32,11 @@ body {
   font-family: var(--font-inter);
   color: var(--primary-color);
   background: #f8fafc;
-  /* Removed overflow-x: hidden here because it breaks scroll snapping on the parent! */
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* SECTION ANCHORS */
@@ -84,10 +89,18 @@ body {
 
 /* HERO SECTION */
 .hero-container {
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .hero-container {
+    min-height: auto;
+    padding: 10px 0;
+  }
 }
 
 .main-card {
@@ -238,11 +251,12 @@ body {
 
 .main-title {
   font-family: var(--font-lexend);
-  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-size: clamp(2rem, 8vw, 4.5rem);
   font-weight: 200; /* Made thinner */
   line-height: 1.1;
   text-align: center;
   letter-spacing: -0.02em;
+  padding: 0 20px;
 }
 
 .footer {
@@ -673,6 +687,18 @@ body {
   }
   div[style*="padding: '40px'"] {
     padding: 10px !important;
+  }
+}
+
+/* PERFORMANCE FIXES */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .motion-reduce {
+    transition: none !important;
+    animation: none !important;
   }
 }
 

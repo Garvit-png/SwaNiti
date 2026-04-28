@@ -69,10 +69,13 @@ export function StaggerProjects({ onMove }: Props) {
     return diff;
   };
 
-  // Visible positions: -1, 0, +1 (only 3 cards)
+  // Visible positions: On mobile, only 0. On desktop, -1, 0, +1
   const visibleCards = projectsData
     .map((project, i) => ({ project, offset: getOffset(i) }))
-    .filter(({ offset }) => Math.abs(offset) <= 1);
+    .filter(({ offset }) => {
+      if (windowWidth < 768) return offset === 0;
+      return Math.abs(offset) <= 1;
+    });
 
   if (!isMounted) return null;
 
@@ -190,12 +193,16 @@ export function StaggerProjects({ onMove }: Props) {
       {/* Navigation controls */}
       <div style={{
         position: 'absolute',
-        bottom: -40,
+        bottom: windowWidth < 768 ? 0 : -40,
         left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex',
-        gap: 12,
-        zIndex: 20,
+        gap: 16,
+        zIndex: 30,
+        padding: windowWidth < 768 ? '10px 20px' : '0',
+        borderRadius: '20px',
+        background: windowWidth < 768 ? 'rgba(255,255,255,0.5)' : 'transparent',
+        backdropFilter: windowWidth < 768 ? 'blur(10px)' : 'none',
       }}>
         <button
           onClick={prev}

@@ -12,8 +12,10 @@ import TestimonialCarousel from '@/components/TestimonialCarousel'
 import { useScroll, useTransform } from 'framer-motion'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Footer from '@/components/Footer'
+import { useIsMobile } from '@/components/hooks/useIsMobile'
 
 export default function Home() {
+  const isMobile = useIsMobile()
   const footerRef = useRef<HTMLDivElement>(null)
   const mouse = useRef({ x: 0.5, y: 0.5 })
   const smooth = useRef({ x: 0.5, y: 0.5 })
@@ -111,10 +113,10 @@ export default function Home() {
 
       {/* VISION SECTION */}
       <div id="about" className="vision-section-wrapper" style={{
-        minHeight: '65vh',
+        minHeight: isMobile ? 'auto' : '65vh',
         width: '100vw',
         background: 'linear-gradient(to bottom, #fdfcf0, #f8fafc)',
-        padding: '20px',
+        padding: isMobile ? '10px' : '20px',
         boxSizing: 'border-box',
         display: 'flex',
         position: 'relative',
@@ -126,10 +128,10 @@ export default function Home() {
           <div className="vision-card" style={{
             flex: 1,
             background: '#d4fdf8', /* Light cyan/blue matching the photo */
-            borderRadius: '32px',
+            borderRadius: isMobile ? '24px' : '32px',
             display: 'flex',
             flexDirection: 'column',
-            padding: '80px',
+            padding: isMobile ? '30px' : '80px',
             position: 'relative',
             overflow: 'hidden',
           }}>
@@ -139,12 +141,13 @@ export default function Home() {
               marginTop: 'auto', 
               display: 'flex', 
               justifyContent: 'space-between', 
-              alignItems: 'flex-end',
-              gap: '40px'
+              alignItems: isMobile ? 'flex-start' : 'flex-end',
+              flexDirection: isMobile ? 'column' : 'row',
+              gap: isMobile ? '20px' : '40px'
             }}>
               {/* Massive heading */}
               <h2 className="vision-title" style={{
-                fontSize: '5rem',
+                fontSize: isMobile ? '2.2rem' : '5rem',
                 fontWeight: 400,
                 color: '#0B2228',
                 lineHeight: 1.05,
@@ -158,12 +161,12 @@ export default function Home() {
               
               {/* Small paragraph */}
               <p className="vision-description" style={{
-                fontSize: '1.05rem',
+                fontSize: isMobile ? '0.95rem' : '1.05rem',
                 color: '#0B2228',
                 maxWidth: '450px',
                 lineHeight: 1.6,
                 margin: 0,
-                paddingBottom: '16px', /* optical alignment with the baseline of the large text */
+                paddingBottom: isMobile ? '0' : '16px', /* optical alignment with the baseline of the large text */
                 opacity: 0.9,
                 fontWeight: 500
               }}>
@@ -174,39 +177,41 @@ export default function Home() {
             </div>
           </div>
 
-          {/* EXACT Logo Cutout Logic — White Corner Box */}
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            padding: '0 32px 32px 0', 
-            background: '#f8fafc',
-            borderBottomRightRadius: '40px',
-            zIndex: 10,
-          }}>
-            {/* Dark Pill "Our Vision" */}
+          {/* EXACT Logo Cutout Logic — White Corner Box - Hidden on mobile */}
+          {!isMobile && (
             <div style={{
-              background: '#0B2228',
-              padding: '16px 32px',
-              borderRadius: '16px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              padding: '0 32px 32px 0', 
+              background: '#f8fafc',
+              borderBottomRightRadius: '40px',
+              zIndex: 10,
             }}>
-              <span style={{
-                color: 'white',
-                fontSize: '1rem',
-                fontWeight: 600,
+              {/* Dark Pill "Our Vision" */}
+              <div style={{
+                background: '#0B2228',
+                padding: '16px 32px',
+                borderRadius: '16px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
               }}>
-                Our Vision
-              </span>
+                <span style={{
+                  color: 'white',
+                  fontSize: '1rem',
+                  fontWeight: 600,
+                }}>
+                  Our Vision
+                </span>
+              </div>
             </div>
-          </div>
+          )}
 
         </div>
       </div>
       <div ref={teamRef} style={{
-        height: '150vh', 
+        height: isMobile ? '100vh' : '150vh', 
         width: '100vw',
         background: '#f8fafc', 
         position: 'relative',
@@ -218,14 +223,14 @@ export default function Home() {
           width: '100%',
           overflow: 'hidden',
           zIndex: 5,
-          padding: '40px',
+          padding: isMobile ? '10px' : '40px',
           boxSizing: 'border-box'
         }}>
           <div style={{ 
             width: '100%', 
             height: '100%', 
             position: 'relative', 
-            borderRadius: '32px', 
+            borderRadius: isMobile ? '24px' : '32px', 
             overflow: 'hidden',
             background: '#fff'
           }}>
@@ -233,7 +238,11 @@ export default function Home() {
               src="/gallery/SvanitiPhoto.png" 
               alt="SvaNiti Team" 
               fill 
-              style={{ objectFit: 'cover', objectPosition: '49% 47%' }}
+              style={{ 
+                objectFit: isMobile ? 'contain' : 'cover', 
+                objectPosition: '49% 47%',
+                background: isMobile ? '#fff' : 'transparent' 
+              }}
               quality={85}
               priority
             />
@@ -260,12 +269,12 @@ export default function Home() {
         }}
       >
         <div className="contact-card framed-card" style={{
-          padding: '60px',
+          padding: isMobile ? '30px 20px' : '60px',
           background: '#e0fcf8',
-          borderRadius: '32px',
+          borderRadius: isMobile ? '24px' : '32px',
           display: 'flex',
           flexDirection: 'column',
-          gap: '40px'
+          gap: isMobile ? '20px' : '40px'
         }}>
           <div style={{ background: '#0B2228', padding: '12px 24px', borderRadius: '8px', width: 'fit-content' }}>
             <span style={{ color: 'white', fontWeight: 600 }}>Let's Talk, What you got!</span>
@@ -274,7 +283,12 @@ export default function Home() {
             Contact us for any notion for nation
           </h3>
 
-          <div className="contact-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', maxWidth: '900px' }}>
+          <div className="contact-form-grid" style={{ 
+            display: 'grid', 
+            gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
+            gap: isMobile ? '20px' : '32px', 
+            maxWidth: '900px' 
+          }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Name *</label>
               <motion.input 
@@ -295,7 +309,7 @@ export default function Home() {
                 style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none' }} 
               />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', gridColumn: 'span 2' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', gridColumn: isMobile ? 'span 1' : 'span 2' }}>
               <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Email *</label>
               <motion.input 
                 whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
@@ -305,7 +319,7 @@ export default function Home() {
                 style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none' }} 
               />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', gridColumn: 'span 2' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', gridColumn: isMobile ? 'span 1' : 'span 2' }}>
               <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Notion Note *</label>
               <motion.textarea 
                 whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
@@ -334,7 +348,7 @@ export default function Home() {
                 fontSize: '1rem',
                 cursor: 'pointer',
                 marginTop: '10px',
-                width: 'fit-content'
+                width: isMobile ? '100%' : 'fit-content'
               }}
             >
               Contact Now
