@@ -16,9 +16,9 @@ export default function WhatWeDo() {
   return (
     <div 
       id="governance"
-      className="what-we-do-inner"
+      className="what-we-do-inner section-padding"
       style={{ 
-        height: '100vh', 
+        minHeight: '100vh', 
         width: '100vw',
         background: 'linear-gradient(to bottom, #f0f9ff, #fdfcf0)',
         padding: '60px',
@@ -31,6 +31,7 @@ export default function WhatWeDo() {
         
         {/* YELLOW CARD WITH MOVING GRADIENT */}
         <motion.div 
+          className="what-we-do-card"
           initial={{ background: gradients[0] }}
           animate={{ 
             background: gradients[gradientIndex % gradients.length]

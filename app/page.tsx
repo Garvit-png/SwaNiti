@@ -110,8 +110,8 @@ export default function Home() {
       <WhatWeDo />
 
       {/* VISION SECTION */}
-      <div id="about" style={{
-        height: '65vh', /* Reduced from 100vh to make it smaller and tighter */
+      <div id="about" className="vision-section-wrapper" style={{
+        minHeight: '65vh',
         width: '100vw',
         background: 'linear-gradient(to bottom, #fdfcf0, #f8fafc)',
         padding: '20px',
@@ -123,7 +123,7 @@ export default function Home() {
         <div style={{ position: 'relative', flex: 1, display: 'flex' }}>
           
           {/* CYAN CARD */}
-          <div style={{
+          <div className="vision-card" style={{
             flex: 1,
             background: '#d4fdf8', /* Light cyan/blue matching the photo */
             borderRadius: '32px',
@@ -135,7 +135,7 @@ export default function Home() {
           }}>
             
             {/* Typography Container — pushed to the bottom */}
-            <div style={{ 
+            <div className="vision-content-container" style={{ 
               marginTop: 'auto', 
               display: 'flex', 
               justifyContent: 'space-between', 
@@ -143,7 +143,7 @@ export default function Home() {
               gap: '40px'
             }}>
               {/* Massive heading */}
-              <h2 style={{
+              <h2 className="vision-title" style={{
                 fontSize: '5rem',
                 fontWeight: 400,
                 color: '#0B2228',
@@ -157,7 +157,7 @@ export default function Home() {
               </h2>
               
               {/* Small paragraph */}
-              <p style={{
+              <p className="vision-description" style={{
                 fontSize: '1.05rem',
                 color: '#0B2228',
                 maxWidth: '450px',
@@ -259,7 +259,7 @@ export default function Home() {
           y: contactRise
         }}
       >
-        <div className="framed-card" style={{
+        <div className="contact-card framed-card" style={{
           padding: '60px',
           background: '#e0fcf8',
           borderRadius: '32px',
@@ -270,11 +270,11 @@ export default function Home() {
           <div style={{ background: '#0B2228', padding: '12px 24px', borderRadius: '8px', width: 'fit-content' }}>
             <span style={{ color: 'white', fontWeight: 600 }}>Let's Talk, What you got!</span>
           </div>
-          <h3 style={{ fontSize: '2.5rem', fontWeight: 300, color: '#0B2228', maxWidth: '600px', lineHeight: 1.2, marginBottom: '60px' }}>
+          <h3 className="contact-title" style={{ fontSize: '2.5rem', fontWeight: 300, color: '#0B2228', maxWidth: '600px', lineHeight: 1.2, marginBottom: '60px' }}>
             Contact us for any notion for nation
           </h3>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', maxWidth: '900px' }}>
+          <div className="contact-form-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', maxWidth: '900px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Name *</label>
               <motion.input 

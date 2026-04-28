@@ -36,12 +36,17 @@ type Props = {
 
 export function StaggerProjects({ onMove }: Props) {
   const [index, setIndex] = useState(0);
-  const [cardWidth, setCardWidth] = useState(320);
+  const [cardWidth, setCardWidth] = useState(420);
+  const [windowWidth, setWindowWidth] = useState(1200); // Default for SSR
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     const update = () => {
-      setCardWidth(window.innerWidth < 640 ? 320 : 420);
+      const width = window.innerWidth;
+      setWindowWidth(width);
+      setCardWidth(width < 480 ? width * 0.85 : width < 640 ? 320 : 420);
     };
+    setIsMounted(true);
     update();
     window.addEventListener('resize', update);
     return () => window.removeEventListener('resize', update);
@@ -69,6 +74,8 @@ export function StaggerProjects({ onMove }: Props) {
     .map((project, i) => ({ project, offset: getOffset(i) }))
     .filter(({ offset }) => Math.abs(offset) <= 1);
 
+  if (!isMounted) return null;
+
   return (
     <div style={{ 
       position: 'relative', 
@@ -78,11 +85,12 @@ export function StaggerProjects({ onMove }: Props) {
       {visibleCards.map(({ project, offset }) => {
         const isCenter = offset === 0;
 
-        const translateX = offset * (cardWidth * 0.7);
-        const translateY = isCenter ? 0 : 15;
-        const rotate = isCenter ? 0 : (offset > 0 ? 3 : -3);
-        const scale = isCenter ? 1 : 0.92;
+        const translateX = offset * (windowWidth < 480 ? cardWidth * 0.3 : cardWidth * 0.85);
+        const translateY = 0;
+        const rotate = 0;
+        const scale = isCenter ? 1 : windowWidth < 480 ? 0.8 : 0.95;
         const zIndex = isCenter ? 10 : 5;
+        const opacity = isCenter ? 1 : windowWidth < 480 ? 0.3 : 0.6;
 
         // Center = soft green, sides = soft yellow
         const bgColor = isCenter ? '#d1f2eb' : '#fff8e1';
@@ -113,6 +121,7 @@ export function StaggerProjects({ onMove }: Props) {
                 : '0 8px 24px rgba(0,0,0,0.05)',
               transform: `translate(-50%, -50%) translateX(${translateX}px) translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`,
               zIndex,
+              opacity,
               transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
             }}
           >
@@ -124,13 +133,13 @@ export function StaggerProjects({ onMove }: Props) {
                 lineHeight: 1.3,
                 fontFamily: 'var(--font-lexend)',
                 color: '#0B2228',
-                marginBottom: 32,
+                marginBottom: windowWidth < 480 ? 16 : 32,
               }}>
                 {project.title}
               </h3>
               <p style={{
                 margin: 0,
-                fontSize: '1.1rem',
+                fontSize: windowWidth < 480 ? '0.9rem' : '1.1rem',
                 lineHeight: '1.75',
                 color: 'rgba(11, 34, 40, 0.65)',
                 marginTop: 10,

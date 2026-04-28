@@ -72,6 +72,13 @@ body {
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
 }
 
+@media (max-width: 768px) {
+  .framed-card {
+    margin: 10px;
+    border-radius: 24px;
+  }
+}
+
 
 
 
@@ -109,6 +116,21 @@ body {
   z-index: 100;
 }
 
+@media (max-width: 1024px) {
+  .header {
+    padding: 20px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 15px;
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+}
+
 .logo-container {
   display: flex;
   align-items: center;
@@ -118,6 +140,13 @@ body {
 /* Only apply the cutout logic to the main Hero header, NOT the sticky navbar */
 .header .logo-container {
   padding-left: 160px; 
+}
+
+@media (max-width: 768px) {
+  .header .logo-container {
+    padding-left: 0;
+    margin-top: 60px;
+  }
 }
 
 .header .logo-tab {
@@ -136,6 +165,18 @@ body {
   z-index: 10;
 }
 
+@media (max-width: 768px) {
+  .header .logo-tab {
+    width: 80px;
+    height: 80px;
+    border-bottom-right-radius: 20px;
+  }
+  .header .logo-tab img {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
+
 .brand-name {
   font-family: var(--font-lexend);
   font-weight: 700;
@@ -149,6 +190,19 @@ body {
   gap: 10px;
 }
 
+@media (max-width: 768px) {
+  .nav {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 10px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .nav::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .nav-link {
   text-decoration: none;
   color: var(--primary-color);
@@ -158,6 +212,14 @@ body {
   border-radius: 12px;
   background: rgba(209, 242, 235, 0.4);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 0.85rem;
+    padding: 8px 16px;
+  }
 }
 
 .nav-link:hover {
@@ -191,6 +253,22 @@ body {
   z-index: 10;
 }
 
+@media (max-width: 1024px) {
+  .footer {
+    padding: 0 30px 40px 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 30px;
+    padding: 0 20px 30px 20px;
+  }
+}
+
 .mission-text {
   font-size: 1.1rem;
   line-height: 1.6;
@@ -202,6 +280,18 @@ body {
   display: flex;
   align-items: center;
   gap: 25px;
+}
+
+@media (max-width: 768px) {
+  .footer-right {
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+  }
+  .contact-btn, .join-btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .contact-btn {
@@ -269,6 +359,17 @@ body {
   background: #f8fafc;
 }
 
+@media (max-width: 768px) {
+  .parallax-ticker-container {
+    padding: 40px 0;
+    gap: 60px;
+    margin: 10px;
+    border-radius: 24px;
+    height: auto;
+    min-height: 50vh;
+  }
+}
+
 .parallax-row {
   display: flex;
   gap: 50px;
@@ -284,6 +385,14 @@ body {
   color: #0B2228;
 }
 
+@media (max-width: 768px) {
+  .parallax-tag {
+    padding: 15px 40px;
+    font-size: 1.8rem;
+    border-radius: 20px;
+  }
+}
+
 .tag-yellow { background: #fffde6; border: 1px solid rgba(0,0,0,0.03); }
 .tag-cyan { background: #e0fcf8; }
 
@@ -292,6 +401,13 @@ body {
   height: 150px; /* Made bigger */
   border-radius: 50%;
   overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .parallax-img-wrapper {
+    width: 80px;
+    height: 80px;
+  }
 }
 
 .parallax-img { width: 100%; height: 100%; object-fit: cover; }
@@ -356,6 +472,28 @@ body {
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
 }
 
+@media (max-width: 1024px) {
+  .sticky-navbar {
+    padding: 0 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sticky-navbar {
+    padding: 0 15px;
+    height: 60px;
+  }
+  .sticky-nav-links {
+    display: none !important;
+  }
+  .sticky-contact-btn {
+    display: block !important;
+  }
+  .sticky-navbar .brand-name {
+    font-size: 0.9rem !important;
+  }
+}
+
 .sticky-navbar-content {
   width: 100%;
   display: flex;
@@ -370,6 +508,172 @@ body {
 .parallax-row, .parallax-item, .parallax-tag, .parallax-img-wrapper {
   transform: translateZ(0);
   backface-visibility: hidden;
+}
+
+/* VISION SECTION RESPONSIVE */
+@media (max-width: 1024px) {
+  .vision-card {
+    padding: 40px !important;
+  }
+  .vision-title {
+    font-size: 3.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .vision-section-wrapper {
+    height: auto !important;
+    min-height: auto !important;
+  }
+  .vision-card {
+    padding: 30px !important;
+    border-radius: 24px !important;
+  }
+  .vision-content-container {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 20px !important;
+  }
+  .vision-title {
+    font-size: 2.2rem !important;
+  }
+  .vision-description {
+    font-size: 0.95rem !important;
+    padding-bottom: 0 !important;
+  }
+}
+
+/* CONTACT SECTION RESPONSIVE */
+@media (max-width: 768px) {
+  .contact-card {
+    padding: 30px !important;
+    gap: 20px !important;
+  }
+  .contact-title {
+    font-size: 1.8rem !important;
+    margin-bottom: 20px !important;
+  }
+  .contact-form-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  .contact-form-grid > div {
+    grid-column: span 1 !important;
+  }
+  .contact-form-grid button {
+    width: 100% !important;
+  }
+}
+
+/* FOOTER RESPONSIVE */
+@media (max-width: 768px) {
+  .footer-container {
+    height: auto !important;
+    padding: 40px 20px !important;
+  }
+}
+
+/* WHAT WE DO RESPONSIVE */
+@media (max-width: 1024px) {
+  .what-we-do-card {
+    padding: 60px 40px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .what-we-do-inner {
+    padding: 10px !important;
+    height: auto !important;
+    min-height: 100vh !important;
+  }
+  .what-we-do-card {
+    padding: 60px 20px 40px 20px !important;
+    border-radius: 24px !important;
+  }
+  .what-we-do-card .text-5xl {
+    font-size: 2.5rem !important;
+  }
+}
+
+/* TESTIMONIALS RESPONSIVE */
+@media (max-width: 1024px) {
+  .testimonial-card-frame {
+    padding: 100px 40px 60px 40px !important;
+  }
+  .testimonial-photo-card {
+    width: 300px !important;
+    height: 400px !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .testimonial-section-container {
+    padding: 10px !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+  .testimonial-card-frame {
+    padding: 80px 20px 40px 20px !important;
+    border-radius: 24px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+  }
+  .testimonial-label, .testimonial-dots {
+    left: 20px !important;
+  }
+  .testimonial-content-wrapper {
+    flex-direction: column !important;
+    gap: 20px !important;
+  }
+  .testimonial-text-card {
+    padding: 30px !important;
+    border-radius: 16px !important;
+  }
+  .testimonial-text-card p {
+    font-size: 1.2rem !important;
+    margin-bottom: 20px !important;
+  }
+  .testimonial-photo-card {
+    width: 100% !important;
+    height: 350px !important;
+    border-radius: 16px !important;
+  }
+  .testimonial-nav-btns {
+    position: static !important;
+    transform: none !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    margin-top: 30px !important;
+    width: 100% !important;
+  }
+}
+
+/* FOOTER COMPONENT RESPONSIVE */
+@media (max-width: 768px) {
+  footer[style*="padding: 40px 60px 20px 60px"] {
+    padding: 40px 20px 20px 20px !important;
+  }
+  footer > div:first-child {
+    gap: 40px !important;
+    margin-bottom: 40px !important;
+  }
+  footer h2 {
+    font-size: 1.1rem !important;
+  }
+  footer .bottom-bar {
+    justify-content: center !important;
+    text-align: center !important;
+  }
+}
+
+/* TEAM PHOTO SECTION RESPONSIVE */
+@media (max-width: 768px) {
+  div[style*="height: '150vh'"] {
+    height: 100vh !important;
+  }
+  div[style*="padding: '40px'"] {
+    padding: 10px !important;
+  }
 }
 
 #nextjs-portal, .nextjs-toast-errors-parent { display: none !important; }

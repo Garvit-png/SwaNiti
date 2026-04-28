@@ -31,15 +31,15 @@ export default function TestimonialCarousel() {
   const prev = () => setIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <div style={{
-      height: '75vh',
+    <div className="testimonial-section-container" style={{
+      minHeight: '75vh',
       width: '100vw',
       padding: '40px',
       boxSizing: 'border-box',
       background: '#f8fafc',
     }}>
       {/* Framed card with skyblue gradient */}
-      <div style={{
+      <div className="testimonial-card-frame" style={{
         width: '100%',
         height: '100%',
         borderRadius: '32px',
@@ -54,7 +54,7 @@ export default function TestimonialCarousel() {
       }}>
 
         {/* Top-left label */}
-        <div style={{
+        <div className="testimonial-label" style={{
           position: 'absolute',
           top: '50px',
           left: '60px',
@@ -72,7 +72,7 @@ export default function TestimonialCarousel() {
         </div>
 
         {/* Dot indicator - bottom left */}
-        <div style={{
+        <div className="testimonial-dots" style={{
           position: 'absolute',
           bottom: '50px',
           left: '60px',
@@ -110,6 +110,7 @@ export default function TestimonialCarousel() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
+              className="testimonial-content-wrapper"
               style={{
                 display: 'flex',
                 alignItems: 'stretch',
@@ -118,7 +119,7 @@ export default function TestimonialCarousel() {
               }}
             >
               {/* Text Card */}
-              <div style={{ 
+              <div className="testimonial-text-card" style={{ 
                 flex: 1,
                 background: 'white',
                 padding: '60px',
@@ -148,7 +149,7 @@ export default function TestimonialCarousel() {
               </div>
               
               {/* Photo Card */}
-              <div style={{
+              <div className="testimonial-photo-card" style={{
                 width: '360px',
                 height: '460px',
                 background: 'white',
@@ -182,7 +183,7 @@ export default function TestimonialCarousel() {
         </div>
 
         {/* Navigation Buttons — vertical stack on the right */}
-        <div style={{
+        <div className="testimonial-nav-btns" style={{
           position: 'absolute',
           right: '60px',
           top: '50%',

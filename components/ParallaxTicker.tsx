@@ -42,11 +42,11 @@ export default function ParallaxTicker() {
   const renderRow = (data: any[], x: any) => (
     <div className="parallax-row-wrapper" style={{ overflow: 'hidden' }}>
       <motion.div 
-        style={{ x, willChange: 'transform', display: 'flex', width: '150%', gap: '50px' }} 
+        style={{ x, willChange: 'transform', display: 'flex', width: 'fit-content', gap: '20px' }} 
         className="parallax-row"
       >
         {[...data, ...data].map((item, idx) => (
-          <div key={idx} className="parallax-item" style={{ gap: '50px' }}>
+          <div key={idx} className="parallax-item" style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
             {item.text ? (
               <div className={`parallax-tag tag-${item.type}`}>
                 {item.text}
@@ -65,12 +65,10 @@ export default function ParallaxTicker() {
   return (
     <div ref={containerRef} className="parallax-ticker-container" style={{ 
       background: 'linear-gradient(to bottom, #f8fafc, #f0f9ff)', 
-      height: '100vh', 
       width: '100vw',
       display: 'flex', 
       flexDirection: 'column',
       justifyContent: 'center',
-      gap: '80px',
       overflow: 'hidden',
       padding: '0',
       margin: 0
