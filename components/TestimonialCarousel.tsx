@@ -10,21 +10,16 @@ const testimonials = [
     quote: "The idea of SvaNiti is much needed and Aadil has much more clarity on this idea at this initial stage.",
     author: "Jigar Inamdar",
     role: "Youth Leader & Politician",
-    event: "PBC 2024, Rishihood University"
+    event: "PBC 2024, Rishihood University",
+    image: "/gallery/Jigar Inamdar.png"
   },
   {
     id: 1,
     quote: "It's need of time that our country needs Creative Economy Ministry. SvaNiti is Bang on promoting idea and research on the same.",
     author: "Sheron",
     role: "Creative Artist",
-    event: "Nudge Charcha 2024"
-  },
-  {
-    id: 2,
-    quote: "SvaNiti's approach to local governance and policy research is exactly what we need for a Viksit Bharat.",
-    author: "Rohan Gupta",
-    role: "Policy Analyst",
-    event: "NITI Aayog Workshop 2024"
+    event: "Nudge Charcha 2024",
+    image: "/testimonials/sheron.png"
   }
 ];
 
@@ -36,7 +31,7 @@ export default function TestimonialCarousel() {
 
   return (
     <div style={{
-      height: '100vh',
+      height: '75vh',
       width: '100vw',
       padding: '40px',
       boxSizing: 'border-box',
@@ -47,12 +42,13 @@ export default function TestimonialCarousel() {
         width: '100%',
         height: '100%',
         borderRadius: '32px',
+        border: '2px solid #0B2228',
         overflow: 'hidden',
         background: 'linear-gradient(135deg, #bfecff 0%, #dff6ff 50%, #f0fbff 100%)',
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
-        padding: '60px',
+        padding: '60px 60px 60px 140px',
         boxSizing: 'border-box',
       }}>
 
@@ -104,7 +100,7 @@ export default function TestimonialCarousel() {
           position: 'relative',
           zIndex: 10,
           width: '100%',
-          maxWidth: '700px',
+          maxWidth: '1000px',
         }}>
           <AnimatePresence mode="wait">
             <motion.div
@@ -114,29 +110,75 @@ export default function TestimonialCarousel() {
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
               style={{
+                display: 'flex',
+                alignItems: 'stretch',
+                gap: '24px',
+                width: '100%',
+              }}
+            >
+              {/* Text Card */}
+              <div style={{ 
+                flex: 1,
                 background: 'white',
                 padding: '60px',
                 borderRadius: '24px',
-                boxShadow: '0 24px 60px rgba(11,34,40,0.1)',
-              }}
-            >
-              <p style={{
-                fontSize: '1.75rem',
-                lineHeight: 1.45,
-                color: '#0B2228',
-                fontFamily: 'var(--font-inter)',
-                fontWeight: 500,
-                marginBottom: '40px',
+                boxShadow: '0 24px 60px rgba(11, 34, 40, 0.08)',
+                display: 'flex',
+                flexDirection: 'column',
               }}>
-                "{testimonials[index].quote}"
-              </p>
-              <div>
-                <h4 style={{ fontSize: '1.05rem', fontWeight: 700, color: '#0B2228', marginBottom: '4px' }}>
-                  {testimonials[index].author}
-                </h4>
-                <p style={{ color: '#64748b', fontSize: '0.85rem', fontWeight: 500 }}>
-                  {testimonials[index].role} · {testimonials[index].event}
+                <p style={{
+                  fontSize: '1.6rem',
+                  lineHeight: 1.45,
+                  color: '#0B2228',
+                  fontFamily: 'var(--font-inter)',
+                  fontWeight: 500,
+                  marginBottom: '40px',
+                }}>
+                  "{testimonials[index % testimonials.length]?.quote || ''}"
                 </p>
+                <div style={{ marginTop: 'auto' }}>
+                  <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0B2228', marginBottom: '4px' }}>
+                    {testimonials[index % testimonials.length]?.author}
+                  </h4>
+                  <p style={{ color: '#64748b', fontSize: '0.9rem', fontWeight: 500 }}>
+                    {testimonials[index % testimonials.length]?.role} · {testimonials[index % testimonials.length]?.event}
+                  </p>
+                </div>
+              </div>
+              
+              {/* Photo Card */}
+              <div style={{
+                width: '380px',
+                background: 'white',
+                padding: '20px',
+                borderRadius: '24px',
+                boxShadow: '0 24px 60px rgba(11, 34, 40, 0.08)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0,
+              }}>
+                <div style={{
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '16px',
+                  overflow: 'hidden',
+                  background: '#f8fafc',
+                }}>
+                  <img 
+                    src={testimonials[index % testimonials.length]?.image} 
+                    alt={testimonials[index % testimonials.length]?.author}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                    }}
+                    onError={(e) => {
+                      const author = testimonials[index % testimonials.length]?.author || 'User';
+                      (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(author)}&background=0B2228&color=fff&size=400`;
+                    }}
+                  />
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>

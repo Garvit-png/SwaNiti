@@ -20,7 +20,7 @@ export default function WhatWeDo() {
         height: '100vh', 
         width: '100vw',
         background: 'linear-gradient(to bottom, #f0f9ff, #fdfcf0)',
-        padding: '40px',
+        padding: '60px',
         boxSizing: 'border-box',
         display: 'flex',
       }}
@@ -38,21 +38,49 @@ export default function WhatWeDo() {
           style={{
             flex: 1,
             borderRadius: '32px',
+            border: '2px solid #0B2228',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-start',
             alignItems: 'center',
             padding: '80px 60px 60px 60px',
             overflow: 'visible', // Allow cards to extend slightly beyond
+            position: 'relative',
           }}
         >
-          <AnimatedText 
-            text="What We Do"
-            textClassName="text-4xl font-normal tracking-tight text-[#0B2228]"
-            underlineClassName="text-[#0B2228] opacity-30"
-            className="mb-4"
-            style={{ fontFamily: 'var(--font-lexend)' }}
-          />
+          {/* Subtle Background Elements to fill "empty" space */}
+          <div style={{
+            position: 'absolute',
+            top: '10%',
+            left: '5%',
+            width: '300px',
+            height: '300px',
+            borderRadius: '50%',
+            background: 'rgba(11, 34, 40, 0.03)',
+            filter: 'blur(60px)',
+            zIndex: 1,
+          }} />
+          <div style={{
+            position: 'absolute',
+            bottom: '10%',
+            right: '5%',
+            width: '400px',
+            height: '400px',
+            borderRadius: '50%',
+            background: 'rgba(193, 241, 241, 0.2)',
+            filter: 'blur(80px)',
+            zIndex: 1,
+          }} />
+
+          <div style={{ position: 'relative', zIndex: 10, textAlign: 'center' }}>
+            <AnimatedText 
+              text="What We Do"
+              textClassName="text-5xl font-normal tracking-tight text-[#0B2228]"
+              underlineClassName="text-[#0B2228] opacity-30"
+              className="mb-4"
+              style={{ fontFamily: 'var(--font-lexend)' }}
+            />
+          </div>
 
           <div style={{ 
             width: '100%', 
@@ -60,6 +88,7 @@ export default function WhatWeDo() {
             justifyContent: 'center', 
             position: 'relative',
             zIndex: 6,
+            marginTop: '20px'
           }}>
             <StaggerProjects onMove={() => setGradientIndex(prev => prev + 1)} />
           </div>

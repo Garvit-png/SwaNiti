@@ -8,21 +8,25 @@ const projectsData = [
     id: 1,
     title: "Sva-Bharat Movement",
     description: "Change in Bharat begins with a movement, not just a policy. Sva-Bharat Movement by SvaNiti channels the aspirations of the people, uniting ideas and voices through regional and campus ambassadors to shape a transformative future.",
+    url: "#sva-bharat"
   },
   {
     id: 2,
     title: "Viksit Bharat Darshan Yatra",
     description: "Viksit Bharat Darshan Yatra honors the Prime Minister's mission for a Developed India by 2047, emphasizing self-discovery through solo, purposeful, and philosophical journeys, shaping individuals with purpose for Viksit Yuva for Viksit Bharat.",
+    url: "#viksit-bharat"
   },
   {
     id: 3,
     title: "LifeSite (जीवन-स्थल) Conceptualization",
     description: "LifeSite originated from a seven-year pilot research project initiated by our founder, aimed at exploring an education system that transcends traditional schools, colleges, and universities, addressing the needs of the current era.",
+    url: "#lifesite"
   },
   {
     id: 4,
     title: "Notion of Ministry of Creative Economy Affairs",
     description: "The creative economy holds the potential to be a powerful multiplier for our economy, unlocking new opportunities in employment, tourism, exports, innovation, and social inclusion. Our proposal to establish a dedicated ministry aims to strengthen initiatives and streamline regulations within this dynamic sector.",
+    url: "#notion"
   }
 ];
 
@@ -36,7 +40,7 @@ export function StaggerProjects({ onMove }: Props) {
 
   useEffect(() => {
     const update = () => {
-      setCardWidth(window.innerWidth < 640 ? 340 : 440);
+      setCardWidth(window.innerWidth < 640 ? 320 : 420);
     };
     update();
     window.addEventListener('resize', update);
@@ -69,7 +73,7 @@ export function StaggerProjects({ onMove }: Props) {
     <div style={{ 
       position: 'relative', 
       width: '100%', 
-      height: 580,
+      height: 600,
     }}>
       {visibleCards.map(({ project, offset }) => {
         const isCenter = offset === 0;
@@ -81,7 +85,7 @@ export function StaggerProjects({ onMove }: Props) {
         const zIndex = isCenter ? 10 : 5;
 
         // Center = soft green, sides = soft yellow
-        const bgColor = isCenter ? '#e8f5e9' : '#fff8e1';
+        const bgColor = isCenter ? '#d1f2eb' : '#fff8e1';
 
         return (
           <div
@@ -97,6 +101,7 @@ export function StaggerProjects({ onMove }: Props) {
               width: cardWidth,
               height: 520,
               borderRadius: 28,
+              border: '2px solid #0B2228',
               padding: 36,
               background: bgColor,
               color: '#0B2228',
@@ -119,15 +124,16 @@ export function StaggerProjects({ onMove }: Props) {
                 lineHeight: 1.3,
                 fontFamily: 'var(--font-lexend)',
                 color: '#0B2228',
-                marginBottom: 20,
+                marginBottom: 32,
               }}>
                 {project.title}
               </h3>
               <p style={{
                 margin: 0,
-                fontSize: '0.95rem',
-                lineHeight: 1.65,
-                color: 'rgba(11,34,40,0.6)',
+                fontSize: '1.1rem',
+                lineHeight: '1.75',
+                color: 'rgba(11, 34, 40, 0.65)',
+                marginTop: 10,
               }}>
                 {project.description}
               </p>
@@ -140,7 +146,19 @@ export function StaggerProjects({ onMove }: Props) {
               alignItems: 'center',
               paddingTop: 16,
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <a 
+                href={project.url}
+                onClick={(e) => e.stopPropagation()}
+                style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  gap: 8, 
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  cursor: 'pointer'
+                }}
+                className="group"
+              >
                 <span style={{ fontWeight: 600, fontSize: '0.85rem' }}>Learn More</span>
                 <div style={{
                   width: 32,
@@ -150,10 +168,11 @@ export function StaggerProjects({ onMove }: Props) {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
+                  transition: 'transform 0.2s ease',
                 }}>
                   <ArrowRight size={15} color="#0B2228" />
                 </div>
-              </div>
+              </a>
             </div>
           </div>
         );
@@ -162,7 +181,7 @@ export function StaggerProjects({ onMove }: Props) {
       {/* Navigation controls */}
       <div style={{
         position: 'absolute',
-        bottom: 10,
+        bottom: -40,
         left: '50%',
         transform: 'translateX(-50%)',
         display: 'flex',

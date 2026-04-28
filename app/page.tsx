@@ -116,7 +116,6 @@ export default function Home() {
         padding: '20px',
         boxSizing: 'border-box',
         display: 'flex',
-        scrollSnapAlign: 'center',
         position: 'relative',
       }}>
         {/* Wrapper for cutout logic */}
@@ -210,7 +209,6 @@ export default function Home() {
         width: '100vw',
         background: '#f8fafc', 
         position: 'relative',
-        scrollSnapAlign: 'start', 
       }}>
         <div style={{
           position: 'sticky',
@@ -277,16 +275,64 @@ export default function Home() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', maxWidth: '900px' }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Name *</label>
-              <input type="text" style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white' }} />
+              <motion.input 
+                whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
+                whileFocus={{ borderColor: '#0B2228', boxShadow: '0 0 0 2px rgba(11, 34, 40, 0.05)' }}
+                type="text" 
+                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none', transition: 'all 0.1s ease-in-out' }} 
+              />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Contact No. *</label>
-              <input type="text" style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white' }} />
+              <motion.input 
+                whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
+                whileFocus={{ borderColor: '#0B2228', boxShadow: '0 0 0 2px rgba(11, 34, 40, 0.05)' }}
+                type="text" 
+                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none', transition: 'all 0.1s ease-in-out' }} 
+              />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', gridColumn: 'span 2' }}>
               <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Email *</label>
-              <input type="email" style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white' }} />
+              <motion.input 
+                whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
+                whileFocus={{ borderColor: '#0B2228', boxShadow: '0 0 0 2px rgba(11, 34, 40, 0.05)' }}
+                type="email" 
+                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none', transition: 'all 0.1s ease-in-out' }} 
+              />
             </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', gridColumn: 'span 2' }}>
+              <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Notion Note *</label>
+              <motion.textarea 
+                whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
+                whileFocus={{ borderColor: '#0B2228', boxShadow: '0 0 0 2px rgba(11, 34, 40, 0.05)' }}
+                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', minHeight: '120px', fontSize: '1rem', fontFamily: 'inherit', outline: 'none', transition: 'all 0.1s ease-in-out' }} 
+              />
+            </div>
+
+            <motion.button 
+              whileHover={{ 
+                background: '#fff1cc', 
+                color: '#0B2228',
+                scale: 1.02
+              }}
+              whileTap={{ scale: 0.98 }}
+              style={{
+                gridColumn: 'span 2',
+                background: '#0B2228',
+                color: 'white',
+                padding: '16px 32px',
+                borderRadius: '12px',
+                border: 'none',
+                fontWeight: 600,
+                fontSize: '1rem',
+                cursor: 'pointer',
+                marginTop: '10px',
+                width: 'fit-content',
+                transition: 'all 0.1s ease-in-out'
+              }}
+            >
+              Contact Now
+            </motion.button>
           </div>
         </div>
       </motion.div>
