@@ -90,7 +90,7 @@ export default function Home() {
       <div style={{
         height: '65vh', /* Reduced from 100vh to make it smaller and tighter */
         width: '100vw',
-        background: 'white',
+        background: 'linear-gradient(to bottom, #fdfcf0, #f8fafc)',
         padding: '20px',
         boxSizing: 'border-box',
         display: 'flex',
@@ -158,7 +158,7 @@ export default function Home() {
             top: 0,
             left: 0,
             padding: '0 32px 32px 0', 
-            background: 'white',
+            background: '#f8fafc',
             borderBottomRightRadius: '40px',
             zIndex: 10,
           }}>
@@ -181,6 +181,28 @@ export default function Home() {
             </div>
           </div>
 
+        </div>
+      </div>
+
+      {/* TEAM PHOTO SECTION */}
+      <div style={{
+        height: '90vh',
+        width: '100vw',
+        background: '#f8fafc',
+        padding: '20px',
+        boxSizing: 'border-box',
+        display: 'flex',
+        scrollSnapAlign: 'center',
+      }}>
+        <div className="framed-card" style={{ flex: 1, position: 'relative', margin: 0, background: '#fff' }}>
+          <Image 
+            src="/gallery/SvanitiPhoto.png" 
+            alt="SvaNiti Team" 
+            fill 
+            style={{ objectFit: 'cover', objectPosition: '49% 47%' }}
+            unoptimized
+            priority
+          />
         </div>
       </div>
 

@@ -1,14 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { StaggerProjects } from '@/components/ui/stagger-testimonials'
 
 export default function WhatWeDo() {
+  const [gradientIndex, setGradientIndex] = useState(0)
+
+  const gradients = [
+    'radial-gradient(at 0% 0%, #fff1cc 0, transparent 60%), radial-gradient(at 100% 100%, #aed6f1 0, transparent 60%), #d1f2eb',
+    'radial-gradient(at 100% 0%, #d1f2eb 0, transparent 60%), radial-gradient(at 0% 100%, #fff1cc 0, transparent 60%), #aed6f1',
+    'radial-gradient(at 50% 0%, #aed6f1 0, transparent 70%), radial-gradient(at 50% 100%, #d1f2eb 0, transparent 70%), #fff1cc',
+    'radial-gradient(at 0% 50%, #fff1cc 0, transparent 60%), radial-gradient(at 100% 50%, #d1f2eb 0, transparent 60%), #aed6f1',
+  ]
+
   return (
     <div 
       className="what-we-do-inner"
       style={{ 
         height: '100vh', 
         width: '100vw',
-        background: 'white',
+        background: 'linear-gradient(to bottom, #f0f9ff, #fdfcf0)',
         padding: '20px',
         boxSizing: 'border-box',
         display: 'flex',
@@ -17,19 +27,25 @@ export default function WhatWeDo() {
       {/* Wrapper to allow the white cutout to sit perfectly on top of the bordered yellow card */}
       <div style={{ position: 'relative', flex: 1, display: 'flex' }}>
         
-        {/* YELLOW CARD */}
-        <div style={{
-          flex: 1,
-          background: '#fff3c4',
-          border: '2px solid #0B2228',
-          borderRadius: '32px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          padding: '60px',
-          overflow: 'hidden', // Keeps carousel cards inside the yellow card
-        }}>
+        {/* YELLOW CARD WITH MOVING GRADIENT */}
+        <motion.div 
+          initial={{ background: gradients[0] }}
+          animate={{ 
+            background: gradients[gradientIndex % gradients.length]
+          }}
+          transition={{ duration: 1.2, ease: "easeInOut" }}
+          style={{
+            flex: 1,
+            border: '2px solid #0B2228',
+            borderRadius: '32px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: '100px 60px 60px 60px',
+            overflow: 'hidden', // Keeps carousel cards inside the yellow card
+          }}
+        >
           {/* Curved "What We Do" heading — SVG textPath arc */}
           <svg
             viewBox="0 0 800 120"
@@ -61,9 +77,9 @@ export default function WhatWeDo() {
             position: 'relative',
             zIndex: 6,
           }}>
-            <StaggerProjects />
+            <StaggerProjects onMove={() => setGradientIndex(prev => prev + 1)} />
           </div>
-        </div>
+        </motion.div>
 
         {/* WHITE CUTOUT BOX WITH BORDERS */}
         <div style={{
@@ -71,7 +87,7 @@ export default function WhatWeDo() {
           top: '-2px', // Pulls up to perfectly cover the yellow card's top border
           left: '-2px', // Pulls left to perfectly cover the yellow card's left border
           padding: '0 32px 32px 0', // Creates the white gap around the dark pill
-          background: 'white',
+          background: '#f8fafc',
           borderRight: '2px solid #0B2228', // Draws the notch's right border
           borderBottom: '2px solid #0B2228', // Draws the notch's bottom border
           borderBottomRightRadius: '40px', // The smooth curve of the notch

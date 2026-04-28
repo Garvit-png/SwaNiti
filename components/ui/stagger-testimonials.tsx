@@ -2,36 +2,32 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Globe, Compass, GraduationCap, Briefcase } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const projects = [
   {
     id: 0,
     title: "Sva-Bharat Movement",
     description: "Change in Bharat begins with a movement, not just a policy. Sva-Bharat Movement by SvaNiti channels the aspirations of the people, uniting ideas and voices through regional and campus ambassadors to shape a transformative future.",
-    by: "Initiative",
-    icon: <Globe size={28} />
+    by: "Initiative"
   },
   {
     id: 1,
     title: "Viksit Bharat Darshan Yatra",
     description: "Viksit Bharat Darshan Yatra honors the Prime Minister's mission for a Developed India by 2047, emphasizing self-discovery through solo, purposeful, and philosophical journeys, shaping individuals with purpose for Viksit Yuva for Viksit Bharat.",
-    by: "National Program",
-    icon: <Compass size={28} />
+    by: "National Program"
   },
   {
     id: 2,
     title: "LifeSite (जीवन-स्थल) Conceptualization",
     description: "LifeSite originated from a seven-year pilot research project initiated by our founder, aimed at exploring an education system that transcends traditional schools, colleges, and universities, addressing the needs of the current era.",
-    by: "Education Reform",
-    icon: <GraduationCap size={28} />
+    by: "Education Reform"
   },
   {
     id: 3,
     title: "Notion of Ministry of Creative Economy Affairs",
     description: "The creative economy holds the potential to be a powerful multiplier for our economy, unlocking new opportunities in employment, tourism, exports, innovation, and social inclusion. Our proposal to establish a dedicated ministry aims to strengthen initiatives and streamline regulations within this dynamic sector.",
-    by: "Policy Proposal",
-    icon: <Briefcase size={28} />
+    by: "Policy Proposal"
   }
 ];
 
@@ -74,11 +70,11 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         width: cardSize,
         height: cardSize + 180,
         borderRadius: '32px',
-        border: '5px solid rgba(15, 42, 51, 0.25)', 
+        border: '1px solid rgba(15, 42, 51, 0.1)', 
         zIndex: isCenter ? 10 : 5 - Math.abs(position),
         pointerEvents: isVisible ? 'auto' : 'none',
         padding: '50px 45px',
-        boxShadow: isCenter ? '0 30px 60px rgba(0,0,0,0.12)' : '0 10px 30px rgba(0,0,0,0.03)',
+        boxShadow: isCenter ? '0 40px 80px rgba(0,0,0,0.15)' : '0 10px 30px rgba(0,0,0,0.02)',
         position: 'absolute',
         left: '50%',
         top: '50%',
@@ -86,86 +82,87 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         translateY: '-50%'
       }}
     >
-      <div className="card-icon-wrapper" style={{ 
-        marginBottom: '32px',
-        color: isCenter ? '#e0fcf8' : '#0B2228',
-        opacity: 0.8
-      }}>
-        {project.icon}
-      </div>
-
       <h3 className="card-title" style={{ 
-        fontSize: '1.6rem', 
+        fontFamily: 'var(--font-lexend)',
+        fontSize: '1.85rem', 
         lineHeight: 1.2,
-        fontWeight: 400,
-        marginBottom: '24px'
+        fontWeight: 300,
+        marginBottom: '28px',
+        letterSpacing: '-0.02em'
       }}>
         {project.title}
       </h3>
       
       <p className="card-desc" style={{ 
-        fontSize: '0.9rem',
-        opacity: isCenter ? 0.6 : 0.5,
-        lineHeight: 1.8,
-        fontWeight: 300
+        fontFamily: 'var(--font-inter)',
+        fontSize: '1.05rem',
+        opacity: isCenter ? 0.85 : 0.5,
+        lineHeight: 1.7,
+        fontWeight: 400,
+        color: isCenter ? '#ffffff' : '#475569', // Using a softer gray for non-center cards
       }}>
         {project.description}
       </p>
 
       <div className="card-footer-info" style={{ 
         position: 'absolute',
-        bottom: '50px', 
+        bottom: '40px', 
         left: '45px', 
         right: '45px',
         display: 'flex',
         justifyContent: 'space-between',
-        alignItems: 'center'
+        alignItems: 'center',
+        borderTop: isCenter ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(15,42,51,0.05)',
+        paddingTop: '25px'
       }}>
         <span className="card-by" style={{ 
-          fontSize: '0.7rem',
-          fontWeight: 400,
+          fontFamily: 'var(--font-inter)',
+          fontSize: '0.75rem',
+          fontWeight: 600,
           textTransform: 'uppercase',
-          letterSpacing: '0.2em',
-          opacity: 0.5
+          letterSpacing: '0.15em',
+          opacity: 0.6,
+          color: isCenter ? '#e0fcf8' : '#0B2228'
         }}>
-          {project.by}
+          Learn More
         </span>
         <div className="card-arrow-icon" style={{ 
-            width: '40px',
-            height: '40px',
-            borderRadius: '50%',
+            width: '44px',
+            height: '44px',
+            borderRadius: '14px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: isCenter ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.03)'
+            background: isCenter ? '#e0fcf8' : 'rgba(15,42,51,0.05)',
+            color: '#0B2228',
+            transition: 'all 0.3s ease'
         }}>
-            <ChevronRight size={18} />
+            <ChevronRight size={20} />
         </div>
       </div>
     </motion.div>
   );
 };
 
-export const StaggerProjects: React.FC = () => {
+export const StaggerProjects: React.FC<{ onMove?: () => void }> = ({ onMove }) => {
   const [cardSize, setCardSize] = useState(400);
-  const [projectsList, setProjectsList] = useState(projects);
+  const [projectsList, setProjectsList] = useState(projects.map(p => ({ ...p, tempId: p.id })));
 
   const handleMove = (steps: number) => {
-    if (steps === 0) return;
-    setProjectsList((prevList) => {
-      const newList = [...prevList];
-      const count = Math.abs(steps);
-      for (let i = 0; i < count; i++) {
-        if (steps > 0) {
-          const item = newList.shift();
-          if (item) newList.push(item);
-        } else {
-          const item = newList.pop();
-          if (item) newList.unshift(item);
-        }
+    const newList = [...projectsList];
+    if (steps > 0) {
+      for (let i = 0; i < steps; i++) {
+        const item = newList.shift();
+        if (item) newList.push({ ...item, tempId: Math.random() });
       }
-      return newList;
-    });
+    } else {
+      for (let i = 0; i < Math.abs(steps); i++) {
+        const item = newList.pop();
+        if (item) newList.unshift({ ...item, tempId: Math.random() });
+      }
+    }
+    setProjectsList(newList);
+    onMove?.();
   };
 
   useEffect(() => {
@@ -181,12 +178,14 @@ export const StaggerProjects: React.FC = () => {
 
   return (
     <div className="stagger-container" style={{ height: '700px', position: 'relative', width: '100%', overflow: 'visible' }}>
-      {projectsList.map((project, index) => {
-        const position = index - Math.floor(projectsList.length / 2);
+      {projectsList.map((project: any, index) => {
+        const position = projectsList.length % 2
+          ? index - (projectsList.length - 1) / 2
+          : index - projectsList.length / 2;
           
         return (
           <ProjectCard
-            key={project.id}
+            key={project.tempId}
             project={project}
             handleMove={handleMove}
             position={position}
@@ -204,8 +203,8 @@ export const StaggerProjects: React.FC = () => {
             height: '60px', 
             borderRadius: '50%', 
             background: 'white', 
-            border: '2px solid rgba(15, 42, 51, 0.1)',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            border: '1px solid rgba(15, 42, 51, 0.1)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -223,8 +222,8 @@ export const StaggerProjects: React.FC = () => {
             height: '60px', 
             borderRadius: '50%', 
             background: 'white', 
-            border: '2px solid rgba(15, 42, 51, 0.1)',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            border: '1px solid rgba(15, 42, 51, 0.1)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',

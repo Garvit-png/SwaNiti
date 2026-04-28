@@ -11,7 +11,7 @@ export default function StickyNavbar() {
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const isScrollingUp = latest < lastScrollY
-    const isPastHero = latest > 150
+    const isPastHero = latest > 400 // Increased threshold
 
     if (isPastHero && isScrollingUp) {
       setVisible(true)
@@ -26,28 +26,28 @@ export default function StickyNavbar() {
     <AnimatePresence>
       {visible && (
         <motion.header
-          initial={{ y: -100 }}
-          animate={{ y: 0 }}
-          exit={{ y: -100 }}
-          transition={{ duration: 0.3 }}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.2, ease: "easeOut" }}
           className="sticky-navbar"
         >
           <div className="sticky-navbar-content">
             <div className="logo-container">
-              <div className="logo-tab" style={{ padding: '8px' }}>
-                <Image src="/logo.png" alt="Logo" width={50} height={50} priority />
+              <div className="logo-tab" style={{ padding: '6px' }}>
+                <Image src="/logo.png" alt="Logo" width={40} height={40} priority />
               </div>
-              <span className="brand-name" style={{ fontSize: '1.15rem' }}>SvaNiti Policy Research Center</span>
+              <span className="brand-name" style={{ fontSize: '1rem' }}>SvaNiti</span>
             </div>
-            <nav className="nav">
-              <a href="#" className="nav-link">About</a>
-              <a href="#projects" className="nav-link">Projects</a>
-              <a href="#insights" className="nav-link">Insights</a>
-              <a href="#contact" className="nav-link">Governance</a>
+            <nav className="nav" style={{ gap: '5px' }}>
+              <a href="#" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>About</a>
+              <a href="#projects" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>Projects</a>
+              <a href="#insights" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>Insights</a>
+              <a href="#contact" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>Governance</a>
             </nav>
             <div className="footer-right">
-              <a href="#contact" className="contact-btn"  >
-                Contact Us
+              <a href="#contact" className="contact-btn" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>
+                Contact
               </a>
             </div>
           </div>
