@@ -1,1 +1,1 @@
-# SwaNiti
+# SvaNiti
