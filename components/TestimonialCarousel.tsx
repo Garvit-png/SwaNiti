@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const testimonials = [
@@ -148,9 +149,10 @@ export default function TestimonialCarousel() {
               
               {/* Photo Card */}
               <div style={{
-                width: '380px',
+                width: '360px',
+                height: '460px',
                 background: 'white',
-                padding: '20px',
+                padding: '16px',
                 borderRadius: '24px',
                 boxShadow: '0 24px 60px rgba(11, 34, 40, 0.08)',
                 display: 'flex',
@@ -164,19 +166,14 @@ export default function TestimonialCarousel() {
                   borderRadius: '16px',
                   overflow: 'hidden',
                   background: '#f8fafc',
+                  position: 'relative'
                 }}>
-                  <img 
-                    src={testimonials[index % testimonials.length]?.image} 
-                    alt={testimonials[index % testimonials.length]?.author}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                    }}
-                    onError={(e) => {
-                      const author = testimonials[index % testimonials.length]?.author || 'User';
-                      (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(author)}&background=0B2228&color=fff&size=400`;
-                    }}
+                  <Image 
+                    src={testimonials[index % testimonials.length]?.image || ''} 
+                    alt={testimonials[index % testimonials.length]?.author || ''}
+                    fill
+                    style={{ objectFit: 'cover', objectPosition: 'top' }}
+                    quality={90}
                   />
                 </div>
               </div>

@@ -315,6 +315,7 @@ body {
   flex-direction: column;
   transform: translateZ(0);
   backface-visibility: hidden;
+  will-change: transform, opacity;
 }
 
 .stagger-card.is-center {
@@ -364,11 +365,6 @@ body {
 
 /* FOOTER */
 .footer-container { background: #f8fafc; }
-.footer-minimal { padding: 60px; margin: 20px; }
-.footer-bottom-links { display: flex; justify-content: space-between; align-items: center; }
-.footer-nav { display: flex; gap: 30px; }
-.footer-nav a { text-decoration: none; color: #64748b; font-weight: 600; font-size: 0.95rem; }
-.copyright { color: #94a3b8; font-size: 0.9rem; }
 
 /* OPTIMIZATIONS */
 .parallax-row, .parallax-item, .parallax-tag, .parallax-img-wrapper {

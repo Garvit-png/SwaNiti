@@ -234,7 +234,7 @@ export default function Home() {
               alt="SvaNiti Team" 
               fill 
               style={{ objectFit: 'cover', objectPosition: '49% 47%' }}
-              unoptimized
+              quality={85}
               priority
             />
           </div>
