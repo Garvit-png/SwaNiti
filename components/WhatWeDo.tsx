@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { StaggerProjects } from '@/components/ui/stagger-testimonials'
+import { AnimatedText } from '@/components/ui/animated-underline-text'
 
 export default function WhatWeDo() {
   const [gradientIndex, setGradientIndex] = useState(0)
@@ -19,7 +20,7 @@ export default function WhatWeDo() {
         height: '100vh', 
         width: '100vw',
         background: 'linear-gradient(to bottom, #f0f9ff, #fdfcf0)',
-        padding: '20px',
+        padding: '40px',
         boxSizing: 'border-box',
         display: 'flex',
       }}
@@ -36,7 +37,6 @@ export default function WhatWeDo() {
           transition={{ duration: 1.2, ease: "easeInOut" }}
           style={{
             flex: 1,
-            border: '2px solid #0B2228',
             borderRadius: '32px',
             display: 'flex',
             flexDirection: 'column',
@@ -46,29 +46,13 @@ export default function WhatWeDo() {
             overflow: 'hidden', // Keeps carousel cards inside the yellow card
           }}
         >
-          {/* Curved "What We Do" heading — SVG textPath arc */}
-          <svg
-            viewBox="0 0 800 120"
-            style={{ width: '80%', maxWidth: '700px', marginBottom: '30px', overflow: 'visible', zIndex: 6, position: 'relative' }}
-          >
-            <defs>
-              <path
-                id="textCurve"
-                d="M 50,90 Q 400,10 750,90"
-              />
-            </defs>
-            <text
-              fill="#0B2228"
-              fontSize="62"
-              fontWeight="500"
-              fontFamily="var(--font-inter), sans-serif"
-              letterSpacing="-1"
-            >
-              <textPath href="#textCurve" startOffset="50%" textAnchor="middle">
-                What We Do
-              </textPath>
-            </text>
-          </svg>
+          <AnimatedText 
+            text="What We Do"
+            textClassName="text-6xl font-normal tracking-tight text-[#0B2228]"
+            underlineClassName="text-[#0B2228] opacity-30"
+            className="mb-12"
+            style={{ fontFamily: 'var(--font-lexend)' }}
+          />
 
           <div style={{ 
             width: '100%', 
@@ -88,8 +72,6 @@ export default function WhatWeDo() {
           left: '-2px', // Pulls left to perfectly cover the yellow card's left border
           padding: '0 32px 32px 0', // Creates the white gap around the dark pill
           background: '#f8fafc',
-          borderRight: '2px solid #0B2228', // Draws the notch's right border
-          borderBottom: '2px solid #0B2228', // Draws the notch's bottom border
           borderBottomRightRadius: '40px', // The smooth curve of the notch
           zIndex: 10,
         }}>

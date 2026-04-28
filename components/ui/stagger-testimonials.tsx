@@ -57,8 +57,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         scale: isCenter ? 1 : 0.85,
         rotate: isCenter ? 0 : position > 0 ? 2 : -2,
         opacity: isVisible ? (isCenter ? 1 : 0.8) : 0,
-        backgroundColor: isCenter ? '#0B2228' : '#ffffff',
-        color: isCenter ? '#ffffff' : '#0B2228',
+        backgroundColor: isCenter ? '#FDFBF0' : '#E0FCF8',
+        color: '#0B2228',
       }}
       transition={{
         type: "spring",
@@ -74,7 +74,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         zIndex: isCenter ? 10 : 5 - Math.abs(position),
         pointerEvents: isVisible ? 'auto' : 'none',
         padding: '50px 45px',
-        boxShadow: isCenter ? '0 40px 80px rgba(0,0,0,0.15)' : '0 10px 30px rgba(0,0,0,0.02)',
+        boxShadow: isCenter ? '0 40px 80px rgba(0,0,0,0.08)' : '0 10px 30px rgba(0,0,0,0.02)',
         position: 'absolute',
         left: '50%',
         top: '50%',
@@ -86,9 +86,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         fontFamily: 'var(--font-lexend)',
         fontSize: '1.85rem', 
         lineHeight: 1.2,
-        fontWeight: 300,
+        fontWeight: 400,
         marginBottom: '28px',
-        letterSpacing: '-0.02em'
+        letterSpacing: '-0.02em',
+        color: '#0B2228'
       }}>
         {project.title}
       </h3>
@@ -96,10 +97,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
       <p className="card-desc" style={{ 
         fontFamily: 'var(--font-inter)',
         fontSize: '1.05rem',
-        opacity: isCenter ? 0.85 : 0.5,
+        opacity: isCenter ? 0.9 : 0.6,
         lineHeight: 1.7,
         fontWeight: 400,
-        color: isCenter ? '#ffffff' : '#475569', // Using a softer gray for non-center cards
+        color: '#0B2228',
       }}>
         {project.description}
       </p>
@@ -112,7 +113,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        borderTop: isCenter ? '1px solid rgba(255,255,255,0.1)' : '1px solid rgba(15,42,51,0.05)',
+        borderTop: '1px solid rgba(11,34,40,0.1)',
         paddingTop: '25px'
       }}>
         <span className="card-by" style={{ 
@@ -122,7 +123,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           textTransform: 'uppercase',
           letterSpacing: '0.15em',
           opacity: 0.6,
-          color: isCenter ? '#e0fcf8' : '#0B2228'
+          color: '#0B2228'
         }}>
           Learn More
         </span>
@@ -133,8 +134,8 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: isCenter ? '#e0fcf8' : 'rgba(15,42,51,0.05)',
-            color: '#0B2228',
+            background: isCenter ? '#0B2228' : 'rgba(11,34,40,0.05)',
+            color: isCenter ? 'white' : '#0B2228',
             transition: 'all 0.3s ease'
         }}>
             <ChevronRight size={20} />

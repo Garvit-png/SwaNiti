@@ -32,14 +32,17 @@ export default function ParallaxTicker() {
     offset: ["start end", "end start"]
   })
 
-  const xLeft = useTransform(scrollYProgress, [0, 1], ["-150px", "150px"])
-  const xRight = useTransform(scrollYProgress, [0, 1], ["150px", "-150px"])
+  const baseLeft = useTransform(scrollYProgress, [0, 1], ["-25%", "25%"])
+  const baseRight = useTransform(scrollYProgress, [0, 1], ["25%", "-25%"])
+
+  const xLeft = useSpring(baseLeft, { stiffness: 100, damping: 30, restDelta: 0.001 })
+  const xRight = useSpring(baseRight, { stiffness: 100, damping: 30, restDelta: 0.001 })
 
 
   const renderRow = (data: any[], x: any) => (
     <div className="parallax-row-wrapper" style={{ overflow: 'hidden' }}>
       <motion.div 
-        style={{ x, willChange: 'transform' }} 
+        style={{ x, willChange: 'transform', display: 'flex', width: '150%', gap: '50px' }} 
         className="parallax-row"
       >
         {[...data, ...data].map((item, idx) => (

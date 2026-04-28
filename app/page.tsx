@@ -7,6 +7,10 @@ import ShaderBackground from '@/components/ShaderBackground'
 import StickyNavbar from '@/components/StickyNavbar'
 import ParallaxTicker from '@/components/ParallaxTicker'
 import WhatWeDo from '@/components/WhatWeDo'
+import ImpactSection from '@/components/ImpactSection'
+import TestimonialCarousel from '@/components/TestimonialCarousel'
+import { useScroll, useTransform } from 'framer-motion'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 export default function Home() {
   const footerRef = useRef<HTMLDivElement>(null)
@@ -14,8 +18,27 @@ export default function Home() {
   const smooth = useRef({ x: 0.5, y: 0.5 })
   const rafId = useRef<number>(0)
 
+  const teamRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: teamRef,
+    offset: ["start start", "end start"]
+  })
+
+  // Simple Layered Transition: Photo stays solid, Testimonials rise over it
+  const testimonialsY = useTransform(scrollYProgress, [0.1, 0.95], ["100vh", "0vh"])
+
+  const contactRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress: contactProgress } = useScroll({
+    target: contactRef,
+    offset: ["start end", "end end"]
+  })
+  const contactRise = useTransform(contactProgress, [0, 1], [100, 0])
+
   return (
-    <main className="main-viewport">
+    <main className="main-viewport" style={{ 
+      position: 'relative',
+      scrollBehavior: 'smooth'
+    }}>
 
       <StickyNavbar />
       {/* HERO SECTION */}
@@ -184,29 +207,116 @@ export default function Home() {
         </div>
       </div>
 
-      {/* TEAM PHOTO SECTION */}
-      <div style={{
-        height: '90vh',
+      {/* LAYERED TRANSITION SECTION: PHOTO FADES / TESTIMONIALS RISE */}
+      <div ref={teamRef} style={{
+        height: '150vh', // Shorter height for a snappier experience
         width: '100vw',
-        background: '#f8fafc',
-        padding: '20px',
-        boxSizing: 'border-box',
-        display: 'flex',
-        scrollSnapAlign: 'center',
+        background: '#f8fafc', 
+        position: 'relative',
+        scrollSnapAlign: 'start', // Locks the viewport to the solid photo arrival
       }}>
-        <div className="framed-card" style={{ flex: 1, position: 'relative', margin: 0, background: '#fff' }}>
-          <Image 
-            src="/gallery/SvanitiPhoto.png" 
-            alt="SvaNiti Team" 
-            fill 
-            style={{ objectFit: 'cover', objectPosition: '49% 47%' }}
-            unoptimized
-            priority
-          />
+        {/* Sticky Background Layer: Team Photo */}
+        <div style={{
+          position: 'sticky',
+          top: 0,
+          height: '100vh',
+          width: '100%',
+          overflow: 'hidden',
+          zIndex: 5
+        }}>
+          <motion.div 
+            style={{ 
+              width: '100%',
+              height: '100%',
+              position: 'relative',
+              padding: '40px', 
+              boxSizing: 'border-box'
+            }}
+          >
+            <div style={{ 
+              width: '100%', 
+              height: '100%', 
+              position: 'relative', 
+              borderRadius: '32px', 
+              overflow: 'hidden',
+              background: '#fff'
+            }}>
+              <Image 
+                src="/gallery/SvanitiPhoto.png" 
+                alt="SvaNiti Team" 
+                fill 
+                style={{ objectFit: 'cover', objectPosition: '49% 47%' }}
+                unoptimized
+                priority
+              />
+            </div>
+          </motion.div>
         </div>
+
+        {/* Rising Foreground Layer: Testimonial Carousel */}
+        <motion.div 
+          style={{
+            position: 'sticky',
+            top: 0,
+            height: '100vh',
+            width: '100vw',
+            zIndex: 10,
+            y: testimonialsY,
+            pointerEvents: 'none', 
+          }}
+        >
+          <div style={{ height: '100%', width: '100%', pointerEvents: 'auto' }}>
+            <TestimonialCarousel />
+          </div>
+        </motion.div>
       </div>
 
-      {/* FOOTER SECTION */}
+      {/* CONTACT SECTION WITH RISE EFFECT */}
+      <motion.div 
+        ref={contactRef}
+        style={{
+          padding: '20px',
+          background: '#f8fafc',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '20px',
+          marginTop: '-100px', // Overlap effect
+          position: 'relative',
+          zIndex: 20,
+          y: contactRise
+        }}
+      >
+        <div className="framed-card" style={{
+          padding: '60px',
+          background: '#e0fcf8',
+          borderRadius: '32px',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '40px'
+        }}>
+          <div style={{ background: '#0B2228', padding: '12px 24px', borderRadius: '8px', width: 'fit-content' }}>
+            <span style={{ color: 'white', fontWeight: 600 }}>Let's Talk, What you got!</span>
+          </div>
+          <h3 style={{ fontSize: '2.5rem', fontWeight: 300, color: '#0B2228', maxWidth: '600px', lineHeight: 1.2, marginBottom: '60px' }}>
+            Contact us for any notion for nation
+          </h3>
+
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px', maxWidth: '900px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Name *</label>
+              <input type="text" style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white' }} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+              <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Contact No. *</label>
+              <input type="text" style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white' }} />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', gridColumn: 'span 2' }}>
+              <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Email *</label>
+              <input type="email" style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white' }} />
+            </div>
+          </div>
+        </div>
+      </motion.div>
       <div className="footer-container">
         <footer ref={footerRef} className="footer-minimal framed-card">
           <div className="footer-bottom-links">
