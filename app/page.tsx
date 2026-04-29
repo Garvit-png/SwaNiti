@@ -1,5 +1,6 @@
 "use client"
 
+import React from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { useRef, useState } from 'react'
@@ -12,6 +13,7 @@ import { useScroll, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import Footer from '@/components/Footer'
 import { useIsMobile } from '@/components/hooks/useIsMobile'
+import VisionSection from '@/components/VisionSection'
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -26,7 +28,7 @@ export default function Home() {
   })
 
   const navLinks = [
-    { name: 'About', href: '#' },
+    { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
     { name: 'Insights', href: '#insights' },
     { name: 'Governance', href: '#contact' },
@@ -194,75 +196,14 @@ export default function Home() {
       {/* WHAT WE DO SECTION */}
       <WhatWeDo />
 
-      {/* VISION SECTION */}
-      <div id="about" className="vision-section-wrapper" style={{
-        minHeight: isMobile ? 'auto' : '65vh',
-        width: '100%',
-        background: 'linear-gradient(to bottom, #fdfcf0, #f8fafc)',
-        padding: isMobile ? '10px' : '20px',
-        boxSizing: 'border-box',
-        display: 'flex',
-        position: 'relative',
-      }}>
-        {/* Wrapper for corner-tab layout */}
-        <div style={{ position: 'relative', flex: 1, display: 'flex' }}>
-          {/* CYAN CARD */}
-          <div className="vision-card" style={{
-            flex: 1,
-            background: '#d4fdf8',
-            borderRadius: isMobile ? '24px' : '32px',
-            display: 'flex',
-            flexDirection: 'column',
-            padding: isMobile ? '30px' : '80px',
-            paddingTop: isMobile ? '30px' : '120px',
-            position: 'relative',
-            overflow: 'hidden',
-          }}>
-            {/* Typography Container — pushed to the bottom */}
-            <div className="vision-content-container" style={{ 
-              marginTop: 'auto', 
-              display: 'flex', 
-              justifyContent: 'space-between', 
-              alignItems: isMobile ? 'flex-start' : 'flex-end',
-              flexDirection: isMobile ? 'column' : 'row',
-              gap: isMobile ? '20px' : '40px'
-            }}>
-              {/* Massive heading */}
-              <h2 className="vision-title" style={{
-                fontSize: isMobile ? '2.2rem' : '5rem',
-                fontWeight: 400,
-                color: '#0B2228',
-                lineHeight: 1.05,
-                letterSpacing: '-0.02em',
-                margin: 0
-              }}>
-                Inspiring Aspirations,<br/>
-                Designing Policy,<br/>
-                Building Nation.
-              </h2>
-              
-              {/* Small paragraph */}
-              <p className="vision-description" style={{
-                fontSize: isMobile ? '0.95rem' : '1.05rem',
-                color: '#0B2228',
-                maxWidth: '450px',
-                lineHeight: 1.6,
-                margin: 0,
-                paddingBottom: isMobile ? '0' : '16px', /* optical alignment with the baseline of the large text */
-                opacity: 0.9,
-                fontWeight: 500
-              }}>
-                We exist to spark a movement that rethinks the policy-making
-                process, rejuvenates education with Indic ideas, and be a vital cog
-                in the mission towards Viksit Bharat.
-              </p>
-            </div>
-          </div>
-
-          {/* Cutout moved into sticky image area to avoid overlapping cards */}
-
+      {/* VISION SECTION (animated) */}
+      <React.Suspense>
+        {/* Lazy load the animated section; it uses the same mobile flag */}
+        <div style={{ width: '100%' }}>
+          {/* @ts-ignore */}
+          <VisionSection isMobile={isMobile} />
         </div>
-      </div>
+      </React.Suspense>
       <div ref={teamRef} style={{
         height: isMobile ? '100vh' : '150vh', 
         width: '100%',

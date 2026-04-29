@@ -40,7 +40,7 @@ export default function StickyNavbar() {
               <span className="brand-name" style={{ fontSize: '1rem' }}>SvaNiti</span>
             </div>
             <nav className="nav sticky-nav-links" style={{ gap: '5px' }}>
-              <a href="#" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>About</a>
+              <a href="#about" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>About</a>
               <a href="#projects" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>Projects</a>
               <a href="#insights" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>Insights</a>
               <a href="#contact" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>Governance</a>
