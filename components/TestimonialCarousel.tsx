@@ -45,13 +45,13 @@ export default function TestimonialCarousel() {
         width: '100%',
         height: '100%',
         borderRadius: isMobile ? '24px' : '32px',
-        border: '2px solid #0B2228',
+        border: '1px solid rgba(11, 34, 40, 0.08)',
         overflow: 'hidden',
         background: 'linear-gradient(135deg, #bfecff 0%, #dff6ff 50%, #f0fbff 100%)',
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
-        padding: isMobile ? '60px 20px 40px 20px' : '60px 60px 60px 140px',
+        padding: isMobile ? '60px 20px 60px 20px' : '80px 80px 80px 140px',
         boxSizing: 'border-box',
       }}>
 
@@ -102,15 +102,21 @@ export default function TestimonialCarousel() {
         <div style={{
           position: 'relative',
           zIndex: 10,
-          width: '100%',
+          width: isMobile ? '100%' : 'calc(100% - 120px)', 
           maxWidth: '1000px',
         }}>
           <AnimatePresence mode="wait">
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              drag="x"
+              dragConstraints={{ left: 0, right: 0 }}
+              onDragEnd={(_, info) => {
+                if (info.offset.x < -100) next();
+                if (info.offset.x > 100) prev();
+              }}
               transition={{ duration: 0.4, ease: 'easeInOut' }}
               className="testimonial-content-wrapper"
               style={{
@@ -119,6 +125,7 @@ export default function TestimonialCarousel() {
                 flexDirection: isMobile ? 'column' : 'row',
                 gap: '24px',
                 width: '100%',
+                cursor: 'grab',
               }}
             >
               {/* Text Card */}

@@ -44,7 +44,7 @@ export default function WhatWeDo() {
           style={{
             flex: 1,
             borderRadius: '32px',
-            border: '2px solid #0B2228',
+            border: '1px solid rgba(11, 34, 40, 0.08)',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-start',
@@ -105,8 +105,8 @@ export default function WhatWeDo() {
         {!isMobile && (
           <div style={{
             position: 'absolute',
-            top: '-2px', // Pulls up to perfectly cover the yellow card's top border
-            left: '-2px', // Pulls left to perfectly cover the yellow card's left border
+            top: '-1px', 
+            left: '-1px', 
             padding: '0 32px 32px 0', // Creates the white gap around the dark pill
             background: '#f8fafc',
             borderBottomRightRadius: '40px', // The smooth curve of the notch

@@ -2,45 +2,121 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { useRef, useEffect } from 'react'
-import ShaderBackground from '@/components/ShaderBackground'
+import { useRef, useEffect, useState } from 'react'
 import StickyNavbar from '@/components/StickyNavbar'
 import ParallaxTicker from '@/components/ParallaxTicker'
 import WhatWeDo from '@/components/WhatWeDo'
 import ImpactSection from '@/components/ImpactSection'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
-import { useScroll, useTransform } from 'framer-motion'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { useScroll, useTransform, AnimatePresence } from 'framer-motion'
+import { ChevronLeft, ChevronRight, Menu, X } from 'lucide-react'
 import Footer from '@/components/Footer'
 import { useIsMobile } from '@/components/hooks/useIsMobile'
 
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
   const isMobile = useIsMobile()
-  const footerRef = useRef<HTMLDivElement>(null)
-  const mouse = useRef({ x: 0.5, y: 0.5 })
-  const smooth = useRef({ x: 0.5, y: 0.5 })
-  const rafId = useRef<number>(0)
-
   const teamRef = useRef<HTMLDivElement>(null)
+  const contactRef = useRef<HTMLDivElement>(null)
+  const footerRef = useRef<HTMLDivElement>(null)
+
   const { scrollYProgress } = useScroll({
     target: teamRef,
     offset: ["start start", "end start"]
   })
 
-  // Clean Transition: Just the contact rise
-
-  const contactRef = useRef<HTMLDivElement>(null)
-  const { scrollYProgress: contactProgress } = useScroll({
-    target: contactRef,
-    offset: ["start end", "end end"]
-  })
-  const contactRise = useTransform(contactProgress, [0, 1], [100, 0])
+  const navLinks = [
+    { name: 'About', href: '#' },
+    { name: 'Projects', href: '#projects' },
+    { name: 'Insights', href: '#insights' },
+    { name: 'Governance', href: '#contact' },
+  ]
 
   return (
     <main className="main-viewport" style={{ 
       position: 'relative',
       scrollBehavior: 'smooth'
     }}>
+      
+      <AnimatePresence>
+        {isMenuOpen && isMobile && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            style={{
+              position: 'fixed',
+              inset: 0,
+              background: 'rgba(11, 34, 40, 0.4)',
+              backdropFilter: 'blur(10px)',
+              zIndex: 2000,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '20px'
+            }}
+            onClick={() => setIsMenuOpen(false)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              style={{
+                width: '100%',
+                maxWidth: '400px',
+                background: '#c1f1f1',
+                borderRadius: '32px',
+                padding: '40px 20px',
+                position: 'relative',
+                boxShadow: '0 40px 100px rgba(11, 34, 40, 0.2)',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: '30px'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => setIsMenuOpen(false)}
+                style={{
+                  position: 'absolute',
+                  top: '20px',
+                  right: '20px',
+                  background: '#0B2228',
+                  border: 'none',
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '10px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  cursor: 'pointer'
+                }}
+              >
+                <X color="white" size={20} />
+              </button>
+
+              {navLinks.map((link) => (
+                <a 
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  style={{
+                    fontSize: '2.5rem',
+                    fontWeight: 400,
+                    color: '#0B2228',
+                    textDecoration: 'none',
+                    fontFamily: 'var(--font-lexend)',
+                    textAlign: 'center'
+                  }}
+                >
+                  {link.name}
+                </a>
+              ))}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <StickyNavbar />
       {/* HERO SECTION */}
@@ -51,7 +127,6 @@ export default function Home() {
           transition={{ duration: 0.8 }}
           className="main-card framed-card"
         >
-          <ShaderBackground />
 
           <header className="header">
             <div className="logo-container">
@@ -60,12 +135,21 @@ export default function Home() {
               </div>
               <span className="brand-name">SvaNiti Policy Research Center</span>
             </div>
-            <nav className="nav">
-              <a href="#" className="nav-link">About</a>
-              <a href="#projects" className="nav-link">Projects</a>
-              <a href="#insights" className="nav-link">Insights</a>
-              <a href="#contact" className="nav-link">Governance</a>
-            </nav>
+            
+            {isMobile ? (
+              <button 
+                onClick={() => setIsMenuOpen(true)}
+                className="nav-toggle-btn"
+              >
+                //
+              </button>
+            ) : (
+              <nav className="nav">
+                {navLinks.map((link) => (
+                  <a key={link.name} href={link.href} className="nav-link">{link.name}</a>
+                ))}
+              </nav>
+            )}
           </header>
 
           <div className="hero-content">
@@ -75,16 +159,14 @@ export default function Home() {
               transition={{ delay: 0.3 }}
               className="main-title"
             >
-              We are Building Bharat's<br />
-              Largest Idea Repository
+              We are Building Bharat's Largest Idea Repository
             </motion.h1>
           </div>
 
           <footer className="footer">
             <div className="footer-left">
               <p className="mission-text">
-                Education & Public Policy Think-Tank in being to Sync<br />
-                Nation's Aspirations into Policy.
+                Education & Public Policy Think-Tank in being to Sync Nation's Aspirations into Policy.
               </p>
             </div>
             <div className="footer-right">
@@ -262,10 +344,9 @@ export default function Home() {
           display: 'flex',
           flexDirection: 'column',
           gap: '20px',
-          marginTop: '-100px', // Overlap effect
+          marginTop: '0', 
           position: 'relative',
           zIndex: 20,
-          y: contactRise
         }}
       >
         <div className="contact-card framed-card" style={{

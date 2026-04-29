@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
 
 const projectsData = [
@@ -89,8 +90,6 @@ export function StaggerProjects({ onMove }: Props) {
         const isCenter = offset === 0;
 
         const translateX = offset * (windowWidth < 480 ? cardWidth * 0.3 : cardWidth * 0.85);
-        const translateY = 0;
-        const rotate = 0;
         const scale = isCenter ? 1 : windowWidth < 480 ? 0.8 : 0.95;
         const zIndex = isCenter ? 10 : 5;
         const opacity = isCenter ? 1 : windowWidth < 480 ? 0.3 : 0.6;
@@ -99,33 +98,46 @@ export function StaggerProjects({ onMove }: Props) {
         const bgColor = isCenter ? '#d1f2eb' : '#fff8e1';
 
         return (
-          <div
+          <motion.div
             key={project.id}
+            drag={isCenter ? "x" : false}
+            dragConstraints={{ left: 0, right: 0 }}
+            onDragEnd={(_, info) => {
+              if (info.offset.x < -50) next();
+              if (info.offset.x > 50) prev();
+            }}
             onClick={() => {
               if (offset > 0) next();
               else if (offset < 0) prev();
             }}
+            initial={false}
+            animate={{
+              x: `-50%`,
+              left: `50%`,
+              translateX: translateX,
+              scale: scale,
+              zIndex: zIndex,
+              opacity: opacity,
+              backgroundColor: bgColor,
+            }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
             style={{
               position: 'absolute',
-              left: '50%',
               top: '50%',
+              y: '-50%',
               width: cardWidth,
               height: 520,
               borderRadius: 28,
-              border: '2px solid #0B2228',
+              border: '1px solid rgba(11, 34, 40, 0.08)',
               padding: 36,
-              background: bgColor,
               color: '#0B2228',
-              cursor: isCenter ? 'default' : 'pointer',
+              cursor: isCenter ? 'grab' : 'pointer',
               display: 'flex',
               flexDirection: 'column',
               boxShadow: isCenter
                 ? '0 20px 50px rgba(11,34,40,0.10)'
                 : '0 8px 24px rgba(0,0,0,0.05)',
-              transform: `translate(-50%, -50%) translateX(${translateX}px) translateY(${translateY}px) rotate(${rotate}deg) scale(${scale})`,
-              zIndex,
-              opacity,
-              transition: 'all 0.5s cubic-bezier(0.22, 1, 0.36, 1)',
+              overflow: 'hidden',
             }}
           >
             <div style={{ flex: 1, overflow: 'hidden' }}>
@@ -186,7 +198,7 @@ export function StaggerProjects({ onMove }: Props) {
                 </div>
               </a>
             </div>
-          </div>
+          </motion.div>
         );
       })}
 
