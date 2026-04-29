@@ -2,14 +2,14 @@
 
 import Image from 'next/image'
 import { motion } from 'framer-motion'
-import { useRef, useEffect, useState } from 'react'
+import { useRef, useState } from 'react'
 import StickyNavbar from '@/components/StickyNavbar'
 import ParallaxTicker from '@/components/ParallaxTicker'
 import WhatWeDo from '@/components/WhatWeDo'
 import ImpactSection from '@/components/ImpactSection'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
-import { useScroll, useTransform, AnimatePresence } from 'framer-motion'
-import { ChevronLeft, ChevronRight, Menu, X } from 'lucide-react'
+import { useScroll, AnimatePresence } from 'framer-motion'
+import { Menu, X } from 'lucide-react'
 import Footer from '@/components/Footer'
 import { useIsMobile } from '@/components/hooks/useIsMobile'
 
@@ -140,8 +140,9 @@ export default function Home() {
               <button 
                 onClick={() => setIsMenuOpen(true)}
                 className="nav-toggle-btn"
+                aria-label="Open navigation menu"
               >
-                //
+                <Menu size={22} strokeWidth={2.5} />
               </button>
             ) : (
               <nav className="nav">
@@ -196,28 +197,27 @@ export default function Home() {
       {/* VISION SECTION */}
       <div id="about" className="vision-section-wrapper" style={{
         minHeight: isMobile ? 'auto' : '65vh',
-        width: '100vw',
+        width: '100%',
         background: 'linear-gradient(to bottom, #fdfcf0, #f8fafc)',
         padding: isMobile ? '10px' : '20px',
         boxSizing: 'border-box',
         display: 'flex',
         position: 'relative',
       }}>
-        {/* Wrapper for cutout logic */}
+        {/* Wrapper for corner-tab layout */}
         <div style={{ position: 'relative', flex: 1, display: 'flex' }}>
-          
           {/* CYAN CARD */}
           <div className="vision-card" style={{
             flex: 1,
-            background: '#d4fdf8', /* Light cyan/blue matching the photo */
+            background: '#d4fdf8',
             borderRadius: isMobile ? '24px' : '32px',
             display: 'flex',
             flexDirection: 'column',
             padding: isMobile ? '30px' : '80px',
+            paddingTop: isMobile ? '30px' : '120px',
             position: 'relative',
             overflow: 'hidden',
           }}>
-            
             {/* Typography Container — pushed to the bottom */}
             <div className="vision-content-container" style={{ 
               marginTop: 'auto', 
@@ -259,44 +259,16 @@ export default function Home() {
             </div>
           </div>
 
-          {/* EXACT Logo Cutout Logic — White Corner Box - Hidden on mobile */}
-          {!isMobile && (
-            <div style={{
-              position: 'absolute',
-              top: 0,
-              left: 0,
-              padding: '0 32px 32px 0', 
-              background: '#f8fafc',
-              borderBottomRightRadius: '40px',
-              zIndex: 10,
-            }}>
-              {/* Dark Pill "Our Vision" */}
-              <div style={{
-                background: '#0B2228',
-                padding: '16px 32px',
-                borderRadius: '16px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-                <span style={{
-                  color: 'white',
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                }}>
-                  Our Vision
-                </span>
-              </div>
-            </div>
-          )}
+          {/* Cutout moved into sticky image area to avoid overlapping cards */}
 
         </div>
       </div>
       <div ref={teamRef} style={{
         height: isMobile ? '100vh' : '150vh', 
-        width: '100vw',
+        width: '100%',
         background: '#f8fafc', 
         position: 'relative',
+        paddingTop: isMobile ? '0' : '120px',
       }}>
         <div style={{
           position: 'sticky',
@@ -304,7 +276,7 @@ export default function Home() {
           height: '100vh',
           width: '100%',
           overflow: 'hidden',
-          zIndex: 5,
+            zIndex: 0,
           padding: isMobile ? '10px' : '40px',
           boxSizing: 'border-box'
         }}>

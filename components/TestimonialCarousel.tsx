@@ -35,7 +35,7 @@ export default function TestimonialCarousel() {
   return (
     <div className="testimonial-section-container" style={{
       minHeight: isMobile ? 'auto' : '75vh',
-      width: '100vw',
+      width: '100%',
       padding: isMobile ? '10px' : '40px',
       boxSizing: 'border-box',
       background: '#f8fafc',

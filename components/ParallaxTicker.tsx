@@ -65,7 +65,7 @@ export default function ParallaxTicker() {
   return (
     <div ref={containerRef} className="parallax-ticker-container" style={{ 
       background: 'linear-gradient(to bottom, #f8fafc, #f0f9ff)', 
-      width: '100vw',
+      width: '100%',
       display: 'flex', 
       flexDirection: 'column',
       justifyContent: 'center',
