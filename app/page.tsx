@@ -130,11 +130,12 @@ export default function Home() {
           className="main-card framed-card"
         >
 
+          <div className="hero-logo-tab" aria-hidden="true">
+            <Image src="/logo.png" alt="Logo" width={55} height={55} priority />
+          </div>
+
           <header className="header">
             <div className="logo-container">
-              <div className="logo-tab">
-                <Image src="/logo.png" alt="Logo" width={55} height={55} priority />
-              </div>
               <span className="brand-name">SvaNiti Policy Research Center</span>
             </div>
             
@@ -239,7 +240,7 @@ export default function Home() {
                 background: isMobile ? '#fff' : 'transparent' 
               }}
               quality={85}
-              priority
+              loading="lazy"
             />
           </div>
         </div>

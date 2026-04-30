@@ -35,7 +35,7 @@ export default function StickyNavbar() {
           <div className="sticky-navbar-content">
             <div className="logo-container">
               <div className="logo-tab" style={{ padding: '6px' }}>
-                <Image src="/logo.png" alt="Logo" width={40} height={40} priority />
+                <Image src="/logo-alpha.png" alt="Logo" width={40} height={40} priority />
               </div>
               <span className="brand-name" style={{ fontSize: '1rem' }}>SvaNiti</span>
             </div>

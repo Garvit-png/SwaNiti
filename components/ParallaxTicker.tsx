@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { useRef } from 'react'
 
@@ -53,7 +54,15 @@ export default function ParallaxTicker() {
               </div>
             ) : (
               <div className="parallax-img-wrapper">
-                <img src={item.img} alt="Moment" className="parallax-img" />
+                <Image
+                  src={item.img}
+                  alt="Moment"
+                  fill
+                  sizes="(max-width: 768px) 80px, 150px"
+                  className="parallax-img"
+                  loading="lazy"
+                  quality={60}
+                />
               </div>
             )}
           </div>
