@@ -83,7 +83,7 @@ body {
   border: none;
   overflow: visible;
   position: relative;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
+  box-shadow: none;
 }
 
 @media (max-width: 768px) {
@@ -103,6 +103,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #ffffff;
 }
 
 @media (max-width: 768px) {
@@ -127,7 +128,7 @@ body {
   display: flex;
   flex-direction: column;
   padding: 0; 
-  box-shadow: 0 40px 100px rgba(0,0,0,0.05), inset 1px 0 0 #ffffff;
+  box-shadow: none;
   overflow: visible;
   /* Hint for GPU acceleration */
   will-change: transform;
@@ -168,19 +169,19 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px 60px;
+  padding: 24px 60px 40px 60px;
   z-index: 100;
 }
 
 @media (max-width: 1024px) {
   .header {
-    padding: 20px 30px;
+    padding: 14px 30px 30px 30px;
   }
 }
 
 @media (max-width: 768px) {
   .header {
-    padding: 8px 12px;
+    padding: 4px 12px 18px 12px;
   }
 
   .brand-name {
@@ -281,12 +282,12 @@ body {
 
 .hero-logo-tab {
   position: absolute;
-  top: -22px;
-  left: -36px;
-  width: 120px;
-  height: 110px;
+  top: -16px;
+  left: -4px;
+  width: 164px;
+  height: 108px;
   background: #ffffff;
-  border-radius: 0 0 36px 0;
+  border-radius: 0 0 48px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -295,13 +296,13 @@ body {
 }
 
 .hero-logo-tab img {
-  width: 48px !important;
-  height: 48px !important;
+  width: 92px !important;
+  height: 92px !important;
 }
 
 /* Only apply the cutout logic to the main Hero header, NOT the sticky navbar */
 .header .logo-container {
-  padding-left: 160px; 
+  padding-left: 160px;
 }
 
 @media (max-width: 768px) {
@@ -313,8 +314,8 @@ body {
 
 .brand-name {
   font-family: var(--font-lexend);
-  font-weight: 700;
-  font-size: 1.25rem;
+  font-weight: 400;
+  font-size: 1.12rem;
   color: var(--primary-color);
   letter-spacing: -0.01em;
 }
@@ -371,12 +372,12 @@ body {
 }
 
 .main-title {
-  font-family: var(--font-lexend);
-  font-size: clamp(2rem, 8vw, 4.5rem);
-  font-weight: 200; /* Made thinner */
-  line-height: 1.1;
+  font-family: var(--font-poppins);
+  font-size: clamp(2.15rem, 7.2vw, 4.2rem);
+  font-weight: 400;
+  line-height: 1.08;
   text-align: center;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   padding: 0 20px;
 }
 
@@ -580,7 +581,7 @@ body {
 .footer-right {
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 18px;
 }
 
 @media (max-width: 768px) {
@@ -598,14 +599,14 @@ body {
 .contact-btn {
   background: transparent;
   color: var(--primary-color);
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: 14px;
   text-decoration: none;
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   transition: all 0.3s ease;
 }
 
@@ -617,14 +618,14 @@ body {
 .join-btn {
   background: #0B2228;
   color: white;
-  padding: 14px 14px 14px 32px;
-  border-radius: 20px;
+  padding: 12px 12px 12px 26px;
+  border-radius: 18px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 1.1rem;
+  font-size: 0.98rem;
   display: flex;
   align-items: center;
-  gap: 25px;
+  gap: 18px;
   transition: all 0.3s ease;
 }
 
@@ -636,9 +637,9 @@ body {
 .arrow-box {
   background: #b2ebf2;
   color: #0B2228;
-  width: 42px;
-  height: 42px;
-  border-radius: 14px;
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1027,7 +1028,7 @@ body {
   .contact-card { grid-template-columns: 1fr; padding: 40px; }
   .services-grid { grid-template-columns: 1fr; }
   .footer-bottom-links { flex-direction: column; gap: 40px; text-align: center; }
-  .main-title { font-size: 3rem; }
+  .main-title { font-size: 3.35rem; font-weight: 300; }
 }
 
 /* MOBILE OPTIMIZATIONS (Phone) */
@@ -1120,10 +1121,10 @@ body {
   }
 
   .main-title {
-    font-size: clamp(3rem, 13vw, 4.8rem) !important;
+    font-size: clamp(2.95rem, 12vw, 4.6rem) !important;
     text-align: left !important;
-    line-height: 0.98 !important;
-    letter-spacing: -0.05em;
+    line-height: 1 !important;
+    letter-spacing: -0.04em;
     margin-bottom: 28px;
     font-weight: 400;
     max-width: 7.7ch;

@@ -195,7 +195,8 @@ export default function Home() {
               transition={{ delay: 0.3 }}
               className="main-title"
             >
-              We are Building Bharat's Largest Idea Repository
+              We are Building Bharat's <br />
+              Largest Idea Repository
             </motion.h1>
           </div>
 
