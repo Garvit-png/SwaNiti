@@ -18,6 +18,7 @@ import VisionSection from '@/components/VisionSection'
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const isMobile = useIsMobile()
+  const mainCardRef = useRef<HTMLDivElement | null>(null)
   const teamRef = useRef<HTMLDivElement>(null)
   const contactRef = useRef<HTMLDivElement>(null)
   const footerRef = useRef<HTMLDivElement>(null)
@@ -33,6 +34,32 @@ export default function Home() {
     { name: 'Insights', href: '#insights' },
     { name: 'Governance', href: '#contact' },
   ]
+
+  function handleMouseMove(e: React.MouseEvent) {
+    const el = mainCardRef.current
+    if (!el) return
+    const rect = el.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    const xPct = (x / rect.width) * 100
+    const yPct = (y / rect.height) * 100
+    el.style.setProperty('--cursor-x', `${xPct}%`)
+    el.style.setProperty('--cursor-y', `${yPct}%`)
+
+    // overlay intensity increases as cursor moves to the right side of viewport
+    const norm = Math.max(0, (e.clientX / window.innerWidth - 0.5) * 2) // 0..1 when on right half
+    const alpha1 = (norm * 0.7).toFixed(3)
+    const alpha2 = (Math.min(0.6, norm * 0.5)).toFixed(3)
+    el.style.setProperty('--overlay-alpha1', `${alpha1}`)
+    el.style.setProperty('--overlay-alpha2', `${alpha2}`)
+  }
+
+  function handleMouseLeave() {
+    const el = mainCardRef.current
+    if (!el) return
+    el.style.setProperty('--overlay-alpha1', `0`)
+    el.style.setProperty('--overlay-alpha2', `0`)
+  }
 
   return (
     <main className="main-viewport" style={{ 
@@ -124,6 +151,9 @@ export default function Home() {
       {/* HERO SECTION */}
       <section className="hero-container">
         <motion.div 
+          ref={mainCardRef}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
@@ -133,6 +163,8 @@ export default function Home() {
           <div className="hero-logo-tab" aria-hidden="true">
             <Image src="/logo.png" alt="Logo" width={55} height={55} priority />
           </div>
+
+          
 
           <header className="header">
             <div className="logo-container">

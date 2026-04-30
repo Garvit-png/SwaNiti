@@ -7,9 +7,9 @@
   --font-lexend: 'Lexend', sans-serif;
   --font-poppins: 'Poppins', sans-serif;
   --primary-color: #0F2A33;
-  --accent-teal: #d1f2eb;
-  --accent-yellow: #fff1cc;
-  --accent-blue: #aed6f1;
+  --accent-teal: #dfffe0; /* light green */
+  --accent-yellow: #fff8cc; /* light yellow */
+  --accent-blue: #9fefff; /* stronger sky blue */
   /* Mobile tuning variables */
   --hero-mobile-h: 44svh;
   --hero-mobile-title: 1.45rem;
@@ -38,7 +38,7 @@ html {
 body {
   font-family: var(--font-inter);
   color: var(--primary-color);
-  background: #f8fafc;
+  background: #ffffff;
   min-height: 100vh;
   min-height: -webkit-fill-available;
   overflow-x: hidden;
@@ -78,17 +78,17 @@ body {
 
 /* UTILITIES */
 .framed-card {
-  margin: 20px;
+  margin: 40px;
   border-radius: 40px;
-  border: 1px solid rgba(11, 34, 40, 0.08);
-  overflow: hidden;
+  border: none;
+  overflow: visible;
   position: relative;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.05);
 }
 
 @media (max-width: 768px) {
   .framed-card {
-    margin: 10px;
+    margin: 20px;
     border-radius: 24px;
   }
 }
@@ -114,20 +114,21 @@ body {
 }
 
 .main-card {
-  width: calc(100% - 40px);
-  height: calc(100% - 40px);
-  background-color: #d1f2eb;
-  background-image: 
-    radial-gradient(at 0% 0%, var(--accent-yellow) 0, transparent 50%), 
-    radial-gradient(at 50% 0%, var(--accent-teal) 0, transparent 50%), 
-    radial-gradient(at 100% 0%, var(--accent-blue) 0, transparent 50%),
-    radial-gradient(at 0% 100%, var(--accent-blue) 0, transparent 50%),
-    radial-gradient(at 100% 100%, var(--accent-yellow) 0, transparent 50%);
+  width: calc(100% - 80px);
+  height: calc(100% - 80px);
+  background: 
+    /* yellow/green overlay that follows cursor */
+    radial-gradient(circle at var(--cursor-x,70%) var(--cursor-y,40%), rgba(255,248,204,var(--overlay-alpha1,0)) 0%, rgba(223,255,224,var(--overlay-alpha2,0)) 40%, transparent 60%),
+    /* sky-blue highlight */
+    radial-gradient(circle at 70% 40%, rgba(31,189,255,0.26) 0%, rgba(31,189,255,0.08) 35%, transparent 60%),
+    /* base gradient */
+    linear-gradient(135deg, var(--accent-yellow) 0%, var(--accent-teal) 30%, var(--accent-blue) 100%);
+  background-blend-mode: normal, screen, normal;
   display: flex;
   flex-direction: column;
   padding: 0; 
-  box-shadow: 0 40px 100px rgba(0,0,0,0.05);
-  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.05), inset 1px 0 0 #ffffff;
+  overflow: visible;
   /* Hint for GPU acceleration */
   will-change: transform;
 }
@@ -280,22 +281,22 @@ body {
 
 .hero-logo-tab {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 140px;
-  height: 120px;
+  top: -22px;
+  left: -36px;
+  width: 120px;
+  height: 110px;
   background: #ffffff;
-  border-radius: 0 0 40px 0;
+  border-radius: 0 0 36px 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 110;
+  z-index: 125;
   pointer-events: none;
 }
 
 .hero-logo-tab img {
-  width: 55px !important;
-  height: 55px !important;
+  width: 48px !important;
+  height: 48px !important;
 }
 
 /* Only apply the cutout logic to the main Hero header, NOT the sticky navbar */
@@ -468,7 +469,7 @@ body {
     border-radius: 24px;
     width: calc(100% - 24px);
     overflow: visible;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.06), inset 1px 0 0 #ffffff;
   }
 
   .main-card {
@@ -505,9 +506,7 @@ body {
     left: -12px;
     width: 72px;
     height: 72px;
-    background: #f8fafc; /* same as page background to create cutout */
-    border-right: 1px solid rgba(11, 34, 40, 0.08);
-    border-bottom: 1px solid rgba(11, 34, 40, 0.08);
+    background: #ffffff; /* same as page background to create cutout */
     border-bottom-right-radius: 28px;
     display: flex;
     align-items: center;
@@ -649,7 +648,7 @@ body {
 .parallax-ticker-container {
   overflow: hidden;
   padding: 80px 0;
-  margin: 20px;
+  margin: 40px;
   border-radius: 40px;
   border: none;
   display: flex;
