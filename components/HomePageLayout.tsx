@@ -163,14 +163,8 @@ export default function HomePage() {
           <h2 style={{ fontSize: '1.5rem', marginBottom: '30px', color: '#0B2228' }}>Featured Items</h2>
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
             gap: '20px',
-            '@media (max-width: 1024px)': {
-              gridTemplateColumns: 'repeat(3, 1fr)'
-            },
-            '@media (max-width: 768px)': {
-              gridTemplateColumns: 'repeat(2, 1fr)'
-            }
           }}>
             {[1, 2, 3, 4].map((item) => (
               <motion.div
@@ -223,13 +217,9 @@ export default function HomePage() {
       <Section background="#fff" minHeight="auto">
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
           gap: '60px',
           alignItems: 'center',
-          '@media (max-width: 768px)': {
-            gridTemplateColumns: '1fr',
-            gap: '30px'
-          }
         }}>
           <motion.div
             initial={{ opacity: 0, x: -40 }}
@@ -292,13 +282,9 @@ export default function HomePage() {
       <Section background="#0B2228" minHeight="auto">
         <div style={{
           display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
           gap: '60px',
           alignItems: 'center',
-          '@media (max-width: 768px)': {
-            gridTemplateColumns: '1fr',
-            gap: '30px'
-          }
         }}>
           <motion.div
             initial={{ opacity: 0, x: -40 }}

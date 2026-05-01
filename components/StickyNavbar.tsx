@@ -43,7 +43,7 @@ export default function StickyNavbar() {
               <a href="#about" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>About</a>
               <a href="#projects" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>Projects</a>
               <a href="#insights" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>Insights</a>
-              <a href="#contact" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>Governance</a>
+              <a href="#governance" className="nav-link" style={{ fontSize: '0.85rem', padding: '8px 16px' }}>Governance</a>
             </nav>
             <div className="sticky-contact-btn">
               <a href="#contact" className="contact-btn" style={{ padding: '8px 16px', fontSize: '0.85rem' }}>

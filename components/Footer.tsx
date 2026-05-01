@@ -3,7 +3,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Mail, Phone, MapPin } from 'lucide-react'
-import Image from 'next/image'
 import { useIsMobile } from './hooks/useIsMobile'
 
 export default function Footer() {
@@ -146,7 +145,7 @@ export default function Footer() {
         textAlign: isMobile ? 'center' : 'left'
       }}>
         <p style={{ color: 'rgba(255,255,255,0.6)', margin: 0, fontSize: '0.85rem' }}>
-          © 2024-{currentYear+4} by Creative Studio SvaNiti Policy Research Center
+          © 2024-{currentYear} by Creative Studio SvaNiti Policy Research Center
         </p>
         <div style={{ display: 'flex', gap: '24px' }}>
           <a href="#" style={{ color: 'rgba(255,255,255,0.6)', textDecoration: 'none', fontSize: '0.85rem' }}>Privacy Policy</a>

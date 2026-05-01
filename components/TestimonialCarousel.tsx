@@ -33,7 +33,7 @@ export default function TestimonialCarousel() {
   const prev = () => setIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
 
   return (
-    <div className="testimonial-section-container" style={{
+    <section id="insights" className="testimonial-section-container" style={{
       minHeight: isMobile ? 'auto' : '75vh',
       width: '100%',
       padding: isMobile ? '10px' : '40px',
@@ -183,6 +183,7 @@ export default function TestimonialCarousel() {
                     src={testimonials[index % testimonials.length]?.image || ''} 
                     alt={testimonials[index % testimonials.length]?.author || ''}
                     fill
+                    sizes="(max-width: 768px) 92vw, 360px"
                     style={{ objectFit: 'cover', objectPosition: 'top' }}
                     quality={90}
                   />
@@ -237,6 +238,6 @@ export default function TestimonialCarousel() {
           </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

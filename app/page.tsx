@@ -7,9 +7,8 @@ import { useRef, useState } from 'react'
 import StickyNavbar from '@/components/StickyNavbar'
 import ParallaxTicker from '@/components/ParallaxTicker'
 import WhatWeDo from '@/components/WhatWeDo'
-import ImpactSection from '@/components/ImpactSection'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
-import { useScroll, AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import Footer from '@/components/Footer'
 import { useIsMobile } from '@/components/hooks/useIsMobile'
@@ -21,18 +20,12 @@ export default function Home() {
   const mainCardRef = useRef<HTMLDivElement | null>(null)
   const teamRef = useRef<HTMLDivElement>(null)
   const contactRef = useRef<HTMLDivElement>(null)
-  const footerRef = useRef<HTMLDivElement>(null)
-
-  const { scrollYProgress } = useScroll({
-    target: teamRef,
-    offset: ["start start", "end start"]
-  })
 
   const navLinks = [
     { name: 'About', href: '#about' },
     { name: 'Projects', href: '#projects' },
     { name: 'Insights', href: '#insights' },
-    { name: 'Governance', href: '#contact' },
+    { name: 'Governance', href: '#governance' },
   ]
 
   function handleMouseMove(e: React.MouseEvent) {
@@ -234,18 +227,17 @@ export default function Home() {
       <React.Suspense>
         {/* Lazy load the animated section; it uses the same mobile flag */}
         <div style={{ width: '100%' }}>
-          {/* @ts-ignore */}
           <VisionSection isMobile={isMobile} />
         </div>
       </React.Suspense>
-      <div ref={teamRef} style={{
+      <div ref={teamRef} className="team-photo-section" style={{
         height: isMobile ? '100vh' : '150vh', 
         width: '100%',
         background: '#f8fafc', 
         position: 'relative',
         paddingTop: isMobile ? '0' : '120px',
       }}>
-        <div style={{
+        <div className="team-photo-sticky" style={{
           position: 'sticky',
           top: 0,
           height: '100vh',
@@ -255,7 +247,7 @@ export default function Home() {
           padding: isMobile ? '10px' : '40px',
           boxSizing: 'border-box'
         }}>
-          <div style={{ 
+          <div className="team-photo-frame" style={{
             width: '100%', 
             height: '100%', 
             position: 'relative', 
@@ -267,6 +259,7 @@ export default function Home() {
               src="/gallery/SvanitiPhoto.png" 
               alt="SvaNiti Team" 
               fill 
+              sizes="(max-width: 768px) 100vw, 94vw"
               style={{ 
                 objectFit: isMobile ? 'contain' : 'cover', 
                 objectPosition: '49% 47%',
@@ -366,7 +359,7 @@ export default function Home() {
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.1, ease: 'easeInOut' }}
               style={{
-                gridColumn: 'span 2',
+                gridColumn: isMobile ? 'span 1' : 'span 2',
                 background: '#0B2228',
                 color: 'white',
                 padding: '16px 32px',

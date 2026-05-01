@@ -35,7 +35,7 @@ export default function WhatWeDo() {
 
   return (
     <section 
-      id="governance"
+      id="projects"
       className="what-we-do-inner section-padding"
       style={{ 
         minHeight: isMobile ? 'auto' : '100vh', 
@@ -50,6 +50,7 @@ export default function WhatWeDo() {
         zIndex: 9999,
       }}
     >
+      <span id="governance" className="anchor-offset" aria-hidden="true" />
       <div style={{ 
         flex: 1,
         display: 'flex',
