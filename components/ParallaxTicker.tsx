@@ -26,11 +26,16 @@ export default function ParallaxTicker() {
       {storyItems.map((item, index) => (
         <motion.div
           key={`${item.kind}-${index}`}
-          className={item.className}
+          className={`${item.className} story-float story-float-${index % 3}`}
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, delay: index * 0.04 }}
+          whileHover={{
+            scale: item.kind === 'image' ? 1.06 : 1.03,
+            rotate: item.kind === 'image' ? 2 : 0,
+            transition: { duration: 0.2 },
+          }}
         >
           {item.kind === 'image' ? (
             <Image
