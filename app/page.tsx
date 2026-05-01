@@ -203,14 +203,6 @@ export default function Home() {
             )}
           </header>
 
-          <nav className="mobile-reference-nav" aria-label="Mobile reference navigation">
-            {navLinks.map((link) => (
-              <a key={link.name} href={link.href} className="mobile-reference-nav-link">
-                {link.name}
-              </a>
-            ))}
-          </nav>
-
           <div className="hero-content">
             <motion.h1
               variants={heroTitleVariants}
@@ -222,7 +214,7 @@ export default function Home() {
               {heroWords.map((word, index) => (
                 <motion.span
                   aria-hidden="true"
-                  className={`hero-word ${index === heroWords.length - 1 ? 'hero-word-break' : ''}`}
+                  className="hero-word"
                   key={`${word}-${index}`}
                   variants={heroWordVariants}
                 >
