@@ -741,6 +741,106 @@ body {
 
 .parallax-img { width: 100%; height: 100%; object-fit: cover; }
 
+/* REFERENCE-STYLE STORY CONSTELLATION */
+.story-constellation {
+  width: 100%;
+  min-height: 1120px;
+  position: relative;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.story-img,
+.story-tag {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.story-img {
+  width: 170px;
+  height: 170px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.story-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-pill {
+  min-width: 152px;
+  min-height: 48px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #0B2228;
+  font-family: var(--font-lexend);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.15;
+  text-align: center;
+  box-shadow: 0 1px 0 rgba(11, 34, 40, 0.04);
+}
+
+.story-pill-cyan {
+  background: #d8fbfb;
+}
+
+.story-pill-yellow {
+  background: #fff6c9;
+}
+
+.story-img-primary { top: 105px; left: 13%; }
+.story-tag-aspiration { top: 150px; right: 10%; }
+.story-tag-inspiration { top: 355px; left: -12px; }
+.story-img-side { top: 300px; right: -70px; filter: grayscale(0.15); }
+.story-tag-unconventional { top: 565px; right: 4%; }
+.story-img-edge { top: 515px; left: -66px; }
+.story-tag-notions { top: 740px; left: 8%; }
+.story-tag-nonpartisan { bottom: 88px; left: 5%; }
+.story-img-small { bottom: 78px; left: 43%; width: 56px; height: 56px; }
+.story-tag-policy { bottom: 84px; right: 29%; }
+
+.section-heading {
+  margin: 0;
+  max-width: 760px;
+  color: #0B2228;
+  font-family: var(--font-lexend);
+  font-size: clamp(2.2rem, 5vw, 4.7rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+.what-we-do-soft-shape {
+  position: absolute;
+  top: 0;
+  right: 48px;
+  z-index: 0;
+  width: min(58vw, 680px);
+  height: 210px;
+  border-radius: 32px 32px 0 0;
+  background: #fff4bd;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.menu-slashes {
+  color: currentColor;
+  font-family: var(--font-lexend);
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.16em;
+  transform: rotate(18deg);
+}
+
 /* STAGGERED PROJECTS */
 .stagger-container {
   position: relative;
@@ -1382,20 +1482,22 @@ textarea:focus-visible {
 
   .hero-container {
     height: auto;
-    min-height: 100svh;
-    padding: 8px;
+    min-height: auto;
+    padding: 12px 12px 22px;
   }
 
   .main-card {
     width: 100%;
-    min-height: calc(100svh - 16px);
-    max-height: none;
+    height: clamp(540px, 64svh, 570px);
+    min-height: 0;
+    max-height: 570px;
     margin: 0;
     border-radius: 28px;
   }
 
   .hero-content {
-    padding: clamp(44px, 9svh, 76px) 22px 0 22px;
+    flex: 0 0 auto;
+    padding: 14px 22px 0 22px;
   }
 
   .header .logo-container {
@@ -1404,19 +1506,28 @@ textarea:focus-visible {
 
   .main-title {
     display: block;
-    max-width: 9ch;
+    max-width: min(100%, 430px);
     overflow: visible;
     text-overflow: clip;
     -webkit-line-clamp: unset;
-    font-size: clamp(2.35rem, 11.5vw, 4.1rem) !important;
+    font-size: clamp(2.75rem, 9.7vw, 3.95rem) !important;
+    line-height: 1.02 !important;
   }
 
   .footer {
     margin-top: auto;
+    padding: 0 20px 20px 20px;
+    gap: 24px;
   }
 
   .footer-right {
     align-items: stretch;
+  }
+
+  .mission-text {
+    max-width: 390px;
+    font-size: 1.18rem;
+    line-height: 1.28;
   }
 
   .contact-btn,
@@ -1440,6 +1551,43 @@ textarea:focus-visible {
   .parallax-tag {
     font-size: clamp(1.4rem, 8vw, 2rem);
     padding: 14px 26px;
+  }
+
+  .story-constellation {
+    min-height: 950px;
+  }
+
+  .story-img {
+    width: 132px;
+    height: 132px;
+  }
+
+  .story-pill {
+    min-width: 118px;
+    min-height: 42px;
+    padding: 10px 18px;
+    font-size: 0.94rem;
+  }
+
+  .story-img-primary { top: 48px; left: 13%; }
+  .story-tag-aspiration { top: 92px; right: 7%; }
+  .story-tag-inspiration { top: 304px; left: -6px; }
+  .story-img-side { top: 259px; right: -62px; }
+  .story-tag-unconventional { top: 499px; right: 5%; max-width: 126px; }
+  .story-img-edge { top: 474px; left: -66px; }
+  .story-tag-notions { top: 708px; left: 5%; }
+  .story-tag-nonpartisan { bottom: 76px; left: 5%; }
+  .story-img-small { bottom: 80px; left: 42%; width: 44px; height: 44px; }
+  .story-tag-policy { bottom: 76px; right: 14%; }
+
+  .section-heading {
+    font-size: clamp(2rem, 9vw, 3.4rem);
+  }
+
+  .what-we-do-soft-shape {
+    right: 18px;
+    width: 70vw;
+    height: 150px;
   }
 
   .what-we-do-inner {
@@ -1495,8 +1643,8 @@ textarea:focus-visible {
   }
 
   .main-title {
-    font-size: clamp(2.1rem, 11vw, 3.1rem) !important;
-    max-width: 9.4ch;
+    font-size: clamp(2.45rem, 10.6vw, 3.2rem) !important;
+    max-width: 100%;
   }
 
   .mission-text {

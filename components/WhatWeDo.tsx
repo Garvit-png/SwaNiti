@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
-import { AnimatedText } from './ui/animated-underline-text'
 import { useIsMobile } from './hooks/useIsMobile'
 
 export default function WhatWeDo() {
@@ -40,23 +39,26 @@ export default function WhatWeDo() {
       style={{ 
         minHeight: isMobile ? 'auto' : '100vh', 
         width: '100%',
-        background: 'linear-gradient(180deg, #f5fbff 0%, #fcf9ef 55%, #f7fbfd 100%)',
-        padding: isMobile ? '16px' : '48px',
+        background: '#fff',
+        padding: isMobile ? '18px 12px 34px' : '54px 48px 70px',
         boxSizing: 'border-box',
         display: 'flex',
         paddingTop: isMobile ? '24px' : '48px',
         paddingBottom: isMobile ? '24px' : '48px',
         position: 'relative',
-        zIndex: 9999,
+        zIndex: 5,
       }}
     >
       <span id="governance" className="anchor-offset" aria-hidden="true" />
+      <div className="what-we-do-soft-shape" aria-hidden="true" />
       <div style={{ 
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
         gap: isMobile ? '18px' : '28px',
         width: '100%',
+        position: 'relative',
+        zIndex: 1,
       }}>
         <div style={{
           display: 'flex',
@@ -79,13 +81,7 @@ export default function WhatWeDo() {
             }}>
               What We Do
             </div>
-            <AnimatedText 
-              text="Ideas, research, and public action."
-              textClassName="text-5xl font-normal tracking-tight text-[#0B2228]"
-              underlineClassName="text-[#0B2228] opacity-30"
-              className="mb-4"
-              style={{ fontFamily: 'var(--font-lexend)' }}
-            />
+            <h2 className="section-heading">Ideas, research, and public action.</h2>
           </div>
 
           <p style={{ 
@@ -95,7 +91,7 @@ export default function WhatWeDo() {
             lineHeight: 1.7,
             color: 'rgba(11, 34, 40, 0.72)',
           }}>
-            A simple grid of active ideas, with soft spacing and our own palette, so each project reads as its own card.
+            SvaNiti turns community aspirations into simple research, journeys, and policy ideas that people can understand and act on.
           </p>
         </div>
 
