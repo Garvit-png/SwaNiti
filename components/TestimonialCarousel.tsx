@@ -21,7 +21,7 @@ const testimonials = [
     author: "Sheron",
     role: "Creative Artist",
     event: "Nudge Charcha 2024",
-    image: "/testimonials/sheron.png"
+    image: "/gallery/img5.jpg"
   }
 ];
 
