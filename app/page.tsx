@@ -9,7 +9,7 @@ import ParallaxTicker from '@/components/ParallaxTicker'
 import WhatWeDo from '@/components/WhatWeDo'
 import TestimonialCarousel from '@/components/TestimonialCarousel'
 import { AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import Footer from '@/components/Footer'
 import { useIsMobile } from '@/components/hooks/useIsMobile'
 import VisionSection from '@/components/VisionSection'
@@ -170,7 +170,7 @@ export default function Home() {
                 className="nav-toggle-btn"
                 aria-label="Open navigation menu"
               >
-                <Menu size={22} strokeWidth={2.5} />
+                <span className="menu-slashes" aria-hidden="true">//</span>
               </button>
             ) : (
               <nav className="nav">
@@ -188,8 +188,7 @@ export default function Home() {
               transition={{ delay: 0.3 }}
               className="main-title"
             >
-              We are Building Bharat's <br />
-              Largest Idea Repository
+              We are Building Bharat&apos;s Largest Idea Repository
             </motion.h1>
           </div>
 
