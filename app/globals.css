@@ -1482,20 +1482,22 @@ textarea:focus-visible {
 
   .hero-container {
     height: auto;
-    min-height: 100svh;
-    padding: 8px;
+    min-height: auto;
+    padding: 12px 12px 22px;
   }
 
   .main-card {
     width: 100%;
-    min-height: calc(100svh - 16px);
-    max-height: none;
+    height: clamp(540px, 64svh, 570px);
+    min-height: 0;
+    max-height: 570px;
     margin: 0;
     border-radius: 28px;
   }
 
   .hero-content {
-    padding: clamp(44px, 9svh, 76px) 22px 0 22px;
+    flex: 0 0 auto;
+    padding: 14px 22px 0 22px;
   }
 
   .header .logo-container {
@@ -1508,16 +1510,24 @@ textarea:focus-visible {
     overflow: visible;
     text-overflow: clip;
     -webkit-line-clamp: unset;
-    font-size: clamp(2.85rem, 10vw, 4.05rem) !important;
-    line-height: 1.04 !important;
+    font-size: clamp(2.75rem, 9.7vw, 3.95rem) !important;
+    line-height: 1.02 !important;
   }
 
   .footer {
     margin-top: auto;
+    padding: 0 20px 20px 20px;
+    gap: 24px;
   }
 
   .footer-right {
     align-items: stretch;
+  }
+
+  .mission-text {
+    max-width: 390px;
+    font-size: 1.18rem;
+    line-height: 1.28;
   }
 
   .contact-btn,
@@ -1559,12 +1569,12 @@ textarea:focus-visible {
     font-size: 0.94rem;
   }
 
-  .story-img-primary { top: 74px; left: 13%; }
-  .story-tag-aspiration { top: 118px; right: 7%; }
-  .story-tag-inspiration { top: 330px; left: -6px; }
-  .story-img-side { top: 285px; right: -62px; }
-  .story-tag-unconventional { top: 525px; right: 5%; max-width: 126px; }
-  .story-img-edge { top: 500px; left: -66px; }
+  .story-img-primary { top: 48px; left: 13%; }
+  .story-tag-aspiration { top: 92px; right: 7%; }
+  .story-tag-inspiration { top: 304px; left: -6px; }
+  .story-img-side { top: 259px; right: -62px; }
+  .story-tag-unconventional { top: 499px; right: 5%; max-width: 126px; }
+  .story-img-edge { top: 474px; left: -66px; }
   .story-tag-notions { top: 708px; left: 5%; }
   .story-tag-nonpartisan { bottom: 76px; left: 5%; }
   .story-img-small { bottom: 80px; left: 42%; width: 44px; height: 44px; }
