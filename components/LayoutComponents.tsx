@@ -19,10 +19,7 @@ export function HeroSection({ children }: { children: ReactNode }) {
       justifyContent: 'center',
       position: 'relative',
       overflow: 'hidden',
-      '@media (max-width: 768px)': {
-        minHeight: 'auto',
-        paddingTop: '40px'
-      }
+      paddingTop: 'clamp(0px, 6vw, 40px)',
     }}>
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
@@ -57,14 +54,8 @@ export function ResponsiveGrid({
   return (
     <div style={{
       display: 'grid',
-      gridTemplateColumns: `repeat(${cols.desktop}, 1fr)`,
+      gridTemplateColumns: `repeat(auto-fit, minmax(min(100%, ${cols.desktop > 2 ? '240px' : '320px'}), 1fr))`,
       gap,
-      '@media (max-width: 1024px)': {
-        gridTemplateColumns: `repeat(${cols.tablet}, 1fr)`
-      },
-      '@media (max-width: 768px)': {
-        gridTemplateColumns: `repeat(${cols.mobile}, 1fr)`
-      }
     }}>
       {children}
     </div>
@@ -87,13 +78,9 @@ export function TwoColumnLayout({
   return (
     <div style={{
       display: 'grid',
-      gridTemplateColumns: '1fr 1fr',
+      gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))',
       gap,
       alignItems: 'center',
-      '@media (max-width: 768px)': {
-        gridTemplateColumns: '1fr',
-        gap: '30px'
-      }
     }}>
       <div>{left}</div>
       <div>{right}</div>
@@ -151,10 +138,7 @@ export function Container({
     <div style={{
       maxWidth,
       margin: '0 auto',
-      padding,
-      '@media (max-width: 768px)': {
-        padding: '60px 30px'
-      }
+      padding: padding === '80px 60px' ? 'clamp(48px, 7vw, 80px) clamp(20px, 5vw, 60px)' : padding,
     }}>
       {children}
     </div>
@@ -178,11 +162,7 @@ export function Section({
     <section style={{
       minHeight,
       background,
-      padding: '60px 40px',
-      '@media (max-width: 768px)': {
-        minHeight: 'auto',
-        padding: '40px 20px'
-      }
+      padding: 'clamp(40px, 6vw, 60px) clamp(20px, 5vw, 40px)',
     }}>
       <Container>{children}</Container>
     </section>
@@ -213,11 +193,8 @@ export function HeaderNav({
       display: 'flex',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: '40px 60px',
+      padding: 'clamp(20px, 5vw, 40px) clamp(20px, 5vw, 60px)',
       zIndex: 100,
-      '@media (max-width: 768px)': {
-        padding: '20px 20px'
-      }
     }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
         {logo && <div>{logo}</div>}
@@ -226,9 +203,7 @@ export function HeaderNav({
       <nav style={{
         display: 'flex',
         gap: '20px',
-        '@media (max-width: 768px)': {
-          display: 'none'
-        }
+        flexWrap: 'wrap',
       }}>
         {navItems?.map((item) => (
           <a key={item.href} href={item.href} style={{ textDecoration: 'none', fontSize: '0.95rem' }}>
@@ -249,13 +224,10 @@ export function TickerRow({ children }: { children: ReactNode }) {
   return (
     <div style={{
       display: 'flex',
-      gap: '20px',
+      gap: 'clamp(15px, 3vw, 20px)',
       overflowX: 'auto',
       paddingBottom: '10px',
       scrollBehavior: 'smooth',
-      '@media (max-width: 768px)': {
-        gap: '15px'
-      }
     }}>
       {children}
     </div>
@@ -306,11 +278,9 @@ export function ButtonGroup({
   return (
     <div style={{
       display: 'flex',
-      flexDirection: direction as any,
+      flexDirection: direction,
+      flexWrap: 'wrap',
       gap: '15px',
-      '@media (max-width: 768px)': {
-        flexDirection: 'column'
-      }
     }}>
       {buttons.map((btn, i) => (
         <a
