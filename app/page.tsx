@@ -1,18 +1,11 @@
 "use client"
 
-import React from 'react'
 import Image from 'next/image'
 import { motion, Variants } from 'framer-motion'
 import { useRef, useState } from 'react'
-import StickyNavbar from '@/components/StickyNavbar'
-import ParallaxTicker from '@/components/ParallaxTicker'
-import WhatWeDo from '@/components/WhatWeDo'
-import TestimonialCarousel from '@/components/TestimonialCarousel'
-import { AnimatePresence } from 'framer-motion'
-import { X } from 'lucide-react'
-import Footer from '@/components/Footer'
-import { useIsMobile } from '@/components/hooks/useIsMobile'
 import VisionSection from '@/components/VisionSection'
+            gap: isMobile ? '14px' : '32px',
+            maxWidth: '900px'
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -20,13 +13,8 @@ export default function Home() {
   const mainCardRef = useRef<HTMLDivElement | null>(null)
   const teamRef = useRef<HTMLDivElement>(null)
   const contactRef = useRef<HTMLDivElement>(null)
-
-  const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Insights', href: '#insights' },
-    { name: 'Governance', href: '#governance' },
-  ]
+                type="text"
+                style={{ padding: isMobile ? '12px 14px' : '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: isMobile ? '0.95rem' : '1rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
 
   const heroWords = "We are Building Bharat's Largest Idea Repository".split(' ')
 
@@ -35,13 +23,8 @@ export default function Home() {
     visible: {
       transition: {
         staggerChildren: 0.055,
-        delayChildren: 0.25,
-      },
-    },
-  }
-
-  const heroWordVariants: Variants = {
-    hidden: { opacity: 0, y: 26, filter: 'blur(8px)' },
+                type="text"
+                style={{ padding: isMobile ? '12px 14px' : '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: isMobile ? '0.95rem' : '1rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
     visible: {
       opacity: 1,
       y: 0,
@@ -50,13 +33,8 @@ export default function Home() {
     },
   }
 
-  function handleMouseMove(e: React.MouseEvent) {
-    const el = mainCardRef.current
-    if (!el) return
-    const rect = el.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    const xPct = (x / rect.width) * 100
+                type="email"
+                style={{ padding: isMobile ? '12px 14px' : '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: isMobile ? '0.95rem' : '1rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
     const yPct = (y / rect.height) * 100
     el.style.setProperty('--cursor-x', `${xPct}%`)
     el.style.setProperty('--cursor-y', `${yPct}%`)
@@ -65,11 +43,7 @@ export default function Home() {
     const norm = Math.max(0, (e.clientX / window.innerWidth - 0.5) * 2) // 0..1 when on right half
     const alpha1 = (norm * 0.7).toFixed(3)
     const alpha2 = (Math.min(0.6, norm * 0.5)).toFixed(3)
-    el.style.setProperty('--overlay-alpha1', `${alpha1}`)
-    el.style.setProperty('--overlay-alpha2', `${alpha2}`)
-  }
-
-  function handleMouseLeave() {
+                style={{ padding: isMobile ? '12px 14px' : '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', minHeight: isMobile ? '96px' : '120px', fontSize: isMobile ? '0.95rem' : '1rem', fontFamily: 'inherit', outline: 'none', width: '100%', boxSizing: 'border-box', resize: 'vertical' }}
     const el = mainCardRef.current
     if (!el) return
     el.style.setProperty('--overlay-alpha1', `0`)
@@ -354,46 +328,47 @@ export default function Home() {
           <div className="contact-form-grid" style={{
             display: 'grid',
             gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr',
-            gap: isMobile ? '20px' : '32px',
-            maxWidth: '900px'
-          }}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            gap: isMobile ? '14px' : '32px',
+            maxWidth: '900px',
+            width: '100%',
+              }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', minWidth: 0 }}>
               <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Name *</label>
               <motion.input
                 whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
                 whileFocus={{ borderColor: '#0B2228', boxShadow: '0 0 0 2px rgba(11, 34, 40, 0.05)' }}
                 transition={{ duration: 0.1 }}
                 type="text"
-                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none' }}
+                style={{ padding: isMobile ? '12px 14px' : '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: isMobile ? '0.95rem' : '1rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
               />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', width: '100%', minWidth: 0 }}>
               <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Contact No. *</label>
               <motion.input
                 whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
                 whileFocus={{ borderColor: '#0B2228', boxShadow: '0 0 0 2px rgba(11, 34, 40, 0.05)' }}
                 transition={{ duration: 0.1 }}
                 type="text"
-                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none' }}
+                style={{ padding: isMobile ? '12px 14px' : '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: isMobile ? '0.95rem' : '1rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
               />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', gridColumn: isMobile ? 'span 1' : 'span 2' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', gridColumn: isMobile ? 'span 1' : 'span 2', width: '100%', minWidth: 0 }}>
               <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Email *</label>
               <motion.input
                 whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
                 whileFocus={{ borderColor: '#0B2228', boxShadow: '0 0 0 2px rgba(11, 34, 40, 0.05)' }}
                 transition={{ duration: 0.1 }}
                 type="email"
-                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: '1rem', outline: 'none' }}
+                style={{ padding: isMobile ? '12px 14px' : '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', fontSize: isMobile ? '0.95rem' : '1rem', outline: 'none', width: '100%', boxSizing: 'border-box' }}
               />
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', gridColumn: isMobile ? 'span 1' : 'span 2' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', gridColumn: isMobile ? 'span 1' : 'span 2', width: '100%', minWidth: 0 }}>
               <label style={{ color: '#0B2228', fontWeight: 600, fontSize: '0.9rem' }}>Notion Note *</label>
               <motion.textarea
                 whileHover={{ borderColor: 'rgba(11, 34, 40, 0.4)' }}
                 whileFocus={{ borderColor: '#0B2228', boxShadow: '0 0 0 2px rgba(11, 34, 40, 0.05)' }}
                 transition={{ duration: 0.1 }}
-                style={{ padding: '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', minHeight: '120px', fontSize: '1rem', fontFamily: 'inherit', outline: 'none' }}
+                style={{ padding: isMobile ? '12px 14px' : '16px 24px', borderRadius: '12px', border: '1px solid rgba(11,34,40,0.1)', background: 'white', minHeight: isMobile ? '96px' : '120px', fontSize: isMobile ? '0.95rem' : '1rem', fontFamily: 'inherit', outline: 'none', width: '100%', boxSizing: 'border-box', resize: 'vertical' }}
               />
             </div>
 

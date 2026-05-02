@@ -302,13 +302,36 @@ body {
 
 /* Only apply the cutout logic to the main Hero header, NOT the sticky navbar */
 .header .logo-container {
-  padding-left: 160px;
+  padding-left: var(--logo-reserve, 160px);
 }
 
 @media (max-width: 768px) {
+  /* On small screens keep the hero cutout visible (smaller) and reserve space so brand text sits beside it */
+  .hero-logo-tab {
+    display: flex;
+    width: 96px;
+    height: 64px;
+    top: -8px;
+    left: -6px;
+    border-radius: 0 0 28px 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Force header to remain a row so logo and brand text sit side-by-side */
+  .header {
+    --logo-reserve: 96px; /* reserve room for the cutout on tablet/phone */
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 8px;
+  }
+
   .header .logo-container {
-    padding-left: 0;
     margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
 }
 
@@ -462,6 +485,22 @@ body {
   }
 }
 
+@media (max-width: 420px) {
+  .header { --logo-reserve: 72px; }
+
+  .hero-logo-tab {
+    width: 72px;
+    height: 56px;
+    top: -8px;
+    left: -6px;
+  }
+
+  .hero-logo-tab img {
+    width: 48px !important;
+    height: 48px !important;
+  }
+}
+
 /* Strong override for small phones to improve visual density */
 @media (max-width: 480px) {
   /* Use an inset rounded card with a cutout logo tab to match the design */
@@ -564,6 +603,22 @@ body {
     gap: 8px;
   }
 
+}
+
+@media (max-width: 480px) {
+  .header { --logo-reserve: 88px; }
+
+  .hero-logo-tab {
+    width: 88px;
+    height: 64px;
+    top: -10px;
+    left: -10px;
+  }
+
+  .hero-logo-tab img {
+    width: 56px !important;
+    height: 56px !important;
+  }
 }
 
 .mission-text {
@@ -673,6 +728,10 @@ body {
   will-change: transform;
 }
 
+.marquee-content.reverse {
+  animation-direction: reverse;
+}
+
 .marquee-item {
   display: inline-flex;
   align-items: center;
@@ -698,10 +757,15 @@ body {
   }
 }
 
+
 .parallax-row {
   display: flex;
-  gap: 50px;
+  gap: 80px; /* increased horizontal spacing between items */
   white-space: nowrap;
+}
+
+.parallax-row-wrapper {
+  padding: 32px 0; /* increased vertical spacing between rows */
 }
 
 .parallax-tag {
@@ -718,6 +782,39 @@ body {
     padding: 15px 40px;
     font-size: 1.8rem;
     border-radius: 20px;
+  }
+
+  /* Make the ticker feel full-bleed on phones: larger tags, bigger round images, and comfortable gaps */
+  .parallax-ticker-container {
+    min-height: 60svh;
+    padding-top: 12px;
+    padding-bottom: 20px;
+    gap: 28px;
+    margin-left: 6px;
+    margin-right: 6px;
+  }
+
+  .parallax-row {
+    gap: 40px; /* slightly reduced on mobile */
+    align-items: center;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .parallax-row-wrapper {
+    padding: 18px 0;
+    overflow: visible;
+  }
+
+  .parallax-tag {
+    padding: 18px 56px;
+    font-size: clamp(1.8rem, 7.5vw, 2.6rem);
+    border-radius: 28px;
+  }
+
+  .parallax-img-wrapper {
+    width: 110px;
+    height: 110px;
   }
 }
 

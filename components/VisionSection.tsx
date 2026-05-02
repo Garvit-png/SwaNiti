@@ -49,22 +49,33 @@ export default function VisionSection({ isMobile }: { isMobile?: boolean }) {
             display: 'flex',
             flexDirection: 'column',
             padding: isPhone ? '30px' : '80px',
-            paddingTop: isPhone ? '30px' : '120px',
+            /* keep room on desktop for the cutout; on phone the badge sits in normal flow */
+            paddingTop: isPhone ? '28px' : '120px',
             position: 'relative',
             overflow: 'hidden',
           }}
         >
           {/* positioned badge at top-left (no cutout) */}
-          <div style={{ position: 'absolute', top: isPhone ? '12px' : '18px', left: isPhone ? '12px' : '18px', zIndex: 6 }}>
+          <div
+            style={{
+              position: isPhone ? 'relative' : 'absolute',
+              top: isPhone ? '0' : '18px',
+              left: isPhone ? '0' : '18px',
+              zIndex: 6,
+              marginBottom: isPhone ? '18px' : 0,
+              alignSelf: isPhone ? 'flex-start' : 'auto',
+            }}
+          >
             <div style={{
               background: '#0B2228',
               color: 'white',
               borderRadius: '999px',
-              padding: isPhone ? '6px 10px' : '8px 12px',
-              fontSize: isPhone ? '0.7rem' : '0.8rem',
+              padding: isPhone ? '8px 12px' : '10px 16px',
+              fontSize: isPhone ? '0.75rem' : '0.9rem',
               fontWeight: 700,
               letterSpacing: '0.04em',
               textTransform: 'uppercase',
+              boxShadow: '0 6px 18px rgba(11,34,40,0.12)'
             }}>
               Our Vision
             </div>
@@ -72,7 +83,7 @@ export default function VisionSection({ isMobile }: { isMobile?: boolean }) {
           <div
             className="vision-content-container"
             style={{
-              marginTop: 'auto',
+              marginTop: isPhone ? '8px' : 'auto',
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: isPhone ? 'flex-start' : 'flex-end',

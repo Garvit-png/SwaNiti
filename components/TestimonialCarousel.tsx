@@ -36,7 +36,7 @@ export default function TestimonialCarousel() {
     <section id="insights" className="testimonial-section-container" style={{
       minHeight: isMobile ? 'auto' : '75vh',
       width: '100%',
-      padding: isMobile ? '10px' : '40px',
+      padding: isMobile ? '6px' : '40px',
       boxSizing: 'border-box',
       background: '#f8fafc',
     }}>
@@ -51,20 +51,20 @@ export default function TestimonialCarousel() {
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
-        padding: isMobile ? '60px 20px 60px 20px' : '80px 80px 80px 140px',
+        padding: isMobile ? '44px 14px 48px 14px' : '80px 80px 80px 140px',
         boxSizing: 'border-box',
       }}>
 
         {/* Top-left label */}
         <div className="testimonial-label" style={{
           position: 'absolute',
-          top: isMobile ? '30px' : '50px',
-          left: isMobile ? '20px' : '60px',
+          top: isMobile ? '16px' : '50px',
+          left: isMobile ? '14px' : '60px',
           zIndex: 10,
         }}>
           <span style={{
             color: '#0B2228',
-            fontSize: '0.95rem',
+            fontSize: isMobile ? '0.8rem' : '0.95rem',
             fontWeight: 600,
             opacity: 0.55,
             letterSpacing: '0.02em',
@@ -76,8 +76,8 @@ export default function TestimonialCarousel() {
         {/* Dot indicator - bottom left */}
         <div className="testimonial-dots" style={{
           position: 'absolute',
-          bottom: isMobile ? '20px' : '50px',
-          left: isMobile ? '20px' : '60px',
+          bottom: isMobile ? '14px' : '50px',
+          left: isMobile ? '14px' : '60px',
           display: 'flex',
           gap: '8px',
           zIndex: 10,
@@ -123,7 +123,7 @@ export default function TestimonialCarousel() {
                 display: 'flex',
                 alignItems: isMobile ? 'center' : 'stretch',
                 flexDirection: isMobile ? 'column' : 'row',
-                gap: '24px',
+                gap: isMobile ? '14px' : '24px',
                 width: '100%',
                 cursor: 'grab',
               }}
@@ -132,27 +132,27 @@ export default function TestimonialCarousel() {
               <div className="testimonial-text-card" style={{ 
                 flex: 1,
                 background: 'white',
-                padding: isMobile ? '30px' : '60px',
-                borderRadius: '24px',
+                padding: isMobile ? '20px' : '60px',
+                borderRadius: isMobile ? '18px' : '24px',
                 boxShadow: '0 24px 60px rgba(11, 34, 40, 0.08)',
                 display: 'flex',
                 flexDirection: 'column',
               }}>
                 <p style={{
-                  fontSize: isMobile ? '1.2rem' : '1.6rem',
+                  fontSize: isMobile ? '1rem' : '1.6rem',
                   lineHeight: 1.45,
                   color: '#0B2228',
                   fontFamily: 'var(--font-inter)',
                   fontWeight: 500,
-                  marginBottom: isMobile ? '20px' : '40px',
+                  marginBottom: isMobile ? '14px' : '40px',
                 }}>
                   "{testimonials[index % testimonials.length]?.quote || ''}"
                 </p>
                 <div style={{ marginTop: 'auto' }}>
-                  <h4 style={{ fontSize: '1.1rem', fontWeight: 700, color: '#0B2228', marginBottom: '4px' }}>
+                  <h4 style={{ fontSize: isMobile ? '0.95rem' : '1.1rem', fontWeight: 700, color: '#0B2228', marginBottom: '4px' }}>
                     {testimonials[index % testimonials.length]?.author}
                   </h4>
-                  <p style={{ color: '#64748b', fontSize: '0.9rem', fontWeight: 500 }}>
+                  <p style={{ color: '#64748b', fontSize: isMobile ? '0.8rem' : '0.9rem', fontWeight: 500 }}>
                     {testimonials[index % testimonials.length]?.role} · {testimonials[index % testimonials.length]?.event}
                   </p>
                 </div>
@@ -161,10 +161,10 @@ export default function TestimonialCarousel() {
               {/* Photo Card */}
               <div className="testimonial-photo-card" style={{
                 width: isMobile ? '100%' : '360px',
-                height: isMobile ? '300px' : '460px',
+                height: isMobile ? '220px' : '460px',
                 background: 'white',
-                padding: '16px',
-                borderRadius: '24px',
+                padding: isMobile ? '12px' : '16px',
+                borderRadius: isMobile ? '18px' : '24px',
                 boxShadow: '0 24px 60px rgba(11, 34, 40, 0.08)',
                 display: 'flex',
                 alignItems: 'center',
