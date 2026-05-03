@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image'
-import { AnimatePresence, motion, Variants } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, BookOpen, Landmark, Menu, MoveRight, Search, Users, X } from 'lucide-react'
 import { useState } from 'react'
 
@@ -54,16 +54,6 @@ const method = [
     text: 'Move ideas through ambassadors, discussions, yatras, and public-facing campaigns.',
   },
 ]
-
-const fadeUp: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] } },
-}
-
-const stagger: Variants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
-}
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -127,12 +117,21 @@ export default function Home() {
       </AnimatePresence>
 
       <section id="top" className="sr-hero">
-        <motion.div className="sr-hero-copy" variants={stagger} initial="hidden" animate="visible">
-          <motion.h1 variants={fadeUp}>Building Bharat&apos;s idea repository for policy action.</motion.h1>
-          <motion.p variants={fadeUp}>
+        <div className="sr-hero-copy sr-animate-in">
+          <h1 aria-label="Building Bharat's idea repository for policy action.">
+            <span className="sr-title-desktop" aria-hidden="true">Building Bharat&apos;s idea repository for policy action.</span>
+            <span className="sr-title-mobile" aria-hidden="true">
+              Building Bharat&apos;s
+              <br />
+              idea repository for
+              <br />
+              policy action.
+            </span>
+          </h1>
+          <p>
             SvaNiti translates people&apos;s aspirations into simple research, civic movements, and policy ideas that are ready to travel.
-          </motion.p>
-          <motion.div className="sr-hero-actions" variants={fadeUp}>
+          </p>
+          <div className="sr-hero-actions">
             <a className="sr-primary-button" href="#work">
               Explore the work
               <ArrowRight size={18} />
@@ -141,15 +140,10 @@ export default function Home() {
               Join the movement
               <MoveRight size={18} />
             </a>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
-        <motion.div
-          className="sr-hero-board"
-          initial={{ opacity: 0, y: 28, scale: 0.98 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-        >
+        <div className="sr-hero-board sr-animate-in sr-animate-delay-1">
           <div className="sr-board-logo">
             <Image src="/logo-alpha.png" alt="" width={68} height={68} priority />
           </div>
@@ -171,7 +165,7 @@ export default function Home() {
           </div>
           <div className="sr-board-pill">Research</div>
           <div className="sr-board-pill sr-board-pill-alt">Public action</div>
-        </motion.div>
+        </div>
       </section>
 
       <section className="sr-theme-strip" aria-label="SvaNiti themes">
@@ -183,10 +177,10 @@ export default function Home() {
       </section>
 
       <section id="about" className="sr-section sr-about">
-        <motion.div className="sr-section-heading" variants={fadeUp} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }}>
+        <div className="sr-section-heading sr-animate-in">
           <span>Our intent</span>
           <h2>From public aspiration to public policy.</h2>
-        </motion.div>
+        </div>
         <div className="sr-about-grid">
           <p>
             SvaNiti is an education and public policy think tank built around a simple belief: policy should begin with the voice of people, not with jargon.
@@ -247,17 +241,15 @@ export default function Home() {
           {method.map((step, index) => {
             const Icon = step.icon
             return (
-              <motion.article
+              <article
                 key={step.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
+                className="sr-animate-in"
+                style={{ animationDelay: `${index * 80}ms` }}
               >
                 <Icon size={24} />
                 <h3>{step.title}</h3>
                 <p>{step.text}</p>
-              </motion.article>
+              </article>
             )
           })}
         </div>

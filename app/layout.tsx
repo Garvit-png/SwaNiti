@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter, Lexend, Poppins } from 'next/font/google'
 import './globals.css'
 
@@ -14,6 +14,11 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'SvaNiti Policy Research Center',
   description: "Building Bharat's Largest Idea Repository",
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({

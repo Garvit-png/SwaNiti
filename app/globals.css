@@ -2168,6 +2168,25 @@ textarea:focus-visible {
   color: inherit;
 }
 
+.sr-animate-in {
+  animation: srRiseIn 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.sr-animate-delay-1 {
+  animation-delay: 120ms;
+}
+
+@keyframes srRiseIn {
+  from {
+    opacity: 0.92;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .sr-nav {
   position: sticky;
   top: 14px;
@@ -2343,10 +2362,18 @@ textarea:focus-visible {
   margin: 0;
   color: var(--sr-ink);
   font-family: var(--font-lexend);
-  font-size: clamp(3.1rem, 6.8vw, 6rem);
+  font-size: clamp(3.1rem, 6.2vw, 5.3rem);
   font-weight: 400;
   line-height: 0.98;
   letter-spacing: 0;
+}
+
+.sr-title-desktop {
+  display: inline;
+}
+
+.sr-title-mobile {
+  display: none;
 }
 
 .sr-hero-copy p {
@@ -2815,25 +2842,55 @@ textarea:focus-visible {
   .sr-section,
   .sr-image-band,
   .sr-connect {
-    width: calc(100% - 16px);
+    width: min(calc(100vw - 16px), 374px);
+    max-width: calc(100vw - 16px);
   }
 
   .sr-hero {
     min-height: auto;
-    margin-top: 10px;
+    margin: 10px 8px 0;
     gap: 18px;
+    overflow: hidden;
+  }
+
+  .sr-section {
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+
+  .sr-image-band {
+    margin-right: 8px;
+    margin-left: 8px;
+  }
+
+  .sr-connect {
+    margin-right: 8px;
+    margin-left: 8px;
   }
 
   .sr-hero-copy {
+    width: 100%;
+    max-width: 100%;
     padding: 46px 6px 12px;
   }
 
   .sr-hero h1 {
-    font-size: clamp(2.85rem, 14vw, 4.25rem);
-    line-height: 1;
+    max-width: 100%;
+    font-size: clamp(2rem, 7.2vw, 2.35rem);
+    line-height: 1.03;
+    overflow-wrap: break-word;
+  }
+
+  .sr-title-desktop {
+    display: none;
+  }
+
+  .sr-title-mobile {
+    display: block;
   }
 
   .sr-hero-copy p {
+    max-width: 100%;
     margin-top: 18px;
     font-size: 1rem;
   }
@@ -2849,6 +2906,7 @@ textarea:focus-visible {
   }
 
   .sr-hero-board {
+    width: min(100%, 374px);
     min-height: 520px;
     border-radius: 24px;
   }
@@ -2931,6 +2989,10 @@ textarea:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .sr-animate-in {
+    animation: none;
+  }
+
   .sr-theme-strip div {
     animation: none;
   }
