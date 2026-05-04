@@ -2,17 +2,50 @@
 
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, ArrowUpRight, BookOpen, Compass, FileText, GraduationCap, Landmark, Menu, MoveRight, Network, Quote, Search, Sparkles, Users, X } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, Compass, FileText, GraduationCap, Landmark, Menu, Network, Quote, Search, Sparkles, Users, X } from 'lucide-react'
 import { useState } from 'react'
 
 const navLinks = [
   { label: 'About', href: '#about' },
-  { label: 'Work', href: '#work' },
-  { label: 'Method', href: '#method' },
-  { label: 'Connect', href: '#connect' },
-]
+  { label: 'Projects', href: '#work' },
+  { label: 'Insights', href: '#method' },
+  { label: 'Governance', href: '#connect' },
+] as const
 
 const themes = ['People\'s Aspiration', 'Education', 'Public Policy', 'Research', 'Non-Partisan', 'Viksit Bharat']
+
+const rollingRows = [
+  {
+    direction: 'left',
+    items: [
+      { kind: 'photo', src: '/gallery/img5.jpg', alt: 'SvaNiti youth participants' },
+      { kind: 'word', text: 'Inspiration', tone: 'sun' },
+      { kind: 'photo', src: '/gallery/img4.jpg', alt: 'SvaNiti group discussion' },
+      { kind: 'word', text: 'Notions', tone: 'cyan' },
+      { kind: 'photo', src: '/gallery/img1.jpg', alt: 'SvaNiti campus moment' },
+    ],
+  },
+  {
+    direction: 'right',
+    items: [
+      { kind: 'word', text: 'People\'s Aspiration', tone: 'cyan' },
+      { kind: 'photo', src: '/gallery/img2.jpg', alt: 'SvaNiti classroom session' },
+      { kind: 'word', text: 'Unconventional', tone: 'sun' },
+      { kind: 'photo', src: '/gallery/img3.jpg', alt: 'SvaNiti participants at event' },
+      { kind: 'word', text: 'Policy', tone: 'cyan' },
+    ],
+  },
+  {
+    direction: 'left',
+    items: [
+      { kind: 'photo', src: '/gallery/SvanitiPhoto.png', alt: 'SvaNiti full team' },
+      { kind: 'word', text: 'Non-Partisan', tone: 'sun' },
+      { kind: 'photo', src: '/gallery/img4.jpg', alt: 'SvaNiti policy cohort' },
+      { kind: 'word', text: 'Viksit Bharat', tone: 'cyan' },
+      { kind: 'photo', src: '/gallery/img5.jpg', alt: 'SvaNiti youth workshop' },
+    ],
+  },
+] as const
 
 const impactStats = [
   { value: '2047', label: 'Viksit Bharat horizon', text: 'Every brief and journey is shaped around a long-term national imagination.' },
@@ -91,33 +124,6 @@ export default function Home() {
 
   return (
     <main className="sr-page">
-      <header className="sr-nav">
-        <a className="sr-brand" href="#top" aria-label="SvaNiti home">
-          <span className="sr-brand-mark">
-            <Image src="/logo.png" alt="" width={42} height={42} priority />
-          </span>
-          <span>
-            <strong>SvaNiti</strong>
-            <small>Policy Research Center</small>
-          </span>
-        </a>
-
-        <nav className="sr-nav-links" aria-label="Primary navigation">
-          {navLinks.map((link) => (
-            <a key={link.href} href={link.href}>{link.label}</a>
-          ))}
-        </nav>
-
-        <a className="sr-nav-cta" href="#connect">
-          Start a conversation
-          <ArrowUpRight size={16} />
-        </a>
-
-        <button className="sr-menu-button" type="button" onClick={() => setMenuOpen(true)} aria-label="Open menu">
-          <Menu size={22} />
-        </button>
-      </header>
-
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -147,58 +153,68 @@ export default function Home() {
       </AnimatePresence>
 
       <section id="top" className="sr-hero">
-        <div className="sr-hero-copy sr-animate-in">
-          <h1 aria-label="Building Bharat's idea repository for policy action.">
-            <span className="sr-title-desktop" aria-hidden="true">Building Bharat&apos;s idea repository for policy action.</span>
-            <span className="sr-title-mobile" aria-hidden="true">
-              Building Bharat&apos;s
-              <br />
-              idea repository for
-              <br />
-              policy action.
-            </span>
-          </h1>
-          <p>
-            SvaNiti translates people&apos;s aspirations into simple research, civic movements, and policy ideas that are ready to travel.
-          </p>
-          <div className="sr-hero-actions">
-            <a className="sr-primary-button" href="#work">
-              Explore the work
-              <ArrowRight size={18} />
+        <div className="sr-hero-card sr-animate-in">
+          <header className="sr-card-nav">
+            <a className="sr-card-brand" href="#top" aria-label="SvaNiti home">
+              <span className="sr-card-logo">
+                <Image src="/logo.png" alt="" width={92} height={92} priority />
+              </span>
+              <strong>SvaNiti Policy Research Center</strong>
             </a>
-            <a className="sr-secondary-button" href="#connect">
-              Join the movement
-              <MoveRight size={18} />
-            </a>
-          </div>
-        </div>
 
-        <div className="sr-hero-board sr-animate-in sr-animate-delay-1">
-          <div className="sr-board-logo">
-            <Image src="/logo-alpha.png" alt="" width={68} height={68} priority />
+            <nav className="sr-card-links" aria-label="Primary navigation">
+              {navLinks.map((link) => (
+                <a key={link.href} href={link.href}>{link.label}</a>
+              ))}
+            </nav>
+
+            <button className="sr-menu-button" type="button" onClick={() => setMenuOpen(true)} aria-label="Open menu">
+              <Menu size={26} />
+            </button>
+          </header>
+
+          <div className="sr-hero-center">
+            <h1>
+              <span>We are Building</span>
+              <span>Bharat&apos;s Largest</span>
+              <span>Idea Repository</span>
+            </h1>
           </div>
-          <div className="sr-board-line" />
-          <div className="sr-board-photo-feature">
-            <Image src="/gallery/img5.jpg" alt="SvaNiti youth policy workshop" fill sizes="(max-width: 980px) 100vw, 560px" priority />
+
+          <div className="sr-hero-footer">
+            <p>Education &amp; Public Policy Think-Tank in being to Sync Nation&apos;s Aspirations into Policy.</p>
+            <div className="sr-hero-actions">
+              <a className="sr-contact-link" href="/contact">
+                Contact Us
+                <ArrowRight size={24} />
+              </a>
+              <a className="sr-join-button" href="#connect">
+                Join Our Movement
+                <span><ArrowRight size={24} /></span>
+              </a>
+            </div>
           </div>
-          <div className="sr-board-card sr-board-card-main">
-            <BookOpen size={22} />
-            <span>Idea brief</span>
-            <strong>Education rooted in Bharat, designed for 2047.</strong>
-          </div>
-          <div className="sr-board-card sr-board-card-small">
-            <span>Policy lens</span>
-            <strong>Non-partisan</strong>
-          </div>
-          <div className="sr-board-photo sr-board-photo-one">
-            <Image src="/gallery/img1.jpg" alt="SvaNiti community discussion" fill sizes="160px" />
-          </div>
-          <div className="sr-board-photo sr-board-photo-two">
-            <Image src="/gallery/img3.jpg" alt="SvaNiti participants" fill sizes="140px" />
-          </div>
-          <div className="sr-board-pill">Research</div>
-          <div className="sr-board-pill sr-board-pill-alt">Public action</div>
         </div>
+      </section>
+
+      <section className="sr-rolling-gallery" aria-label="Rolling SvaNiti ideas">
+        {rollingRows.map((row, rowIndex) => (
+          <div className={`sr-roll-row sr-roll-${row.direction}`} key={`${row.direction}-${rowIndex}`}>
+            <div className="sr-roll-track">
+              {[...row.items, ...row.items].map((item, index) => (
+                item.kind === 'word' ? (
+                  <span className={`sr-roll-word sr-roll-${item.tone}`} key={`${item.text}-${index}`}>
+                    {item.text}
+                  </span>
+                ) : (
+                  <span className="sr-roll-photo" key={`${item.src}-${index}`}>
+                    <Image src={item.src} alt={item.alt} fill sizes="180px" />
+                  </span>
+                )
+              ))}
+            </div>
+          </div>
+        ))}
       </section>
 
       <section className="sr-theme-strip" aria-label="SvaNiti themes">
@@ -315,14 +331,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="sr-image-band" aria-label="SvaNiti team">
-        <Image src="/gallery/SvanitiPhoto.png" alt="SvaNiti team gathering" fill sizes="100vw" />
-        <div className="sr-image-caption">
-          <span>People behind the movement</span>
-          <p>Research feels stronger when it stays close to the people who will carry it.</p>
-        </div>
-      </section>
-
       <section className="sr-section sr-flow">
         <div className="sr-section-heading">
           <span>Idea journey</span>
@@ -367,6 +375,14 @@ export default function Home() {
             Clear language, strong visual rhythm, and lightweight motion make the experience feel alive without slowing people down.
           </p>
           <GraduationCap size={40} />
+        </div>
+      </section>
+
+      <section className="sr-image-band sr-final-image" aria-label="SvaNiti team">
+        <Image src="/gallery/SvanitiPhoto.png" alt="SvaNiti full group gathering" fill sizes="100vw" />
+        <div className="sr-image-caption">
+          <span>People behind the movement</span>
+          <p>Research feels stronger when it stays close to the people who will carry it.</p>
         </div>
       </section>
 
