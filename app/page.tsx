@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, ArrowUpRight, BookOpen, Landmark, Menu, MoveRight, Search, Users, X } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, BookOpen, Compass, FileText, GraduationCap, Landmark, Menu, MoveRight, Network, Quote, Search, Sparkles, Users, X } from 'lucide-react'
 import { useState } from 'react'
 
 const navLinks = [
@@ -13,6 +13,12 @@ const navLinks = [
 ]
 
 const themes = ['People\'s Aspiration', 'Education', 'Public Policy', 'Research', 'Non-Partisan', 'Viksit Bharat']
+
+const impactStats = [
+  { value: '2047', label: 'Viksit Bharat horizon', text: 'Every brief and journey is shaped around a long-term national imagination.' },
+  { value: '4', label: 'Active idea tracks', text: 'Movements, yatras, education concepts, and creative economy policy.' },
+  { value: '1', label: 'Simple civic loop', text: 'Listen deeply, research clearly, and move ideas into public action.' },
+]
 
 const projects = [
   {
@@ -53,6 +59,30 @@ const method = [
     title: 'Mobilise',
     text: 'Move ideas through ambassadors, discussions, yatras, and public-facing campaigns.',
   },
+]
+
+const ideaFlow = [
+  {
+    icon: Compass,
+    title: 'Aspirations',
+    text: 'Start with what people, students, volunteers, and civic leaders are already sensing on the ground.',
+  },
+  {
+    icon: FileText,
+    title: 'Notions',
+    text: 'Turn raw concerns into readable research notes, issue maps, and policy possibilities.',
+  },
+  {
+    icon: Network,
+    title: 'Action',
+    text: 'Carry ideas through discussions, chapters, yatras, and public-facing campaigns.',
+  },
+]
+
+const voices = [
+  'Readable for first-time volunteers.',
+  'Useful for researchers and NGO teams.',
+  'Grounded in Bharat, not boardroom jargon.',
 ]
 
 export default function Home() {
@@ -148,6 +178,9 @@ export default function Home() {
             <Image src="/logo-alpha.png" alt="" width={68} height={68} priority />
           </div>
           <div className="sr-board-line" />
+          <div className="sr-board-photo-feature">
+            <Image src="/gallery/img5.jpg" alt="SvaNiti youth policy workshop" fill sizes="(max-width: 980px) 100vw, 560px" priority />
+          </div>
           <div className="sr-board-card sr-board-card-main">
             <BookOpen size={22} />
             <span>Idea brief</span>
@@ -172,6 +205,33 @@ export default function Home() {
         <div>
           {[...themes, ...themes].map((theme, index) => (
             <span key={`${theme}-${index}`}>{theme}</span>
+          ))}
+        </div>
+      </section>
+
+      <section className="sr-section sr-impact">
+        <div className="sr-impact-heading">
+          <div className="sr-section-heading">
+            <span>Why it matters</span>
+            <h2>More signal, less noise, for teams working in public life.</h2>
+          </div>
+          <p>
+            The site now gives visitors a quicker sense of what SvaNiti does, how ideas move, and where they can join without making the experience feel heavy.
+          </p>
+        </div>
+        <div className="sr-stat-grid">
+          {impactStats.map((stat, index) => (
+            <motion.article
+              key={stat.label}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.55, delay: index * 0.08 }}
+            >
+              <strong>{stat.value}</strong>
+              <span>{stat.label}</span>
+              <p>{stat.text}</p>
+            </motion.article>
           ))}
         </div>
       </section>
@@ -257,6 +317,57 @@ export default function Home() {
 
       <section className="sr-image-band" aria-label="SvaNiti team">
         <Image src="/gallery/SvanitiPhoto.png" alt="SvaNiti team gathering" fill sizes="100vw" />
+        <div className="sr-image-caption">
+          <span>People behind the movement</span>
+          <p>Research feels stronger when it stays close to the people who will carry it.</p>
+        </div>
+      </section>
+
+      <section className="sr-section sr-flow">
+        <div className="sr-section-heading">
+          <span>Idea journey</span>
+          <h2>A simple path from lived experience to policy-ready work.</h2>
+        </div>
+        <div className="sr-flow-grid">
+          {ideaFlow.map((item, index) => {
+            const Icon = item.icon
+            return (
+              <motion.article
+                key={item.title}
+                initial={{ opacity: 0, y: 28 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.35 }}
+                transition={{ duration: 0.55, delay: index * 0.1 }}
+              >
+                <div>
+                  <Icon size={24} />
+                  <span>{String(index + 1).padStart(2, '0')}</span>
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+              </motion.article>
+            )
+          })}
+        </div>
+      </section>
+
+      <section className="sr-section sr-voices">
+        <div className="sr-voice-card">
+          <Quote size={34} />
+          <h2>Designed for NGO teams, students, researchers, and volunteers.</h2>
+          <div>
+            {voices.map((voice) => (
+              <span key={voice}>{voice}</span>
+            ))}
+          </div>
+        </div>
+        <div className="sr-voice-side">
+          <Sparkles size={26} />
+          <p>
+            Clear language, strong visual rhythm, and lightweight motion make the experience feel alive without slowing people down.
+          </p>
+          <GraduationCap size={40} />
+        </div>
       </section>
 
       <section id="connect" className="sr-section sr-connect">
