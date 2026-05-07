@@ -1,9 +1,21 @@
 "use client"
 
+import { useRef } from 'react'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
 
 export default function Home() {
+  const cardRef = useRef<HTMLDivElement>(null)
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!cardRef.current) return
+    const { left, top, width, height } = cardRef.current.getBoundingClientRect()
+    const x = ((e.clientX - left) / width) * 100
+    const y = ((e.clientY - top) / height) * 100
+    cardRef.current.style.setProperty('--m-x', `${x}%`)
+    cardRef.current.style.setProperty('--m-y', `${y}%`)
+  }
+
   const navLinks = [
     { label: 'About', href: '#' },
     { label: 'Projects', href: '#' },
@@ -14,7 +26,11 @@ export default function Home() {
   return (
     <main className="sr-page">
       <section id="top" className="sr-hero">
-        <div className="sr-hero-card sr-animate-in">
+        <div 
+          ref={cardRef}
+          onMouseMove={handleMouseMove}
+          className="sr-hero-card sr-animate-in"
+        >
           {/* Logo Notch */}
           <div className="sr-card-logo-notch">
             <div className="sr-logo-wrapper">
