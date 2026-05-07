@@ -1,15 +1,9 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Lexend, Poppins } from 'next/font/google'
+import { Inter, Lexend } from 'next/font/google'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 const lexend = Lexend({ subsets: ['latin'], variable: '--font-lexend' })
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '600', '700'],
-  variable: '--font-poppins',
-  display: 'swap',
-})
 
 export const metadata: Metadata = {
   title: 'SvaNiti Policy Research Center',
@@ -28,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${lexend.variable} ${poppins.variable}`}>
+      <body className={`${inter.variable} ${lexend.variable}`}>
         {children}
       </body>
     </html>
