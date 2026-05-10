@@ -308,10 +308,9 @@ a {
 
 .sr-tag {
   font-family: var(--font-lexend);
-  font-size: clamp(1.8rem, 4vw, 3.2rem); /* Adjusted for better scale */
-  font-weight: 300;
-  padding: 18px 50px;
-  border-radius: 12px; /* Matches the 'box' look in image */
+  font-size: clamp(2.2rem, 5vw, 4rem); 
+  padding: 24px 60px;
+  border-radius: 16px;
   color: var(--sr-ink);
   display: flex;
   align-items: center;
@@ -327,8 +326,8 @@ a {
 }
 
 .sr-marquee-img {
-  width: 90px;
-  height: 90px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
@@ -346,9 +345,9 @@ a {
 .sr-projects-container {
   width: 100%;
   height: 100%;
-  background: #fff9c4; /* Soft buttery yellow from image */
+  background: #fff9c4; /* Soft buttery yellow reverted */
   border-radius: 40px;
-  padding: 80px 40px 40px;
+  padding: 100px 40px 40px;
   position: relative;
   overflow: visible;
   display: flex;
@@ -356,14 +355,13 @@ a {
 }
 
 .sr-card-logo-notch.dark {
-  background: var(--sr-white); /* White background like the logo notch */
-  color: var(--sr-ink); /* Dark text */
-  padding: 20px 40px;
+  background: var(--sr-white); 
+  padding: 10px; /* Gap for the inner black box */
   top: -1px;
   left: -1px;
   height: auto;
-  border-top-left-radius: 40px;
   border-bottom-right-radius: 20px;
+  border-top-left-radius: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -396,10 +394,14 @@ a {
 }
 
 .sr-notch-label {
+  background: var(--sr-ink);
+  color: var(--sr-white);
+  padding: 15px 35px;
+  border-radius: 12px;
+  border-bottom-right-radius: 18px; /* Slightly more rounded for that 'cut' look */
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   letter-spacing: -0.01em;
-  color: var(--sr-ink);
 }
 
 .sr-projects-grid {
@@ -416,7 +418,7 @@ a {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  transition: box-shadow 0.3s ease;
   min-height: 400px;
 }
 
@@ -527,8 +529,8 @@ a {
   .sr-hero-actions { flex-direction: column; align-items: stretch; gap: 20px; }
   .sr-card-links { display: none; }
   .sr-contact-link { justify-content: space-between; padding-bottom: 10px; }
-  .sr-tag { font-size: 1.8rem; padding: 12px 30px; border-radius: 10px; }
-  .sr-marquee-img { width: 70px; height: 70px; }
+  .sr-tag { font-size: 2.2rem; padding: 16px 40px; border-radius: 12px; }
+  .sr-marquee-img { width: 90px; height: 90px; }
   .sr-scroll-container { gap: 30px; }
   .sr-projects-grid { grid-template-columns: 1fr; }
   .sr-projects-container { padding: 80px 20px 20px; border-radius: 30px; }
@@ -537,8 +539,8 @@ a {
 
 @media (max-width: 640px) {
   .sr-hero-center h1 { font-size: 2.2rem; }
-  .sr-tag { font-size: 1.1rem; padding: 10px 20px; border-radius: 8px; }
-  .sr-marquee-img { width: 50px; height: 50px; }
+  .sr-tag { font-size: 1.4rem; padding: 12px 24px; border-radius: 10px; }
+  .sr-marquee-img { width: 70px; height: 70px; }
   .sr-marquee-row { gap: 12px; }
   .sr-scroll-container { justify-content: center; gap: 40px; height: auto; min-height: 100vh; padding: 60px 0; }
   .sr-project-card h3 { font-size: 1.5rem; }

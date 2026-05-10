@@ -11,11 +11,14 @@ export default function Home() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   const getRotation = (index: number) => {
-    if (hoveredIndex === null || hoveredIndex === index) {
-      return { rotateX: 0, rotateY: 0, scale: hoveredIndex === index ? 1.02 : 1, opacity: 1 }
+    if (hoveredIndex === null) return { rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }
+    
+    if (hoveredIndex === index) {
+      return { rotateX: 0, rotateY: 0, scale: 1.05, opacity: 1, zIndex: 10 }
     }
     
-    const cols = 3
+    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1024
+    const cols = isMobile ? 1 : 3
     const row = Math.floor(index / cols)
     const col = index % cols
     const hRow = Math.floor(hoveredIndex / cols)
@@ -25,10 +28,10 @@ export default function Home() {
     const dy = hRow - row
 
     return {
-      rotateY: dx * 8,
-      rotateX: -dy * 8,
-      scale: 0.98,
-      opacity: 0.6
+      rotateY: dx * 12,
+      rotateX: -dy * 12,
+      scale: 0.96,
+      opacity: 0.5
     }
   }
 
@@ -210,30 +213,34 @@ export default function Home() {
 
       {/* SECTION 3: WHAT WE DO */}
       <section id="projects" className="sr-page">
-        <div className="sr-projects-container sr-animate-in" style={{ perspective: '1000px' }}>
+        <div className="sr-projects-container" style={{ perspective: '1000px' }}>
           {/* Section Notch */}
           <div className="sr-card-logo-notch dark">
             <span className="sr-notch-label">What We Do</span>
           </div>
 
-          <motion.div 
-            className="sr-projects-grid"
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={{
-              hidden: { opacity: 0 },
-              show: {
-                opacity: 1,
-                transition: { staggerChildren: 0.1 }
-              }
-            }}
-          >
+          <div className="sr-projects-grid">
             {projects.map((project, i) => (
               <motion.div 
                 key={i}
-                variants={{ hidden: { opacity: 0, y: 30 }, show: { opacity: 1, y: 0 } }}
-                animate={getRotation(i)}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={{ 
+                  hidden: { opacity: 0, y: 80, x: -20, rotate: -2 }, 
+                  show: { 
+                    opacity: 1, 
+                    y: 0, 
+                    x: 0,
+                    rotate: 0,
+                    transition: {
+                      duration: 0.8,
+                      ease: [0.16, 1, 0.3, 1],
+                      delay: i * 0.1
+                    }
+                  } 
+                }}
+                animate={hoveredIndex !== null ? getRotation(i) : "show"}
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
                 className={`sr-project-card ${project.organic ? 'organic' : ''}`}
@@ -249,7 +256,7 @@ export default function Home() {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
