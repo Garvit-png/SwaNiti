@@ -1,22 +1,37 @@
 "use client"
 
 import { useRef, useState } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ArrowUp, ArrowDown } from 'lucide-react'
 
 export default function Home() {
   const cardRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
+  const photoSectionRef = useRef<HTMLDivElement>(null)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [testimonialIndex, setTestimonialIndex] = useState(0)
+
+  const testimonials = [
+    {
+      quote: "It's need of time that our country needs Creative Economy Ministry. We need initiative and regulations from governement to grow more as industry. SvaNiti is Bang on promoting idea and research on the same.",
+      author: "Sheron (Creative Artist)",
+      org: "Nudge Charcha 2024"
+    },
+    {
+      quote: "The idea of SvaNiti is much needed and Aadil has much more clarity on this idea at this initial stage.",
+      author: "Jigar Inamdar (Youth Leader & Politician)",
+      org: "PBC 2024, Rishihood University."
+    }
+  ]
 
   const getRotation = (index: number) => {
     if (hoveredIndex === null) return { rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }
-    
+
     if (hoveredIndex === index) {
       return { rotateX: 0, rotateY: 0, scale: 1.05, opacity: 1, zIndex: 10 }
     }
-    
+
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1024
     const cols = isMobile ? 1 : 3
     const row = Math.floor(index / cols)
@@ -45,6 +60,17 @@ export default function Home() {
   const xLeft = useTransform(scrollYProgress, [0, 1], [200, -200])
   const xRight = useTransform(scrollYProgress, [0, 1], [-200, 200])
 
+  // Photo section scroll reveal
+  const { scrollYProgress: photoScrollY } = useScroll({
+    target: photoSectionRef,
+    offset: ["start end", "end start"]
+  })
+
+  const photoScale = 1 
+  const photoOpacity = 1 
+  const photoY = 0 
+  const testimonialOpacity = useTransform(photoScrollY, [0.5, 0.7], [0, 1])
+
   const handleMouseMove = (e: React.MouseEvent) => {
     if (!cardRef.current) return
     const { left, top, width, height } = cardRef.current.getBoundingClientRect()
@@ -55,8 +81,8 @@ export default function Home() {
   }
 
   const navLinks = [
-    { label: 'About', href: '#' },
-    { label: 'Projects', href: '#' },
+    { label: 'About', href: '#about' },
+    { label: 'Projects', href: '#about' },
     { label: 'Insights', href: '#' },
     { label: 'Governance', href: '#' },
   ]
@@ -111,7 +137,7 @@ export default function Home() {
       {/* SECTION 1: HERO */}
       <section id="top" className="sr-page full-screen">
         <div className="sr-hero">
-          <div 
+          <div
             ref={cardRef}
             onMouseMove={handleMouseMove}
             className="sr-hero-card sr-animate-in"
@@ -136,7 +162,7 @@ export default function Home() {
 
             <div className="sr-hero-center">
               <h1>
-                We are Building Bharat&apos;s <br /> 
+                We are Building Bharat&apos;s <br />
                 Largest Idea Repository
               </h1>
             </div>
@@ -149,7 +175,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="sr-hero-actions">
-                <a className="sr-contact-link" href="#">
+                <a className="sr-contact-link" href="#contact">
                   Contact Us
                   <span className="sr-contact-arrow">
                     <ArrowRight size={20} />
@@ -212,7 +238,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 3: WHAT WE DO */}
-      <section id="projects" className="sr-page">
+      <section id="about" className="sr-page">
         <div className="sr-projects-container" style={{ perspective: '1000px' }}>
           {/* Section Notch */}
           <div className="sr-card-logo-notch dark">
@@ -221,16 +247,16 @@ export default function Home() {
 
           <div className="sr-projects-grid">
             {projects.map((project, i) => (
-              <motion.div 
+              <motion.div
                 key={i}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
-                variants={{ 
-                  hidden: { opacity: 0, y: 80, x: -20, rotate: -2 }, 
-                  show: { 
-                    opacity: 1, 
-                    y: 0, 
+                variants={{
+                  hidden: { opacity: 0, y: 80, x: -20, rotate: -2 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
                     x: 0,
                     rotate: 0,
                     transition: {
@@ -238,7 +264,7 @@ export default function Home() {
                       ease: [0.16, 1, 0.3, 1],
                       delay: i * 0.1
                     }
-                  } 
+                  }
                 }}
                 animate={hoveredIndex !== null ? getRotation(i) : "show"}
                 onMouseEnter={() => setHoveredIndex(i)}
@@ -263,7 +289,7 @@ export default function Home() {
       {/* SECTION 4: OUR VISION (Preview) */}
       <section className="sr-page">
         <div className="sr-vision-container sr-animate-in">
-           <div className="sr-card-logo-notch dark">
+          <div className="sr-card-logo-notch dark">
             <span className="sr-notch-label">Our Vision</span>
           </div>
           <div className="sr-vision-content">
@@ -276,6 +302,162 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* SECTION 5: TEAM PHOTO REVEAL & TESTIMONIALS */}
+      <section ref={photoSectionRef} className="sr-photo-reveal-section">
+        <div className="sr-photo-reveal-sticky">
+          <motion.div 
+            style={{ 
+              scale: photoScale,
+              opacity: photoOpacity,
+              y: photoY
+            }}
+            className="sr-photo-reveal-wrapper"
+          >
+            <Image
+              src="/team-final.png"
+              alt="SvaNiti Team"
+              fill
+              className="sr-photo-reveal-img"
+            />
+            {/* Dark Overlay - now tied to testimonial appearance */}
+            <motion.div 
+              style={{ opacity: testimonialOpacity }}
+              className="sr-photo-overlay"
+            ></motion.div>
+
+            {/* Testimonial Content Overlay */}
+            <motion.div 
+              style={{ opacity: testimonialOpacity }}
+              className="sr-testimonial-overlay-content"
+            >
+              <div className="sr-testimonial-header">
+                <span>What people tell about us?</span>
+              </div>
+              
+              <div className="sr-testimonial-slider-container">
+                <AnimatePresence mode="wait">
+                  <motion.div 
+                    key={testimonialIndex}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 20 }}
+                    className="sr-testimonial-main-card"
+                  >
+                    <p className="sr-main-quote">"{testimonials[testimonialIndex].quote}"</p>
+                    <div className="sr-main-author">
+                      <strong>{testimonials[testimonialIndex].author}</strong>
+                      <span>{testimonials[testimonialIndex].org}</span>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+
+                <div className="sr-testimonial-nav">
+                  <button 
+                    onClick={() => setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+                    className="sr-nav-btn"
+                  >
+                    <ArrowUp size={20} />
+                  </button>
+                  <button 
+                    onClick={() => setTestimonialIndex((prev) => (prev + 1) % testimonials.length)}
+                    className="sr-nav-btn"
+                  >
+                    <ArrowDown size={20} />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* SECTION 6: LET'S TALK */}
+      <section id="contact" className="sr-page sr-footer-section">
+        <div className="sr-footer-container">
+          <div className="sr-card-logo-notch dark footer-notch">
+            <span className="sr-notch-label">Let's Talk, What you got!</span>
+          </div>
+          <div className="sr-footer-content">
+            <h3>Contact us for any notion for nation</h3>
+            
+            <form className="sr-contact-form">
+              <div className="sr-form-row">
+                <div className="sr-form-group">
+                  <label>Name *</label>
+                  <input type="text" placeholder="" required />
+                </div>
+                <div className="sr-form-group">
+                  <label>Contact No. *</label>
+                  <input type="text" placeholder="" required />
+                </div>
+              </div>
+
+              <div className="sr-form-group full-width">
+                <label>Email *</label>
+                <input type="email" placeholder="" required />
+              </div>
+
+              <div className="sr-form-group full-width">
+                <label>Notion Note *</label>
+                <textarea rows={4} placeholder="" required></textarea>
+              </div>
+
+              <button type="submit" className="sr-contact-submit">
+                Contact Now
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL FOOTER */}
+      <footer className="sr-site-footer">
+        <div className="sr-footer-main">
+          <div className="sr-footer-branding">
+            <div className="sr-footer-logo-box">
+              SvaNiti Policy Research Center
+            </div>
+            <div className="sr-footer-social">
+              <a 
+                href="https://www.linkedin.com/company/svaniti-policy-research-center/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="sr-social-icon"
+              >
+                in
+              </a>
+            </div>
+          </div>
+
+          <div className="sr-footer-mission">
+            <strong>Think-Tank for Education<br/>& Public Policy</strong>
+          </div>
+
+          <div className="sr-footer-links">
+            <h4>What We Do</h4>
+            <ul>
+              <li><a href="#about">About</a></li>
+              <li><a href="#about">Governance</a></li>
+              <li><a href="#contact">Contact us</a></li>
+            </ul>
+          </div>
+
+          <div className="sr-footer-contact">
+            <h4>Get In Touch</h4>
+            <address>
+              I/Office Aadil Belim, Upleta,<br/>
+              Rajkot - 360-490, Gujarat, Bharat.<br/>
+              <a href="mailto:office@svaniti.in">office@svaniti.in</a><br/>
+              +91 2826 358085
+            </address>
+          </div>
+        </div>
+
+        <div className="sr-footer-bottom">
+          <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center</p>
+        </div>
+      </footer>
     </main>
   )
 }
