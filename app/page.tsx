@@ -144,9 +144,11 @@ export default function Home() {
           >
             {/* Logo Notch */}
             <div className="sr-card-logo-notch">
-              <div className="sr-logo-wrapper">
-                <Image src="/logo.png" alt="SvaNiti Logo" width={80} height={80} priority />
-              </div>
+              <a href="#" className="sr-logo-link">
+                <div className="sr-logo-wrapper">
+                  <Image src="/logo.png" alt="SvaNiti Logo" width={80} height={80} priority />
+                </div>
+              </a>
             </div>
 
             <header className="sr-card-nav">
@@ -237,8 +239,36 @@ export default function Home() {
         </div>
       </section>
 
+      <section id="about" className="sr-page sr-about-section">
+        <div className="sr-about-container">
+          {/* Logo Notch */}
+          <div className="sr-card-logo-notch light">
+            <a href="#" className="sr-logo-link">
+              <div className="sr-logo-wrapper">
+                <Image src="/logo.png" alt="SvaNiti Logo" width={60} height={60} />
+              </div>
+            </a>
+          </div>
+          <div className="sr-about-layout">
+            <div className="sr-about-sidebar">
+              <span className="sr-about-label">About</span>
+            </div>
+            <div className="sr-about-main">
+              <h2 className="sr-about-heading">
+                SvaNiti, the coolest<br/>Think-Tank, re-thinking Policy!
+              </h2>
+              <div className="sr-about-footer">
+                <p className="sr-about-description">
+                  In this rapidly evolving world, we need policies and strategies that align with humanity's progress. Shifting from complex research to people-centric policy—that's what we do at SvaNiti.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* SECTION 3: WHAT WE DO */}
-      <section id="about" className="sr-page">
+      <section id="projects" className="sr-page">
         <div className="sr-projects-container" style={{ perspective: '1000px' }}>
           {/* Section Notch */}
           <div className="sr-card-logo-notch dark">
@@ -415,9 +445,11 @@ export default function Home() {
       <footer className="sr-site-footer">
         <div className="sr-footer-main">
           <div className="sr-footer-branding">
-            <div className="sr-footer-logo-box">
-              SvaNiti Policy Research Center
-            </div>
+            <a href="#" className="sr-footer-logo-link">
+              <div className="sr-footer-logo-box">
+                SvaNiti Policy Research Center
+              </div>
+            </a>
             <div className="sr-footer-social">
               <a 
                 href="https://www.linkedin.com/company/svaniti-policy-research-center/" 
