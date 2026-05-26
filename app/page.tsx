@@ -239,33 +239,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="about" className="sr-page sr-about-section">
-        <div className="sr-about-container">
-          {/* Logo Notch */}
-          <div className="sr-card-logo-notch light">
-            <a href="#" className="sr-logo-link">
-              <div className="sr-logo-wrapper">
-                <Image src="/logo.png" alt="SvaNiti Logo" width={60} height={60} />
-              </div>
-            </a>
-          </div>
-          <div className="sr-about-layout">
-            <div className="sr-about-sidebar">
-              <span className="sr-about-label">About</span>
-            </div>
-            <div className="sr-about-main">
-              <h2 className="sr-about-heading">
-                SvaNiti, the coolest<br/>Think-Tank, re-thinking Policy!
-              </h2>
-              <div className="sr-about-footer">
-                <p className="sr-about-description">
-                  In this rapidly evolving world, we need policies and strategies that align with humanity's progress. Shifting from complex research to people-centric policy—that's what we do at SvaNiti.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* SECTION 3: WHAT WE DO */}
       <section id="projects" className="sr-page">
