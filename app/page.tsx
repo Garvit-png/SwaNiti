@@ -34,7 +34,7 @@ export default function Home() {
     }
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1024
-    const cols = isMobile ? 1 : 2
+    const cols = isMobile ? 1 : 3
     const row = Math.floor(index / cols)
     const col = index % cols
     const hRow = Math.floor(hoveredIndex / cols)
@@ -276,7 +276,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
+          <div className="sr-projects-grid relative z-10">
             {projects.map((project, i) => (
               <motion.div
                 key={i}
@@ -300,17 +300,15 @@ export default function Home() {
                 animate={hoveredIndex !== null ? getRotation(i) : "show"}
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                className={`sr-project-card h-full flex flex-col justify-between ${project.organic ? 'organic' : ''} ${project.hoverClass} transition-colors duration-300 relative overflow-hidden`}
+                className={`sr-project-card ${project.organic ? 'organic' : ''} ${project.hoverClass} transition-colors duration-300 relative overflow-hidden`}
                 style={{ 
                   transformStyle: 'preserve-3d',
                   borderLeft: `4px solid ${project.accentColor}`
                 }}
               >
-                <div>
-                  <h3>{project.title}</h3>
-                  <p className="mt-4">{project.desc}</p>
-                </div>
-                <div className="sr-card-learn-more mt-6" style={{ color: project.accentColor }}>
+                <h3>{project.title}</h3>
+                <p>{project.desc}</p>
+                <div className="sr-card-learn-more" style={{ color: project.accentColor }}>
                   <span className="font-semibold">Learn More</span>
                   <div className="sr-arrow-box small" style={{ backgroundColor: project.lightBg }}>
                     <ArrowRight size={16} color={project.accentColor} />
