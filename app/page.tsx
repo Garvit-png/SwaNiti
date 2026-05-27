@@ -14,14 +14,14 @@ export default function Home() {
 
   const testimonials = [
     {
-      quote: "It's need of time that our country needs Creative Economy Ministry. We need initiative and regulations from governement to grow more as industry. SvaNiti is Bang on promoting idea and research on the same.",
-      author: "Sheron (Creative Artist)",
-      org: "Nudge Charcha 2024"
-    },
-    {
       quote: "The idea of SvaNiti is much needed and Aadil has much more clarity on this idea at this initial stage.",
       author: "Jigar Inamdar (Youth Leader & Politician)",
       org: "PBC 2024, Rishihood University."
+    },
+    {
+      quote: "It's need of time that our country needs Creative Economy Ministry. We need initiative and regulations from governement to grow more as industry. SvaNiti is Bang on promoting idea and research on the same.",
+      author: "Sheron (Creative Artist)",
+      org: "Nudge Charcha 2024"
     }
   ]
 
@@ -92,24 +92,21 @@ export default function Home() {
     { img: '/marquee/photo1.jpg' },
     { text: 'Notions', color: 'cyan' },
     { img: '/marquee/photo2.jpg' },
-    { text: 'Inspiration', color: 'cream' },
-    { img: '/marquee/photo1.jpg' },
+    { text: 'Research', color: 'cream' },
   ]
 
   const row2 = [
     { text: "People's Aspiration", color: 'cyan' },
     { img: '/marquee/photo3.jpg' },
     { text: 'Unconventional', color: 'cream' },
-    { text: "People's Aspiration", color: 'cyan' },
-    { img: '/marquee/photo3.jpg' },
+    { text: 'Sync', color: 'cyan' },
   ]
 
   const row3 = [
     { text: 'Non-Partisan', color: 'cream' },
     { img: '/marquee/photo4.jpg' },
     { text: 'Policy', color: 'cyan' },
-    { text: 'Non-Partisan', color: 'cream' },
-    { img: '/marquee/photo4.jpg' },
+    { text: 'Governance', color: 'cream' },
   ]
 
   const projects = [
@@ -160,6 +157,9 @@ export default function Home() {
                   <a key={link.label} href={link.href}>{link.label}</a>
                 ))}
               </nav>
+              <button className="sr-hamburger-btn" aria-label="Menu">
+                //
+              </button>
             </header>
 
             <div className="sr-hero-center">
@@ -455,7 +455,7 @@ export default function Home() {
               I/Office Aadil Belim, Upleta,<br/>
               Rajkot - 360-490, Gujarat, Bharat.<br/>
               <a href="mailto:office@svaniti.in">office@svaniti.in</a><br/>
-              +91 2826 358085
+              +91 2826 358065
             </address>
           </div>
         </div>
