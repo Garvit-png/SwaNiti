@@ -3,7 +3,7 @@
 import { useRef, useState } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { ArrowRight, ArrowUp, ArrowDown } from 'lucide-react'
+import { ArrowRight, ArrowLeft } from 'lucide-react'
 
 export default function Home() {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -361,13 +361,13 @@ export default function Home() {
                     onClick={() => setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
                     className="sr-nav-btn"
                   >
-                    <ArrowUp size={20} />
+                    <ArrowLeft size={20} />
                   </button>
                   <button 
                     onClick={() => setTestimonialIndex((prev) => (prev + 1) % testimonials.length)}
                     className="sr-nav-btn"
                   >
-                    <ArrowDown size={20} />
+                    <ArrowRight size={20} />
                   </button>
                 </div>
               </div>
