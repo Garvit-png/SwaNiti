@@ -259,63 +259,67 @@ export default function Home() {
 
 
       {/* SECTION 3: WHAT WE DO */}
-      <section id="projects" className="sr-page relative overflow-x-hidden">
-        <div className="sr-projects-container" style={{ perspective: '1000px' }}>
-          {/* Section Heading */}
-          <div className="relative w-full mb-8 z-10">
-            {/* Heading Content */}
-            <div className="relative z-10 flex flex-col items-start">
-              {/* Teal Accent Bar */}
-              <div className="w-[40px] h-[3px] bg-[#2D6A6A] rounded-sm mb-3"></div>
-              
-              {/* Text */}
-              <h2 className="flex flex-col text-[2.5rem] md:text-[3.5rem] leading-none tracking-tight m-0">
-                <span style={{ fontWeight: 300, color: '#1a1a1a' }}>What</span>
-                <span style={{ fontWeight: 700, color: '#0D2B2B' }}>We Do</span>
-              </h2>
+      <section id="projects" className="w-full bg-white py-12 md:py-20 overflow-x-hidden relative">
+        <div className="w-full max-w-[1200px] mx-auto px-4 md:px-8">
+          
+          {/* Header Row */}
+          <div className="flex items-end w-full relative z-20">
+            {/* Dark Pill Badge */}
+            <div className="bg-[#0D2B2B] text-white px-5 py-3 rounded-xl font-medium text-[15px] z-30 flex-shrink-0 relative translate-y-[2px]">
+              What We Do
+            </div>
+            
+            {/* Yellow Blob */}
+            <div className="relative bg-[#FEFCE8] h-[48px] rounded-tr-[1.5rem] rounded-br-[1.5rem] rounded-bl-[1.5rem] rounded-tl-none z-10"
+                 style={{ width: '150vw' }}>
+              {/* Concave Notch */}
+              <div className="absolute bottom-full left-0 w-[1.5rem] h-[1.5rem] bg-white rounded-bl-[1.5rem]"></div>
             </div>
           </div>
 
-          <div className="sr-projects-grid relative z-10">
-            {projects.map((project, i) => (
-              <motion.div
-                key={i}
-                initial="hidden"
-                whileInView="show"
-                viewport={{ once: true, amount: 0.2 }}
-                variants={{
-                  hidden: { opacity: 0, y: 80, x: -20, rotate: -2 },
-                  show: {
-                    opacity: 1,
-                    y: 0,
-                    x: 0,
-                    rotate: 0,
-                    transition: {
-                      duration: 0.8,
-                      ease: [0.16, 1, 0.3, 1],
-                      delay: i * 0.1
+          {/* Section Body */}
+          <div className="bg-[#FEFCE8] rounded-[1.5rem] rounded-tl-none p-5 md:p-8 w-full relative z-10 mt-0">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6 relative z-10" style={{ perspective: '1000px' }}>
+              {projects.map((project, i) => (
+                <motion.div
+                  key={i}
+                  initial="hidden"
+                  whileInView="show"
+                  viewport={{ once: true, amount: 0.2 }}
+                  variants={{
+                    hidden: { opacity: 0, y: 80, x: -20, rotate: -2 },
+                    show: {
+                      opacity: 1,
+                      y: 0,
+                      x: 0,
+                      rotate: 0,
+                      transition: {
+                        duration: 0.8,
+                        ease: [0.16, 1, 0.3, 1],
+                        delay: i * 0.1
+                      }
                     }
-                  }
-                }}
-                animate={hoveredIndex !== null ? getRotation(i) : "show"}
-                onMouseEnter={() => setHoveredIndex(i)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className={`sr-project-card ${project.organic ? 'organic' : ''} ${project.hoverClass} transition-colors duration-300 relative overflow-hidden`}
-                style={{ 
-                  transformStyle: 'preserve-3d',
-                  borderLeft: `4px solid ${project.accentColor}`
-                }}
-              >
-                <h3>{project.title}</h3>
-                <p>{project.desc}</p>
-                <div className="sr-card-learn-more" style={{ color: project.accentColor }}>
-                  <span className="font-semibold">Learn More</span>
-                  <div className="sr-arrow-box small" style={{ backgroundColor: project.lightBg }}>
-                    <ArrowRight size={16} color={project.accentColor} />
+                  }}
+                  animate={hoveredIndex !== null ? getRotation(i) : "show"}
+                  onMouseEnter={() => setHoveredIndex(i)}
+                  onMouseLeave={() => setHoveredIndex(null)}
+                  className={`bg-white rounded-[1rem] p-5 ${project.hoverClass} transition-colors duration-300 relative overflow-hidden flex flex-col gap-4 min-h-[350px] shadow-sm hover:shadow-lg`}
+                  style={{ 
+                    transformStyle: 'preserve-3d',
+                    borderLeft: `4px solid ${project.accentColor}`
+                  }}
+                >
+                  <h3 className="text-2xl md:text-[1.8rem] font-light leading-snug" style={{ fontFamily: 'var(--font-lexend)' }}>{project.title}</h3>
+                  <p className="text-[1.05rem] font-light opacity-80 leading-relaxed flex-grow">{project.desc}</p>
+                  <div className="flex items-center gap-3 font-medium text-[1.1rem] mt-auto cursor-pointer" style={{ color: project.accentColor }}>
+                    <span className="font-semibold">Learn More</span>
+                    <div className="w-10 h-10 rounded-lg flex items-center justify-center transition-transform hover:scale-105" style={{ backgroundColor: project.lightBg }}>
+                      <ArrowRight size={18} color={project.accentColor} />
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
