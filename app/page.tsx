@@ -113,20 +113,32 @@ export default function Home() {
   const projects = [
     {
       title: "Sva-Bharat Movement",
-      desc: "Change in Bharat begins with a movement, not just a policy. Sva-Bharat Movement by SvaNiti channels the aspirations of the people, uniting ideas and voices through regional and campus ambassadors to shape a transformative future."
+      desc: "Change in Bharat begins with a movement, not just a policy. Sva-Bharat Movement by SvaNiti channels the aspirations of the people, uniting ideas and voices through regional and campus ambassadors to shape a transformative future.",
+      accentColor: "#2D6A6A",
+      lightBg: "#E1F5EE",
+      hoverClass: "hover:bg-[#2D6A6A]/10"
     },
     {
       title: "Viksit Bharat Darshan Yatra",
-      desc: "Viksit Bharat Darshan Yatra honors the Prime Minister's mission for a Developed India by 2047, emphasizing self-discovery through solo, purposeful, and philosophical journeys, shaping individuals with purpose for Viksit Yuva for Viksit Bharat."
+      desc: "Viksit Bharat Darshan Yatra honors the Prime Minister's mission for a Developed India by 2047, emphasizing self-discovery through solo, purposeful, and philosophical journeys, shaping individuals with purpose for Viksit Yuva for Viksit Bharat.",
+      accentColor: "#E8A838",
+      lightBg: "#FFF3E0",
+      hoverClass: "hover:bg-[#E8A838]/10"
     },
     {
       title: "LifeSite (जीवन-स्थल) Conceptualization",
       desc: "LifeSite originated from a seven-year pilot research project initiated by our founder, aimed at exploring an education system that transcends traditional schools, colleges, and universities, addressing the needs of the current era.",
-      organic: true
+      organic: true,
+      accentColor: "#5B8A3C",
+      lightBg: "#E8F5E9",
+      hoverClass: "hover:bg-[#5B8A3C]/10"
     },
     {
       title: "Notion of Ministry of Creative Economy Affairs",
-      desc: "The creative economy holds the potential to be a powerful multiplier for our economy, unlocking new opportunities in employment, tourism, exports, innovation, and social inclusion. Our proposal to establish a dedicated ministry aims to strengthen initiatives and streamline regulations within this dynamic sector."
+      desc: "The creative economy holds the potential to be a powerful multiplier for our economy, unlocking new opportunities in employment, tourism, exports, innovation, and social inclusion. Our proposal to establish a dedicated ministry aims to strengthen initiatives and streamline regulations within this dynamic sector.",
+      accentColor: "#8B5CF6",
+      lightBg: "#F3E8FF",
+      hoverClass: "hover:bg-[#8B5CF6]/10"
     }
   ]
 
@@ -247,14 +259,20 @@ export default function Home() {
 
 
       {/* SECTION 3: WHAT WE DO */}
-      <section id="projects" className="sr-page">
+      <section id="projects" className="sr-page relative overflow-x-hidden">
         <div className="sr-projects-container" style={{ perspective: '1000px' }}>
-          {/* Section Notch */}
-          <div className="sr-card-logo-notch dark">
-            <span className="sr-notch-label">What We Do</span>
+          {/* Section Badge and Blob */}
+          <div className="relative w-full mb-12 pt-8">
+            {/* The yellow blob: bleeds off top right */}
+            <div className="absolute bottom-4 left-4 w-[120%] h-48 bg-[#FFF9C4] rounded-[2rem] z-0"></div>
+            
+            {/* The dark badge */}
+            <div className="relative z-10 inline-flex bg-[#0b2228] text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl tracking-wide">
+              What We Do
+            </div>
           </div>
 
-          <div className="sr-projects-grid">
+          <div className="sr-projects-grid relative z-10">
             {projects.map((project, i) => (
               <motion.div
                 key={i}
@@ -278,15 +296,18 @@ export default function Home() {
                 animate={hoveredIndex !== null ? getRotation(i) : "show"}
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
-                className={`sr-project-card ${project.organic ? 'organic' : ''}`}
-                style={{ transformStyle: 'preserve-3d' }}
+                className={`sr-project-card ${project.organic ? 'organic' : ''} ${project.hoverClass} transition-colors duration-300 relative overflow-hidden`}
+                style={{ 
+                  transformStyle: 'preserve-3d',
+                  borderLeft: `4px solid ${project.accentColor}`
+                }}
               >
                 <h3>{project.title}</h3>
                 <p>{project.desc}</p>
-                <div className="sr-card-learn-more">
-                  <span>Learn More</span>
-                  <div className="sr-arrow-box small">
-                    <ArrowRight size={16} />
+                <div className="sr-card-learn-more" style={{ color: project.accentColor }}>
+                  <span className="font-semibold">Learn More</span>
+                  <div className="sr-arrow-box small" style={{ backgroundColor: project.lightBg }}>
+                    <ArrowRight size={16} color={project.accentColor} />
                   </div>
                 </div>
               </motion.div>
