@@ -263,14 +263,6 @@ export default function Home() {
         <div className="sr-projects-container" style={{ perspective: '1000px' }}>
           {/* Section Heading */}
           <div className="relative w-full mb-8 z-10">
-            {/* Ghost Number */}
-            <div 
-              className="absolute top-0 right-0 font-black z-0 pointer-events-none select-none"
-              style={{ fontSize: '8rem', color: 'rgba(13, 43, 43, 0.05)', lineHeight: 0.8 }}
-            >
-              02
-            </div>
-            
             {/* Heading Content */}
             <div className="relative z-10 flex flex-col items-start">
               {/* Teal Accent Bar */}
