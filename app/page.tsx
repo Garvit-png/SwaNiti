@@ -9,7 +9,6 @@ export default function Home() {
   const cardRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
   const photoSectionRef = useRef<HTMLDivElement>(null)
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [testimonialIndex, setTestimonialIndex] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -25,31 +24,6 @@ export default function Home() {
       org: "Nudge Charcha 2024"
     }
   ]
-
-  const getRotation = (index: number) => {
-    if (hoveredIndex === null) return { rotateX: 0, rotateY: 0, scale: 1, opacity: 1 }
-
-    if (hoveredIndex === index) {
-      return { rotateX: 0, rotateY: 0, scale: 1.05, opacity: 1, zIndex: 10 }
-    }
-
-    const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1024
-    const cols = isMobile ? 1 : 2
-    const row = Math.floor(index / cols)
-    const col = index % cols
-    const hRow = Math.floor(hoveredIndex / cols)
-    const hCol = hoveredIndex % cols
-
-    const dx = hCol - col
-    const dy = hRow - row
-
-    return {
-      rotateY: dx * 12,
-      rotateX: -dy * 12,
-      scale: 0.96,
-      opacity: 0.5
-    }
-  }
 
   // Scroll tracking for the horizontal section
   const { scrollYProgress } = useScroll({
@@ -114,31 +88,19 @@ export default function Home() {
     {
       title: "Sva-Bharat Movement",
       desc: "Change in Bharat begins with a movement, not just a policy. Sva-Bharat Movement by SvaNiti channels the aspirations of the people, uniting ideas and voices through regional and campus ambassadors to shape a transformative future.",
-      accentColor: "#2D6A6A",
-      lightBg: "#E1F5EE",
-      hoverClass: "hover:bg-[#2D6A6A]/10"
     },
     {
       title: "Viksit Bharat Darshan Yatra",
       desc: "Viksit Bharat Darshan Yatra honors the Prime Minister's mission for a Developed India by 2047, emphasizing self-discovery through solo, purposeful, and philosophical journeys, shaping individuals with purpose for Viksit Yuva for Viksit Bharat.",
-      accentColor: "#E8A838",
-      lightBg: "#FFF3E0",
-      hoverClass: "hover:bg-[#E8A838]/10"
     },
     {
       title: "LifeSite (जीवन-स्थल) Conceptualization",
       desc: "LifeSite originated from a seven-year pilot research project initiated by our founder, aimed at exploring an education system that transcends traditional schools, colleges, and universities, addressing the needs of the current era.",
       organic: true,
-      accentColor: "#5B8A3C",
-      lightBg: "#E8F5E9",
-      hoverClass: "hover:bg-[#5B8A3C]/10"
     },
     {
       title: "Notion of Ministry of Creative Economy Affairs",
       desc: "The creative economy holds the potential to be a powerful multiplier for our economy, unlocking new opportunities in employment, tourism, exports, innovation, and social inclusion. Our proposal to establish a dedicated ministry aims to strengthen initiatives and streamline regulations within this dynamic sector.",
-      accentColor: "#8B5CF6",
-      lightBg: "#F3E8FF",
-      hoverClass: "hover:bg-[#8B5CF6]/10"
     }
   ]
 
@@ -297,21 +259,20 @@ export default function Home() {
                     }
                   }
                 }}
-                animate={hoveredIndex !== null ? getRotation(i) : "show"}
-                onMouseEnter={() => setHoveredIndex(i)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                className={`sr-project-card ${project.organic ? 'organic' : ''} ${project.hoverClass} transition-colors duration-300 relative overflow-hidden`}
-                style={{ 
-                  transformStyle: 'preserve-3d',
-                  borderLeft: `4px solid ${project.accentColor}`
+                whileHover={{
+                  y: -10,
+                  scale: 1.03,
+                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.08)",
+                  transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
                 }}
+                className={`sr-project-card ${project.organic ? 'organic' : ''} transition-colors duration-300 relative overflow-hidden`}
               >
                 <h3>{project.title}</h3>
                 <p>{project.desc}</p>
-                <div className="sr-card-learn-more" style={{ color: project.accentColor }}>
+                <div className="sr-card-learn-more">
                   <span className="font-semibold">Learn More</span>
-                  <div className="sr-arrow-box small" style={{ backgroundColor: project.lightBg }}>
-                    <ArrowRight size={16} color={project.accentColor} />
+                  <div className="sr-arrow-box small">
+                    <ArrowRight size={16} />
                   </div>
                 </div>
               </motion.div>

@@ -360,7 +360,7 @@ a {
 
 .sr-projects-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
   margin-top: 40px;
 }
@@ -373,11 +373,9 @@ a {
   flex-direction: column;
   gap: 20px;
   transition: box-shadow 0.3s ease;
-  min-height: 400px;
 }
 
 .sr-project-card:hover {
-  transform: translateY(-10px);
   box-shadow: 0 20px 40px rgba(0,0,0,0.05);
 }
 
@@ -404,12 +402,15 @@ a {
   font-size: 0.9rem;
   justify-content: flex-end;
   cursor: pointer;
+  color: var(--sr-ink);
 }
 
 .sr-arrow-box.small {
   width: 36px;
   height: 36px;
   border-radius: 10px;
+  background: #c8fbfb;
+  color: var(--sr-ink);
 }
 
 /* VISION SECTION */
