@@ -312,6 +312,7 @@ a {
 .sr-tag {
   font-family: var(--font-lexend);
   font-size: clamp(2.2rem, 5vw, 4rem); 
+  font-weight: 400;
   padding: 24px 60px;
   border-radius: 16px;
   color: var(--sr-ink);
