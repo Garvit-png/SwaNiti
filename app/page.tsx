@@ -11,6 +11,7 @@ export default function Home() {
   const photoSectionRef = useRef<HTMLDivElement>(null)
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [testimonialIndex, setTestimonialIndex] = useState(0)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const testimonials = [
     {
@@ -157,7 +158,11 @@ export default function Home() {
                   <a key={link.label} href={link.href}>{link.label}</a>
                 ))}
               </nav>
-              <button className="sr-hamburger-btn" aria-label="Menu">
+              <button 
+                className="sr-hamburger-btn" 
+                aria-label="Menu"
+                onClick={() => setMenuOpen(true)}
+              >
                 //
               </button>
             </header>
@@ -464,6 +469,83 @@ export default function Home() {
           <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center</p>
         </div>
       </footer>
+
+      {/* CREATIVE MOBILE MENU OVERLAY */}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'tween', duration: 0.3, ease: 'easeOut' }}
+            className="sr-mobile-menu-overlay"
+          >
+            {/* Top Bar */}
+            <div className="sr-menu-overlay-header">
+              <div className="sr-menu-logo-notch">
+                <Image src="/logo.png" alt="SvaNiti Logo" width={44} height={44} />
+              </div>
+              <div className="sr-menu-brand">
+                <strong>SvaNiti Policy Research Center</strong>
+              </div>
+              <button 
+                className="sr-menu-close-btn"
+                onClick={() => setMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                X
+              </button>
+            </div>
+
+            {/* Nav Links */}
+            <nav className="sr-menu-nav-links">
+              {[
+                { num: '01', label: 'About', href: '#about' },
+                { num: '02', label: 'Projects', href: '#projects' },
+                { num: '03', label: 'Insights', href: '#' },
+                { num: '04', label: 'Governance', href: '#' },
+              ].map((item, index) => (
+                <motion.a
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 + index * 0.05 }}
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className="sr-menu-nav-item"
+                >
+                  <span className="sr-nav-num">{item.num}</span>
+                  <span className="sr-nav-text">{item.label}</span>
+                  <span className="sr-nav-arrow"><ArrowRight size={28} /></span>
+                </motion.a>
+              ))}
+            </nav>
+
+            {/* Bottom Actions */}
+            <div className="sr-menu-footer">
+              <a className="sr-menu-join-btn" href="#" onClick={() => setMenuOpen(false)}>
+                Join Our Movement
+                <span className="sr-menu-arrow-box">
+                  <ArrowRight size={20} />
+                </span>
+              </a>
+              <div className="sr-menu-contact-info">
+                <span>office@svaniti.in</span>
+                <span className="sr-divider-pipe">|</span>
+                <span>+91 90675 47325</span>
+              </div>
+              <a 
+                href="https://www.linkedin.com/company/svaniti-policy-research-center/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="sr-menu-social-link"
+              >
+                LinkedIn
+              </a>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </main>
   )
 }
