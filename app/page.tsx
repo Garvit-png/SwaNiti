@@ -5,29 +5,6 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import { ArrowRight, ArrowLeft } from 'lucide-react'
 
-const SectionHeader = ({ title, color, className = "", notchBg = "bg-white" }: { title: string, color: string, className?: string, notchBg?: string }) => {
-  return (
-    <div className={`relative w-full mb-8 md:mb-12 flex h-20 md:h-28 z-20 pt-4 ${className}`}>
-      {/* The colored blob with SVG mask for the notch */}
-      <div 
-        className="absolute bottom-0 left-[2rem] md:left-[3rem] right-[-50vw] h-full z-0" 
-        style={{ 
-          backgroundColor: color,
-          borderTopLeftRadius: '2rem',
-          WebkitMaskImage: 'radial-gradient(circle 1.5rem at 0 100%, transparent 1.5rem, black 1.5rem)',
-          maskImage: 'radial-gradient(circle 1.5rem at 0 100%, transparent 1.5rem, black 1.5rem)'
-        }}
-      >
-      </div>
-      
-      {/* The dark badge */}
-      <div className="relative z-10 flex self-end bg-[#0D2B2B] text-[#CCFBF1] px-5 py-2 md:px-6 md:py-3 rounded-xl font-medium text-[14px] md:text-[15px] shadow-sm tracking-wide" style={{ borderBottomRightRadius: '0' }}>
-        {title}
-      </div>
-    </div>
-  );
-};
-
 export default function Home() {
   const cardRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -236,9 +213,8 @@ export default function Home() {
       </section>
 
       {/* SECTION 2: SCROLL REACTIVE SECTION */}
-      <section ref={containerRef} className="sr-scroll-section sr-full-height relative overflow-x-hidden pt-12">
-        <SectionHeader title="Our Values" color="#FEFCE8" className="px-4 md:px-12" />
-        <div className="sr-scroll-container -mt-8 md:-mt-12">
+      <section ref={containerRef} className="sr-scroll-section sr-full-height">
+        <div className="sr-scroll-container">
           {/* Row 1 */}
           <motion.div style={{ x: xLeft }} className="sr-marquee-row">
             {row1.map((item, i) => (
@@ -283,9 +259,19 @@ export default function Home() {
 
 
       {/* SECTION 3: WHAT WE DO */}
-      <section id="projects" className="sr-page relative overflow-x-hidden pt-12">
-        <SectionHeader title="What We Do" color="#FEFCE8" className="md:ml-4" />
-        <div className="sr-projects-container -mt-10" style={{ perspective: '1000px' }}>
+      <section id="projects" className="sr-page relative overflow-x-hidden">
+        <div className="sr-projects-container" style={{ perspective: '1000px' }}>
+          {/* Section Badge and Blob */}
+          <div className="relative w-full mb-12 pt-8">
+            {/* The yellow blob: bleeds off top right */}
+            <div className="absolute bottom-4 left-4 w-[120%] h-48 bg-[#FFF9C4] rounded-[2rem] z-0"></div>
+            
+            {/* The dark badge */}
+            <div className="relative z-10 inline-flex bg-[#0b2228] text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl tracking-wide">
+              What We Do
+            </div>
+          </div>
+
           <div className="sr-projects-grid relative z-10">
             {projects.map((project, i) => (
               <motion.div
@@ -331,9 +317,11 @@ export default function Home() {
       </section>
 
       {/* SECTION 4: OUR VISION (Preview) */}
-      <section className="sr-page relative overflow-x-hidden pt-12">
-        <SectionHeader title="Our Vision" color="#F3E8FF" />
-        <div className="sr-vision-container sr-animate-in !mt-0" style={{ paddingTop: '40px' }}>
+      <section className="sr-page">
+        <div className="sr-vision-container sr-animate-in">
+          <div className="sr-card-logo-notch dark">
+            <span className="sr-notch-label">Our Vision</span>
+          </div>
           <div className="sr-vision-content">
             <div className="sr-vision-main">
               <h2>Inspiring Aspirations,<br />Designing Policy,<br />Building Nation.</h2>
@@ -371,9 +359,11 @@ export default function Home() {
             {/* Testimonial Content Overlay */}
             <motion.div 
               style={{ opacity: testimonialOpacity }}
-              className="sr-testimonial-overlay-content relative overflow-x-hidden"
+              className="sr-testimonial-overlay-content"
             >
-              <SectionHeader title="Testimonials" color="#E0F2FE" />
+              <div className="sr-testimonial-header">
+                <span>What people tell about us?</span>
+              </div>
               
               <div className="sr-testimonial-slider-container">
                 <AnimatePresence mode="wait">
@@ -413,9 +403,11 @@ export default function Home() {
       </section>
 
       {/* SECTION 6: LET'S TALK */}
-      <section id="contact" className="sr-page sr-footer-section relative overflow-x-hidden pt-12">
-        <SectionHeader title="Get In Touch" color="#DCFCE7" className="md:px-10" />
-        <div className="sr-footer-container -mt-4">
+      <section id="contact" className="sr-page sr-footer-section">
+        <div className="sr-footer-container">
+          <div className="sr-card-logo-notch dark footer-notch">
+            <span className="sr-notch-label">Let's Talk, What you got!</span>
+          </div>
           <div className="sr-footer-content">
             <h3>Contact us for any notion for nation</h3>
             

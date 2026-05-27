@@ -366,14 +366,13 @@ a {
 
 .sr-project-card {
   background: var(--sr-white);
-  padding: 24px;
-  border-radius: 16px;
+  padding: 40px;
+  border-radius: 30px;
   display: flex;
   flex-direction: column;
   gap: 20px;
   transition: box-shadow 0.3s ease;
   min-height: 400px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 
 .sr-project-card:hover {
@@ -580,10 +579,10 @@ a {
   .sr-marquee-img { width: 80px; height: 80px; }
 
   /* Projects */
-  .sr-projects-grid { gap: 16px; margin-top: 24px; }
-  .sr-projects-container { padding: 60px 20px 20px; border-radius: 20px; }
-  .sr-project-card { padding: 24px; border-radius: 16px; gap: 16px; }
-  .sr-project-card h3 { font-size: 1.3rem; font-weight: 300; }
+  .sr-projects-grid { grid-template-columns: 1fr; }
+  .sr-projects-container { padding: 70px 20px 20px; border-radius: 24px; }
+  .sr-project-card { padding: 28px; min-height: auto; border-radius: 20px; }
+  .sr-project-card h3 { font-size: 1.5rem; font-weight: 300; }
   .sr-project-card p { font-size: 0.95rem; }
 
   /* Vision */
