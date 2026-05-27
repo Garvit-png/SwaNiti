@@ -261,14 +261,26 @@ export default function Home() {
       {/* SECTION 3: WHAT WE DO */}
       <section id="projects" className="sr-page relative overflow-x-hidden">
         <div className="sr-projects-container" style={{ perspective: '1000px' }}>
-          {/* Section Badge and Blob */}
-          <div className="relative w-full mb-12 pt-8">
-            {/* The yellow blob: bleeds off top right */}
-            <div className="absolute bottom-4 left-4 w-[120%] h-48 bg-[#FFF9C4] rounded-[2rem] z-0"></div>
+          {/* Section Heading */}
+          <div className="relative w-full mb-8 z-10">
+            {/* Ghost Number */}
+            <div 
+              className="absolute top-0 right-0 font-black z-0 pointer-events-none select-none"
+              style={{ fontSize: '8rem', color: 'rgba(13, 43, 43, 0.05)', lineHeight: 0.8 }}
+            >
+              02
+            </div>
             
-            {/* The dark badge */}
-            <div className="relative z-10 inline-flex bg-[#0b2228] text-white px-8 py-3 rounded-full font-bold text-lg shadow-xl tracking-wide">
-              What We Do
+            {/* Heading Content */}
+            <div className="relative z-10 flex flex-col items-start">
+              {/* Teal Accent Bar */}
+              <div className="w-[40px] h-[3px] bg-[#2D6A6A] rounded-sm mb-3"></div>
+              
+              {/* Text */}
+              <h2 className="flex flex-col text-[2.5rem] md:text-[3.5rem] leading-none tracking-tight m-0">
+                <span style={{ fontWeight: 300, color: '#1a1a1a' }}>What</span>
+                <span style={{ fontWeight: 700, color: '#0D2B2B' }}>We Do</span>
+              </h2>
             </div>
           </div>
 
