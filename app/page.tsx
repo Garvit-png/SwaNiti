@@ -34,7 +34,7 @@ export default function Home() {
     }
 
     const isMobile = typeof window !== 'undefined' && window.innerWidth <= 1024
-    const cols = isMobile ? 1 : 3
+    const cols = isMobile ? 1 : 2
     const row = Math.floor(index / cols)
     const col = index % cols
     const hRow = Math.floor(hoveredIndex / cols)
