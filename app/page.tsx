@@ -259,24 +259,14 @@ export default function Home() {
 
 
       {/* SECTION 3: WHAT WE DO */}
-      <section id="projects" className="sr-page relative overflow-x-hidden">
-        <div className="sr-projects-container" style={{ perspective: '1000px' }}>
-          {/* Section Heading */}
-          <div className="relative w-full mb-8 z-10">
-            {/* Heading Content */}
-            <div className="relative z-10 flex flex-col items-start">
-              {/* Teal Accent Bar */}
-              <div className="w-[40px] h-[3px] bg-[#2D6A6A] rounded-sm mb-3"></div>
-              
-              {/* Text */}
-              <h2 className="flex flex-col text-[2.5rem] md:text-[3.5rem] leading-none tracking-tight m-0">
-                <span style={{ fontWeight: 300, color: '#1a1a1a' }}>What</span>
-                <span style={{ fontWeight: 700, color: '#0D2B2B' }}>We Do</span>
-              </h2>
-            </div>
-          </div>
+      <section id="projects" className="sr-page relative overflow-x-hidden" style={{ background: '#ffffff' }}>
+        {/* Header row: badge + blob */}
+        <div className="sr-wwd-header-row">
+          <div className="sr-wwd-badge">What We Do</div>
+          <div className="sr-wwd-blob"></div>
+        </div>
 
-          <div className="sr-projects-grid relative z-10">
+        <div className="sr-projects-container" style={{ borderTopLeftRadius: 0 }}>
             {projects.map((project, i) => (
               <motion.div
                 key={i}
