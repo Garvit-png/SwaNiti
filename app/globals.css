@@ -71,10 +71,9 @@ a {
   --m-y: 50%;
   
   background: 
-    radial-gradient(circle at calc(var(--m-x, 50%) * 0.2 + 10%) calc(var(--m-y, 50%) * 0.2 + 20%), rgba(244, 255, 196, 0.85) 0%, transparent 65%), /* warm yellow-green */
-    radial-gradient(circle at calc(100% - var(--m-x, 50%) * 0.2 - 10%) calc(50% - var(--m-y, 50%) * 0.2), rgba(197, 253, 244, 0.8) 0%, transparent 65%), /* cyan/light teal */
-    radial-gradient(circle at 50% 100%, rgba(214, 240, 255, 0.95) 0%, transparent 75%), /* soft blue */
-    #dbf9f6; /* airy base */
+    radial-gradient(circle at calc(var(--m-x, 50%) * 0.15) calc(var(--m-y, 50%) * 0.2 + 10%), rgba(255, 240, 160, 0.8) 0%, transparent 50%), /* left warm yellow */
+    radial-gradient(circle at 50% 100%, rgba(190, 240, 255, 0.8) 0%, transparent 75%), /* soft blue bottom glow */
+    #c8fbfb; /* strong cyan base for more blue */
     
   transition: --m-x 1s cubic-bezier(0.16, 1, 0.3, 1), --m-y 1s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: --m-x, --m-y;
@@ -191,9 +190,9 @@ a {
 }
 
 .sr-hero-center h1 {
-  font-family: var(--font-lexend);
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(2.5rem, 7vw, 5.2rem);
-  font-weight: 200;
+  font-weight: 300;
   line-height: 1.05;
   color: var(--sr-ink);
   letter-spacing: -0.04em;
