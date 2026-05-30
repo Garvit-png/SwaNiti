@@ -850,9 +850,13 @@ a {
     padding: 20px 20px 30px;
     gap: 20px;
   }
+  .sr-test-card-wrapper {
+    min-height: 380px;
+  }
   .sr-testimonial-main-card {
     padding: 28px 24px;
     border-radius: 20px;
+    min-height: 380px;
   }
   .sr-main-quote {
     font-size: 1.05rem;
