@@ -298,72 +298,58 @@ export default function Home() {
         </div>
       </section>
 
-      {/* SECTION 5: TEAM PHOTO REVEAL & TESTIMONIALS */}
-      <section ref={photoSectionRef} className="sr-photo-reveal-section">
-        <div className="sr-photo-reveal-sticky">
-          <motion.div 
-            style={{ 
-              scale: photoScale,
-              opacity: photoOpacity,
-              y: photoY
-            }}
-            className="sr-photo-reveal-wrapper"
-          >
-            <Image
-              src="/team-final.png"
-              alt="SvaNiti Team"
-              fill
-              className="sr-photo-reveal-img"
-            />
-            {/* Dark Overlay - now tied to testimonial appearance */}
-            <motion.div 
-              style={{ opacity: testimonialOpacity }}
-              className="sr-photo-overlay"
-            ></motion.div>
+      {/* SECTION 5: TEAM PHOTO */}
+      <section ref={photoSectionRef} className="sr-photo-section">
+        <div className="sr-photo-wrapper">
+          <Image
+            src="/team-final.png"
+            alt="SvaNiti Team"
+            width={1920}
+            height={1080}
+            className="sr-team-photo"
+          />
+        </div>
+      </section>
 
-            {/* Testimonial Content Overlay */}
-            <motion.div 
-              style={{ opacity: testimonialOpacity }}
-              className="sr-testimonial-overlay-content"
-            >
-              <div className="sr-testimonial-header">
-                <span>What people tell about us?</span>
-              </div>
-              
-              <div className="sr-testimonial-slider-container">
-                <AnimatePresence mode="wait">
-                  <motion.div 
-                    key={testimonialIndex}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: 20 }}
-                    className="sr-testimonial-main-card"
-                  >
-                    <p className="sr-main-quote">"{testimonials[testimonialIndex].quote}"</p>
-                    <div className="sr-main-author">
-                      <strong>{testimonials[testimonialIndex].author}</strong>
-                      <span>{testimonials[testimonialIndex].org}</span>
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-
-                <div className="sr-testimonial-nav">
-                  <button 
-                    onClick={() => setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
-                    className="sr-nav-btn"
-                  >
-                    <ArrowLeft size={20} />
-                  </button>
-                  <button 
-                    onClick={() => setTestimonialIndex((prev) => (prev + 1) % testimonials.length)}
-                    className="sr-nav-btn"
-                  >
-                    <ArrowRight size={20} />
-                  </button>
+      {/* SECTION 5.5: TESTIMONIALS */}
+      <section className="sr-testimonial-section">
+        <div className="sr-testimonial-container">
+          <div className="sr-testimonial-header">
+            <span>What people tell about us?</span>
+          </div>
+          
+          <div className="sr-testimonial-slider-container">
+            <AnimatePresence mode="wait">
+              <motion.div 
+                key={testimonialIndex}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 20 }}
+                className="sr-testimonial-main-card"
+              >
+                <p className="sr-main-quote">"{testimonials[testimonialIndex].quote}"</p>
+                <div className="sr-main-author">
+                  <strong>{testimonials[testimonialIndex].author}</strong>
+                  <span>{testimonials[testimonialIndex].org}</span>
                 </div>
-              </div>
-            </motion.div>
-          </motion.div>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="sr-testimonial-nav">
+              <button 
+                onClick={() => setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
+                className="sr-nav-btn"
+              >
+                <ArrowLeft size={20} />
+              </button>
+              <button 
+                onClick={() => setTestimonialIndex((prev) => (prev + 1) % testimonials.length)}
+                className="sr-nav-btn"
+              >
+                <ArrowRight size={20} />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 
