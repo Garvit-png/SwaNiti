@@ -734,6 +734,12 @@ a {
   gap: 30px;
 }
 
+.sr-test-card-wrapper {
+  width: 100%;
+  min-height: 280px;
+  position: relative;
+}
+
 .sr-testimonial-main-card {
   background: var(--sr-white);
   padding: 50px;

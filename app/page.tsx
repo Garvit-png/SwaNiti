@@ -329,25 +329,27 @@ export default function Home() {
 
           {/* Right Side: Quote card + nav */}
           <div className="sr-test-right">
-            <AnimatePresence mode="wait">
-              <motion.div 
-                key={testimonialIndex}
-                initial={{ opacity: 0, y: 30, scale: 0.97 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: -30, scale: 0.97 }}
-                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-                className="sr-testimonial-main-card"
-              >
-                <p className="sr-main-quote">&ldquo;{testimonials[testimonialIndex].quote}&rdquo;</p>
-                <div className="sr-test-author-row">
-                  <div className="sr-test-accent-bar"></div>
-                  <div className="sr-main-author">
-                    <strong>{testimonials[testimonialIndex].author}</strong>
-                    <span>{testimonials[testimonialIndex].org}</span>
+            <div className="sr-test-card-wrapper">
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={testimonialIndex}
+                  initial={{ opacity: 0, y: 30, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -30, scale: 0.97 }}
+                  transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                  className="sr-testimonial-main-card"
+                >
+                  <p className="sr-main-quote">&ldquo;{testimonials[testimonialIndex].quote}&rdquo;</p>
+                  <div className="sr-test-author-row">
+                    <div className="sr-test-accent-bar"></div>
+                    <div className="sr-main-author">
+                      <strong>{testimonials[testimonialIndex].author}</strong>
+                      <span>{testimonials[testimonialIndex].org}</span>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                </motion.div>
+              </AnimatePresence>
+            </div>
 
             <div className="sr-testimonial-nav">
               <button 
