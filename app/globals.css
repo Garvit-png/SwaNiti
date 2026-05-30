@@ -625,6 +625,7 @@ a {
   height: auto;
   display: block;
   object-fit: contain;
+  margin-top: -4%;
 }
 
 @media (max-width: 1024px) {
