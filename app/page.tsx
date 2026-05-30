@@ -314,23 +314,37 @@ export default function Home() {
       {/* SECTION 5.5: TESTIMONIALS */}
       <section className="sr-testimonial-section">
         <div className="sr-testimonial-container">
-          <div className="sr-testimonial-header">
-            <span>What people tell about us?</span>
+          {/* Left Side: Big decorative quote + heading */}
+          <div className="sr-test-left">
+            <div className="sr-test-big-quote">&ldquo;</div>
+            <h2 className="sr-test-heading">
+              What people<br />tell about us
+            </h2>
+            <div className="sr-test-counter">
+              <span className="sr-test-current">{String(testimonialIndex + 1).padStart(2, '0')}</span>
+              <span className="sr-test-divider">/</span>
+              <span className="sr-test-total">{String(testimonials.length).padStart(2, '0')}</span>
+            </div>
           </div>
-          
-          <div className="sr-testimonial-slider-container">
+
+          {/* Right Side: Quote card + nav */}
+          <div className="sr-test-right">
             <AnimatePresence mode="wait">
               <motion.div 
                 key={testimonialIndex}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 20 }}
+                initial={{ opacity: 0, y: 30, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -30, scale: 0.97 }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 className="sr-testimonial-main-card"
               >
-                <p className="sr-main-quote">"{testimonials[testimonialIndex].quote}"</p>
-                <div className="sr-main-author">
-                  <strong>{testimonials[testimonialIndex].author}</strong>
-                  <span>{testimonials[testimonialIndex].org}</span>
+                <p className="sr-main-quote">&ldquo;{testimonials[testimonialIndex].quote}&rdquo;</p>
+                <div className="sr-test-author-row">
+                  <div className="sr-test-accent-bar"></div>
+                  <div className="sr-main-author">
+                    <strong>{testimonials[testimonialIndex].author}</strong>
+                    <span>{testimonials[testimonialIndex].org}</span>
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
@@ -339,12 +353,14 @@ export default function Home() {
               <button 
                 onClick={() => setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
                 className="sr-nav-btn"
+                aria-label="Previous testimonial"
               >
                 <ArrowLeft size={20} />
               </button>
               <button 
                 onClick={() => setTestimonialIndex((prev) => (prev + 1) % testimonials.length)}
                 className="sr-nav-btn"
+                aria-label="Next testimonial"
               >
                 <ArrowRight size={20} />
               </button>
