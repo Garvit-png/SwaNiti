@@ -451,7 +451,7 @@ export default function Home() {
             {/* Nav Links */}
             <nav className="sr-menu-nav-links">
               {[
-                { num: '01', label: 'About', href: '#about' },
+                { num: '01', label: 'About', href: '/about' },
                 { num: '02', label: 'Projects', href: '#projects' },
                 { num: '03', label: 'Insights', href: '#' },
                 { num: '04', label: 'Governance', href: '#' },
