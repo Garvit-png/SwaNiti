@@ -1,0 +1,200 @@
+/* ABOUT PAGE SPECIFIC CSS */
+
+.sr-about-hero-card {
+  flex: none;
+  position: relative;
+  border-radius: var(--radius-xl);
+  
+  background: #c8fbfb;
+    
+  display: flex;
+  flex-direction: column;
+  padding: 30px 60px 60px 60px;
+  overflow: hidden;
+  justify-content: space-between;
+  max-height: 70vh;
+  height: 70vh;
+}
+
+.sr-about-hero-center {
+  margin-top: 60px;
+  max-width: 900px;
+}
+
+.sr-about-hero-center h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--sr-ink);
+}
+
+.sr-about-hero-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  padding-top: 30px;
+}
+
+.sr-about-label {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.sr-about-desc {
+  max-width: 600px;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* STORY SECTION */
+.sr-story-wrapper {
+  margin: 20px auto 60px auto;
+  max-width: 1500px;
+  width: 100%;
+}
+
+.sr-story-notch-outer {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  background: var(--sr-white);
+  padding: 12px 20px;
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 20px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sr-story-notch-outer::before,
+.sr-story-notch-outer::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+}
+
+.sr-story-notch-outer::before {
+  top: 0;
+  right: -20px;
+  border-top-left-radius: 20px;
+  box-shadow: -10px -10px 0 10px var(--sr-white);
+}
+
+.sr-story-notch-outer::after {
+  bottom: -20px;
+  left: 0;
+  border-top-left-radius: 20px;
+  box-shadow: -10px -10px 0 10px var(--sr-white);
+}
+
+.sr-story-notch-inner {
+  background: var(--sr-ink);
+  color: var(--sr-white);
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.sr-story-container {
+  background: #c8fbfb;
+  border-radius: 40px;
+  padding: 100px 80px 80px 80px;
+  display: flex;
+  gap: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sr-story-left {
+  flex: 0 0 300px;
+}
+
+.sr-story-left h2 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--sr-ink);
+}
+
+.sr-story-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.sr-story-right p {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--sr-ink);
+  opacity: 0.85;
+}
+
+.sr-story-right strong {
+  font-weight: 600;
+  opacity: 1;
+}
+
+@media (max-width: 1024px) {
+  .sr-about-hero-card {
+    padding: 20px 20px 40px 20px;
+    height: auto;
+    max-height: none;
+  }
+  .sr-about-hero-center h1 {
+    font-size: 2.5rem;
+  }
+  .sr-about-hero-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+  }
+  .sr-story-container {
+    flex-direction: column;
+    padding: 80px 20px 40px 20px;
+    gap: 40px;
+    border-radius: 24px;
+  }
+  .sr-story-notch-outer {
+    border-top-left-radius: 24px;
+    border-bottom-right-radius: 12px;
+    padding: 10px 16px;
+  }
+  .sr-story-notch-outer::before,
+  .sr-story-notch-outer::after {
+    width: 12px;
+    height: 12px;
+  }
+  .sr-story-notch-outer::before {
+    right: -12px;
+    border-top-left-radius: 12px;
+    box-shadow: -6px -6px 0 6px var(--sr-white);
+  }
+  .sr-story-notch-outer::after {
+    bottom: -12px;
+    border-top-left-radius: 12px;
+    box-shadow: -6px -6px 0 6px var(--sr-white);
+  }
+  .sr-story-notch-inner {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
+  .sr-story-left {
+    flex: auto;
+  }
+  .sr-story-left h2 {
+    font-size: 2.5rem;
+  }
+}

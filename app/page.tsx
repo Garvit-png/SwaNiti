@@ -3,7 +3,9 @@
 import { useRef, useState } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
+import Link from 'next/link'
 import { ArrowRight, ArrowLeft } from 'lucide-react'
+import Navbar from './components/Navbar'
 
 export default function Home() {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -55,12 +57,6 @@ export default function Home() {
     cardRef.current.style.setProperty('--m-y', `${y}%`)
   }
 
-  const navLinks = [
-    { label: 'About', href: '#about' },
-    { label: 'Projects', href: '#about' },
-    { label: 'Insights', href: '#' },
-    { label: 'Governance', href: '#' },
-  ]
 
   const row1 = [
     { text: 'Inspiration', color: 'cream' },
@@ -114,32 +110,7 @@ export default function Home() {
             onMouseMove={handleMouseMove}
             className="sr-hero-card sr-animate-in"
           >
-            {/* Logo Notch */}
-            <div className="sr-card-logo-notch">
-              <a href="#" className="sr-logo-link">
-                <div className="sr-logo-wrapper">
-                  <Image src="/logo.png" alt="SvaNiti Logo" width={80} height={80} priority />
-                </div>
-              </a>
-            </div>
-
-            <header className="sr-card-nav">
-              <a className="sr-card-brand" href="#top" aria-label="SvaNiti home">
-                <strong>SvaNiti Policy Research Center</strong>
-              </a>
-              <nav className="sr-card-links">
-                {navLinks.map((link) => (
-                  <a key={link.label} href={link.href}>{link.label}</a>
-                ))}
-              </nav>
-              <button 
-                className="sr-hamburger-btn" 
-                aria-label="Menu"
-                onClick={() => setMenuOpen(true)}
-              >
-                //
-              </button>
-            </header>
+            <Navbar activePath="/" onMenuClick={() => setMenuOpen(true)} />
 
             <div className="sr-hero-center">
               <h1>
@@ -284,8 +255,8 @@ export default function Home() {
       {/* SECTION 4: OUR VISION (Preview) */}
       <section className="sr-page">
         <div className="sr-vision-container sr-animate-in">
-          <div className="sr-card-logo-notch dark">
-            <span className="sr-notch-label">Our Vision</span>
+          <div className="sr-vision-notch-outer">
+            <div className="sr-vision-notch-inner">Our Vision</div>
           </div>
           <div className="sr-vision-content">
             <div className="sr-vision-main">

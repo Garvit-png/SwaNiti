@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import './about.css';
+
 @property --m-x {
   syntax: '<percentage>';
   inherits: false;
@@ -179,6 +181,10 @@ a {
   background: #fdf5e6; /* Soft cream beige */
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(11, 34, 40, 0.1);
+}
+
+.sr-card-links a.active {
+  background: var(--sr-yellow-light);
 }
 
 /* HERO CONTENT */
@@ -414,6 +420,54 @@ a {
 }
 
 /* VISION SECTION */
+
+.sr-vision-notch-outer {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  background: var(--sr-white);
+  padding: 12px 20px;
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 20px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sr-vision-notch-outer::before,
+.sr-vision-notch-outer::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+}
+
+.sr-vision-notch-outer::before {
+  top: 0;
+  right: -20px;
+  border-top-left-radius: 20px;
+  box-shadow: -10px -10px 0 10px var(--sr-white);
+}
+
+.sr-vision-notch-outer::after {
+  bottom: -20px;
+  left: 0;
+  border-top-left-radius: 20px;
+  box-shadow: -10px -10px 0 10px var(--sr-white);
+}
+
+.sr-vision-notch-inner {
+  background: var(--sr-ink);
+  color: var(--sr-white);
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
 .sr-vision-container {
   width: 100%;
   min-height: 600px; /* Increased for dramatic effect */
@@ -588,6 +642,31 @@ a {
   .sr-project-card p { font-size: 0.95rem; }
 
   /* Vision */
+  .sr-vision-notch-outer {
+    border-top-left-radius: 24px;
+    border-bottom-right-radius: 12px;
+    padding: 10px 16px;
+  }
+  .sr-vision-notch-outer::before,
+  .sr-vision-notch-outer::after {
+    width: 12px;
+    height: 12px;
+  }
+  .sr-vision-notch-outer::before {
+    right: -12px;
+    border-top-left-radius: 12px;
+    box-shadow: -6px -6px 0 6px var(--sr-white);
+  }
+  .sr-vision-notch-outer::after {
+    bottom: -12px;
+    border-top-left-radius: 12px;
+    box-shadow: -6px -6px 0 6px var(--sr-white);
+  }
+  .sr-vision-notch-inner {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
   .sr-vision-container { min-height: auto; border-radius: 24px; }
   .sr-vision-content {
     flex-direction: column;
@@ -1395,6 +1474,31 @@ a {
   .sr-arrow-box.small { width: 30px; height: 30px; border-radius: 8px; }
 
   /* Vision */
+  .sr-vision-notch-outer {
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 10px;
+    padding: 8px 14px;
+  }
+  .sr-vision-notch-outer::before,
+  .sr-vision-notch-outer::after {
+    width: 10px;
+    height: 10px;
+  }
+  .sr-vision-notch-outer::before {
+    right: -10px;
+    border-top-left-radius: 10px;
+    box-shadow: -5px -5px 0 5px var(--sr-white);
+  }
+  .sr-vision-notch-outer::after {
+    bottom: -10px;
+    border-top-left-radius: 10px;
+    box-shadow: -5px -5px 0 5px var(--sr-white);
+  }
+  .sr-vision-notch-inner {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+  }
   .sr-vision-container { border-radius: 20px; margin-top: -10px; }
   .sr-vision-content { padding: 60px 20px 30px; gap: 24px; }
   .sr-vision-main h2 {
