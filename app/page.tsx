@@ -195,18 +195,8 @@ export default function Home() {
       <section id="projects" className="sr-page relative overflow-x-hidden">
         <div className="sr-projects-container" style={{ perspective: '1000px' }}>
           {/* Section Heading */}
-          <div className="relative w-full mb-8 z-10">
-            {/* Heading Content */}
-            <div className="relative z-10 flex flex-col items-start">
-              {/* Teal Accent Bar */}
-              <div className="w-[40px] h-[3px] bg-[#2D6A6A] rounded-sm mb-3"></div>
-              
-              {/* Text */}
-              <h2 className="flex flex-col text-[2.5rem] md:text-[3.5rem] leading-none tracking-tight m-0">
-                <span style={{ fontWeight: 300, color: '#1a1a1a' }}>What</span>
-                <span style={{ fontWeight: 700, color: '#0D2B2B' }}>We Do</span>
-              </h2>
-            </div>
+          <div className="sr-section-notch-outer">
+            <div className="sr-section-notch-inner">What <strong>We Do</strong></div>
           </div>
 
           <div className="sr-projects-grid relative z-10">
@@ -345,8 +335,8 @@ export default function Home() {
       {/* SECTION 6: LET'S TALK */}
       <section id="contact" className="sr-page sr-footer-section">
         <div className="sr-footer-container">
-          <div className="sr-card-logo-notch dark footer-notch">
-            <span className="sr-notch-label">Let's Talk, What you got!</span>
+          <div className="sr-section-notch-outer sr-footer-notch-outer">
+            <div className="sr-section-notch-inner">Let's Talk, What you got!</div>
           </div>
           <div className="sr-footer-content">
             <h3>Contact us for any notion for nation</h3>

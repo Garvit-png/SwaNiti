@@ -351,6 +351,64 @@ a {
   object-fit: cover;
 }
 
+/* SHARED SECTION NOTCH (white outer + dark inner rectangle) */
+.sr-section-notch-outer {
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  background: var(--sr-white);
+  padding: 12px 20px;
+  border-top-left-radius: 40px;
+  border-bottom-right-radius: 20px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sr-section-notch-outer::before,
+.sr-section-notch-outer::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: transparent;
+}
+
+.sr-section-notch-outer::before {
+  top: 0;
+  right: -20px;
+  border-top-left-radius: 20px;
+  box-shadow: -10px -10px 0 10px var(--sr-white);
+}
+
+.sr-section-notch-outer::after {
+  bottom: -20px;
+  left: 0;
+  border-top-left-radius: 20px;
+  box-shadow: -10px -10px 0 10px var(--sr-white);
+}
+
+.sr-section-notch-inner {
+  background: var(--sr-ink);
+  color: var(--sr-white);
+  padding: 10px 24px;
+  border-radius: 12px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.sr-section-notch-inner strong {
+  font-weight: 700;
+}
+
+/* Footer notch: The footer container background is cyan not white,
+   so shadows must match it */
+.sr-footer-notch-outer {
+  /* inherits all styles from sr-section-notch-outer */
+}
+
 /* PROJECTS SECTION */
 .sr-projects-container {
   width: 100%;
@@ -633,6 +691,33 @@ a {
   .sr-scroll-container { gap: 20px; height: auto; min-height: 60vh; padding: 40px 0; }
   .sr-tag { font-size: 1.8rem; padding: 14px 32px; border-radius: 12px; }
   .sr-marquee-img { width: 80px; height: 80px; }
+
+  /* Section Notch (shared: What We Do, Let's Talk) */
+  .sr-section-notch-outer {
+    border-top-left-radius: 24px;
+    border-bottom-right-radius: 12px;
+    padding: 10px 16px;
+  }
+  .sr-section-notch-outer::before,
+  .sr-section-notch-outer::after {
+    width: 12px;
+    height: 12px;
+  }
+  .sr-section-notch-outer::before {
+    right: -12px;
+    border-top-left-radius: 12px;
+    box-shadow: -6px -6px 0 6px var(--sr-white);
+  }
+  .sr-section-notch-outer::after {
+    bottom: -12px;
+    border-top-left-radius: 12px;
+    box-shadow: -6px -6px 0 6px var(--sr-white);
+  }
+  .sr-section-notch-inner {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    border-radius: 8px;
+  }
 
   /* Projects */
   .sr-projects-grid { grid-template-columns: 1fr; }
@@ -1466,6 +1551,32 @@ a {
 
   /* Projects */
   .sr-projects-container { padding: 60px 20px 20px; border-radius: 20px; }
+  /* Section Notch (shared: What We Do, Let's Talk) */
+  .sr-section-notch-outer {
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 10px;
+    padding: 8px 14px;
+  }
+  .sr-section-notch-outer::before,
+  .sr-section-notch-outer::after {
+    width: 10px;
+    height: 10px;
+  }
+  .sr-section-notch-outer::before {
+    right: -10px;
+    border-top-left-radius: 10px;
+    box-shadow: -5px -5px 0 5px var(--sr-white);
+  }
+  .sr-section-notch-outer::after {
+    bottom: -10px;
+    border-top-left-radius: 10px;
+    box-shadow: -5px -5px 0 5px var(--sr-white);
+  }
+  .sr-section-notch-inner {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+  }
   .sr-notch-label { font-size: 0.9rem; padding: 10px 22px; border-radius: 10px; }
   .sr-project-card { padding: 22px; border-radius: 16px; gap: 14px; }
   .sr-project-card h3 { font-size: 1.3rem; font-weight: 300; }
