@@ -239,32 +239,38 @@
 
 /* CORE TEAM SECTION */
 .sr-team-section {
-  padding: 8px; /* smaller equal white gap on all sides */
+  padding: 12px; /* small equal white gap on all sides */
   background: var(--sr-white);
   display: flex;
   justify-content: center;
+  box-sizing: border-box;
+  width: 100vw;
+  margin-left: calc(-1 * (100vw - 100%)/2); /* ensure centering when using full-viewport width */
 }
 
 /* Outer wrapper that frames the blue team container. Keeps the inner blue background intact. */
 .sr-team-outer {
-  width: 100%;
-  max-width: none; /* allow full-width so yellow panel can stretch near corners */
-  margin: 0;
-  padding: 0; /* remove extra white frame so yellow reaches closer to edges */
-  border-radius: 12px;
+  /* make the outer wrapper span the viewport minus the gutter so yellow can stretch to corners */
+  width: calc(100% - 24px); /* 12px gutter on each side */
+  max-width: none;
+  margin: 0 auto;
+  padding: 0;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   background: var(--sr-white);
   box-shadow: 0 6px 18px rgba(11,34,40,0.03);
+  box-sizing: border-box;
 }
 
 .sr-team-container {
   width: 100%;
   max-width: none;
   background: var(--sr-yellow-light);
-  border-radius: 12px; /* slightly smaller radius so edges feel flush */
-  padding: 80px 24px 60px; /* reduce horizontal padding so yellow stretches more */
+  border-radius: 8px; /* slightly smaller radius so edges feel flush */
+  padding: 80px 20px 60px; /* reduce horizontal padding so yellow stretches more */
   position: relative;
+  box-sizing: border-box;
 }
 
 .sr-team-badge {
@@ -332,11 +338,12 @@
   /* Shift yellow container slightly to the right on narrow screens for visual symmetry */
   .sr-team-outer {
     padding: 0; /* no white frame on small screens */
+    width: calc(100% - 24px);
   }
 
   .sr-team-container {
     padding: 48px 12px 36px 12px; /* narrower inner padding on small screens */
-    border-radius: 10px;
+    border-radius: 8px;
   }
 }
 
