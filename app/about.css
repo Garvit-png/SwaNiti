@@ -239,7 +239,7 @@
 
 /* CORE TEAM SECTION */
 .sr-team-section {
-  padding: 40px 24px 8px; /* reduced white gap around whole section */
+  padding: 16px; /* small, equal white gap on all sides */
   background: var(--sr-white);
   display: flex;
   justify-content: center;
@@ -248,22 +248,22 @@
 /* Outer wrapper that frames the blue team container. Keeps the inner blue background intact. */
 .sr-team-outer {
   width: 100%;
-  max-width: 1200px; /* constrain width so white gaps are equal both sides */
-  margin: 0 auto; /* center the outer frame */
-  padding: 12px 20px; /* white frame thickness (symmetric) */
-  border-radius: 40px;
+  max-width: none; /* allow full-width so yellow panel can stretch near corners */
+  margin: 0; /* use section padding to control equal gaps */
+  padding: 8px; /* thin white frame around yellow panel */
+  border-radius: 20px;
   display: flex;
   justify-content: center;
-  background: var(--sr-white); /* outer white frame around the inner container */
+  background: var(--sr-white);
   box-shadow: 0 6px 18px rgba(11,34,40,0.03);
 }
 
 .sr-team-container {
   width: 100%;
-  max-width: 1800px;
-  background: var(--sr-yellow-light); /* solid yellow background as requested */
-  border-radius: 28px; /* slightly smaller so outer white frame is visible */
-  padding: 80px 48px 60px;
+  max-width: none;
+  background: var(--sr-yellow-light);
+  border-radius: 20px;
+  padding: 80px 36px 60px; /* keep inner spacing while allowing yellow to reach near edges */
   position: relative;
 }
 
@@ -331,11 +331,12 @@
 
   /* Shift yellow container slightly to the right on narrow screens for visual symmetry */
   .sr-team-outer {
-    padding: 12px 16px; /* symmetric padding on small screens */
+    padding: 8px; /* thinner white frame on small screens */
   }
 
   .sr-team-container {
-    padding: 60px 20px 36px 20px; /* symmetric inner padding on small screens */
+    padding: 48px 18px 36px 18px; /* symmetric inner padding on small screens */
+    border-radius: 16px;
   }
 }
 
