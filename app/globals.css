@@ -38,7 +38,7 @@ body {
   color: var(--sr-ink);
   font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
-  cursor: url('/cursor.png') 20 20, auto;
+  cursor: url('/cursor.png'), auto;
 }
 
 a {

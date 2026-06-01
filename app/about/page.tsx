@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import Navbar from '../components/Navbar'
+import Image from 'next/image'
+import '../about.css'
 
 export default function AboutPage() {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -57,6 +59,58 @@ export default function AboutPage() {
                 While we may not be able to pinpoint a single moment of our inception, what we do know is this: we have continuously evolved with our vision, and as a think tank, we will keep aligning with national priorities to shape a brighter future for Bharat.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: TEAM PHOTO */}
+      <section className="sr-about-photo-section">
+        <div className="sr-about-photo-wrapper">
+          <Image
+            src="/about.png"
+            alt="SvaNiti Team"
+            width={1920}
+            height={1080}
+            className="sr-about-photo"
+          />
+        </div>
+      </section>
+
+      {/* SECTION 4: CORE TEAM */}
+      <section className="sr-team-section">
+        <div className="sr-team-container">
+          <div className="sr-team-badge">Our Core Team</div>
+          <div className="sr-team-grid">
+            {[
+              { name: 'Aadil Belim', role: 'Founder &\nChief Vision Officer' },
+              { name: 'Uzma A', role: 'Director &\nChief Culture Officer' },
+              { name: 'Eshaak J', role: 'Research Associate Creative\nEconomy' },
+              { name: 'Akshit Gadhia', role: 'Compliance Officer' },
+              { name: 'Amin Belim', role: 'Non-Executive Director' },
+              { name: 'Sagar Narayan', role: 'Research Associate' }
+            ].map((member, i) => (
+              <div key={i} className="sr-team-card">
+                <div className="sr-team-photo-col">
+                  {/* Using about.png as a placeholder for team members until specific images are uploaded */}
+                  <Image src="/about.png" alt={member.name} width={400} height={400} />
+                </div>
+                <div className="sr-team-info-col">
+                  <div className="sr-team-info-top">
+                    <h4>{member.name}</h4>
+                    <p>{member.role}</p>
+                  </div>
+                  <div className="sr-team-email-row">
+                    Email
+                    <div className="sr-email-btn">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                        <polyline points="12 5 19 12 12 19"></polyline>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
