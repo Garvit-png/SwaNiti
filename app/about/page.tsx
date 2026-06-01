@@ -55,6 +55,8 @@ export default function AboutPage() {
         </div>
       </section>
 
+      
+
       {/* SECTION 2: STORY */}
       <section className="sr-page">
         <div className="sr-story-wrapper">
