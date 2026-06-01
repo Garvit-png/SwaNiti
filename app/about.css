@@ -239,7 +239,7 @@
 
 /* CORE TEAM SECTION */
 .sr-team-section {
-  padding: 16px; /* small, equal white gap on all sides */
+  padding: 8px; /* smaller equal white gap on all sides */
   background: var(--sr-white);
   display: flex;
   justify-content: center;
@@ -249,9 +249,9 @@
 .sr-team-outer {
   width: 100%;
   max-width: none; /* allow full-width so yellow panel can stretch near corners */
-  margin: 0; /* use section padding to control equal gaps */
-  padding: 8px; /* thin white frame around yellow panel */
-  border-radius: 20px;
+  margin: 0;
+  padding: 0; /* remove extra white frame so yellow reaches closer to edges */
+  border-radius: 12px;
   display: flex;
   justify-content: center;
   background: var(--sr-white);
@@ -262,8 +262,8 @@
   width: 100%;
   max-width: none;
   background: var(--sr-yellow-light);
-  border-radius: 20px;
-  padding: 80px 36px 60px; /* keep inner spacing while allowing yellow to reach near edges */
+  border-radius: 12px; /* slightly smaller radius so edges feel flush */
+  padding: 80px 24px 60px; /* reduce horizontal padding so yellow stretches more */
   position: relative;
 }
 
@@ -331,12 +331,12 @@
 
   /* Shift yellow container slightly to the right on narrow screens for visual symmetry */
   .sr-team-outer {
-    padding: 8px; /* thinner white frame on small screens */
+    padding: 0; /* no white frame on small screens */
   }
 
   .sr-team-container {
-    padding: 48px 18px 36px 18px; /* symmetric inner padding on small screens */
-    border-radius: 16px;
+    padding: 48px 12px 36px 12px; /* narrower inner padding on small screens */
+    border-radius: 10px;
   }
 }
 
