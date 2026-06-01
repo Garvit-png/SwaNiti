@@ -116,7 +116,7 @@ export default function AboutPage() {
             ].map((member, i) => (
               <div
                 key={i}
-                ref={(el) => (cardRefs.current[i] = el)}
+                ref={(el) => { cardRefs.current[i] = el }}
                 className="sr-team-card"
                 style={{ ['--delay' as any]: `${i * 120}ms` }}
               >
