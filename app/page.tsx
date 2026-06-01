@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -26,6 +26,13 @@ export default function Home() {
       org: "Nudge Charcha 2024"
     }
   ]
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTestimonialIndex((prev) => (prev + 1) % testimonials.length)
+    }, 3000)
+    return () => clearInterval(timer)
+  }, [testimonials.length])
 
   // Scroll tracking for the horizontal section
   const { scrollYProgress } = useScroll({
