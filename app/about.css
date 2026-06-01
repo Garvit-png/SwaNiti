@@ -328,6 +328,15 @@
     animation: sr-card-in 420ms ease forwards;
     animation-delay: var(--delay, 0ms);
   }
+
+  /* Shift yellow container slightly to the right on narrow screens for visual symmetry */
+  .sr-team-outer {
+    padding: 12px 8px 12px 20px; /* top right bottom left */
+  }
+
+  .sr-team-container {
+    padding: 60px 12px 36px 28px; /* reduce right padding so yellow stretches more to the edge */
+  }
 }
 
 /* Desktop: make the team grid fit within the viewport height
