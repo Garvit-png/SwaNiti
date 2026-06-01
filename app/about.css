@@ -243,14 +243,14 @@
   background: var(--sr-white);
   display: flex;
   justify-content: center;
-  padding-left: 0; /* allow outer wrapper to align with the left edge */
 }
 
 /* Outer wrapper that frames the blue team container. Keeps the inner blue background intact. */
 .sr-team-outer {
   width: 100%;
-  max-width: none; /* span full width so it can touch the left edge */
-  padding: 12px 18px; /* white frame thickness */
+  max-width: 1200px; /* constrain width so white gaps are equal both sides */
+  margin: 0 auto; /* center the outer frame */
+  padding: 12px 20px; /* white frame thickness (symmetric) */
   border-radius: 40px;
   display: flex;
   justify-content: center;
@@ -331,11 +331,11 @@
 
   /* Shift yellow container slightly to the right on narrow screens for visual symmetry */
   .sr-team-outer {
-    padding: 12px 8px 12px 20px; /* top right bottom left */
+    padding: 12px 16px; /* symmetric padding on small screens */
   }
 
   .sr-team-container {
-    padding: 60px 12px 36px 28px; /* reduce right padding so yellow stretches more to the edge */
+    padding: 60px 20px 36px 20px; /* symmetric inner padding on small screens */
   }
 }
 
