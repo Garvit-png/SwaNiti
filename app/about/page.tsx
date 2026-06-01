@@ -1,12 +1,34 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Navbar from '../components/Navbar'
 import Image from 'next/image'
 import '../about.css'
 
 export default function AboutPage() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  useEffect(() => {
+    if (!cardRefs.current) return
+    const obs = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.2 }
+    )
+
+    cardRefs.current.forEach((el) => {
+      if (el) obs.observe(el)
+    })
+
+    return () => obs.disconnect()
+  }, [])
 
   return (
     <main className="sr-app">
@@ -78,21 +100,27 @@ export default function AboutPage() {
 
       {/* SECTION 4: CORE TEAM */}
       <section className="sr-team-section">
-        <div className="sr-team-container">
-          <div className="sr-team-badge">Our Core Team</div>
-          <div className="sr-team-grid">
+        <div className="sr-team-outer">
+          <div className="sr-team-container">
+            <div className="sr-team-badge">Our Core Team</div>
+            <div className="sr-team-grid">
             {[
-              { name: 'Aadil Belim', role: 'Founder &\nChief Vision Officer' },
-              { name: 'Uzma A', role: 'Director &\nChief Culture Officer' },
-              { name: 'Eshaak J', role: 'Research Associate Creative\nEconomy' },
-              { name: 'Akshit Gadhia', role: 'Compliance Officer' },
-              { name: 'Amin Belim', role: 'Non-Executive Director' },
-              { name: 'Sagar Narayan', role: 'Research Associate' }
+              { name: 'Aadil Belim', role: 'Founder &\nChief Vision Officer', photo: '/adil.png' },
+              { name: 'Uzma A', role: 'Director &\nChief Culture Officer', photo: '/uzma.jpg' },
+              { name: 'Eshaak J', role: 'Research Associate Creative\nEconomy', photo: '/eshaak.jpg' },
+              { name: 'Akshit Gadhia', role: 'Compliance Officer', photo: '/akshit.jpg' },
+              { name: 'Amin Belim', role: 'Non-Executive Director', photo: '/amin.jpg' },
+              { name: 'Sagar Narayan', role: 'Research Associate', photo: '/sagar.jpg' }
             ].map((member, i) => (
-              <div key={i} className="sr-team-card">
+              <div
+                key={i}
+                ref={(el) => (cardRefs.current[i] = el)}
+                className="sr-team-card"
+                style={{ ['--delay' as any]: `${i * 120}ms` }}
+              >
                 <div className="sr-team-photo-col">
-                  {/* Using about.png as a placeholder for team members until specific images are uploaded */}
-                  <Image src="/about.png" alt={member.name} width={400} height={400} />
+                  {/* Use member.photo when available; otherwise use the placeholder avatar. */}
+                  <Image src={member.photo || '/avatar-placeholder.svg'} alt={member.name} width={400} height={400} />
                 </div>
                 <div className="sr-team-info-col">
                   <div className="sr-team-info-top">
@@ -111,6 +139,7 @@ export default function AboutPage() {
                 </div>
               </div>
             ))}
+            </div>
           </div>
         </div>
       </section>

@@ -239,31 +239,47 @@
 
 /* CORE TEAM SECTION */
 .sr-team-section {
-  padding: 10px;
+  padding: 40px 24px 8px; /* reduced white gap around whole section */
   background: var(--sr-white);
   display: flex;
   justify-content: center;
+  padding-left: 0; /* allow outer wrapper to align with the left edge */
+}
+
+/* Outer wrapper that frames the blue team container. Keeps the inner blue background intact. */
+.sr-team-outer {
+  width: 100%;
+  max-width: none; /* span full width so it can touch the left edge */
+  padding: 12px 18px; /* white frame thickness */
+  border-radius: 40px;
+  display: flex;
+  justify-content: center;
+  background: var(--sr-white); /* outer white frame around the inner container */
+  box-shadow: 0 6px 18px rgba(11,34,40,0.03);
 }
 
 .sr-team-container {
   width: 100%;
   max-width: 1800px;
-  background-color: var(--sr-ink);
-  border-radius: 40px;
-  padding: 100px 60px 80px;
+  background: var(--sr-yellow-light); /* solid yellow background as requested */
+  border-radius: 28px; /* slightly smaller so outer white frame is visible */
+  padding: 80px 48px 60px;
   position: relative;
 }
 
 .sr-team-badge {
   position: absolute;
-  top: 40px;
+  top: 12px;
   left: 40px;
-  background: #061519;
+  z-index: 60;
+  background: var(--sr-ink);
   color: var(--sr-white);
-  padding: 14px 28px;
+  padding: 10px 20px;
   border-radius: 12px;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1rem;
+  border: 1px solid rgba(11,34,40,0.06);
+  box-shadow: 0 6px 18px rgba(11,34,40,0.06);
 }
 
 .sr-team-grid {
@@ -274,17 +290,77 @@
 }
 
 .sr-team-card {
-  background: var(--sr-white);
+  background: var(--sr-white); /* cards set to white */
   border-radius: 24px;
   display: flex;
   overflow: hidden;
   height: 240px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.08); /* subtle 1px border */
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.18s ease;
 }
 
 .sr-team-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  transform: translateY(-6px);
+  box-shadow: 0 22px 40px rgba(11,34,40,0.12);
+}
+
+/* Mobile: single-column layout and staggered entrance animation */
+@keyframes sr-card-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .sr-team-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-top: 12px;
+  }
+
+  .sr-team-card {
+    height: auto;
+    opacity: 0;
+    transform: translateY(18px);
+    /* animation only runs when the card gains .is-visible */
+  }
+
+  .sr-team-card.is-visible {
+    animation: sr-card-in 420ms ease forwards;
+    animation-delay: var(--delay, 0ms);
+  }
+}
+
+/* Desktop: make the team grid fit within the viewport height
+   by distributing rows evenly and allowing cards to stretch. */
+@media (min-width: 1024px) {
+  .sr-team-container {
+    padding: 60px 60px 40px; /* reduce padding to gain vertical space */
+  }
+
+  .sr-team-grid {
+    height: calc(100vh - 160px);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 1fr; /* make each row equal height */
+    gap: 30px;
+    margin-top: 20px;
+  }
+
+  .sr-team-card {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .sr-team-photo-col,
+  .sr-team-info-col {
+    height: 100%;
+  }
+
+  .sr-team-photo-col img {
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .sr-team-photo-col {
