@@ -9,7 +9,7 @@ interface NavbarProps {
 export default function Navbar({ activePath = '/', onMenuClick }: NavbarProps) {
   const navLinks = [
     { label: 'About', href: '/about' },
-    { label: 'Projects', href: '/#about' },
+    { label: 'Projects', href: '/projects' },
     { label: 'Insights', href: '/#' },
     { label: 'Governance', href: '/#' },
   ]
