@@ -10,7 +10,7 @@ export default function Navbar({ activePath = '/', onMenuClick }: NavbarProps) {
   const navLinks = [
     { label: 'About', href: '/about' },
     { label: 'Projects', href: '/projects' },
-    { label: 'Insights', href: '/#' },
+    { label: 'Insights', href: '/insights' },
     { label: 'Governance', href: '/#' },
   ]
 
