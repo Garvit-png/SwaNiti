@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
     // Compose the email
     const mailOptions = {
       from: `"SvaNiti Website" <${process.env.GMAIL_USER}>`,
-      to: 'garvitgandhi0313@gmail.com',
+      to: 'office@svaniti.in',
       replyTo: email,
       subject: `New Contact from SvaNiti Website — ${name}`,
       html: `
