@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { ArrowRight, ArrowLeft } from 'lucide-react'
+import { ArrowRight, ArrowLeft, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
 import Navbar from './components/Navbar'
 
 export default function Home() {
@@ -13,6 +13,68 @@ export default function Home() {
   const photoSectionRef = useRef<HTMLDivElement>(null)
   const [testimonialIndex, setTestimonialIndex] = useState(0)
   const [menuOpen, setMenuOpen] = useState(false)
+
+  // Contact form state
+  const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' })
+  const [formErrors, setFormErrors] = useState<Record<string, string>>({})
+  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [formMessage, setFormMessage] = useState('')
+
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+    // Clear error for this field as user types
+    if (formErrors[name]) {
+      setFormErrors(prev => { const n = { ...prev }; delete n[name]; return n })
+    }
+  }
+
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    const errors: Record<string, string> = {}
+
+    if (!formData.name.trim()) errors.name = 'Please enter your name'
+    if (!formData.phone.trim()) errors.phone = 'Please enter your contact number'
+    if (!formData.email.trim()) {
+      errors.email = 'Please enter your email'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = 'Please enter a valid email address'
+    }
+    if (!formData.message.trim()) errors.message = 'Please write your notion note'
+
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors)
+      setFormStatus('error')
+      setFormMessage('Please fill in all the required fields')
+      // Auto-dismiss the banner after 4 seconds
+      setTimeout(() => { setFormStatus('idle'); setFormMessage('') }, 4000)
+      return
+    }
+
+    setFormErrors({})
+    setFormStatus('loading')
+    setFormMessage('')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      const data = await res.json()
+      if (res.ok) {
+        setFormStatus('success')
+        setFormMessage('Your message has been sent successfully! We will get back to you soon.')
+        setFormData({ name: '', phone: '', email: '', message: '' })
+      } else {
+        setFormStatus('error')
+        setFormMessage(data.error || 'Something went wrong. Please try again.')
+      }
+    } catch {
+      setFormStatus('error')
+      setFormMessage('Network error. Please check your connection and try again.')
+    }
+  }
 
   const testimonials = [
     {
@@ -66,25 +128,26 @@ export default function Home() {
 
 
   const row1 = [
-    { text: 'Inspiration', color: 'cream' },
+    { text: 'First Principles Thinking', color: 'cream' },
     { img: '/marquee/photo1.jpg' },
-    { text: 'Notions', color: 'cyan' },
+    { text: 'Experiential Learning', color: 'cyan' },
     { img: '/marquee/photo2.jpg' },
-    { text: 'Research', color: 'cream' },
+    { text: 'Youth Leadership', color: 'cream' },
   ]
 
   const row2 = [
-    { text: "People's Aspiration", color: 'cyan' },
+    { text: 'Unconventional Approaches', color: 'cyan' },
     { img: '/marquee/photo3.jpg' },
-    { text: 'Unconventional', color: 'cream' },
-    { text: 'Sync', color: 'cyan' },
+    { text: 'Systems Thinking', color: 'cream' },
+    { text: 'Policy Innovation', color: 'cyan' },
   ]
 
   const row3 = [
-    { text: 'Non-Partisan', color: 'cream' },
+    { text: 'Creative Economy', color: 'cream' },
     { img: '/marquee/photo4.jpg' },
-    { text: 'Policy', color: 'cyan' },
-    { text: 'Governance', color: 'cream' },
+    { text: 'Collaborative Dialogue', color: 'cyan' },
+    { text: 'Future Readiness', color: 'cream' },
+    { text: 'Nation Building', color: 'cyan' },
   ]
 
   const projects = [
@@ -348,30 +411,105 @@ export default function Home() {
           <div className="sr-footer-content">
             <h3>Contact us for any notion for nation</h3>
             
-            <form className="sr-contact-form">
+            {/* Status Banner */}
+            <AnimatePresence>
+              {formMessage && (
+                <motion.div
+                  initial={{ opacity: 0, y: -10, scale: 0.97 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -10, scale: 0.97 }}
+                  transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                  className={`sr-form-banner ${formStatus}`}
+                >
+                  {formStatus === 'success' ? <CheckCircle size={20} /> : <AlertCircle size={20} />}
+                  <span>{formMessage}</span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            <form className="sr-contact-form" onSubmit={handleFormSubmit} noValidate>
               <div className="sr-form-row">
-                <div className="sr-form-group">
-                  <label>Name *</label>
-                  <input type="text" placeholder="" required />
+                <div className={`sr-form-group ${formErrors.name ? 'has-error' : ''}`}>
+                  <label htmlFor="contact-name">Name *</label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleFormChange}
+                    placeholder="Your full name"
+                  />
+                  {formErrors.name && (
+                    <motion.span initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="sr-field-error">
+                      {formErrors.name}
+                    </motion.span>
+                  )}
                 </div>
-                <div className="sr-form-group">
-                  <label>Contact No. *</label>
-                  <input type="text" placeholder="" required />
+                <div className={`sr-form-group ${formErrors.phone ? 'has-error' : ''}`}>
+                  <label htmlFor="contact-phone">Contact No. *</label>
+                  <input
+                    id="contact-phone"
+                    type="text"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleFormChange}
+                    placeholder="+91 XXXXX XXXXX"
+                  />
+                  {formErrors.phone && (
+                    <motion.span initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="sr-field-error">
+                      {formErrors.phone}
+                    </motion.span>
+                  )}
                 </div>
               </div>
 
-              <div className="sr-form-group full-width">
-                <label>Email *</label>
-                <input type="email" placeholder="" required />
+              <div className={`sr-form-group full-width ${formErrors.email ? 'has-error' : ''}`}>
+                <label htmlFor="contact-email">Email *</label>
+                <input
+                  id="contact-email"
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleFormChange}
+                  placeholder="you@example.com"
+                />
+                {formErrors.email && (
+                  <motion.span initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="sr-field-error">
+                    {formErrors.email}
+                  </motion.span>
+                )}
               </div>
 
-              <div className="sr-form-group full-width">
-                <label>Notion Note *</label>
-                <textarea rows={4} placeholder="" required></textarea>
+              <div className={`sr-form-group full-width ${formErrors.message ? 'has-error' : ''}`}>
+                <label htmlFor="contact-message">Notion Note *</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={handleFormChange}
+                  placeholder="Share your notion for the nation..."
+                ></textarea>
+                {formErrors.message && (
+                  <motion.span initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="sr-field-error">
+                    {formErrors.message}
+                  </motion.span>
+                )}
               </div>
 
-              <button type="submit" className="sr-contact-submit">
-                Contact Now
+              <button
+                type="submit"
+                className={`sr-contact-submit ${formStatus === 'loading' ? 'loading' : ''}`}
+                disabled={formStatus === 'loading'}
+              >
+                {formStatus === 'loading' ? (
+                  <>
+                    <Loader2 size={18} className="sr-spinner" />
+                    Sending...
+                  </>
+                ) : (
+                  'Contact Now'
+                )}
               </button>
             </form>
           </div>
