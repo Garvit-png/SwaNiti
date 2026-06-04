@@ -219,62 +219,64 @@ export default function InsightsPage() {
       </section>
 
       {/* BLOG ASYMMETRICAL GRID */}
-      <section className={styles.blogGrid}>
-        <AnimatePresence mode="popLayout">
-          {filteredBlogs.length > 0 ? (
-            filteredBlogs.map((blog, index) => {
-              // Get the background pattern class based on patternType
-              let patternClass = styles.orangeGridPattern
-              if (blog.patternType === 'cyan') patternClass = styles.cyanGridPattern
-              if (blog.patternType === 'yellow') patternClass = styles.yellowGridPattern
+      <div className={styles.gridWrapper}>
+        <section className={styles.blogGrid}>
+          <AnimatePresence mode="popLayout">
+            {filteredBlogs.length > 0 ? (
+              filteredBlogs.map((blog, index) => {
+                // Get the background pattern class based on patternType
+                let patternClass = styles.orangeGridPattern
+                if (blog.patternType === 'cyan') patternClass = styles.cyanGridPattern
+                if (blog.patternType === 'yellow') patternClass = styles.yellowGridPattern
 
-              return (
-                <div
-                  key={blog.id}
-                  ref={(el) => { cardRefs.current[index] = el }}
-                  className={`${styles.blogCard} ${blog.gridClass}`}
-                  style={{ transitionDelay: `${index * 0.05}s` }}
-                >
-                  <div className={styles.imageWrapper}>
-                    <div className={`${styles.patternBackdrop} ${patternClass}`}>
-                      <div className={styles.patternTitle}>
-                        {blog.title.split(':')[0]}
+                return (
+                  <div
+                    key={blog.id}
+                    ref={(el) => { cardRefs.current[index] = el }}
+                    className={`${styles.blogCard} ${blog.gridClass}`}
+                    style={{ transitionDelay: `${index * 0.05}s` }}
+                  >
+                    <div className={styles.imageWrapper}>
+                      <div className={`${styles.patternBackdrop} ${patternClass}`}>
+                        <div className={styles.patternTitle}>
+                          {blog.title.split(':')[0]}
+                        </div>
+                        <span className={styles.patternSub}>SvaNiti Policy Research</span>
                       </div>
-                      <span className={styles.patternSub}>SvaNiti Policy Research</span>
                     </div>
-                  </div>
 
-                  <div className={styles.cardBody}>
-                    <div className={styles.cardHeader}>
-                      <span className={styles.tag}>{blog.category}</span>
-                      <span className={styles.readTime}>{blog.readTime}</span>
-                    </div>
-                    
-                    <h3 className={styles.cardTitle}>{blog.title}</h3>
-                    <p className={styles.cardDesc}>{blog.excerpt}</p>
-                    
-                    <div className={styles.cardFooter}>
-                      <span>Read Full Insight</span>
-                      <ArrowRight className={styles.arrowIcon} size={18} />
+                    <div className={styles.cardBody}>
+                      <div className={styles.cardHeader}>
+                        <span className={styles.tag}>{blog.category}</span>
+                        <span className={styles.readTime}>{blog.readTime}</span>
+                      </div>
+                      
+                      <h3 className={styles.cardTitle}>{blog.title}</h3>
+                      <p className={styles.cardDesc}>{blog.excerpt}</p>
+                      
+                      <div className={styles.cardFooter}>
+                        <span>Read Full Insight</span>
+                        <ArrowRight className={styles.arrowIcon} size={18} />
+                      </div>
                     </div>
                   </div>
-                </div>
-              )
-            })
-          ) : (
-            <div className={styles.emptyState}>
-              <h3>No insights found</h3>
-              <p>We couldn't find any articles matching your search criteria. Try a different category or search term.</p>
-              <button 
-                className={styles.clearSearchBtn}
-                onClick={() => { setSearchQuery(''); setSelectedCategory('All') }}
-              >
-                Reset Filters
-              </button>
-            </div>
-          )}
-        </AnimatePresence>
-      </section>
+                )
+              })
+            ) : (
+              <div className={styles.emptyState}>
+                <h3>No insights found</h3>
+                <p>We couldn't find any articles matching your search criteria. Try a different category or search term.</p>
+                <button 
+                  className={styles.clearSearchBtn}
+                  onClick={() => { setSearchQuery(''); setSelectedCategory('All') }}
+                >
+                  Reset Filters
+                </button>
+              </div>
+            )}
+          </AnimatePresence>
+        </section>
+      </div>
 
       {/* FOOTER */}
       <InsightsFooter />
