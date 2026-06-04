@@ -149,8 +149,10 @@
 .gridWrapper {
   background-color: var(--sr-yellow-light);
   padding: 80px 0;
-  width: 100%;
-  margin-top: 40px;
+  max-width: 1500px;
+  margin: 40px auto 80px auto;
+  border-radius: var(--radius-xl);
+  width: calc(100% - 80px);
 }
 
 /* Asymmetrical Creative Grid */
@@ -444,8 +446,14 @@
   .searchContainer {
     max-width: 100%;
   }
+  .gridWrapper {
+    width: calc(100% - 30px);
+    margin: 20px auto 60px auto;
+    padding: 40px 0;
+    border-radius: 24px;
+  }
   .blogGrid {
-    padding: 0 20px 60px;
+    padding: 0 15px;
     gap: 20px;
   }
   .blogCardLarge, .blogCardSmall, .blogCardMedium, .blogCardFull {
