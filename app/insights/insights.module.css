@@ -17,9 +17,9 @@
   display: flex;
   flex-direction: column;
   background: 
-    radial-gradient(circle at calc(var(--m-x, 50%) * 0.15) calc(var(--m-y, 50%) * 0.2 + 10%), rgba(255, 248, 204, 0.85) 0%, transparent 60%),
-    radial-gradient(circle at 80% 90%, rgba(200, 251, 251, 0.9) 0%, transparent 70%),
-    #fff8cc;
+    radial-gradient(circle at calc(var(--m-x, 50%) * 0.15) calc(var(--m-y, 50%) * 0.2 + 10%), rgba(200, 251, 251, 0.85) 0%, transparent 60%),
+    radial-gradient(circle at 80% 90%, rgba(190, 240, 255, 0.9) 0%, transparent 70%),
+    #c8fbfb;
   transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -35,7 +35,7 @@
 .heroInner h1 {
   font-family: var(--font-lexend);
   font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 800;
+  font-weight: 500;
   line-height: 1.1;
   letter-spacing: -0.03em;
   color: var(--sr-ink);
@@ -130,7 +130,7 @@
   color: var(--sr-ink);
   font-family: var(--font-lexend);
   font-size: 0.9rem;
-  font-weight: 600;
+  font-weight: 400;
   cursor: pointer;
   border-radius: 30px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -242,15 +242,15 @@
 
 /* Visual designs matching the user uploaded screen (Orange Future grid) */
 .orangeGridPattern {
-  background: radial-gradient(circle at center, #2a0c02 0%, #050100 100%);
+  background: radial-gradient(circle at center, #0B2228 0%, #030a0c 100%);
 }
 
 .orangeGridPattern::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: linear-gradient(30deg, rgba(235, 94, 40, 0.15) 1px, transparent 1px),
-                    linear-gradient(150deg, rgba(235, 94, 40, 0.15) 1px, transparent 1px);
+  background-image: linear-gradient(30deg, rgba(200, 251, 251, 0.15) 1px, transparent 1px),
+                    linear-gradient(150deg, rgba(200, 251, 251, 0.15) 1px, transparent 1px);
   background-size: 24px 41px;
 }
 
@@ -268,21 +268,21 @@
 }
 
 .yellowGridPattern {
-  background: radial-gradient(circle at center, #3c2f02 0%, #100c00 100%);
+  background: radial-gradient(circle at center, #06181c 0%, #01080a 100%);
 }
 
 .yellowGridPattern::before {
   content: '';
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle, rgba(255, 248, 204, 0.15) 2px, transparent 2px);
+  background-image: radial-gradient(circle, rgba(200, 251, 251, 0.15) 2px, transparent 2px);
   background-size: 30px 30px;
 }
 
 .patternTitle {
   font-family: var(--font-lexend);
   font-size: 1.6rem;
-  font-weight: 700;
+  font-weight: 500;
   text-align: center;
   z-index: 2;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
@@ -318,7 +318,7 @@
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.8rem;
-  font-weight: 600;
+  font-weight: 400;
   font-family: var(--font-lexend);
   letter-spacing: 0.02em;
 }
@@ -332,7 +332,7 @@
 .cardTitle {
   font-family: var(--font-lexend);
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 500;
   margin-bottom: 12px;
   line-height: 1.4;
   color: var(--sr-ink);
@@ -340,7 +340,7 @@
 }
 
 .blogCard:hover .cardTitle {
-  color: #eb5e28;
+  color: #0077b6;
 }
 
 .cardDesc {
@@ -355,7 +355,7 @@
 .cardFooter {
   display: flex;
   align-items: center;
-  font-weight: 700;
+  font-weight: 500;
   font-size: 0.9rem;
   gap: 6px;
   color: var(--sr-ink);
