@@ -32,7 +32,7 @@ export default function AboutPage() {
 
   return (
     <main className="sr-app">
-      {/* SECTION 1: HERO */}
+      {/* 1. HERO SECTION */}
       <section id="top" className="sr-page">
         <div className="sr-hero">
           <div className="sr-hero-card sr-about-hero-card">
@@ -55,9 +55,30 @@ export default function AboutPage() {
         </div>
       </section>
 
-      
+      {/* 2. APPROACH SECTION */}
+      <section className="sr-page">
+        <div className="sr-approach-wrapper">
+          <div className="sr-approach-container">
+            <div className="sr-approach-badge">Our Approach</div>
+            <div className="sr-approach-grid">
+              <div className="sr-approach-card">
+                <h3>01 / First Principles</h3>
+                <p>We strip complex policy questions down to their core realities, questioning foundational assumptions rather than relying on legacy methods.</p>
+              </div>
+              <div className="sr-approach-card">
+                <h3>02 / Grassroots Direct</h3>
+                <p>True public policy is built from the ground. Having traveled over 100,000 km, we base our proposals on lived human realities across Bharat.</p>
+              </div>
+              <div className="sr-approach-card">
+                <h3>03 / Actionable Advocacy</h3>
+                <p>We bridge the gap between academic theory and executive implementation, drafting clear, modular roadmaps ready for direct governance adoption.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* SECTION 2: STORY */}
+      {/* 3. OUR STORY SECTION */}
       <section className="sr-page">
         <div className="sr-story-wrapper">
           <div className="sr-story-container">
@@ -87,7 +108,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* SECTION 3: TEAM PHOTO */}
+      {/* 4. CREATIVE SECTION OF IMAGES */}
       <section className="sr-about-photo-section">
         <div className="sr-about-photo-wrapper">
           <Image
@@ -96,11 +117,12 @@ export default function AboutPage() {
             width={1920}
             height={1080}
             className="sr-about-photo"
+            priority
           />
         </div>
       </section>
 
-      {/* SECTION 4: CORE TEAM */}
+      {/* 5. TEAM SECTION */}
       <section className="sr-team-section">
         <div className="sr-team-outer">
           <div className="sr-team-container">
@@ -121,7 +143,6 @@ export default function AboutPage() {
                 style={{ ['--delay' as any]: `${i * 120}ms` }}
               >
                 <div className="sr-team-photo-col">
-                  {/* Use member.photo when available; otherwise use the placeholder avatar. */}
                   <Image src={member.photo || '/avatar-placeholder.svg'} alt={member.name} width={400} height={400} />
                 </div>
                 <div className="sr-team-info-col">
@@ -141,6 +162,33 @@ export default function AboutPage() {
                 </div>
               </div>
             ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. PARTNERS SECTION */}
+      <section className="sr-page">
+        <div className="sr-partners-wrapper">
+          <div className="sr-partners-container">
+            <div className="sr-partners-badge">Collaborations &amp; Engagements</div>
+            <div className="sr-partners-grid">
+              <div className="sr-partner-card">
+                <h4>PBC 2024</h4>
+                <p>Rishihood University</p>
+              </div>
+              <div className="sr-partner-card">
+                <h4>The Nudge</h4>
+                <p>Nudge Charcha 2024</p>
+              </div>
+              <div className="sr-partner-card">
+                <h4>Sva-Bharat</h4>
+                <p>Sva-Bharat Foundation</p>
+              </div>
+              <div className="sr-partner-card">
+                <h4>IDUME</h4>
+                <p>IDUME Education System</p>
+              </div>
             </div>
           </div>
         </div>
