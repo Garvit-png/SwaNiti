@@ -33,11 +33,11 @@
 }
 
 .heroInner h1 {
-  font-family: var(--font-lexend);
+  font-family: 'Poppins', sans-serif;
   font-size: clamp(2.5rem, 5vw, 4.5rem);
-  font-weight: 500;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
   color: var(--sr-ink);
 }
 
@@ -128,9 +128,9 @@
   border: none;
   background: transparent;
   color: var(--sr-ink);
-  font-family: var(--font-lexend);
+  font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
-  font-weight: 400;
+  font-weight: 300;
   cursor: pointer;
   border-radius: 30px;
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -280,9 +280,9 @@
 }
 
 .patternTitle {
-  font-family: var(--font-lexend);
+  font-family: 'Poppins', sans-serif;
   font-size: 1.6rem;
-  font-weight: 500;
+  font-weight: 300;
   text-align: center;
   z-index: 2;
   text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
@@ -318,8 +318,8 @@
   padding: 6px 14px;
   border-radius: 20px;
   font-size: 0.8rem;
-  font-weight: 400;
-  font-family: var(--font-lexend);
+  font-weight: 300;
+  font-family: 'Poppins', sans-serif;
   letter-spacing: 0.02em;
 }
 
@@ -330,9 +330,9 @@
 }
 
 .cardTitle {
-  font-family: var(--font-lexend);
+  font-family: 'Poppins', sans-serif;
   font-size: 1.25rem;
-  font-weight: 500;
+  font-weight: 300;
   margin-bottom: 12px;
   line-height: 1.4;
   color: var(--sr-ink);
@@ -355,7 +355,7 @@
 .cardFooter {
   display: flex;
   align-items: center;
-  font-weight: 500;
+  font-weight: 300;
   font-size: 0.9rem;
   gap: 6px;
   color: var(--sr-ink);
