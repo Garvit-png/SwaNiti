@@ -42,7 +42,7 @@ export async function POST(req: NextRequest) {
         <div style="font-family: 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; background: #f8fffe; border-radius: 16px; overflow: hidden; border: 1px solid #e0f7f7;">
           <div style="background: linear-gradient(135deg, #c8fbfb 0%, #fef5ce 100%); padding: 32px 28px 20px;">
             <h1 style="margin: 0; font-size: 22px; color: #0B2228; font-weight: 600;">New Notion for Nation 🇮🇳</h1>
-            <p style="margin: 8px 0 0; font-size: 14px; color: #0B2228; opacity: 0.7;">Someone reached out via svaniti.in</p>
+            <p style="margin: 8px 0 0; font-size: 14px; color: #0B2228; opacity: 0.7;">Someone reached out via svanitipolicy.vercel.app</p>
           </div>
           <div style="padding: 28px;">
             <table style="width: 100%; border-collapse: collapse;">
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
             </table>
           </div>
           <div style="padding: 16px 28px; background: #f0fafa; text-align: center;">
-            <p style="margin: 0; font-size: 12px; color: #888;">SvaNiti Policy Research Center • svaniti.in</p>
+            <p style="margin: 0; font-size: 12px; color: #888;">SvaNiti Policy Research Center • svanitipolicy.vercel.app</p>
           </div>
         </div>
       `,
