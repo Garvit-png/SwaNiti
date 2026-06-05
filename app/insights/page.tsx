@@ -122,7 +122,7 @@ export default function InsightsPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const heroCardRef = useRef<HTMLDivElement>(null)
-  const cardRefs = useRef<Array<HTMLDivElement | null>>([])
+  const cardRefs = useRef<Array<HTMLAnchorElement | null>>([])
 
   // Category list
   const categories = ['All', 'Policy', 'Youth', 'Education', 'Movement']
@@ -148,7 +148,7 @@ export default function InsightsPage() {
 
   // Animation intersection observer for blog cards
   useEffect(() => {
-    const cards = cardRefs.current.filter(Boolean) as HTMLDivElement[]
+    const cards = cardRefs.current.filter(Boolean) as HTMLAnchorElement[]
     if (!cards.length) return
 
     const observer = new IntersectionObserver(
@@ -230,8 +230,9 @@ export default function InsightsPage() {
                 if (blog.patternType === 'yellow') patternClass = styles.yellowGridPattern
 
                 return (
-                  <div
+                  <Link
                     key={blog.id}
+                    href={`/insights/${blog.id}`}
                     ref={(el) => { cardRefs.current[index] = el }}
                     className={`${styles.blogCard} ${blog.gridClass}`}
                     style={{ transitionDelay: `${index * 0.05}s` }}
@@ -259,7 +260,7 @@ export default function InsightsPage() {
                         <ArrowRight className={styles.arrowIcon} size={18} />
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 )
               })
             ) : (
