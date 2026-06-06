@@ -454,7 +454,14 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
         </div>
 
         {/* Cover Banner Card (Styled hexagon block) */}
-        <div className={styles.coverCard}>
+        <div 
+          className={styles.coverCard}
+          style={blog.coverUrl?.startsWith('/') ? { 
+            backgroundImage: `linear-gradient(rgba(5, 17, 20, 0.6), rgba(5, 17, 20, 0.8)), url('${blog.coverUrl}')`, 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center' 
+          } : {}}
+        >
           <div className={styles.coverPattern} />
           
           <div className={styles.coverHeader}>
@@ -477,7 +484,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
 
           <div className={styles.coverFooter}>
             <span className={styles.coverSummit}>{blog.coverSub}</span>
-            <span className={styles.coverLink}>{blog.coverUrl}</span>
+            <span className={styles.coverLink}>{blog.coverUrl?.startsWith('/') ? 'View Source Article' : blog.coverUrl}</span>
           </div>
         </div>
 

@@ -1,14 +1,21 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './portal.module.css'
-import { Loader2, ArrowLeft } from 'lucide-react'
+import { Loader2, ArrowLeft, Trash2 } from 'lucide-react'
 import Link from 'next/link'
+import allBlogsData from '../../data/blogs.json'
 
 export default function AdminPortal() {
   const router = useRouter()
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [passcode, setPasscode] = useState('')
+  const [passcodeError, setPasscodeError] = useState(false)
+  
   const [loading, setLoading] = useState(false)
+  const [uploadingInline, setUploadingInline] = useState(false)
+  const [deletingId, setDeletingId] = useState<string | null>(null)
   const [status, setStatus] = useState<{ type: 'success' | 'error' | '', message: '' }>({ type: '', message: '' })
 
   const [formData, setFormData] = useState({
@@ -19,6 +26,47 @@ export default function AdminPortal() {
     content: ''
   })
   const [file, setFile] = useState<File | null>(null)
+
+  const [blogs, setBlogs] = useState(allBlogsData)
+
+  const handlePasscodeSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (passcode === '0313') {
+      setIsAuthenticated(true)
+      setPasscodeError(false)
+    } else {
+      setPasscodeError(true)
+      setPasscode('')
+    }
+  }
+
+  const handleDelete = async (id: string, title: string) => {
+    if (!confirm(`Are you sure you want to delete "${title}"?`)) return;
+    
+    setDeletingId(id)
+    setStatus({ type: '', message: '' })
+    
+    try {
+      const res = await fetch('/api/delete', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id })
+      })
+      const result = await res.json()
+      
+      if (res.ok) {
+        setStatus({ type: 'success', message: 'Blog deleted successfully!' })
+        // Update UI without reloading
+        setBlogs(prev => prev.filter(b => b.id !== id))
+      } else {
+        setStatus({ type: 'error', message: result.error || 'Failed to delete blog' })
+      }
+    } catch (err) {
+      setStatus({ type: 'error', message: 'Network error occurred' })
+    } finally {
+      setDeletingId(null)
+    }
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
@@ -68,6 +116,27 @@ export default function AdminPortal() {
     }
   }
 
+  if (!isAuthenticated) {
+    return (
+      <div className={styles.passcodeContainer}>
+        <form onSubmit={handlePasscodeSubmit} className={styles.passcodeCard}>
+          <h2>Admin Access</h2>
+          <p>Please enter the passcode to continue</p>
+          <input 
+            type="password" 
+            value={passcode} 
+            onChange={(e) => setPasscode(e.target.value)} 
+            placeholder="Enter passcode"
+            autoFocus
+          />
+          {passcodeError && <span className={styles.passcodeError}>Incorrect passcode</span>}
+          <button type="submit">Unlock</button>
+          <Link href="/" className={styles.passcodeBack}>Return to site</Link>
+        </form>
+      </div>
+    )
+  }
+
   return (
     <div className={styles.portalContainer}>
       <div className={styles.header}>
@@ -75,15 +144,19 @@ export default function AdminPortal() {
           <ArrowLeft size={20} /> Back to Home
         </Link>
         <h1>Admin Portal</h1>
-        <p>Add a new blog post and push it directly to Vercel.</p>
+        <p>Manage your blog posts here.</p>
       </div>
 
-      <form className={styles.formCard} onSubmit={handleSubmit}>
-        {status.message && (
+      {status.message && (
+        <div style={{ maxWidth: '800px', margin: '0 auto' }}>
           <div className={`${styles.alert} ${styles[status.type]}`}>
             {status.message}
           </div>
-        )}
+        </div>
+      )}
+
+      <form className={styles.formCard} onSubmit={handleSubmit}>
+        <h2 style={{ marginBottom: '20px', fontSize: '1.5rem' }}>Create New Blog</h2>
 
         <div className={styles.inputGroup}>
           <label>Blog Title</label>
@@ -117,14 +190,99 @@ export default function AdminPortal() {
         </div>
 
         <div className={styles.inputGroup}>
-          <label>Content (Markdown or HTML)</label>
-          <textarea name="content" value={formData.content} onChange={handleChange} required rows={10} placeholder="Write your blog content here..." />
+          <div className={styles.contentHeader}>
+            <label>Content (Markdown or HTML)</label>
+            <div className={styles.inlineImageUploader}>
+              <input 
+                type="file" 
+                accept="image/*" 
+                id="inlineImageInput"
+                style={{ display: 'none' }}
+                onChange={async (e) => {
+                  if (!e.target.files || !e.target.files[0]) return;
+                  const imgFile = e.target.files[0];
+                  setUploadingInline(true);
+                  const uploadData = new FormData();
+                  uploadData.append('file', imgFile);
+                  
+                  try {
+                    const res = await fetch('/api/upload-image', {
+                      method: 'POST',
+                      body: uploadData
+                    });
+                    const result = await res.json();
+                    if (res.ok && result.url) {
+                      const imageMarkdown = `\n![${imgFile.name}](${result.url})\n`;
+                      const textarea = document.getElementById('contentTextArea') as HTMLTextAreaElement;
+                      
+                      if (textarea) {
+                        const start = textarea.selectionStart;
+                        const end = textarea.selectionEnd;
+                        const text = formData.content;
+                        const before = text.substring(0, start);
+                        const after = text.substring(end, text.length);
+                        
+                        setFormData(prev => ({ ...prev, content: before + imageMarkdown + after }));
+                        
+                        setTimeout(() => {
+                          textarea.focus();
+                          textarea.setSelectionRange(start + imageMarkdown.length, start + imageMarkdown.length);
+                        }, 0);
+                      } else {
+                        setFormData(prev => ({ ...prev, content: prev.content + imageMarkdown }));
+                      }
+                      
+                      setStatus({ type: 'success', message: 'Image uploaded and inserted into content!' });
+                    } else {
+                      setStatus({ type: 'error', message: result.error || 'Failed to upload inline image' });
+                    }
+                  } catch (err) {
+                    setStatus({ type: 'error', message: 'Network error uploading inline image' });
+                  } finally {
+                    setUploadingInline(false);
+                    e.target.value = '';
+                  }
+                }}
+              />
+              <button 
+                type="button" 
+                className={styles.uploadInlineBtn}
+                disabled={uploadingInline}
+                onClick={() => document.getElementById('inlineImageInput')?.click()}
+              >
+                {uploadingInline ? <><Loader2 size={14} className={styles.spinner} /> Uploading...</> : '🖼️ Insert Image'}
+              </button>
+            </div>
+          </div>
+          <textarea id="contentTextArea" name="content" value={formData.content} onChange={handleChange} required rows={15} placeholder="Write your blog content here... Use markdown or HTML." />
         </div>
 
         <button type="submit" disabled={loading} className={styles.submitButton}>
           {loading ? <><Loader2 size={18} className={styles.spinner} /> Pushing to Vercel...</> : 'Publish to Vercel'}
         </button>
       </form>
+
+      <div className={styles.manageSection}>
+        <h2>Manage Blogs</h2>
+        <div className={styles.blogList}>
+          {blogs.map((blog) => (
+            <div key={blog.id} className={styles.blogItem}>
+              <div>
+                <h3>{blog.title}</h3>
+                <p>{blog.date} • {blog.category}</p>
+              </div>
+              <button 
+                className={styles.deleteBtn} 
+                onClick={() => handleDelete(blog.id, blog.title)}
+                disabled={deletingId === blog.id}
+              >
+                {deletingId === blog.id ? <Loader2 size={18} className={styles.spinner} /> : <><Trash2 size={18} /> Delete</>}
+              </button>
+            </div>
+          ))}
+          {blogs.length === 0 && <p className={styles.noBlogs}>No published blogs found.</p>}
+        </div>
+      </div>
     </div>
   )
 }

@@ -96,7 +96,13 @@ export async function POST(req: NextRequest) {
       patternType: 'orange', 
       gridClass: 'blogCardMedium', 
       coverUrl: imageUrl,
-      contentHtml: `<p>${content.replace(/\\n/g, '<br />')}</p>`,
+      contentHtml: (() => {
+        let html = content;
+        // Convert Markdown images to HTML
+        html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto; border-radius: 12px; margin: 20px 0; display: block;" />');
+        // Convert newlines to <br />
+        return `<p>${html.replace(/\n/g, '<br />')}</p>`;
+      })(),
       date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       author: {
         name: "Admin Contributor",
