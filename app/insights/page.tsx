@@ -17,53 +17,13 @@ type Blog = {
   gridClass: string
 }
 
-const allBlogs: Blog[] = [
-  {
-    id: 'creative-future-ministry',
-    title: "Institutionalizing India's Creative Future: The Case for a Dedicated Ministry",
-    excerpt: "The inaugural World Audio Visual & Entertainment Summit (WAVES) 2025, held in Mumbai, represents a landmark shift towards regulating and supporting India's booming creative economy affairs.",
-    category: "Policy",
-    readTime: "5 min read",
-    patternType: 'orange',
-    gridClass: styles.blogCardLarge
-  },
-  {
-    id: 'darshan-yatra-discovery',
-    title: "Viksit Bharat Darshan Yatra: Transforming Youth through Self-Discovery",
-    excerpt: "Fostering leadership and philosophical reflection through solo travel and deep civic engagements across the historic landscapes of Bharat.",
-    category: "Youth",
-    readTime: "6 min read",
-    patternType: 'cyan',
-    gridClass: styles.blogCardSmall
-  },
-  {
-    id: 'lifesite-classroom-paradigm',
-    title: "The LifeSite Paradigm: Evolving Beyond the Traditional Classroom",
-    excerpt: "Exploring an educational framework rooted in Bharatiya values that transcends standard schools and universities, empowering holistic development.",
-    category: "Education",
-    readTime: "8 min read",
-    patternType: 'yellow',
-    gridClass: styles.blogCardMedium
-  },
-  {
-    id: 'sva-bharat-movement-aspirations',
-    title: "Sva-Bharat Movement: Channelling the Collective Aspirations of a Nation",
-    excerpt: "How campus and regional ambassadors are coming together to shape public policy, youth leadership, and direct civic dialogues.",
-    category: "Movement",
-    readTime: "4 min read",
-    patternType: 'orange',
-    gridClass: styles.blogCardMedium
-  },
-  {
-    id: 'creative-economy-multiplier',
-    title: "Creative Economy: The Multiplier Effect for Bharat's Economic Growth",
-    excerpt: "Unlocking new opportunities in employment, tourism, exports, and social inclusion by integrating technology and indigenous arts into global pipelines.",
-    category: "Policy",
-    readTime: "7 min read",
-    patternType: 'cyan',
-    gridClass: styles.blogCardFull
-  }
-]
+import allBlogsData from '../data/blogs.json'
+
+const allBlogs = allBlogsData.map(blog => ({
+  ...blog,
+  patternType: blog.patternType as 'orange' | 'cyan' | 'yellow',
+  gridClass: styles[blog.gridClass] || ''
+})) as Blog[]
 
 function InsightsFooter() {
   return (
@@ -111,7 +71,7 @@ function InsightsFooter() {
       </div>
 
       <div className="sr-footer-bottom">
-        <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center</p>
+        <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center <Link href="/admin/portal" style={{ opacity: 0.8, color: '#ff4444', padding: '10px', display: 'inline-block', position: 'relative', zIndex: 9999, pointerEvents: 'auto' }}>.</Link></p>
       </div>
     </footer>
   )
@@ -140,7 +100,7 @@ export default function InsightsPage() {
   // Filtered blogs
   const filteredBlogs = allBlogs.filter((blog) => {
     const matchesCategory = selectedCategory === 'All' || blog.category === selectedCategory
-    const matchesSearch = 
+    const matchesSearch =
       blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       blog.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
     return matchesCategory && matchesSearch
@@ -251,10 +211,10 @@ export default function InsightsPage() {
                         <span className={styles.tag}>{blog.category}</span>
                         <span className={styles.readTime}>{blog.readTime}</span>
                       </div>
-                      
+
                       <h3 className={styles.cardTitle}>{blog.title}</h3>
                       <p className={styles.cardDesc}>{blog.excerpt}</p>
-                      
+
                       <div className={styles.cardFooter}>
                         <span>Read Full Insight</span>
                         <ArrowRight className={styles.arrowIcon} size={18} />
@@ -267,7 +227,7 @@ export default function InsightsPage() {
               <div className={styles.emptyState}>
                 <h3>No insights found</h3>
                 <p>We couldn't find any articles matching your search criteria. Try a different category or search term.</p>
-                <button 
+                <button
                   className={styles.clearSearchBtn}
                   onClick={() => { setSearchQuery(''); setSelectedCategory('All') }}
                 >
@@ -299,7 +259,7 @@ export default function InsightsPage() {
               <div className="sr-menu-brand">
                 <strong>SvaNiti Policy Research Center</strong>
               </div>
-              <button 
+              <button
                 className="sr-menu-close-btn"
                 onClick={() => setMenuOpen(false)}
                 aria-label="Close menu"
@@ -340,7 +300,7 @@ export default function InsightsPage() {
                 <span className="sr-divider-pipe">|</span>
                 <span>+91 90675 47325</span>
               </div>
-              <a 
+              <a
                 href="https://www.linkedin.com/company/svaniti-policy-research-center/"
                 target="_blank"
                 rel="noopener noreferrer"

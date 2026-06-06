@@ -315,10 +315,29 @@ const blogsData: Record<string, BlogDetails> = {
   }
 }
 
+import allBlogsData from '../../data/blogs.json'
+
 export default function BlogPostPage({ params }: { params: Promise<{ id: string }> }) {
   const resolvedParams = use(params)
   const id = resolvedParams.id
-  const blog = blogsData[id] || blogsData['creative-future-ministry']
+  
+  const oldBlog = blogsData[id]
+  const jsonBlog = allBlogsData.find(b => b.id === id)
+
+  const blog = oldBlog || (jsonBlog ? {
+    id: jsonBlog.id,
+    title: jsonBlog.title,
+    excerpt: jsonBlog.excerpt,
+    category: jsonBlog.category,
+    readTime: jsonBlog.readTime,
+    author: jsonBlog.author || { name: 'Admin', role: 'Guest', photo: '/logo.png' },
+    date: jsonBlog.date || 'Today',
+    coverTitle: jsonBlog.title,
+    coverSub: '',
+    coverUrl: jsonBlog.coverUrl || '',
+    contentHtml: <div dangerouslySetInnerHTML={{ __html: jsonBlog.contentHtml || `<p>${jsonBlog.excerpt}</p>` }} />
+  } : blogsData['creative-future-ministry'])
+
 
   const [menuOpen, setMenuOpen] = useState(false)
   const [liked, setLiked] = useState(false)
@@ -625,7 +644,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
         </div>
 
         <div className="sr-footer-bottom">
-          <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center</p>
+          <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center <Link href="/admin/portal" style={{ opacity: 0.8, color: '#ff4444', padding: '10px', display: 'inline-block', position: 'relative', zIndex: 9999, pointerEvents: 'auto' }}>.</Link></p>
         </div>
       </footer>
 

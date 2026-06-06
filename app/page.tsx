@@ -112,9 +112,9 @@ export default function Home() {
     offset: ["start end", "end start"]
   })
 
-  const photoScale = 1 
-  const photoOpacity = 1 
-  const photoY = 0 
+  const photoScale = 1
+  const photoOpacity = 1
+  const photoY = 0
   const testimonialOpacity = useTransform(photoScrollY, [0.5, 0.7], [0, 1])
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -362,7 +362,7 @@ export default function Home() {
           <div className="sr-test-right">
             <div className="sr-test-card-wrapper">
               <AnimatePresence mode="wait">
-                <motion.div 
+                <motion.div
                   key={testimonialIndex}
                   initial={{ opacity: 0, y: 30, scale: 0.97 }}
                   animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -383,14 +383,14 @@ export default function Home() {
             </div>
 
             <div className="sr-testimonial-nav">
-              <button 
+              <button
                 onClick={() => setTestimonialIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)}
                 className="sr-nav-btn"
                 aria-label="Previous testimonial"
               >
                 <ArrowLeft size={20} />
               </button>
-              <button 
+              <button
                 onClick={() => setTestimonialIndex((prev) => (prev + 1) % testimonials.length)}
                 className="sr-nav-btn"
                 aria-label="Next testimonial"
@@ -410,7 +410,7 @@ export default function Home() {
           </div>
           <div className="sr-footer-content">
             <h3>Contact us for any notion for nation</h3>
-            
+
             {/* Status Banner */}
             <AnimatePresence>
               {formMessage && (
@@ -526,10 +526,10 @@ export default function Home() {
               </div>
             </a>
             <div className="sr-footer-social">
-              <a 
-                href="https://www.linkedin.com/company/svaniti-policy-research-center/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.linkedin.com/company/svaniti-policy-research-center/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="sr-social-icon"
               >
                 in
@@ -538,7 +538,7 @@ export default function Home() {
           </div>
 
           <div className="sr-footer-mission">
-            <strong>Think-Tank for Education<br/>& Public Policy</strong>
+            <strong>Think-Tank for Education<br />& Public Policy</strong>
           </div>
 
           <div className="sr-footer-links">
@@ -553,16 +553,16 @@ export default function Home() {
           <div className="sr-footer-contact">
             <h4>Get In Touch</h4>
             <address>
-              I/Office Aadil Belim, Upleta,<br/>
-              Rajkot - 360-490, Gujarat, Bharat.<br/>
-              <a href="mailto:office@svaniti.in">office@svaniti.in</a><br/>
+              I/Office Aadil Belim, Upleta,<br />
+              Rajkot - 360-490, Gujarat, Bharat.<br />
+              <a href="mailto:office@svaniti.in">office@svaniti.in</a><br />
               +91 2826 358065
             </address>
           </div>
         </div>
 
         <div className="sr-footer-bottom">
-          <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center</p>
+          <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center <Link href="/admin/portal" style={{ opacity: 0.8, color: '#ff4444', padding: '10px', display: 'inline-block', position: 'relative', zIndex: 9999, pointerEvents: 'auto' }}>.</Link></p>
         </div>
       </footer>
 
@@ -584,7 +584,7 @@ export default function Home() {
               <div className="sr-menu-brand">
                 <strong>SvaNiti Policy Research Center</strong>
               </div>
-              <button 
+              <button
                 className="sr-menu-close-btn"
                 onClick={() => setMenuOpen(false)}
                 aria-label="Close menu"
@@ -630,7 +630,7 @@ export default function Home() {
                 <span className="sr-divider-pipe">|</span>
                 <span>+91 90675 47325</span>
               </div>
-              <a 
+              <a
                 href="https://www.linkedin.com/company/svaniti-policy-research-center/"
                 target="_blank"
                 rel="noopener noreferrer"
