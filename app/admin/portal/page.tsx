@@ -7,6 +7,22 @@ import { Loader2, ArrowLeft, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 import allBlogsData from '../../data/blogs.json'
 
+type BlogData = {
+  id: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  readTime: string;
+  date?: string;
+  author?: {
+    name: string;
+    role: string;
+    photo: string;
+  };
+  coverUrl?: string;
+  contentHtml?: string;
+};
+
 export default function AdminPortal() {
   const router = useRouter()
   const [isAuthenticated, setIsAuthenticated] = useState(false)
@@ -27,7 +43,7 @@ export default function AdminPortal() {
   })
   const [file, setFile] = useState<File | null>(null)
 
-  const [blogs, setBlogs] = useState(allBlogsData)
+  const [blogs, setBlogs] = useState<BlogData[]>(allBlogsData as BlogData[])
 
   const handlePasscodeSubmit = (e: React.FormEvent) => {
     e.preventDefault()
