@@ -1,22 +1,5 @@
 [
   {
-    "id": "testing-blog",
-    "title": "testing blog",
-    "excerpt": "test 1",
-    "category": "Policy",
-    "readTime": "5 min read",
-    "patternType": "orange",
-    "gridClass": "blogCardMedium",
-    "coverUrl": "/images/blogs/testing-blog-Screenshot_2026-06-06_at_9.17.51_PM.png",
-    "contentHtml": "<p>lorem helllo lel jsl\r<br /><img src=\"/images/blogs/inline/inline-1780772098049-Screenshot_2026-06-06_at_9.17.51_PM.png\" alt=\"Screenshot 2026-06-06 at 9.17.51 PM.png\" style=\"max-width: 100%; height: auto; border-radius: 12px; margin: 20px 0; display: block;\" />\r<br /></p>",
-    "date": "Jun 6, 2026",
-    "author": {
-      "name": "Admin Contributor",
-      "role": "Guest",
-      "photo": "/logo.png"
-    }
-  },
-  {
     "id": "test-blog",
     "title": "test blog",
     "excerpt": "test 1",
