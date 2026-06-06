@@ -322,7 +322,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
   const id = resolvedParams.id
   
   const oldBlog = blogsData[id]
-  const jsonBlog = allBlogsData.find(b => b.id === id)
+  const jsonBlog = (allBlogsData as any[]).find(b => b.id === id)
 
   const blog = oldBlog || (jsonBlog ? {
     id: jsonBlog.id,
