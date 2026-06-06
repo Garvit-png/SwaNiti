@@ -16,7 +16,7 @@ export default function AdminPortal() {
   const [loading, setLoading] = useState(false)
   const [uploadingInline, setUploadingInline] = useState(false)
   const [deletingId, setDeletingId] = useState<string | null>(null)
-  const [status, setStatus] = useState<{ type: 'success' | 'error' | '', message: '' }>({ type: '', message: '' })
+  const [status, setStatus] = useState<{ type: 'success' | 'error' | '', message: string }>({ type: '', message: '' })
 
   const [formData, setFormData] = useState({
     title: '',
