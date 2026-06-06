@@ -1,22 +1,5 @@
 [
   {
-    "id": "test-blog",
-    "title": "test blog",
-    "excerpt": "test 1",
-    "category": "Policy",
-    "readTime": "5 min read",
-    "patternType": "orange",
-    "gridClass": "blogCardMedium",
-    "coverUrl": "/images/blogs/test-blog-Screenshot_2026-06-06_at_4.40.50_PM.png",
-    "contentHtml": "<p>hello mark up photo\r<br />\r<br />\r<br /><img src=\"/images/blogs/inline/inline-1780765970852-Screenshot_2026-06-06_at_7.44.36_PM.png\" alt=\"Screenshot 2026-06-06 at 7.44.36 PM.png\" style=\"max-width: 100%; height: auto; border-radius: 12px; margin: 20px 0; display: block;\" />\r<br /></p>",
-    "date": "Jun 6, 2026",
-    "author": {
-      "name": "Admin Contributor",
-      "role": "Guest",
-      "photo": "/logo.png"
-    }
-  },
-  {
     "id": "creative-future-ministry",
     "title": "Institutionalizing India's Creative Future: The Case for a Dedicated Ministry",
     "excerpt": "The inaugural World Audio Visual & Entertainment Summit (WAVES) 2025, held in Mumbai, represents a landmark shift towards regulating and supporting India's booming creative economy affairs.",
