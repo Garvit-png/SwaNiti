@@ -1,6 +1,6 @@
 "use client"
 
-import { use, useState, useEffect } from 'react'
+import { use, useState, useEffect, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -41,6 +41,124 @@ type BlogDetails = {
   blogType?: 'editor' | 'medium' | 'pdf'
   mediumUrl?: string
   pdfUrl?: string
+}
+
+function PdfPage({ pdfDoc, pageNum }: { pdfDoc: any; pageNum: number }) {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    let active = true;
+    const renderPage = async () => {
+      try {
+        const page = await pdfDoc.getPage(pageNum);
+        // Use 1.8x scale for extremely crisp, high-resolution rendering
+        const viewport = page.getViewport({ scale: 1.8 });
+        
+        if (!active || !canvasRef.current) return;
+        const canvas = canvasRef.current;
+        const context = canvas.getContext('2d');
+        if (!context) return;
+
+        canvas.height = viewport.height;
+        canvas.width = viewport.width;
+
+        await page.render({
+          canvasContext: context,
+          viewport: viewport,
+        }).promise;
+      } catch (err) {
+        console.error('Error rendering PDF page:', err);
+      }
+    };
+
+    renderPage();
+    return () => {
+      active = false;
+    };
+  }, [pdfDoc, pageNum]);
+
+  return (
+    <canvas
+      ref={canvasRef}
+      style={{
+        width: '100%',
+        maxWidth: '900px',
+        height: 'auto',
+        boxShadow: '0 4px 24px rgba(0,0,0,0.06)',
+        borderRadius: '8px',
+        backgroundColor: '#ffffff'
+      }}
+    />
+  );
+}
+
+function PdfRenderer({ url }: { url: string }) {
+  const [pdfDoc, setPdfDoc] = useState<any>(null);
+  const [numPages, setNumPages] = useState<number>(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    const loadPdf = async () => {
+      try {
+        if (!(window as any).pdfjsLib) {
+          const script = document.createElement('script');
+          script.src = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js';
+          document.head.appendChild(script);
+          await new Promise((resolve) => {
+            script.onload = resolve;
+          });
+        }
+
+        const pdfjsLib = (window as any).pdfjsLib;
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        const pdf = await pdfjsLib.getDocument(url).promise;
+        if (active) {
+          setPdfDoc(pdf);
+          setNumPages(pdf.numPages);
+          setLoading(false);
+        }
+      } catch (err: any) {
+        console.error(err);
+        if (active) {
+          setError('Failed to load PDF document.');
+          setLoading(false);
+        }
+      }
+    };
+
+    loadPdf();
+    return () => {
+      active = false;
+    };
+  }, [url]);
+
+  if (loading) {
+    return (
+      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '80px 0', gap: '16px' }}>
+        <Loader2 className={styles.spinner} size={32} style={{ color: '#0B2228' }} />
+        <span style={{ fontFamily: 'var(--font-inter)', color: '#64748b' }}>Loading document pages...</span>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div style={{ padding: '40px', textAlign: 'center', color: '#ef4444', fontFamily: 'var(--font-inter)' }}>
+        {error}
+      </div>
+    );
+  }
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', width: '100%', alignItems: 'center', background: '#f8fafc', padding: '24px', borderRadius: '16px' }}>
+      {Array.from({ length: numPages }, (_, i) => (
+        <PdfPage key={i + 1} pdfDoc={pdfDoc} pageNum={i + 1} />
+      ))}
+    </div>
+  );
 }
 
 // Full Blog Post Content and Database
@@ -514,10 +632,9 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
               </a>
             </div>
           )}
-
           {blog.blogType === 'pdf' && (
             <div className={styles.pdfViewerContainer}>
-              <div className={styles.pdfDownloadBar}>
+              <div className={styles.pdfDownloadBar} style={{ marginBottom: '24px' }}>
                 <span className={styles.pdfDownloadText}>
                   Document: <strong>{blog.title}</strong> (PDF)
                 </span>
@@ -529,11 +646,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
                   Download PDF <Download size={14} />
                 </a>
               </div>
-              <iframe 
-                src={blog.pdfUrl} 
-                className={styles.pdfIframe} 
-                title={blog.title}
-              />
+              <PdfRenderer url={blog.pdfUrl || ''} />
             </div>
           )}
 

@@ -56,8 +56,8 @@ export default function AdminPortal() {
     excerpt: '',
     category: 'Policy',
     readTime: '5 min read',
-    authorName: 'Admin Contributor',
-    authorRole: 'Guest',
+    authorName: '',
+    authorRole: '',
   })
   const [coverFile, setCoverFile] = useState<File | null>(null)
   const [coverPreview, setCoverPreview] = useState<string | null>(null)
@@ -117,8 +117,8 @@ export default function AdminPortal() {
       excerpt: '',
       category: 'Policy',
       readTime: '5 min read',
-      authorName: 'Admin Contributor',
-      authorRole: 'Guest',
+      authorName: '',
+      authorRole: '',
     })
     setCoverFile(null)
     setCoverPreview(null)
@@ -295,7 +295,7 @@ export default function AdminPortal() {
           />
           {passcodeError && <span className={styles.passcodeError}>Incorrect passcode</span>}
           <button type="submit">Unlock</button>
-          <Link href="/" className={styles.passcodeBack}>Return to site</Link>
+          <a href="/" className={styles.passcodeBack}>Return to site</a>
         </form>
       </div>
     )
@@ -308,9 +308,9 @@ export default function AdminPortal() {
       <div className={styles.portalContainer}>
         {/* Header */}
         <div className={styles.header}>
-          <Link href="/" className={styles.backButton}>
+          <a href="/" className={styles.backButton}>
             <ArrowLeft size={18} /> Back to Home
-          </Link>
+          </a>
           <h1>Admin Portal</h1>
           <p>Create, edit, and manage your blog posts. Changes auto-deploy to Vercel.</p>
         </div>
@@ -383,12 +383,12 @@ export default function AdminPortal() {
 
                   <div className={styles.inputGroup}>
                     <label>Author Name</label>
-                    <input name="authorName" value={formData.authorName} onChange={handleChange} placeholder="Author name" />
+                    <input name="authorName" value={formData.authorName} onChange={handleChange} placeholder="Enter author's name" />
                   </div>
 
                   <div className={styles.inputGroup}>
-                    <label>Author Role</label>
-                    <input name="authorRole" value={formData.authorRole} onChange={handleChange} placeholder="e.g. Research Associate" />
+                    <label>Author Designation</label>
+                    <input name="authorRole" value={formData.authorRole} onChange={handleChange} placeholder="e.g. Research Associate / Director" />
                   </div>
 
                   <div className={`${styles.inputGroup} ${styles.metaGridFull}`}>
