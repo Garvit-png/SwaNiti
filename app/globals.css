@@ -1927,3 +1927,194 @@ a {
     opacity: 0.9;
   }
 }
+
+/* ========== ADMIN NAVBAR BUTTON ========== */
+.sr-admin-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(11, 34, 40, 0.08);
+  border: 1px solid rgba(11, 34, 40, 0.12);
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: var(--sr-ink);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font-inter);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  letter-spacing: 0.01em;
+}
+
+.sr-admin-nav-btn:hover {
+  background: rgba(11, 34, 40, 0.14);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(11, 34, 40, 0.12);
+}
+
+.sr-admin-nav-btn svg {
+  opacity: 0.7;
+  transition: transform 0.3s ease;
+}
+
+.sr-admin-nav-btn:hover svg {
+  transform: rotate(60deg);
+  opacity: 1;
+}
+
+/* ========== PASSCODE MODAL OVERLAY ========== */
+.sr-passcode-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 34, 40, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: srOverlayFadeIn 0.3s ease;
+  padding: 20px;
+}
+
+@keyframes srOverlayFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sr-passcode-modal {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  padding: 40px 36px 36px;
+  width: 100%;
+  max-width: 380px;
+  text-align: center;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255,255,255,0.2) inset;
+  animation: srModalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+@keyframes srModalSlideUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.sr-passcode-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(11, 34, 40, 0.06);
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--sr-ink);
+  opacity: 0.5;
+  transition: all 0.2s;
+}
+
+.sr-passcode-close:hover {
+  opacity: 1;
+  background: rgba(11, 34, 40, 0.1);
+}
+
+.sr-passcode-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #c8fbfb, #dfffe0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  color: var(--sr-ink);
+}
+
+.sr-passcode-modal h3 {
+  font-family: var(--font-lexend);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--sr-ink);
+  margin-bottom: 6px;
+}
+
+.sr-passcode-modal p {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-bottom: 24px;
+}
+
+.sr-passcode-modal input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 14px;
+  font-size: 1.3rem;
+  text-align: center;
+  letter-spacing: 0.3em;
+  font-family: var(--font-inter);
+  transition: all 0.25s;
+  background: rgba(248, 250, 252, 0.8);
+  margin-bottom: 12px;
+}
+
+.sr-passcode-modal input:focus {
+  outline: none;
+  border-color: #0B2228;
+  box-shadow: 0 0 0 4px rgba(11, 34, 40, 0.08);
+  background: #fff;
+}
+
+.sr-passcode-error {
+  display: block;
+  color: #ef4444;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.sr-passcode-submit {
+  width: 100%;
+  padding: 14px;
+  background: var(--sr-ink);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font-inter);
+  cursor: pointer;
+  transition: all 0.25s;
+  margin-top: 4px;
+}
+
+.sr-passcode-submit:hover {
+  background: #1a3a42;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(11, 34, 40, 0.25);
+}
+
+.sr-passcode-shake {
+  animation: srShake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes srShake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+
+/* Mobile: hide admin button text, keep icon */
+@media (max-width: 1024px) {
+  .sr-admin-nav-btn {
+    display: none;
+  }
+}

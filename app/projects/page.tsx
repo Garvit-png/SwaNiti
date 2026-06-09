@@ -93,7 +93,7 @@ function ProjectsFooter() {
       </div>
 
       <div className="sr-footer-bottom">
-        <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center <Link href="/admin/portal" style={{ opacity: 0.8, color: '#ff4444', padding: '10px', display: 'inline-block', position: 'relative', zIndex: 9999, pointerEvents: 'auto' }}>.</Link></p>
+        <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center</p>
       </div>
     </footer>
   )
