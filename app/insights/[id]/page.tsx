@@ -13,7 +13,9 @@ import {
   Copy, 
   Check, 
   MessageSquare, 
-  Loader2
+  Loader2,
+  ExternalLink,
+  Download
 } from 'lucide-react'
 import Navbar from '../../components/Navbar'
 import styles from './post.module.css'
@@ -36,6 +38,9 @@ type BlogDetails = {
   date: string
   author: Author
   contentHtml: React.ReactNode
+  blogType?: 'editor' | 'medium' | 'pdf'
+  mediumUrl?: string
+  pdfUrl?: string
 }
 
 // Full Blog Post Content and Database
@@ -335,6 +340,9 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
     coverTitle: jsonBlog.title,
     coverSub: '',
     coverUrl: jsonBlog.coverUrl || '',
+    blogType: jsonBlog.blogType || 'editor',
+    mediumUrl: jsonBlog.mediumUrl || '',
+    pdfUrl: jsonBlog.pdfUrl || '',
     contentHtml: <div dangerouslySetInnerHTML={{ __html: jsonBlog.contentHtml || `<p>${jsonBlog.excerpt}</p>` }} />
   } : blogsData['creative-future-ministry'])
 
@@ -490,7 +498,46 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
 
         {/* Article Body Content */}
         <div className={styles.bodyContent}>
-          {blog.contentHtml}
+          {blog.blogType === 'medium' && (
+            <div className={styles.mediumPreviewCard}>
+              <div className={styles.mediumTitle}>This article is published on Medium</div>
+              <p style={{ maxWidth: '600px', margin: '0 auto 20px', color: 'rgba(11, 34, 40, 0.7)' }}>
+                {blog.excerpt || 'Read the full publication and engage with the community directly on the Medium platform.'}
+              </p>
+              <a 
+                href={blog.mediumUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className={styles.mediumButton}
+              >
+                Read on Medium <ExternalLink size={16} />
+              </a>
+            </div>
+          )}
+
+          {blog.blogType === 'pdf' && (
+            <div className={styles.pdfViewerContainer}>
+              <div className={styles.pdfDownloadBar}>
+                <span className={styles.pdfDownloadText}>
+                  Document: <strong>{blog.title}</strong> (PDF)
+                </span>
+                <a 
+                  href={blog.pdfUrl} 
+                  download 
+                  className={styles.pdfDownloadBtn}
+                >
+                  Download PDF <Download size={14} />
+                </a>
+              </div>
+              <iframe 
+                src={blog.pdfUrl} 
+                className={styles.pdfIframe} 
+                title={blog.title}
+              />
+            </div>
+          )}
+
+          {(blog.blogType === 'editor' || !blog.blogType) && blog.contentHtml}
         </div>
 
         {/* Social Share & Likes Bar */}

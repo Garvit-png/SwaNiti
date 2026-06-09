@@ -27,6 +27,11 @@ export async function POST(req: NextRequest) {
     const existingId = formData.get('existingId') as string | null
     const existingCoverUrl = formData.get('existingCoverUrl') as string | null
 
+    const blogType = (formData.get('blogType') as string) || 'editor'
+    const mediumUrl = formData.get('mediumUrl') as string | null
+    const pdfFile = formData.get('pdfFile') as File | null
+    const existingPdfUrl = formData.get('existingPdfUrl') as string | null
+
     if (!title) {
       return NextResponse.json({ error: 'Title is required.' }, { status: 400 })
     }
@@ -91,6 +96,53 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // 1.5. Upload PDF Document if blogType is pdf and new pdfFile is provided
+    let pdfUrl = existingPdfUrl || ''
+    if (blogType === 'pdf' && pdfFile) {
+      const pdfBuffer = Buffer.from(await pdfFile.arrayBuffer())
+      const pdfName = `${id}-${pdfFile.name.replace(/[^a-zA-Z0-9.-]/g, '_')}`
+      const pdfPath = `public/documents/${pdfName}`
+      pdfUrl = `/documents/${pdfName}`
+
+      if (token) {
+        const base64Pdf = pdfBuffer.toString('base64')
+        let existingPdfSha = ''
+        try {
+          const checkRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${pdfPath}?ref=${branch}`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+          })
+          if (checkRes.ok) {
+            const checkData = await checkRes.json()
+            existingPdfSha = checkData.sha
+          }
+        } catch {}
+
+        const pdfRes = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${pdfPath}`, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: `Upload PDF for blog: ${title}`,
+            content: base64Pdf,
+            ...(existingPdfSha ? { sha: existingPdfSha } : {}),
+            branch
+          })
+        })
+
+        if (!pdfRes.ok) {
+          const err = await pdfRes.json()
+          return NextResponse.json({ error: 'Failed to upload PDF to GitHub: ' + err.message }, { status: 500 })
+        }
+      } else if (isDev) {
+        const fullPdfPath = path.join(process.cwd(), pdfPath)
+        const dir = path.dirname(fullPdfPath)
+        if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+        fs.writeFileSync(fullPdfPath, pdfBuffer)
+      }
+    }
+
     // 2. Update blogs.json
     const blogsJsonPath = 'app/data/blogs.json'
     let currentBlogs: any[] = []
@@ -116,11 +168,9 @@ export async function POST(req: NextRequest) {
 
     // Build the final contentHtml
     let finalHtml = ''
-    if (contentHtml) {
-      // Rich editor HTML — use directly
+    if (blogType === 'editor' && contentHtml) {
       finalHtml = contentHtml
-    } else if (content) {
-      // Legacy: markdown-like content
+    } else if (blogType === 'editor' && content) {
       let html = content
       html = html.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; height: auto; border-radius: 12px; margin: 20px 0; display: block;" />')
       finalHtml = `<p>${html.replace(/\n/g, '<br />')}</p>`
@@ -136,6 +186,9 @@ export async function POST(req: NextRequest) {
       gridClass: 'blogCardMedium', 
       coverUrl: imageUrl,
       contentHtml: finalHtml,
+      blogType,
+      mediumUrl: blogType === 'medium' ? mediumUrl : undefined,
+      pdfUrl: blogType === 'pdf' ? pdfUrl : undefined,
       date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
       author: {
         name: authorName,

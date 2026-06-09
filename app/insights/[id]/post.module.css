@@ -564,3 +564,99 @@
     justify-content: space-between;
   }
 }
+
+/* Medium Card & PDF Viewer Styles */
+.mediumPreviewCard {
+  background: rgba(11, 34, 40, 0.03);
+  border: 1px solid rgba(11, 34, 40, 0.08);
+  border-radius: 24px;
+  padding: 40px;
+  text-align: center;
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+}
+
+.mediumTitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--sr-ink);
+}
+
+.mediumButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #000;
+  color: #fff;
+  padding: 14px 28px;
+  border-radius: 30px;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+.mediumButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+  background: #1e1e1e;
+}
+
+.pdfViewerContainer {
+  width: 100%;
+  margin: 40px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pdfIframe {
+  width: 100%;
+  height: 700px;
+  border-radius: 20px;
+  border: 1px solid rgba(11, 34, 40, 0.1);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+
+.pdfDownloadBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: rgba(11, 34, 40, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(11, 34, 40, 0.08);
+}
+
+.pdfDownloadText {
+  font-family: var(--font-inter);
+  font-size: 0.95rem;
+  color: rgba(11, 34, 40, 0.7);
+}
+
+.pdfDownloadBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--sr-ink);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 24px;
+  text-decoration: none;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.pdfDownloadBtn:hover {
+  background: rgba(11, 34, 40, 0.85);
+  transform: translateY(-1px);
+}

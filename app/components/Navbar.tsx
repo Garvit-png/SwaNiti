@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -26,6 +26,11 @@ export default function Navbar({ activePath = '/', onMenuClick }: NavbarProps) {
 
   const handleAdminClick = (e: React.MouseEvent) => {
     e.preventDefault()
+    // If already authenticated this session, go directly
+    if (typeof window !== 'undefined' && sessionStorage.getItem('svaniti_admin') === 'true') {
+      router.push('/admin/portal')
+      return
+    }
     setShowPasscode(true)
     setPasscode('')
     setPasscodeError(false)
@@ -34,6 +39,10 @@ export default function Navbar({ activePath = '/', onMenuClick }: NavbarProps) {
   const handlePasscodeSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (passcode === '0313') {
+      // Store auth in sessionStorage (clears when browser tab closes)
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('svaniti_admin', 'true')
+      }
       setShowPasscode(false)
       setPasscodeError(false)
       router.push('/admin/portal')
