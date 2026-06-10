@@ -1460,11 +1460,44 @@ a {
   padding: 15px 40px;
   border-radius: 12px;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .sr-footer-bottom p {
   font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.sr-footer-admin-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--sr-white);
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: var(--font-inter);
+  letter-spacing: 0.02em;
+  transition: all 0.3s ease;
+}
+
+.sr-footer-admin-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.35);
+  transform: translateY(-1px);
+}
+
+.sr-footer-admin-btn:hover svg {
+  transform: rotate(60deg);
+}
+
+.sr-footer-admin-btn svg {
+  transition: transform 0.4s ease;
   opacity: 0.8;
 }
 
