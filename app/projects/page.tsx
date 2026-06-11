@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import styles from './projects.module.css'
 
 type Project = {
@@ -47,57 +48,6 @@ const projects: Project[] = [
     link: '/projects/creative-economy',
   },
 ]
-
-function ProjectsFooter() {
-  return (
-    <footer className="sr-site-footer">
-      <div className="sr-footer-main">
-        <div className="sr-footer-branding">
-          <Link href="/" className="sr-footer-logo-link">
-            <div className="sr-footer-logo-box">SvaNiti Policy Research Center</div>
-          </Link>
-          <div className="sr-footer-social">
-            <a
-              href="https://www.linkedin.com/company/svaniti-policy-research-center/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sr-social-icon"
-            >
-              in
-            </a>
-          </div>
-        </div>
-
-        <div className="sr-footer-mission">
-          <strong>Think-Tank for Education<br />& Public Policy</strong>
-        </div>
-
-        <div className="sr-footer-links">
-          <h4>What We Do</h4>
-          <ul>
-            <li><Link href="/about">About</Link></li>
-            <li><Link href="/projects">Projects</Link></li>
-            <li><Link href="/#contact">Contact us</Link></li>
-          </ul>
-        </div>
-
-        <div className="sr-footer-contact">
-          <h4>Get In Touch</h4>
-          <address>
-            I/Office Aadil Belim, Upleta,<br />
-            Rajkot - 360-490, Gujarat, Bharat.<br />
-            <a href="mailto:office@svaniti.in">office@svaniti.in</a><br />
-            +91 2826 358065
-          </address>
-        </div>
-      </div>
-
-      <div className="sr-footer-bottom">
-        <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center</p>
-      </div>
-    </footer>
-  )
-}
 
 export default function ProjectsPage() {
   const cardRefs = useRef<Array<HTMLElement | null>>([])
@@ -173,7 +123,7 @@ export default function ProjectsPage() {
         })}
       </section>
 
-      <ProjectsFooter />
+      <Footer />
     </main>
   )
 }
