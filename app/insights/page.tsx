@@ -19,7 +19,7 @@ type Blog = {
 
 import allBlogsData from '../data/blogs.json'
 
-const allBlogs = allBlogsData.map(blog => ({
+const allBlogs = (allBlogsData as any[]).map((blog: any) => ({
   ...blog,
   patternType: blog.patternType as 'orange' | 'cyan' | 'yellow',
   gridClass: styles[blog.gridClass] || ''
