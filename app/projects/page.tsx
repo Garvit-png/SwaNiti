@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import styles from './projects.module.css'
@@ -10,6 +11,8 @@ type Project = {
   tag: string
   title: string
   accent: string
+  image?: string
+  imagePosition?: string
   desc: string
   link: string
 }
@@ -19,6 +22,7 @@ const projects: Project[] = [
     tag: 'Movement',
     title: 'Sva-Bharat Movement',
     accent: '',
+    image: '/projects/svabharat.jpg',
     desc:
       'Change in Bharat begins with a movement, not just a policy. Channelling youth aspirations through regional and campus ambassadors to shape a transformative future.',
     link: '/projects/sva-bharat',
@@ -27,22 +31,26 @@ const projects: Project[] = [
     tag: 'Heritage',
     title: 'Viksit Bharat Darshan Yatra',
     accent: '',
+    image: '/projects/viksit.png',
     desc:
       'Honoring the PM\'s mission for a Developed India by 2047. Fostering self-discovery through solo, purposeful philosophical journeys for Viksit Yuva.',
     link: '/projects/darshan-yatra',
   },
   {
     tag: 'Education',
-    title: 'LifeSita (जीवन-स्थल) Conceptualization',
+    title: 'LifeSite (जीवन-स्थल) Conceptualization',
     accent: '',
+    image: '/projects/lifesite.png',
+    imagePosition: 'center 20%',
     desc:
       'Reimagining education beyond conventional schools and colleges. Adaptive, rooted in Bharatiya values, empowering holistic development and self-discovery.',
     link: '/projects/lifesite',
   },
   {
     tag: 'Economy',
-    title: 'Notion of Ministry of Creative Economy',
+    title: 'Notion of Ministry of Creative Economy Affairs',
     accent: '',
+    image: '/projects/economy.jpg',
     desc:
       'Establishing a dedicated institutional framework to strengthen the creative economy — empowering artists, innovators, and cultural entrepreneurs across Bharat.',
     link: '/projects/creative-economy',
@@ -116,7 +124,11 @@ export default function ProjectsPage() {
               </div>
 
               <div className={styles.accentBox} aria-hidden="true">
-                <span>{project.accent}</span>
+                {project.image ? (
+                  <Image src={project.image} alt={project.title} fill style={{ objectFit: 'cover', objectPosition: project.imagePosition || 'center' }} />
+                ) : (
+                  <span>{project.accent}</span>
+                )}
               </div>
             </article>
           )

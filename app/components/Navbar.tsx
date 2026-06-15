@@ -18,7 +18,7 @@ export default function Navbar({ activePath = '/', onMenuClick }: NavbarProps) {
     { label: 'About', href: '/about' },
     { label: 'Projects', href: '/projects' },
     { label: 'Insights', href: '/insights' },
-    { label: 'Governance', href: '/#' },
+    { label: 'Governance', href: '/governance' },
     { label: 'Admin', href: '/admin/portal' },
   ]
 
@@ -101,7 +101,7 @@ export default function Navbar({ activePath = '/', onMenuClick }: NavbarProps) {
                 { num: '01', label: 'About', href: '/about' },
                 { num: '02', label: 'Projects', href: '/projects' },
                 { num: '03', label: 'Insights', href: '/insights' },
-                { num: '04', label: 'Governance', href: '/#' },
+                { num: '04', label: 'Governance', href: '/governance' },
               ].map((item, index) => (
                 <Link
                   key={item.label}

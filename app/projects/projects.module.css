@@ -62,7 +62,7 @@
   display: flex;
   align-items: stretch;
   min-height: 360px;
-  background: #fffdf0;
+  background: var(--sr-yellow-light);
   border: 1.5px solid #1a1a1a;
   border-radius: 28px;
   overflow: hidden;
@@ -172,17 +172,17 @@
   justify-content: center;
   margin-top: 28px;
   padding: 12px 18px;
-  border: 1px solid #89c9ee;
+  border: 1px solid #000000;
   border-radius: 999px;
-  color: #2c6f91;
+  color: #000000;
   font-size: 0.9rem;
   font-weight: 600;
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
 .learnMore:hover {
-  background: #89c9ee;
-  color: #ffffff;
+  background: var(--sr-blue-light);
+  color: #000000;
   transform: translateY(-1px);
 }
 
@@ -245,10 +245,17 @@
 
   .number,
   .numberRight {
-    top: 4px;
-    left: 18px;
-    right: auto;
-    font-size: clamp(5.5rem, 22vw, 7rem);
+    top: 0px;
+    right: 20px;
+    left: auto;
+    font-size: clamp(4.5rem, 18vw, 6rem);
+    opacity: 0.15; /* Make it subtle so it doesn't clash with content */
+    z-index: 0;
+  }
+  
+  .tag, .content h2, .content p, .learnMore {
+    position: relative;
+    z-index: 1;
   }
 }
 
