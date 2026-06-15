@@ -18,7 +18,7 @@ const projects: Project[] = [
   {
     tag: 'Movement',
     title: 'Sva-Bharat Movement',
-    accent: 'स्व',
+    accent: '',
     desc:
       'Change in Bharat begins with a movement, not just a policy. Channelling youth aspirations through regional and campus ambassadors to shape a transformative future.',
     link: '/projects/sva-bharat',
@@ -26,7 +26,7 @@ const projects: Project[] = [
   {
     tag: 'Heritage',
     title: 'Viksit Bharat Darshan Yatra',
-    accent: 'यात्रा',
+    accent: '',
     desc:
       'Honoring the PM\'s mission for a Developed India by 2047. Fostering self-discovery through solo, purposeful philosophical journeys for Viksit Yuva.',
     link: '/projects/darshan-yatra',
@@ -34,7 +34,7 @@ const projects: Project[] = [
   {
     tag: 'Education',
     title: 'LifeSita (जीवन-स्थल) Conceptualization',
-    accent: 'ज्ञान',
+    accent: '',
     desc:
       'Reimagining education beyond conventional schools and colleges. Adaptive, rooted in Bharatiya values, empowering holistic development and self-discovery.',
     link: '/projects/lifesite',
@@ -42,7 +42,7 @@ const projects: Project[] = [
   {
     tag: 'Economy',
     title: 'Notion of Ministry of Creative Economy',
-    accent: 'सृजन',
+    accent: '',
     desc:
       'Establishing a dedicated institutional framework to strengthen the creative economy — empowering artists, innovators, and cultural entrepreneurs across Bharat.',
     link: '/projects/creative-economy',

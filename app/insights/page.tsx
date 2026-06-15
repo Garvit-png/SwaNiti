@@ -25,58 +25,7 @@ const allBlogs = allBlogsData.map(blog => ({
   gridClass: styles[blog.gridClass] || ''
 })) as Blog[]
 
-function InsightsFooter() {
-  return (
-    <footer className="sr-site-footer">
-      <div className="sr-footer-main">
-        <div className="sr-footer-branding">
-          <Link href="/" className="sr-footer-logo-link">
-            <div className="sr-footer-logo-box">SvaNiti Policy Research Center</div>
-          </Link>
-          <div className="sr-footer-social">
-            <a
-              href="https://www.linkedin.com/company/svaniti-policy-research-center/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="sr-social-icon"
-            >
-              in
-            </a>
-          </div>
-        </div>
-
-        <div className="sr-footer-mission">
-          <strong>Think-Tank for Education<br />& Public Policy</strong>
-        </div>
-
-        <div className="sr-footer-links">
-          <h4>What We Do</h4>
-          <ul>
-            <li><Link href="/about">About</Link></li>
-            <li><Link href="/projects">Projects</Link></li>
-            <li><Link href="/insights">Insights</Link></li>
-            <li><Link href="/#contact">Contact us</Link></li>
-          </ul>
-        </div>
-
-        <div className="sr-footer-contact">
-          <h4>Get In Touch</h4>
-          <address>
-            I/Office Aadil Belim, Upleta,<br />
-            Rajkot - 360-490, Gujarat, Bharat.<br />
-            <a href="mailto:office@svaniti.in">office@svaniti.in</a><br />
-            +91 2826 358065
-          </address>
-        </div>
-      </div>
-
-      <div className="sr-footer-bottom">
-        <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center</p>
-      </div>
-    </footer>
-  )
-}
-
+import Footer from '../components/Footer'
 export default function InsightsPage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -240,78 +189,9 @@ export default function InsightsPage() {
       </div>
 
       {/* FOOTER */}
-      <InsightsFooter />
+      <Footer />
 
-      {/* MOBILE MENU OVERLAY */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3, ease: 'easeOut' }}
-            className="sr-mobile-menu-overlay"
-          >
-            <div className="sr-menu-overlay-header">
-              <div className="sr-menu-logo-notch">
-                <img src="/logo.png" alt="SvaNiti Logo" width={44} height={44} />
-              </div>
-              <div className="sr-menu-brand">
-                <strong>SvaNiti Policy Research Center</strong>
-              </div>
-              <button
-                className="sr-menu-close-btn"
-                onClick={() => setMenuOpen(false)}
-                aria-label="Close menu"
-              >
-                X
-              </button>
-            </div>
 
-            <nav className="sr-menu-nav-links">
-              {[
-                { num: '01', label: 'About', href: '/about' },
-                { num: '02', label: 'Projects', href: '/projects' },
-                { num: '03', label: 'Insights', href: '/insights' },
-                { num: '04', label: 'Governance', href: '#' },
-              ].map((item, index) => (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="sr-menu-nav-item"
-                >
-                  <span className="sr-nav-num">{item.num}</span>
-                  <span className="sr-nav-text">{item.label}</span>
-                  <span className="sr-nav-arrow"><ArrowRight size={28} /></span>
-                </Link>
-              ))}
-            </nav>
-
-            <div className="sr-menu-footer">
-              <a className="sr-menu-join-btn" href="#" onClick={() => setMenuOpen(false)}>
-                Join Our Movement
-                <span className="sr-menu-arrow-box">
-                  <ArrowRight size={20} />
-                </span>
-              </a>
-              <div className="sr-menu-contact-info">
-                <span>office@svaniti.in</span>
-                <span className="sr-divider-pipe">|</span>
-                <span>+91 90675 47325</span>
-              </div>
-              <a
-                href="https://www.linkedin.com/company/svaniti-policy-research-center/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sr-menu-social-link"
-              >
-                LinkedIn
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </main>
   )
 }

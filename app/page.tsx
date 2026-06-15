@@ -7,6 +7,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 
 export default function Home() {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -560,65 +561,8 @@ export default function Home() {
       </section>
 
       {/* FINAL FOOTER */}
-      <footer className="sr-site-footer">
-        <div className="sr-footer-main">
-          <div className="sr-footer-branding">
-            <a href="#" className="sr-footer-logo-link">
-              <div className="sr-footer-logo-box">
-                SvaNiti Policy Research Center
-              </div>
-            </a>
-            <div className="sr-footer-social">
-              <a
-                href="https://www.linkedin.com/company/svaniti-policy-research-center/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sr-social-icon"
-              >
-                in
-              </a>
-            </div>
-          </div>
-
-          <div className="sr-footer-mission">
-            <strong>Think-Tank for Education<br />& Public Policy</strong>
-          </div>
-
-          <div className="sr-footer-links">
-            <h4>What We Do</h4>
-            <ul>
-              <li><a href="#about">About</a></li>
-              <li><a href="#about">Governance</a></li>
-              <li><a href="#contact">Contact us</a></li>
-            </ul>
-          </div>
-
-          <div className="sr-footer-contact">
-            <h4>Get In Touch</h4>
-            <address>
-              I/Office Aadil Belim, Upleta,<br />
-              Rajkot - 360-490, Gujarat, Bharat.<br />
-              <a href="mailto:office@svaniti.in">office@svaniti.in</a><br />
-              +91 2826 358065
-            </address>
-          </div>
-        </div>
-
-        <div className="sr-footer-bottom">
-          <p>© 2024-2028 by Creative Studio SvaNiti Policy Research Center</p>
-          <button
-            className="sr-footer-admin-btn"
-            onClick={handleAdminClick}
-            aria-label="Admin Portal"
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
-              <circle cx="12" cy="12" r="3"/>
-            </svg>
-            Admin Portal
-          </button>
-        </div>
-      </footer>
+      {/* FINAL FOOTER */}
+      <Footer />
 
       {/* ADMIN PASSCODE MODAL */}
       {showPasscode && (
@@ -663,82 +607,7 @@ export default function Home() {
         </div>
       )}
 
-      {/* CREATIVE MOBILE MENU OVERLAY */}
-      <AnimatePresence>
-        {menuOpen && (
-          <motion.div
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ type: 'tween', duration: 0.3, ease: 'easeOut' }}
-            className="sr-mobile-menu-overlay"
-          >
-            {/* Top Bar */}
-            <div className="sr-menu-overlay-header">
-              <div className="sr-menu-logo-notch">
-                <Image src="/logo.png" alt="SvaNiti Logo" width={44} height={44} />
-              </div>
-              <div className="sr-menu-brand">
-                <strong>SvaNiti Policy Research Center</strong>
-              </div>
-              <button
-                className="sr-menu-close-btn"
-                onClick={() => setMenuOpen(false)}
-                aria-label="Close menu"
-              >
-                X
-              </button>
-            </div>
 
-            {/* Nav Links */}
-            <nav className="sr-menu-nav-links">
-              {[
-                { num: '01', label: 'About', href: '/about' },
-                { num: '02', label: 'Projects', href: '#projects' },
-                { num: '03', label: 'Insights', href: '/insights' },
-                { num: '04', label: 'Governance', href: '#' },
-              ].map((item, index) => (
-                <motion.a
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + index * 0.05 }}
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => setMenuOpen(false)}
-                  className="sr-menu-nav-item"
-                >
-                  <span className="sr-nav-num">{item.num}</span>
-                  <span className="sr-nav-text">{item.label}</span>
-                  <span className="sr-nav-arrow"><ArrowRight size={28} /></span>
-                </motion.a>
-              ))}
-            </nav>
-
-            {/* Bottom Actions */}
-            <div className="sr-menu-footer">
-              <a className="sr-menu-join-btn" href="#" onClick={() => setMenuOpen(false)}>
-                Join Our Movement
-                <span className="sr-menu-arrow-box">
-                  <ArrowRight size={20} />
-                </span>
-              </a>
-              <div className="sr-menu-contact-info">
-                <span>office@svaniti.in</span>
-                <span className="sr-divider-pipe">|</span>
-                <span>+91 90675 47325</span>
-              </div>
-              <a
-                href="https://www.linkedin.com/company/svaniti-policy-research-center/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="sr-menu-social-link"
-              >
-                LinkedIn
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </main>
   )
 }

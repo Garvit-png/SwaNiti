@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import Image from 'next/image'
 import '../about.css'
 
@@ -193,6 +194,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+      <Footer />
     </main>
   )
 }
