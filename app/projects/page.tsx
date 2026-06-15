@@ -8,7 +8,6 @@ import Footer from '../components/Footer'
 import styles from './projects.module.css'
 
 type Project = {
-  tag: string
   title: string
   accent: string
   image?: string
@@ -19,7 +18,6 @@ type Project = {
 
 const projects: Project[] = [
   {
-    tag: 'Movement',
     title: 'Sva-Bharat Movement',
     accent: '',
     image: '/projects/svabharat.jpg',
@@ -28,7 +26,6 @@ const projects: Project[] = [
     link: '/projects/sva-bharat',
   },
   {
-    tag: 'Heritage',
     title: 'Viksit Bharat Darshan Yatra',
     accent: '',
     image: '/projects/viksit.png',
@@ -37,7 +34,6 @@ const projects: Project[] = [
     link: '/projects/darshan-yatra',
   },
   {
-    tag: 'Education',
     title: 'LifeSite (जीवन-स्थल) Conceptualization',
     accent: '',
     image: '/projects/lifesite.png',
@@ -47,7 +43,6 @@ const projects: Project[] = [
     link: '/projects/lifesite',
   },
   {
-    tag: 'Economy',
     title: 'Notion of Ministry of Creative Economy Affairs',
     accent: '',
     image: '/projects/economy.jpg',
