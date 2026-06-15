@@ -116,7 +116,6 @@ export default function ProjectsPage() {
                   {String(index + 1).padStart(2, '0')}
                 </div>
                 <span className={styles.tag}>{project.tag}</span>
-                <h2>{project.title}</h2>
                 <p>{project.desc}</p>
                 <Link href={project.link} className={styles.learnMore}>
                   Learn More →
@@ -125,10 +124,14 @@ export default function ProjectsPage() {
 
               <div className={styles.accentBox} aria-hidden="true">
                 {project.image ? (
-                  <Image src={project.image} alt={project.title} fill style={{ objectFit: 'cover', objectPosition: project.imagePosition || 'center' }} />
+                  <>
+                    <Image src={project.image} alt={project.title} fill style={{ objectFit: 'cover', objectPosition: project.imagePosition || 'center' }} />
+                    <div className={styles.imageOverlay}></div>
+                  </>
                 ) : (
                   <span>{project.accent}</span>
                 )}
+                <h2 className={styles.imageTitle}>{project.title}</h2>
               </div>
             </article>
           )
