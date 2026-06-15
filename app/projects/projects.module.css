@@ -246,6 +246,7 @@
   }
 
   .accentBox {
+    width: 100%;
     min-height: 360px;
     flex-basis: auto;
   }
@@ -315,6 +316,7 @@
   }
 
   .accentBox {
+    width: 100%;
     min-height: 320px;
   }
 

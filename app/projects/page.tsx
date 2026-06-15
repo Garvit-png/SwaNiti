@@ -115,7 +115,6 @@ export default function ProjectsPage() {
                 <div className={`${styles.number} ${isEven ? styles.numberRight : ''}`} aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}
                 </div>
-                <span className={styles.tag}>{project.tag}</span>
                 <p>{project.desc}</p>
                 <Link href={project.link} className={styles.learnMore}>
                   Learn More →
