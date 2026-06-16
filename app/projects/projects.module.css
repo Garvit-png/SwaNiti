@@ -234,7 +234,7 @@
   }
 
   .projectList {
-    width: min(100%, calc(100% - 24px));
+    width: min(100%, calc(100% - 48px));
   }
 
   .card,
@@ -272,7 +272,7 @@
 
 @media (max-width: 640px) {
   .heroSection {
-    padding: 12px 12px 0;
+    padding: 16px 20px 0;
   }
 
   .heroCard {
@@ -292,6 +292,7 @@
   }
 
   .projectList {
+    width: min(100%, calc(100% - 40px));
     gap: 28px;
     margin-top: 30px;
   }
