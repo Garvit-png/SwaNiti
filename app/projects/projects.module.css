@@ -260,12 +260,7 @@
 
   .number,
   .numberRight {
-    top: 0px;
-    right: 20px;
-    left: auto;
-    font-size: clamp(4.5rem, 18vw, 6rem);
-    opacity: 0.15; /* Make it subtle so it doesn't clash with content */
-    z-index: 0;
+    display: none;
   }
   
   .tag, .content h2, .content p, .learnMore {
@@ -315,7 +310,8 @@
   }
 
   .content p {
-    font-size: 1.05rem;
+    font-size: 1rem;
+    margin-bottom: 24px;
   }
 
   .accentBox {
@@ -324,6 +320,7 @@
   }
 
   .learnMore {
-    width: 100%;
+    width: auto;
+    align-self: flex-start;
   }
 }

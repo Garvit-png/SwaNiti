@@ -423,3 +423,28 @@
     height: 36px;
   }
 }
+
+@media (max-width: 640px) {
+  .documentListOuter {
+    padding: 0 0 10px 10px;
+  }
+  .threadCurveOrigin {
+    left: 20px;
+  }
+  .documentList {
+    padding-left: 36px;
+  }
+  .documentRow {
+    padding-bottom: 60px;
+  }
+  .docInfoBox {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
+  }
+  .downloadBtn {
+    width: 100%;
+    justify-content: center;
+  }
+}

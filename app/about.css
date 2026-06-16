@@ -426,7 +426,13 @@
   opacity: 0;
 }
 
-.sr-team-card:hover .sr-team-photo-hover {
+@media (hover: hover) {
+  .sr-team-card:hover .sr-team-photo-hover {
+    opacity: 1;
+  }
+}
+
+.sr-team-card:active .sr-team-photo-hover {
   opacity: 1;
 }
 
