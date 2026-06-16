@@ -238,7 +238,7 @@
 
   .card,
   .cardReverse {
-    flex-direction: column;
+    flex-direction: column-reverse;
     min-height: auto;
   }
 
@@ -250,7 +250,7 @@
 
   .accentBox {
     width: 100%;
-    min-height: 360px;
+    min-height: 280px;
     flex-basis: auto;
   }
 
@@ -316,7 +316,7 @@
 
   .accentBox {
     width: 100%;
-    min-height: 320px;
+    min-height: 240px;
   }
 
   .learnMore {
