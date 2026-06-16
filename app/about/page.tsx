@@ -8,6 +8,7 @@ import '../about.css'
 
 export default function AboutPage() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [tappedCard, setTappedCard] = useState<number | null>(null)
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
@@ -142,8 +143,9 @@ export default function AboutPage() {
                 <div
                   key={i}
                   ref={(el) => { cardRefs.current[i] = el }}
-                  className="sr-team-card"
+                  className={`sr-team-card${tappedCard === i ? ' tapped' : ''}`}
                   style={{ ['--delay' as any]: `${i * 120}ms` }}
+                  onClick={() => setTappedCard(tappedCard === i ? null : i)}
                 >
                   <div className="sr-team-photo-col">
                     <Image src={member.photo || '/avatar-placeholder.svg'} alt={member.name} fill className="sr-team-photo-base" unoptimized />

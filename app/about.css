@@ -437,8 +437,12 @@
 }
 
 @media (max-width: 1024px) {
-  .sr-team-photo-hover {
-    display: none !important;
+  .sr-team-card .sr-team-photo-hover {
+    opacity: 0;
+    transition: opacity 0.45s ease-in-out;
+  }
+  .sr-team-card.tapped .sr-team-photo-hover {
+    opacity: 1;
   }
 }
 
