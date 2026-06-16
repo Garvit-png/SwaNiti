@@ -1,7 +1,6 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import { ArrowRight } from 'lucide-react'
-import Link from 'next/link'
+import TimelineAccordion from './TimelineAccordion'
 import styles from './governance.module.css'
 
 export default function GovernancePage() {
@@ -81,45 +80,7 @@ export default function GovernancePage() {
 
       <section className={styles.timelineSection}>
         <div className={styles.timelineInner}>
-          <Link href="#" className={styles.timelinePill}>
-            <div className={styles.pillLeft}>
-              <span className={styles.pillNum}>01</span>
-              <span className={styles.pillTitle}>2021-2022</span>
-            </div>
-            <div className={styles.pillArrow}>
-              <ArrowRight strokeWidth={1.5} size={24} />
-            </div>
-          </Link>
-          
-          <Link href="#" className={styles.timelinePill}>
-            <div className={styles.pillLeft}>
-              <span className={styles.pillNum}>02</span>
-              <span className={styles.pillTitle}>Project Title</span>
-            </div>
-            <div className={styles.pillArrow}>
-              <ArrowRight strokeWidth={1.5} size={24} />
-            </div>
-          </Link>
-
-          <Link href="#" className={styles.timelinePill}>
-            <div className={styles.pillLeft}>
-              <span className={styles.pillNum}>03</span>
-              <span className={styles.pillTitle}>Project Title</span>
-            </div>
-            <div className={styles.pillArrow}>
-              <ArrowRight strokeWidth={1.5} size={24} />
-            </div>
-          </Link>
-
-          <Link href="#" className={styles.timelinePill}>
-            <div className={styles.pillLeft}>
-              <span className={styles.pillNum}>04</span>
-              <span className={styles.pillTitle}>Project Title</span>
-            </div>
-            <div className={styles.pillArrow}>
-              <ArrowRight strokeWidth={1.5} size={24} />
-            </div>
-          </Link>
+          <TimelineAccordion />
         </div>
       </section>
 

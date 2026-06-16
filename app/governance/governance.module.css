@@ -140,6 +140,10 @@
   color: #0f2429;
   background: #c8fbfb;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  width: 100%;
+  cursor: pointer;
+  z-index: 2;
+  position: relative;
 }
 
 .timelinePill:hover {
@@ -175,6 +179,191 @@
   align-items: center;
   justify-content: center;
   color: #000;
+  transition: transform 0.3s ease;
+}
+
+.arrowOpen {
+  transform: rotate(90deg);
+}
+
+/* Accordion Dropdown Styles */
+.accordionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.accordionItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.accordionContent {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+  opacity: 0;
+}
+
+.contentOpen {
+  max-height: 1000px;
+  opacity: 1;
+}
+
+.documentListOuter {
+  padding: 0 0 20px 40px;
+  position: relative;
+  display: flex;
+}
+
+.threadCurveOrigin {
+  position: absolute;
+  top: -30px;
+  left: 60px;
+  width: 24px;
+  height: 50px;
+  border-bottom-left-radius: 20px;
+  border-left: 2px dashed rgba(0, 119, 182, 0.4);
+  border-bottom: 2px dashed rgba(0, 119, 182, 0.4);
+}
+
+.documentList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 84px;
+  padding-top: 12px;
+}
+
+.documentRow {
+  display: flex;
+  gap: 24px;
+  position: relative;
+  padding-bottom: 120px;
+}
+
+.documentRow:last-child {
+  padding-bottom: 0;
+}
+
+.docPathConnector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 16px;
+  position: absolute;
+  left: -32px;
+  top: 24px;
+  bottom: -16px;
+}
+
+.documentRow:last-child .docPathConnector {
+  bottom: auto;
+  height: 16px;
+}
+
+.docDot {
+  width: 12px;
+  height: 12px;
+  background: #0077b5;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 0 4px var(--sr-blue-light);
+  transition: all 0.3s ease;
+}
+
+.docDotActive {
+  background: #0ea5e9; /* Brighter blue glow */
+  box-shadow: 0 0 0 6px rgba(14, 165, 233, 0.3);
+  transform: scale(1.2);
+}
+
+.docLine {
+  width: 2px;
+  flex-grow: 1;
+  background-image: linear-gradient(to bottom, rgba(0, 119, 182, 0.4) 50%, transparent 50%);
+  background-size: 2px 10px;
+  background-repeat: repeat-y;
+  margin-top: 4px;
+  background-color: transparent;
+  transition: background-color 0.8s ease-in-out, background-image 0.8s ease-in-out;
+}
+
+.docLineActive {
+  background-image: linear-gradient(to bottom, #0ea5e9 50%, transparent 50%);
+}
+
+.docLineSolid {
+  background-color: #0ea5e9;
+  background-image: linear-gradient(to bottom, #0ea5e9 50%, transparent 50%); /* keep same image so background-color fades in behind it seamlessly */
+}
+
+.docInfoBox {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-grow: 1;
+  border: 1px solid rgba(0,0,0,0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.docInfoBox:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.docIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #f0fdfd;
+  color: #0077b5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.docDetails {
+  flex-grow: 1;
+}
+
+.docDetails h4 {
+  font-family: var(--font-lexend), sans-serif;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #0f2429;
+  margin: 0 0 4px 0;
+}
+
+.docDetails p {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.downloadBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 99px;
+  background: #0f2429;
+  color: #ffffff;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.downloadBtn:hover {
+  background: #0077b5;
 }
 
 @media (max-width: 1024px) {
