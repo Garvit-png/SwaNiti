@@ -106,6 +106,8 @@
 .content {
   flex-basis: 60%;
   padding: 48px 42px 42px 48px;
+  display: flex;
+  flex-direction: column;
 }
 
 .contentReverse {
@@ -155,21 +157,22 @@
 
 .learnMore {
   position: relative;
-  display: inline-block;
-  margin-top: 28px;
-  padding: 12px 28px;
-  border: 1px solid #000000;
-  border-radius: 4px;
-  color: #000000;
-  font-size: 0.9rem;
-  font-weight: 600;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  align-self: flex-end;
+  margin-top: auto;
+  padding: 14px 32px;
+  background: var(--sr-ink);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .learnMore:hover {
-  background: var(--sr-blue-light);
-  color: #000000;
-  transform: translateY(-1px);
+  background: var(--sr-ink);
+  color: #ffffff;
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(15, 36, 41, 0.15);
 }
 
 .accentBox {

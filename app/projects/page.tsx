@@ -31,7 +31,7 @@ const projects: Project[] = [
     image: '/projects/viksit.png',
     desc:
       'Honoring the PM\'s mission for a Developed India by 2047. Fostering self-discovery through solo, purposeful philosophical journeys for Viksit Yuva.',
-    link: '/projects/darshan-yatra',
+    link: 'https://www.viksitbharatyatra.com/',
   },
   {
     title: 'LifeSite (जीवन-स्थल) Conceptualization',

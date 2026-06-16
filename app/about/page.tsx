@@ -133,38 +133,42 @@ export default function AboutPage() {
               <div className="sr-notch-tab">Our Team</div>
             </div>
             <div className="sr-team-grid">
-            {[
-              { name: 'Aadil Belim', role: 'Founder &\nChief Vision Officer', photo: '/adil.png' },
-              { name: 'Uzma A', role: 'Director &\nChief Culture Officer', photo: '/uzma.jpg' },
-              { name: 'Akshit Gadhia', role: 'Compliance Officer', photo: '/akshit.jpg' },
-              { name: 'Sagar Narayan', role: 'Research Associate', photo: '/sagar.jpg' }
-            ].map((member, i) => (
-              <div
-                key={i}
-                ref={(el) => { cardRefs.current[i] = el }}
-                className="sr-team-card"
-                style={{ ['--delay' as any]: `${i * 120}ms` }}
-              >
-                <div className="sr-team-photo-col">
-                  <Image src={member.photo || '/avatar-placeholder.svg'} alt={member.name} width={400} height={400} />
-                </div>
-                <div className="sr-team-info-col">
-                  <div className="sr-team-info-top">
-                    <h4>{member.name}</h4>
-                    <p>{member.role}</p>
+              {[
+                { name: 'Aadil Belim', role: 'Founder &\nChief Vision Officer', photo: '/adil.png', link: 'https://www.linkedin.com/in/aadilniti/' },
+                { name: 'Uzma A', role: 'Director &\nChief Culture Officer', photo: '/uzma.jpg', link: 'https://www.linkedin.com/in/uzma-belim-45577a229?utm_source=share_via&utm_content=profile&utm_medium=member_android' },
+                { name: 'Akshit Gadhia', role: 'Compliance Officer', photo: '/akshit.jpg', link: 'https://www.linkedin.com/in/akshit-gadhia-b380a2180/' },
+                { name: 'Sagar Narayan', role: 'Research Associate', photo: '/sagar.jpg', link: 'https://www.linkedin.com/in/sagarnaarayan/' }
+              ].map((member, i) => (
+                <div
+                  key={i}
+                  ref={(el) => { cardRefs.current[i] = el }}
+                  className="sr-team-card"
+                  style={{ ['--delay' as any]: `${i * 120}ms` }}
+                >
+                  <div className="sr-team-photo-col">
+                    <Image src={member.photo || '/avatar-placeholder.svg'} alt={member.name} width={400} height={400} />
                   </div>
-                  <div className="sr-team-email-row">
-                    LinkedIn
-                    <div className="sr-email-btn">
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                        <polyline points="12 5 19 12 12 19"></polyline>
-                      </svg>
+                  <div className="sr-team-info-col">
+                    <div className="sr-team-info-top">
+                      <h4>{member.name}</h4>
+                      <p>{member.role}</p>
+                    </div>
+                    <div className="sr-team-email-row">
+                      {member.link ? (
+                        <a href={member.link} target="_blank" rel="noopener noreferrer">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="#0077b5">
+                            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                          </svg>
+                        </a>
+                      ) : (
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="#0077b5">
+                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                      )}
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
             </div>
           </div>
         </div>
