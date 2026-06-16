@@ -154,7 +154,6 @@ export default function AboutPage() {
                         fill 
                         className="sr-team-photo-hover" 
                         unoptimized 
-                        style={member.hoverTransform ? { transform: member.hoverTransform } : undefined}
                       />
                     )}
                   </div>
