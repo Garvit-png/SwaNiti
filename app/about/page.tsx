@@ -60,7 +60,9 @@ export default function AboutPage() {
       <section className="sr-page">
         <div className="sr-approach-wrapper">
           <div className="sr-approach-container">
-            <div className="sr-approach-badge">Our Approach</div>
+            <div className="sr-notch-tab-wrapper">
+              <div className="sr-notch-tab">Our Approach</div>
+            </div>
             <div className="sr-approach-grid">
               <div className="sr-approach-card">
                 <h3>01 / First Principles</h3>
@@ -127,14 +129,14 @@ export default function AboutPage() {
       <section className="sr-team-section">
         <div className="sr-team-outer">
           <div className="sr-team-container">
-            <div className="sr-team-badge">Our Core Team</div>
+            <div className="sr-notch-tab-wrapper">
+              <div className="sr-notch-tab">Our Team</div>
+            </div>
             <div className="sr-team-grid">
             {[
               { name: 'Aadil Belim', role: 'Founder &\nChief Vision Officer', photo: '/adil.png' },
               { name: 'Uzma A', role: 'Director &\nChief Culture Officer', photo: '/uzma.jpg' },
-              { name: 'Eshaak J', role: 'Research Associate Creative\nEconomy', photo: '/eshaak.jpg' },
               { name: 'Akshit Gadhia', role: 'Compliance Officer', photo: '/akshit.jpg' },
-              { name: 'Amin Belim', role: 'Non-Executive Director', photo: '/amin.jpg' },
               { name: 'Sagar Narayan', role: 'Research Associate', photo: '/sagar.jpg' }
             ].map((member, i) => (
               <div
@@ -152,7 +154,7 @@ export default function AboutPage() {
                     <p>{member.role}</p>
                   </div>
                   <div className="sr-team-email-row">
-                    Email
+                    LinkedIn
                     <div className="sr-email-btn">
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -172,7 +174,9 @@ export default function AboutPage() {
       <section className="sr-page">
         <div className="sr-partners-wrapper">
           <div className="sr-partners-container">
-            <div className="sr-partners-badge">Collaborations &amp; Engagements</div>
+            <div className="sr-notch-tab-wrapper">
+              <div className="sr-notch-tab">Collaborations &amp; Engagements</div>
+            </div>
             <div className="sr-partners-grid">
               <div className="sr-partner-card">
                 <h4>PBC 2024</h4>

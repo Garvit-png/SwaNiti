@@ -107,9 +107,6 @@ export default function ProjectsPage() {
               style={{ '--card-delay': `${index * 0.1}s` } as React.CSSProperties}
             >
               <div className={`${styles.content} ${isEven ? styles.contentReverse : ''}`}>
-                <div className={`${styles.number} ${isEven ? styles.numberRight : ''}`} aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </div>
                 <p>{project.desc}</p>
                 <Link href={project.link} className={styles.learnMore}>
                   Learn More →

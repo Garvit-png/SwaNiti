@@ -19,7 +19,6 @@ export default function Navbar({ activePath = '/', onMenuClick }: NavbarProps) {
     { label: 'Projects', href: '/projects' },
     { label: 'Insights', href: '/insights' },
     { label: 'Governance', href: '/governance' },
-    { label: 'Admin', href: '/admin/portal' },
   ]
 
 
