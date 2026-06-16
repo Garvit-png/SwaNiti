@@ -36,24 +36,21 @@ const TIMELINE_DATA = [
 export default function TimelineAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [activeRow, setActiveRow] = useState<string | null>(null)
-  const pillRefs = useRef<(HTMLButtonElement | null)[]>([])
+  const observerRef = useRef<IntersectionObserver | null>(null)
 
-  const toggleSection = (index: number) => {
-    const isClosing = openIndex === index
-    setOpenIndex(isClosing ? null : index)
+  const toggleSection = (index: number, e: React.MouseEvent<HTMLButtonElement>) => {
+    const isOpening = openIndex !== index
+    setOpenIndex(isOpening ? index : null)
 
-    // When opening, gently nudge the pill into view after the accordion starts expanding
-    if (!isClosing) {
+    if (isOpening && window.innerWidth <= 1024) {
+      const btn = e.currentTarget
       setTimeout(() => {
-        const pill = pillRefs.current[index]
-        if (pill) {
-          const rect = pill.getBoundingClientRect()
-          // Only scroll if the pill is partially above the viewport
-          if (rect.top < 80) {
-            window.scrollBy({ top: rect.top - 100, behavior: 'smooth' })
-          }
-        }
-      }, 150)
+        // Find where the button ended up after other sections collapsed
+        const rect = btn.getBoundingClientRect()
+        // Scroll smoothly so the button is about 30% from the top of the screen
+        const targetTop = rect.top - (window.innerHeight * 0.3)
+        window.scrollBy({ top: targetTop, behavior: 'smooth' })
+      }, 350) // Wait for CSS transition (accordion collapse) to finish
     }
   }
 
@@ -93,7 +90,7 @@ export default function TimelineAccordion() {
           <div key={section.id} className={`${styles.accordionItem} ${isOpen ? styles.isOpen : ''}`}>
             <button 
               className={styles.timelinePill} 
-              onClick={() => toggleSection(index)}
+              onClick={(e) => toggleSection(index, e)}
               aria-expanded={isOpen}
             >
               <div className={styles.pillLeft}>
