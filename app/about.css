@@ -436,6 +436,12 @@
   opacity: 1;
 }
 
+@media (max-width: 1024px) {
+  .sr-team-photo-hover {
+    display: none !important;
+  }
+}
+
 .sr-team-info-col {
   width: 100%;
   padding: 20px;
