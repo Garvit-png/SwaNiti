@@ -3,6 +3,7 @@
   background: #fdfcf7;
   color: #374151;
   padding-bottom: 40px;
+  overflow-x: hidden;
 }
 
 .heroSection {
