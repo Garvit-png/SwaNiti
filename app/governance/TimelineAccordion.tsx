@@ -36,10 +36,25 @@ const TIMELINE_DATA = [
 export default function TimelineAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   const [activeRow, setActiveRow] = useState<string | null>(null)
-  const observerRef = useRef<IntersectionObserver | null>(null)
+  const pillRefs = useRef<(HTMLButtonElement | null)[]>([])
 
   const toggleSection = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index)
+    const isClosing = openIndex === index
+    setOpenIndex(isClosing ? null : index)
+
+    // When opening, gently nudge the pill into view after the accordion starts expanding
+    if (!isClosing) {
+      setTimeout(() => {
+        const pill = pillRefs.current[index]
+        if (pill) {
+          const rect = pill.getBoundingClientRect()
+          // Only scroll if the pill is partially above the viewport
+          if (rect.top < 80) {
+            window.scrollBy({ top: rect.top - 100, behavior: 'smooth' })
+          }
+        }
+      }, 150)
+    }
   }
 
   useEffect(() => {
