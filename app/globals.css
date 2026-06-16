@@ -2150,3 +2150,103 @@ a {
     display: none;
   }
 }
+
+/* FLOATING NAVBAR STYLES */
+.sr-floating-nav-wrapper {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 9990;
+  pointer-events: none;
+}
+
+.sr-floating-nav {
+  pointer-events: auto;
+  width: min(800px, calc(100% - 32px));
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(0,0,0,0.05);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px 8px 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+}
+
+.sr-floating-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.sr-floating-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.sr-floating-links a {
+  font-family: var(--font-lexend), sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #4b5563;
+  text-decoration: none;
+  padding: 8px 20px;
+  border-radius: 999px;
+  transition: background 0.2s, transform 0.2s, color 0.2s;
+}
+
+.sr-floating-links a:hover {
+  background: #fdf5e6; /* Soft cream beige */
+  color: var(--sr-ink);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(11, 34, 40, 0.08);
+}
+
+.sr-floating-links a.active {
+  color: var(--sr-ink);
+  background: var(--sr-yellow-light);
+}
+
+.sr-floating-menu-btn {
+  display: none;
+  background: var(--sr-ink);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.sr-floating-menu-btn:hover {
+  transform: scale(1.05);
+  background: #000;
+}
+
+@media (max-width: 768px) {
+  .sr-floating-nav {
+    padding: 8px 10px;
+    width: max-content;
+    gap: 20px;
+  }
+  .sr-floating-links {
+    display: none;
+  }
+  .sr-floating-menu-btn {
+    display: flex;
+  }
+}
+

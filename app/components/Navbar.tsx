@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
@@ -16,9 +16,31 @@ interface NavbarProps {
 export default function Navbar({ activePath = '/', onMenuClick }: NavbarProps) {
   const [menuOpen, setMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const lastScrollY = useRef(0)
 
   useEffect(() => {
     setMounted(true)
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+
+      if (currentScrollY > 300) {
+        if (currentScrollY < lastScrollY.current) {
+          // Scrolling up
+          setScrolled(true)
+        } else if (currentScrollY > lastScrollY.current + 5) {
+          // Scrolling down (with a tiny threshold)
+          setScrolled(false)
+        }
+      } else {
+        setScrolled(false)
+      }
+
+      lastScrollY.current = currentScrollY
+    }
+    
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
   const navLinks = [
@@ -73,6 +95,50 @@ export default function Navbar({ activePath = '/', onMenuClick }: NavbarProps) {
           </svg>
         </button>
       </header>
+
+      {/* FLOATING NAVBAR (appears on scroll) */}
+      {mounted && createPortal(
+        <AnimatePresence>
+          {scrolled && (
+            <div className="sr-floating-nav-wrapper">
+              <motion.div
+                initial={{ y: '-150%', opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: '-150%', opacity: 0 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                className="sr-floating-nav"
+              >
+                <Link href="/" className="sr-floating-logo">
+                  <Image src="/logo.png" alt="Logo" width={38} height={38} />
+                </Link>
+                <nav className="sr-floating-links">
+                  {navLinks.map((link) => (
+                    <Link 
+                      key={link.label} 
+                      href={link.href}
+                      className={activePath === link.href ? 'active' : ''}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </nav>
+                <button 
+                  className="sr-floating-menu-btn" 
+                  aria-label="Menu"
+                  onClick={() => setMenuOpen(true)}
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                  </svg>
+                </button>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
 
       {mounted && createPortal(
         <AnimatePresence>
