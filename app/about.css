@@ -339,7 +339,6 @@
 }
 
 .sr-team-card:hover {
-  transform: translateY(-6px);
   box-shadow: 0 22px 40px rgba(11,34,40,0.12);
 }
 
@@ -417,7 +416,7 @@
   height: 100%;
   object-fit: cover;
   object-position: center 15%; /* prioritize faces */
-  transition: opacity 0.4s ease;
+  transition: opacity 0.45s ease-in-out;
 }
 
 .sr-team-photo-hover {

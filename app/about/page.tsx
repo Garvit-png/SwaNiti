@@ -134,9 +134,9 @@ export default function AboutPage() {
             </div>
             <div className="sr-team-grid">
               {[
-                { name: 'Aadil Belim', role: 'Founder &\nChief Vision Officer', photo: '/adil.png', link: 'https://www.linkedin.com/in/aadilniti/' },
+                { name: 'Aadil Belim', role: 'Founder &\nChief Vision Officer', photo: '/aadil-bw.jpg', hoverPhoto: '/aadil.jpg', hoverTransform: 'translateY(4px) rotate(0.6deg)', link: 'https://www.linkedin.com/in/aadilniti/' },
                 { name: 'Uzma A', role: 'Director &\nChief Culture Officer', photo: '/uzma.jpg', link: 'https://www.linkedin.com/in/uzma-belim-45577a229/' },
-                { name: 'Akshit Gadhia', role: 'Compliance Officer', photo: '/akshit-bw.jpg', hoverPhoto: '/akshit.jpg', link: 'https://www.linkedin.com/in/akshit-gadhia-b380a2180/' },
+                { name: 'Akshit Gadhia', role: 'Compliance Officer', photo: '/akshit-bw.jpg', hoverPhoto: '/akshit.jpg', hoverTransform: 'translateY(2px)', link: 'https://www.linkedin.com/in/akshit-gadhia-b380a2180/' },
                 { name: 'Sagar Narayan', role: 'Research Associate', photo: '/sagar.jpg', link: 'https://www.linkedin.com/in/sagarnaarayan/' }
               ].map((member, i) => (
                 <div
@@ -146,9 +146,16 @@ export default function AboutPage() {
                   style={{ ['--delay' as any]: `${i * 120}ms` }}
                 >
                   <div className="sr-team-photo-col">
-                    <Image src={member.photo || '/avatar-placeholder.svg'} alt={member.name} width={400} height={400} className="sr-team-photo-base" unoptimized />
+                    <Image src={member.photo || '/avatar-placeholder.svg'} alt={member.name} fill className="sr-team-photo-base" unoptimized />
                     {member.hoverPhoto && (
-                      <Image src={member.hoverPhoto} alt={member.name} width={400} height={400} className="sr-team-photo-hover" unoptimized />
+                      <Image 
+                        src={member.hoverPhoto} 
+                        alt={member.name} 
+                        fill 
+                        className="sr-team-photo-hover" 
+                        unoptimized 
+                        style={member.hoverTransform ? { transform: member.hoverTransform } : undefined}
+                      />
                     )}
                   </div>
                   <div className="sr-team-info-col">
