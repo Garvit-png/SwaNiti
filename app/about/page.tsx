@@ -134,10 +134,10 @@ export default function AboutPage() {
             </div>
             <div className="sr-team-grid">
               {[
-                { name: 'Aadil Belim', role: 'Founder &\nChief Vision Officer', photo: '/aadil-bw.jpg', hoverPhoto: '/aadil.jpg', hoverTransform: 'translateY(4px) rotate(0.6deg)', link: 'https://www.linkedin.com/in/aadilniti/' },
-                { name: 'Uzma A', role: 'Director &\nChief Culture Officer', photo: '/uzma.jpg', link: 'https://www.linkedin.com/in/uzma-belim-45577a229/' },
-                { name: 'Akshit Gadhia', role: 'Compliance Officer', photo: '/akshit-bw.jpg', hoverPhoto: '/akshit.jpg', hoverTransform: 'translateY(2px)', link: 'https://www.linkedin.com/in/akshit-gadhia-b380a2180/' },
-                { name: 'Sagar Narayan', role: 'Research Associate', photo: '/sagar.jpg', link: 'https://www.linkedin.com/in/sagarnaarayan/' }
+                { name: 'Aadil Belim', role: 'Founder &\nChief Vision Officer', photo: '/aadil-bw.jpg', hoverPhoto: '/aadil.jpg', link: 'https://www.linkedin.com/in/aadilniti/' },
+                { name: 'Uzma A', role: 'Director &\nChief Culture Officer', photo: '/uzma-bw.jpg', hoverPhoto: '/uzma.jpg', link: 'https://www.linkedin.com/in/uzma-belim-45577a229/' },
+                { name: 'Akshit Gadhia', role: 'Compliance Officer', photo: '/akshit-bw.jpg', hoverPhoto: '/akshit.jpg', link: 'https://www.linkedin.com/in/akshit-gadhia-b380a2180/' },
+                { name: 'Sagar Narayan', role: 'Research Associate', photo: '/sagar-bw.jpg', hoverPhoto: '/sagar.jpg', link: 'https://www.linkedin.com/in/sagarnaarayan/' }
               ].map((member, i) => (
                 <div
                   key={i}
