@@ -108,7 +108,12 @@ export default function ProjectsPage() {
             >
               <div className={`${styles.content} ${isEven ? styles.contentReverse : ''}`}>
                 <p>{project.desc}</p>
-                <Link href={project.link} className={styles.learnMore}>
+                <Link 
+                  href={project.link} 
+                  className={styles.learnMore}
+                  target={project.link.startsWith('http') ? '_blank' : undefined}
+                  rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                >
                   Learn More →
                 </Link>
               </div>

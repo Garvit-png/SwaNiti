@@ -135,8 +135,8 @@ export default function AboutPage() {
             <div className="sr-team-grid">
               {[
                 { name: 'Aadil Belim', role: 'Founder &\nChief Vision Officer', photo: '/adil.png', link: 'https://www.linkedin.com/in/aadilniti/' },
-                { name: 'Uzma A', role: 'Director &\nChief Culture Officer', photo: '/uzma.jpg', link: 'https://www.linkedin.com/in/uzma-belim-45577a229?utm_source=share_via&utm_content=profile&utm_medium=member_android' },
-                { name: 'Akshit Gadhia', role: 'Compliance Officer', photo: '/akshit.jpg', link: 'https://www.linkedin.com/in/akshit-gadhia-b380a2180/' },
+                { name: 'Uzma A', role: 'Director &\nChief Culture Officer', photo: '/uzma.jpg', link: 'https://www.linkedin.com/in/uzma-belim-45577a229/' },
+                { name: 'Akshit Gadhia', role: 'Compliance Officer', photo: '/akshit-bw.jpg', hoverPhoto: '/akshit.jpg', link: 'https://www.linkedin.com/in/akshit-gadhia-b380a2180/' },
                 { name: 'Sagar Narayan', role: 'Research Associate', photo: '/sagar.jpg', link: 'https://www.linkedin.com/in/sagarnaarayan/' }
               ].map((member, i) => (
                 <div
@@ -146,7 +146,10 @@ export default function AboutPage() {
                   style={{ ['--delay' as any]: `${i * 120}ms` }}
                 >
                   <div className="sr-team-photo-col">
-                    <Image src={member.photo || '/avatar-placeholder.svg'} alt={member.name} width={400} height={400} />
+                    <Image src={member.photo || '/avatar-placeholder.svg'} alt={member.name} width={400} height={400} className="sr-team-photo-base" unoptimized />
+                    {member.hoverPhoto && (
+                      <Image src={member.hoverPhoto} alt={member.name} width={400} height={400} className="sr-team-photo-hover" unoptimized />
+                    )}
                   </div>
                   <div className="sr-team-info-col">
                     <div className="sr-team-info-top">
