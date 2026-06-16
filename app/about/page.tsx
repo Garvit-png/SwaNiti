@@ -9,6 +9,7 @@ import '../about.css'
 export default function AboutPage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [tappedCard, setTappedCard] = useState<number | null>(null)
+  const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
 
   useEffect(() => {
@@ -17,7 +18,10 @@ export default function AboutPage() {
       (entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
+            const idx = cardRefs.current.indexOf(entry.target as HTMLDivElement)
+            if (idx !== -1) {
+              setVisibleCards(prev => new Set(prev).add(idx))
+            }
             observer.unobserve(entry.target)
           }
         })
@@ -143,7 +147,7 @@ export default function AboutPage() {
                 <div
                   key={i}
                   ref={(el) => { cardRefs.current[i] = el }}
-                  className={`sr-team-card${tappedCard === i ? ' tapped' : ''}`}
+                  className={`sr-team-card${visibleCards.has(i) ? ' is-visible' : ''}${tappedCard === i ? ' tapped' : ''}`}
                   style={{ ['--delay' as any]: `${i * 120}ms` }}
                   onClick={() => setTappedCard(tappedCard === i ? null : i)}
                 >
