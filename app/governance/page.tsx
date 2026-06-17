@@ -79,6 +79,9 @@ export default function GovernancePage() {
       </section>
 
       <section className={styles.timelineSection}>
+        <div className={styles.tabWrapper}>
+          <div className={`${styles.tab} ${styles.reportsTab}`}>Reports</div>
+        </div>
         <div className={styles.timelineInner}>
           <TimelineAccordion />
         </div>
