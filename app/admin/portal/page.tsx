@@ -220,7 +220,7 @@ export default function AdminPortal() {
       const result = await res.json()
 
       if (res.ok) {
-        setStatus({ type: 'success', message: editingBlogId ? 'Blog updated and pushed to Vercel!' : 'Blog published and pushed to Vercel!' })
+        setStatus({ type: 'success', message: editingBlogId ? 'Blog updated successfully!' : 'Blog published successfully!' })
         resetForm()
         try {
           const blogsRes = await fetch('/api/blogs')
@@ -488,7 +488,7 @@ export default function AdminPortal() {
                   {loading ? (
                     <><Loader2 size={18} className={styles.spinner} /> {editingBlogId ? 'Updating...' : 'Publishing...'}</>
                   ) : (
-                    editingBlogId ? '✓ Update & Deploy' : '🚀 Publish to Vercel'
+                    editingBlogId ? '✓ Update Blog' : '🚀 Publish Blog'
                   )}
                 </button>
                 {editingBlogId && (
