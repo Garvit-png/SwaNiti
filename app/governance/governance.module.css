@@ -362,6 +362,34 @@
   margin: 0;
 }
 
+.docActions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.viewBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 99px;
+  background: transparent;
+  color: #0f2429;
+  border: 1.5px solid #0f2429;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.viewBtn:hover {
+  background: #0f2429;
+  color: #ffffff;
+}
+
 .downloadBtn {
   display: flex;
   align-items: center;
@@ -464,8 +492,17 @@
     gap: 12px;
     padding: 16px;
   }
-  .downloadBtn {
+  .docActions {
     width: 100%;
+    flex-direction: row;
+    gap: 8px;
+  }
+  .viewBtn {
+    flex: 1;
+    justify-content: center;
+  }
+  .downloadBtn {
+    flex: 1;
     justify-content: center;
   }
 }

@@ -151,6 +151,7 @@ a {
   align-items: center;
   margin-bottom: 80px;
   padding-left: 110px; /* Offset for notch width */
+  padding-right: 40px; /* Shift links left/inward */
   margin-top: 10px; /* Fine-tune vertical alignment with logo */
 }
 
@@ -610,6 +611,7 @@ a {
   /* Nav */
   .sr-card-nav {
     padding-left: 80px;
+    padding-right: 24px; /* Shift hamburger left/inward */
     margin-bottom: 0;
     margin-top: 0;
     display: flex;
@@ -1612,6 +1614,7 @@ a {
   .sr-logo-wrapper img { width: 44px; height: 44px; object-fit: contain; }
   .sr-card-nav {
     padding-left: 80px;
+    padding-right: 20px; /* Shift hamburger left/inward */
     margin-bottom: 0;
     display: flex;
     align-items: center;

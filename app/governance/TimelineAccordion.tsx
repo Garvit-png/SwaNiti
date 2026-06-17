@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useRef } from 'react'
-import { ArrowRight, Download, FileText } from 'lucide-react'
+import { ArrowRight, Download, FileText, Eye } from 'lucide-react'
 import styles from './governance.module.css'
 
 const TIMELINE_DATA = [
@@ -9,26 +9,26 @@ const TIMELINE_DATA = [
     id: '01',
     year: '2023-2024',
     documents: [
-      { title: 'Annual Impact Report 2023-24', size: '2.4 MB', type: 'PDF' },
-      { title: 'Audited Financial Statements', size: '1.1 MB', type: 'PDF' },
-      { title: 'Board Resolution Highlights', size: '450 KB', type: 'PDF' }
+      { title: 'Annual Impact Report 2023-24', size: '2.4 MB', type: 'PDF', pdfUrl: '/documents/sample.pdf' },
+      { title: 'Audited Financial Statements', size: '1.1 MB', type: 'PDF', pdfUrl: '/documents/sample.pdf' },
+      { title: 'Board Resolution Highlights', size: '450 KB', type: 'PDF', pdfUrl: '/documents/sample.pdf' }
     ]
   },
   {
     id: '02',
     year: '2022-2023',
     documents: [
-      { title: 'Annual Impact Report 2022-23', size: '3.1 MB', type: 'PDF' },
-      { title: 'Audited Financial Statements', size: '1.4 MB', type: 'PDF' },
+      { title: 'Annual Impact Report 2022-23', size: '3.1 MB', type: 'PDF', pdfUrl: '/documents/sample.pdf' },
+      { title: 'Audited Financial Statements', size: '1.4 MB', type: 'PDF', pdfUrl: '/documents/sample.pdf' },
     ]
   },
   {
     id: '03',
     year: '2021-2022',
     documents: [
-      { title: 'Annual Impact Report 2021-22', size: '1.8 MB', type: 'PDF' },
-      { title: 'Audited Financial Statements', size: '890 KB', type: 'PDF' },
-      { title: 'Foundational Charter', size: '1.2 MB', type: 'PDF' }
+      { title: 'Annual Impact Report 2021-22', size: '1.8 MB', type: 'PDF', pdfUrl: '/documents/sample.pdf' },
+      { title: 'Audited Financial Statements', size: '890 KB', type: 'PDF', pdfUrl: '/documents/sample.pdf' },
+      { title: 'Foundational Charter', size: '1.2 MB', type: 'PDF', pdfUrl: '/documents/sample.pdf' }
     ]
   }
 ]
@@ -129,10 +129,24 @@ export default function TimelineAccordion() {
                           <h4>{doc.title}</h4>
                           <p>{doc.type} • {doc.size}</p>
                         </div>
-                        <button className={styles.downloadBtn} aria-label={`Download ${doc.title}`}>
-                          <Download size={18} strokeWidth={1.5} />
-                          <span>Download</span>
-                        </button>
+                        <div className={styles.docActions}>
+                          {doc.pdfUrl && (
+                            <a
+                              href={doc.pdfUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={styles.viewBtn}
+                              aria-label={`View ${doc.title}`}
+                            >
+                              <Eye size={18} strokeWidth={1.5} />
+                              <span>View</span>
+                            </a>
+                          )}
+                          <button className={styles.downloadBtn} aria-label={`Download ${doc.title}`}>
+                            <Download size={18} strokeWidth={1.5} />
+                            <span>Download</span>
+                          </button>
+                        </div>
                       </div>
                     </div>
                   )
