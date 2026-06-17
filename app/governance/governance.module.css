@@ -498,14 +498,16 @@
   .docActions {
     width: 100%;
     flex-direction: row;
-    gap: 8px;
+    gap: 6px;
   }
-  .viewBtn {
+  .viewBtn, .downloadBtn {
     flex: 1;
     justify-content: center;
+    padding: 8px 12px;
+    font-size: 0.8rem;
   }
-  .downloadBtn {
-    flex: 1;
-    justify-content: center;
+  .viewBtn svg, .downloadBtn svg {
+    width: 16px;
+    height: 16px;
   }
 }
