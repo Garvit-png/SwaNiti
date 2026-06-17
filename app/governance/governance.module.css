@@ -475,16 +475,19 @@
     border-radius: 20px;
   }
   .documentListOuter {
-    padding: 0 0 10px 10px;
+    padding: 0 0 10px 0;
   }
   .threadCurveOrigin {
-    left: 20px;
+    left: 16px;
   }
   .documentList {
-    padding-left: 36px;
+    padding-left: 48px;
   }
   .documentRow {
     padding-bottom: 60px;
+  }
+  .docPathConnector {
+    left: -40px;
   }
   .docInfoBox {
     flex-direction: column;
