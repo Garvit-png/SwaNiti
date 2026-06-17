@@ -34,24 +34,14 @@ const TIMELINE_DATA = [
 ]
 
 export default function TimelineAccordion() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null)
+  const [openIndexes, setOpenIndexes] = useState<number[]>([])
   const [activeRow, setActiveRow] = useState<string | null>(null)
   const observerRef = useRef<IntersectionObserver | null>(null)
 
-  const toggleSection = (index: number, e: React.MouseEvent<HTMLButtonElement>) => {
-    const isOpening = openIndex !== index
-    setOpenIndex(isOpening ? index : null)
-
-    if (isOpening && window.innerWidth <= 1024) {
-      const btn = e.currentTarget
-      setTimeout(() => {
-        // Find where the button ended up after other sections collapsed
-        const rect = btn.getBoundingClientRect()
-        // Scroll smoothly so the button is about 30% from the top of the screen
-        const targetTop = rect.top - (window.innerHeight * 0.3)
-        window.scrollBy({ top: targetTop, behavior: 'smooth' })
-      }, 350) // Wait for CSS transition (accordion collapse) to finish
-    }
+  const toggleSection = (index: number) => {
+    setOpenIndexes((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    )
   }
 
   useEffect(() => {
@@ -79,18 +69,18 @@ export default function TimelineAccordion() {
     return () => {
       observerRef.current?.disconnect()
     }
-  }, [openIndex])
+  }, [openIndexes])
 
   return (
     <div className={styles.accordionContainer}>
       {TIMELINE_DATA.map((section, index) => {
-        const isOpen = openIndex === index
+        const isOpen = openIndexes.includes(index)
 
         return (
           <div key={section.id} className={`${styles.accordionItem} ${isOpen ? styles.isOpen : ''}`}>
             <button 
-              className={styles.timelinePill} 
-              onClick={(e) => toggleSection(index, e)}
+              className={`${styles.timelinePill} ${isOpen ? styles.pillActive : ''}`} 
+              onClick={() => toggleSection(index)}
               aria-expanded={isOpen}
             >
               <div className={styles.pillLeft}>

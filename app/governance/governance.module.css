@@ -118,7 +118,8 @@
 .timelineSection {
   background: var(--sr-blue-light);
   padding: 80px 40px;
-  margin-top: 40px;
+  margin: 40px 40px 40px;
+  border-radius: 40px;
 }
 
 .timelineInner {
@@ -149,7 +150,15 @@
 .timelinePill:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  background: #f7dfff; /* Pink/lilac on hover */
+  background: #f7dfff !important;
+}
+
+.pillActive {
+  background: #f7dfff; /* Pink/lilac when active/clicked */
+}
+
+.timelinePill:hover:not(.pillActive) .pillArrow {
+  transform: rotate(45deg);
 }
 
 .pillLeft {
@@ -183,7 +192,7 @@
 }
 
 .arrowOpen {
-  transform: rotate(90deg);
+  transform: rotate(90deg) !important;
 }
 
 /* Accordion Dropdown Styles */
@@ -199,18 +208,20 @@
 }
 
 .accordionContent {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.15s ease-out, opacity 0.12s ease-out;
   opacity: 0;
+  overflow: hidden;
 }
 
 .contentOpen {
-  max-height: 1000px;
+  grid-template-rows: 1fr;
   opacity: 1;
 }
 
 .documentListOuter {
+  min-height: 0;
   padding: 0 0 20px 40px;
   position: relative;
   display: flex;
@@ -410,7 +421,8 @@
 
   .timelineSection {
     padding: 60px 24px;
-    margin-top: 20px;
+    margin: 24px 24px 24px;
+    border-radius: 24px;
   }
   .timelinePill {
     padding: 16px 24px;
@@ -425,6 +437,11 @@
 }
 
 @media (max-width: 640px) {
+  .timelineSection {
+    padding: 40px 16px;
+    margin: 20px 20px 20px;
+    border-radius: 20px;
+  }
   .documentListOuter {
     padding: 0 0 10px 10px;
   }
