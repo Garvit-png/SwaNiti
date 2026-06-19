@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "id": "testing-blog",
+    "title": "Testing blog",
+    "excerpt": "testing description",
+    "category": "Policy",
+    "readTime": "5 min read",
+    "patternType": "orange",
+    "gridClass": "blogCardMedium",
+    "coverUrl": "/images/blogs/testing-blog-Screenshot_2026-06-17_at_9.54.19_PM.png",
+    "contentHtml": "",
+    "blogType": "pdf",
+    "pdfUrl": "/documents/testing-blog-DSA_Roadmap___System_Design__LLD__HLD__Machine_Coding____Complete_Guide.pdf",
+    "date": "Jun 19, 2026",
+    "author": {
+      "name": "testing author name",
+      "role": "testing autho designation",
+      "photo": "/logo.png"
+    }
+  }
+]
