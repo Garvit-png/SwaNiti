@@ -16,6 +16,7 @@ type Blog = {
   patternType: 'orange' | 'cyan' | 'yellow'
   gridClass: string
   coverUrl?: string
+  mediumUrl?: string
 }
 
 import allBlogsData from '../data/blogs.json'
@@ -140,9 +141,11 @@ export default function InsightsPage() {
                 if (blog.patternType === 'yellow') patternClass = styles.yellowGridPattern
 
                 return (
-                  <Link
+                  <a
                     key={blog.id}
-                    href={`/insights/${blog.id}`}
+                    href={blog.mediumUrl || `/insights/${blog.id}`}
+                    target={blog.mediumUrl ? '_blank' : undefined}
+                    rel={blog.mediumUrl ? 'noopener noreferrer' : undefined}
                     ref={(el) => { cardRefs.current[index] = el }}
                     className={`${styles.blogCard} ${blog.gridClass}`}
                     style={{ transitionDelay: `${index * 0.05}s` }}
@@ -178,7 +181,7 @@ export default function InsightsPage() {
                         <ArrowRight className={styles.arrowIcon} size={18} />
                       </div>
                     </div>
-                  </Link>
+                  </a>
                 )
               })
             ) : (
