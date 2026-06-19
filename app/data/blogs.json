@@ -1,1 +1,21 @@
-[]
+[
+  {
+    "id": "dummy",
+    "title": "dummy",
+    "excerpt": "dummy",
+    "category": "Policy",
+    "readTime": "5 min read",
+    "patternType": "orange",
+    "gridClass": "blogCardMedium",
+    "coverUrl": "/images/blogs/dummy-5207f406073ace07de7371e4cf3fbb38.jpg",
+    "contentHtml": "",
+    "blogType": "medium",
+    "mediumUrl": "https://medium.com/@dariusforoux/how-to-do-hard-things-when-you-have-zero-motivation-4218b652d950",
+    "date": "Jun 19, 2026",
+    "author": {
+      "name": "dummy",
+      "role": "dummy",
+      "photo": "/logo.png"
+    }
+  }
+]
