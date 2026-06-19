@@ -122,6 +122,11 @@ export default function Home() {
 
   const testimonials = [
     {
+      quote: "The Creative Economy is an important driver of growth for every state, particularly for a state like Chhattisgarh, which possesses immense creative potential rooted in its tribal communities, cultural heritage, and local talent. Innovative policy thinking in this domain is essential for unlocking these opportunities and advancing the vision of both Viksit Chhattisgarh and Viksit Bharat.",
+      author: "O.P. Choudhary",
+      org: "Finance Minister, Government of Chhattisgarh, Pune Public Policy Festival 2025"
+    },
+    {
       quote: "The idea of SvaNiti is much needed and Aadil has much more clarity on this idea at this initial stage.",
       author: "Jigar Inamdar (Youth Leader & Politician)",
       org: "PBC 2024, Rishihood University."
@@ -244,12 +249,6 @@ export default function Home() {
                 <a className="sr-contact-link" href="#contact">
                   Contact Us
                   <span className="sr-contact-arrow">
-                    <ArrowRight size={20} />
-                  </span>
-                </a>
-                <a className="sr-join-button" href="#">
-                  Join Our Movement
-                  <span className="sr-arrow-box">
                     <ArrowRight size={20} />
                   </span>
                 </a>
@@ -389,21 +388,12 @@ export default function Home() {
       {/* SECTION 5.5: TESTIMONIALS */}
       <section className="sr-testimonial-section">
         <div className="sr-testimonial-container">
-          {/* Left Side: Big decorative quote + heading */}
-          <div className="sr-test-left">
-            <div className="sr-test-big-quote">&ldquo;</div>
-            <h2 className="sr-test-heading">
-              What people<br />tell about us
-            </h2>
-            <div className="sr-test-counter">
-              <span className="sr-test-current">{String(testimonialIndex + 1).padStart(2, '0')}</span>
-              <span className="sr-test-divider">/</span>
-              <span className="sr-test-total">{String(testimonials.length).padStart(2, '0')}</span>
+          {/* Text Side: Quote card + nav (Now on the left) */}
+          <div className="sr-test-right" style={{ position: 'relative' }}>
+            <div className="sr-section-notch-outer" style={{ position: 'absolute', top: '-1px', left: '-1px', zIndex: 10 }}>
+              <div className="sr-section-notch-inner">What People <strong>Think About Us</strong></div>
             </div>
-          </div>
-
-          {/* Right Side: Quote card + nav */}
-          <div className="sr-test-right">
+            
             <div className="sr-test-card-wrapper">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -442,6 +432,16 @@ export default function Home() {
                 <ArrowRight size={20} />
               </button>
             </div>
+          </div>
+
+          {/* Photo Side (Now on the right) */}
+          <div className="sr-test-left">
+            <Image
+              src="/op-choudhary.jpg"
+              alt="O.P. Choudhary"
+              fill
+              className="sr-test-photo"
+            />
           </div>
         </div>
       </section>

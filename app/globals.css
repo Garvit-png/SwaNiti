@@ -826,68 +826,23 @@ a {
 
 /* LEFT PANEL — Decorative */
 .sr-test-left {
-  flex: 0 0 340px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 60px 50px;
+  flex: 0 0 450px;
   position: relative;
   background: #c9fcfb; /* bright skyblue from image */
+  overflow: hidden;
 }
 
-.sr-test-big-quote {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: 12rem;
-  line-height: 0.7;
-  color: var(--sr-ink);
-  opacity: 0.12;
+.sr-test-photo {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.sr-test-left .sr-section-notch-outer {
   position: absolute;
-  top: 30px;
-  left: 30px;
-  pointer-events: none;
-  user-select: none;
-}
-
-.sr-test-heading {
-  font-family: var(--font-lexend);
-  font-size: 2.2rem;
-  font-weight: 300;
-  line-height: 1.2;
-  color: var(--sr-ink);
-  margin: 0 0 40px 0;
-  letter-spacing: -0.02em;
-  position: relative;
-  z-index: 2;
-}
-
-.sr-test-counter {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  font-family: var(--font-lexend);
-  position: relative;
-  z-index: 2;
-}
-
-.sr-test-current {
-  font-size: 3rem;
-  font-weight: 300;
-  color: var(--sr-ink);
-  line-height: 1;
-}
-
-.sr-test-divider {
-  font-size: 1.5rem;
-  color: var(--sr-ink);
-  opacity: 0.3;
-  margin: 0 4px;
-}
-
-.sr-test-total {
-  font-size: 1.2rem;
-  font-weight: 400;
-  color: var(--sr-ink);
-  opacity: 0.4;
+  top: -1px;
+  left: -1px;
+  z-index: 10;
 }
 
 /* RIGHT PANEL — Card + Nav */
@@ -897,7 +852,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 60px;
+  padding: 100px 60px 60px 60px;
   gap: 30px;
 }
 
@@ -999,19 +954,7 @@ a {
   }
   .sr-test-left {
     flex: none;
-    padding: 40px 28px 20px;
-  }
-  .sr-test-big-quote {
-    font-size: 7rem;
-    top: 10px;
-    left: 16px;
-  }
-  .sr-test-heading {
-    font-size: 1.6rem;
-    margin-bottom: 16px;
-  }
-  .sr-test-current {
-    font-size: 2rem;
+    min-height: 300px;
   }
   .sr-test-right {
     padding: 20px 20px 30px;
@@ -1408,17 +1351,23 @@ a {
   margin-bottom: 15px;
 }
 
+.sr-footer-social {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
 .sr-footer-social .sr-social-icon {
   width: 32px;
   height: 32px;
-  background: var(--sr-ink);
-  color: var(--sr-white);
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.8rem;
-  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.sr-footer-social .sr-social-icon:hover {
+  transform: translateY(-2px);
 }
 
 .sr-footer-mission strong {

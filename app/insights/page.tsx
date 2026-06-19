@@ -15,6 +15,7 @@ type Blog = {
   readTime: string
   patternType: 'orange' | 'cyan' | 'yellow'
   gridClass: string
+  coverUrl?: string
 }
 
 import allBlogsData from '../data/blogs.json'
@@ -147,12 +148,20 @@ export default function InsightsPage() {
                     style={{ transitionDelay: `${index * 0.05}s` }}
                   >
                     <div className={styles.imageWrapper}>
-                      <div className={`${styles.patternBackdrop} ${patternClass}`}>
-                        <div className={styles.patternTitle}>
-                          {blog.title.split(':')[0]}
+                      {blog.coverUrl ? (
+                        <img 
+                          src={blog.coverUrl} 
+                          alt={blog.title} 
+                          style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
+                        />
+                      ) : (
+                        <div className={`${styles.patternBackdrop} ${patternClass}`}>
+                          <div className={styles.patternTitle}>
+                            {blog.title.split(':')[0]}
+                          </div>
+                          <span className={styles.patternSub}>SvaNiti Policy Research</span>
                         </div>
-                        <span className={styles.patternSub}>SvaNiti Policy Research</span>
-                      </div>
+                      )}
                     </div>
 
                     <div className={styles.cardBody}>

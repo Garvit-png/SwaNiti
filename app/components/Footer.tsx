@@ -16,8 +16,44 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="sr-social-icon"
+              aria-label="LinkedIn"
             >
-              in
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="#0a66c2" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zM7.119 20.452H3.554V9h3.565v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/svaniti.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sr-social-icon"
+              aria-label="Instagram"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="ig-grad" x1="2" y1="22" x2="22" y2="2" gradientUnits="userSpaceOnUse">
+                    <stop offset="0%" stopColor="#f09433" />
+                    <stop offset="25%" stopColor="#e6683c" />
+                    <stop offset="50%" stopColor="#dc2743" />
+                    <stop offset="75%" stopColor="#cc2366" />
+                    <stop offset="100%" stopColor="#bc1888" />
+                  </linearGradient>
+                </defs>
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="url(#ig-grad)" strokeWidth="2" />
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" stroke="url(#ig-grad)" strokeWidth="2" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="url(#ig-grad)" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </a>
+            <a
+              href="https://x.com/SvaNiti"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sr-social-icon"
+              aria-label="X (Twitter)"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+                <path d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z" />
+              </svg>
             </a>
           </div>
         </div>
