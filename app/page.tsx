@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { ArrowRight, ArrowLeft, CheckCircle, AlertCircle, Loader2 } from 'lucide-react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-
+import testimonialsData from './data/testimonials.json'
 export default function Home() {
   const cardRef = useRef<HTMLDivElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -34,16 +34,29 @@ export default function Home() {
     setPasscodeError(false)
   }
 
-  const handlePasscodeSubmit = (e: React.FormEvent) => {
+  const handlePasscodeSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (passcode === '0313') {
-      if (typeof window !== 'undefined') {
-        sessionStorage.setItem('svaniti_admin', 'true')
+    
+    try {
+      const res = await fetch('/api/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ passcode })
+      })
+      
+      if (res.ok) {
+        if (typeof window !== 'undefined') {
+          sessionStorage.setItem('svaniti_admin', 'true')
+        }
+        setShowPasscode(false)
+        setPasscodeError(false)
+        adminRouter.push('/admin/portal')
+      } else {
+        setPasscodeError(true)
+        setPasscode('')
+        setShakeKey(prev => prev + 1)
       }
-      setShowPasscode(false)
-      setPasscodeError(false)
-      adminRouter.push('/admin/portal')
-    } else {
+    } catch (error) {
       setPasscodeError(true)
       setPasscode('')
       setShakeKey(prev => prev + 1)
@@ -120,23 +133,7 @@ export default function Home() {
     }
   }
 
-  const testimonials = [
-    {
-      quote: "The Creative Economy is an important driver of growth for every state, particularly for a state like Chhattisgarh, which possesses immense creative potential rooted in its tribal communities, cultural heritage, and local talent. Innovative policy thinking in this domain is essential for unlocking these opportunities and advancing the vision of both Viksit Chhattisgarh and Viksit Bharat.",
-      author: "O.P. Choudhary",
-      org: "Finance Minister, Government of Chhattisgarh, Pune Public Policy Festival 2025"
-    },
-    {
-      quote: "The idea of SvaNiti is much needed and Aadil has much more clarity on this idea at this initial stage.",
-      author: "Jigar Inamdar (Youth Leader & Politician)",
-      org: "PBC 2024, Rishihood University."
-    },
-    {
-      quote: "It's need of time that our country needs Creative Economy Ministry. We need initiative and regulations from governement to grow more as industry. SvaNiti is Bang on promoting idea and research on the same.",
-      author: "Sheron (Creative Artist)",
-      org: "Nudge Charcha 2024"
-    }
-  ]
+  const testimonials = testimonialsData
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -436,12 +433,24 @@ export default function Home() {
 
           {/* Photo Side (Now on the right) */}
           <div className="sr-test-left">
-            <Image
-              src="/op-choudhary.jpg"
-              alt="O.P. Choudhary"
-              fill
-              className="sr-test-photo"
-            />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={testimonialIndex}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}
+              >
+                <Image
+                  src={testimonials[testimonialIndex].photo || '/logo.png'}
+                  alt={testimonials[testimonialIndex].author}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  className="sr-test-photo"
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </section>

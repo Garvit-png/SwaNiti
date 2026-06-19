@@ -234,9 +234,20 @@ a {
   align-items: center;
   gap: 15px;
   text-decoration: none;
-  color: var(--sr-ink);
+  color: #fff;
+  background-color: var(--sr-ink);
+  padding: 12px 24px;
+  border-radius: 30px;
   font-weight: 600;
   font-size: 1rem;
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.sr-contact-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  background-color: #000;
 }
 
 .sr-contact-arrow {
