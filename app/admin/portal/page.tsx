@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import styles from './portal.module.css'
-import { Loader2, ArrowLeft, Trash2, Pencil, Plus, FileText, X, Image as ImageIcon, MessageSquare, FileType } from 'lucide-react'
+import { Loader2, ArrowLeft, Trash2, Pencil, Plus, FileText, X, Image as ImageIcon, MessageSquare, FileType, Bold, Italic, Underline, AlignLeft, AlignCenter, AlignRight, List, ListOrdered, Quote, Link as LinkIcon } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import allBlogsData from '../../data/blogs.json'
@@ -55,11 +55,17 @@ export default function AdminPortal() {
   
   // Blog form state
   const [editingBlogId, setEditingBlogId] = useState<string | null>(null)
-  const [blogType, setBlogType] = useState<'medium' | 'pdf'>('pdf')
+  const [blogType, setBlogType] = useState<'medium' | 'pdf' | 'editor'>('editor')
   const [mediumUrl, setMediumUrl] = useState('')
   const [pdfFile, setPdfFile] = useState<File | null>(null)
   const [pdfPreviewName, setPdfPreviewName] = useState('')
   const [existingPdfUrl, setExistingPdfUrl] = useState('')
+
+  const [blogContentHtml, setBlogContentHtml] = useState('')
+  const [uploadingImage, setUploadingImage] = useState(false)
+  const [isDraggingImage, setIsDraggingImage] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<HTMLImageElement | null>(null)
+  const editorRef = useRef<HTMLDivElement>(null)
 
   const [formData, setFormData] = useState({
     title: '',
@@ -174,11 +180,15 @@ export default function AdminPortal() {
     setCoverFile(null)
     setCoverPreview(null)
     setEditingBlogId(null)
-    setBlogType('pdf')
+    setBlogType('editor')
     setMediumUrl('')
     setPdfFile(null)
     setPdfPreviewName('')
     setExistingPdfUrl('')
+    setBlogContentHtml('')
+    if (editorRef.current) {
+      editorRef.current.innerHTML = ''
+    }
   }
 
   const resetTestForm = () => {
@@ -201,11 +211,13 @@ export default function AdminPortal() {
       authorName: blog.author?.name || 'Admin Contributor',
       authorRole: blog.author?.role || 'Guest',
     })
-    setBlogType(blog.blogType === 'medium' ? 'medium' : 'pdf')
+    setBlogType(blog.blogType === 'medium' ? 'medium' : blog.blogType === 'pdf' ? 'pdf' : 'editor')
     setMediumUrl(blog.mediumUrl || '')
     setExistingPdfUrl(blog.pdfUrl || '')
     setPdfFile(null)
     setPdfPreviewName('')
+    setBlogContentHtml(blog.contentHtml || '')
+    // Editor innerHTML is updated via useEffect
     if (blog.coverUrl) {
       setCoverPreview(blog.coverUrl)
       setCoverFile(null)
@@ -226,6 +238,93 @@ export default function AdminPortal() {
     setActiveTab('create')
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  // ===== EDITOR FUNCTIONS =====
+  const execCommand = (command: string, value: string | undefined = undefined) => {
+    document.execCommand(command, false, value)
+    editorRef.current?.focus()
+    updateHtml()
+  }
+
+  const handleLink = () => {
+    const selection = window.getSelection()
+    if (!selection || selection.isCollapsed) {
+      const text = prompt('Enter the text to display for the link:')
+      if (!text) return
+      const url = prompt('Enter link URL (e.g. https://example.com):')
+      if (url) {
+        execCommand('insertHTML', `<a href="${url}" style="color: #2563eb; text-decoration: underline;">${text}</a>&nbsp;`)
+      }
+    } else {
+      const url = prompt('Enter link URL (e.g. https://example.com):')
+      if (url) {
+        execCommand('createLink', url)
+      }
+    }
+  }
+
+  const updateHtml = () => {
+    if (editorRef.current) {
+      setBlogContentHtml(editorRef.current.innerHTML)
+    }
+  }
+
+  const handleEditorPaste = (e: React.ClipboardEvent) => {
+    const clipboardData = e.clipboardData
+    if (!clipboardData) return
+    const pastedText = clipboardData.getData('text/plain')
+    const isUrl = /^(https?:\/\/[^\s]+)/i.test(pastedText.trim())
+    const selection = window.getSelection()
+
+    // If text is selected and a URL is pasted, turn it into a link
+    if (isUrl && selection && !selection.isCollapsed && editorRef.current?.contains(selection.anchorNode)) {
+      e.preventDefault()
+      execCommand('createLink', pastedText.trim())
+    }
+  }
+
+  const handleEditorImageUpload = async (file: File) => {
+    if (!file.type.startsWith('image/')) return
+    setUploadingImage(true)
+    
+    const data = new FormData()
+    data.append('file', file)
+    
+    try {
+      const res = await fetch('/api/upload-image', {
+        method: 'POST',
+        body: data
+      })
+      const result = await res.json()
+      
+      if (res.ok && result.url) {
+        editorRef.current?.focus()
+        document.execCommand('insertHTML', false, `<img src="${result.url}">&nbsp;`)
+        updateHtml()
+      } else {
+        setStatus({ type: 'error', message: result.error || 'Failed to upload inline image' })
+      }
+    } catch {
+      setStatus({ type: 'error', message: 'Network error during image upload' })
+    } finally {
+      setUploadingImage(false)
+    }
+  }
+
+  const onEditorDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDraggingImage(false)
+    const file = e.dataTransfer.files[0]
+    if (file) handleEditorImageUpload(file)
+  }
+
+  useEffect(() => {
+    if (activeTab === 'create' && activeSection === 'blogs' && blogType === 'editor' && editorRef.current) {
+      if (editorRef.current.innerHTML !== blogContentHtml) {
+        editorRef.current.innerHTML = blogContentHtml;
+      }
+    }
+  }, [activeTab, activeSection, blogType, editingBlogId])
 
   // ===== SUBMIT BLOG =====
   const handleBlogSubmit = async (e: React.FormEvent) => {
@@ -251,6 +350,11 @@ export default function AdminPortal() {
       return
     }
 
+    if (blogType === 'editor' && (!blogContentHtml.trim() || blogContentHtml === '<br>')) {
+      setStatus({ type: 'error', message: 'Please write some content for the blog' })
+      return
+    }
+
     setLoading(true)
     setStatus({ type: '', message: '' })
 
@@ -272,6 +376,8 @@ export default function AdminPortal() {
       if (existingPdfUrl) {
         data.append('existingPdfUrl', existingPdfUrl)
       }
+    } else if (blogType === 'editor') {
+      data.append('contentHtml', blogContentHtml)
     }
 
     if (coverFile) {
@@ -580,7 +686,8 @@ export default function AdminPortal() {
 
                       <div className={`${styles.inputGroup} ${styles.metaGridFull}`}>
                         <label>Import Method / Blog Format</label>
-                        <select name="blogType" value={blogType} onChange={(e) => setBlogType(e.target.value as 'medium' | 'pdf')}>
+                        <select name="blogType" value={blogType} onChange={(e) => setBlogType(e.target.value as 'medium' | 'pdf' | 'editor')}>
+                          <option value="editor">Write Blog (Rich Text Editor)</option>
                           <option value="pdf">Import from PDF (Upload document and embed PDF viewer)</option>
                           <option value="medium">Import from Medium (Link to Medium blog post)</option>
                         </select>
@@ -663,6 +770,118 @@ export default function AdminPortal() {
                               <p className={styles.coverDropHint}>PDF document up to 25MB</p>
                             </>
                           )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Rich Text Editor */}
+                    {blogType === 'editor' && (
+                      <div className={styles.inputGroup} style={{ marginBottom: 24, gridColumn: '1 / -1' }}>
+                        <label>Blog Content</label>
+                        <div className={styles.toolbarWrapper}>
+                          <div className={styles.toolbar}>
+                            <div className={styles.toolbarGroup}>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('formatBlock', 'H1')} title="Heading 1">H1</button>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('formatBlock', 'H2')} title="Heading 2">H2</button>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('formatBlock', 'H3')} title="Heading 3">H3</button>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('formatBlock', 'P')} title="Paragraph">P</button>
+                            </div>
+                            <div className={styles.toolbarDivider} />
+                            <div className={styles.toolbarGroup}>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('bold')} title="Bold"><Bold size={16} /></button>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('italic')} title="Italic"><Italic size={16} /></button>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('underline')} title="Underline"><Underline size={16} /></button>
+                            </div>
+                            <div className={styles.toolbarDivider} />
+                            <div className={styles.toolbarGroup}>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('justifyLeft')} title="Align Left"><AlignLeft size={16} /></button>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('justifyCenter')} title="Align Center"><AlignCenter size={16} /></button>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('justifyRight')} title="Align Right"><AlignRight size={16} /></button>
+                            </div>
+                            <div className={styles.toolbarDivider} />
+                            <div className={styles.toolbarGroup}>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('insertUnorderedList')} title="Bullet List"><List size={16} /></button>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('insertOrderedList')} title="Numbered List"><ListOrdered size={16} /></button>
+                              <button type="button" className={styles.toolBtn} onClick={() => execCommand('formatBlock', 'BLOCKQUOTE')} title="Quote"><Quote size={16} /></button>
+                            </div>
+                            <div className={styles.toolbarDivider} />
+                            <div className={styles.toolbarGroup}>
+                              <button type="button" className={styles.toolBtn} onClick={handleLink} title="Insert Link"><LinkIcon size={16} /></button>
+                              <button type="button" className={styles.toolBtn} onClick={() => document.getElementById('editorImageUpload')?.click()} title="Insert Image"><ImageIcon size={16} /></button>
+                            </div>
+                            {selectedImage && (
+                              <>
+                                <div className={styles.toolbarDivider} />
+                                <div className={styles.toolbarGroup}>
+                                  <span style={{fontSize: '0.8rem', color: '#64748b', marginLeft: '4px', marginRight: '4px'}}>Image Size:</span>
+                                  <button type="button" className={styles.toolBtn} onClick={() => { selectedImage.style.width = '25%'; updateHtml(); }} title="25% width" style={{width: 'auto', padding: '0 8px'}}>25%</button>
+                                  <button type="button" className={styles.toolBtn} onClick={() => { selectedImage.style.width = '50%'; updateHtml(); }} title="50% width" style={{width: 'auto', padding: '0 8px'}}>50%</button>
+                                  <button type="button" className={styles.toolBtn} onClick={() => { selectedImage.style.width = '100%'; updateHtml(); }} title="100% width" style={{width: 'auto', padding: '0 8px'}}>100%</button>
+                                </div>
+                                <div className={styles.toolbarDivider} />
+                                <div className={styles.toolbarGroup}>
+                                  <span style={{fontSize: '0.8rem', color: '#64748b', marginLeft: '4px', marginRight: '4px'}}>Wrap Text:</span>
+                                  <button type="button" className={styles.toolBtn} onClick={() => { selectedImage.style.float = 'left'; selectedImage.style.margin = '0 16px 16px 0'; updateHtml(); }} title="Float Left" style={{width: 'auto', padding: '0 8px'}}>Left</button>
+                                  <button type="button" className={styles.toolBtn} onClick={() => { selectedImage.style.float = 'none'; selectedImage.style.margin = '16px 0'; updateHtml(); }} title="Inline" style={{width: 'auto', padding: '0 8px'}}>Inline</button>
+                                  <button type="button" className={styles.toolBtn} onClick={() => { selectedImage.style.float = 'right'; selectedImage.style.margin = '0 0 16px 16px'; updateHtml(); }} title="Float Right" style={{width: 'auto', padding: '0 8px'}}>Right</button>
+                                </div>
+                              </>
+                            )}
+                          </div>
+                          
+                          {uploadingImage && (
+                            <div className={styles.imageUploading}>
+                              <Loader2 size={16} className={styles.spinner} /> Uploading image...
+                            </div>
+                          )}
+
+                          <input 
+                            type="file" 
+                            id="editorImageUpload" 
+                            accept="image/*" 
+                            style={{ display: 'none' }} 
+                            onChange={(e) => {
+                              if (e.target.files && e.target.files[0]) handleEditorImageUpload(e.target.files[0]);
+                              e.target.value = '';
+                            }} 
+                          />
+
+                          <div 
+                            className={styles.editorWrapper}
+                            onDragOver={(e) => { e.preventDefault(); setIsDraggingImage(true); }}
+                            onDragLeave={() => setIsDraggingImage(false)}
+                            onDrop={onEditorDrop}
+                          >
+                            <div
+                              ref={editorRef}
+                              className={styles.editorCanvas}
+                              contentEditable
+                              onInput={updateHtml}
+                              onBlur={updateHtml}
+                              onPaste={handleEditorPaste}
+                              suppressContentEditableWarning
+                              onClick={(e) => {
+                                if (!(e.target instanceof HTMLImageElement)) {
+                                  if (selectedImage) {
+                                    selectedImage.classList.remove(styles.selected)
+                                    setSelectedImage(null)
+                                  }
+                                }
+                              }}
+                              onMouseUp={(e) => {
+                                if (e.target instanceof HTMLImageElement) {
+                                  if (selectedImage && selectedImage !== e.target) selectedImage.classList.remove(styles.selected)
+                                  e.target.classList.add(styles.selected)
+                                  setSelectedImage(e.target)
+                                }
+                              }}
+                            />
+                            {isDraggingImage && (
+                              <div className={styles.editorDragOverlay}>
+                                <div className={styles.editorDragOverlayText}>Drop image to upload inline</div>
+                              </div>
+                            )}
+                          </div>
                         </div>
                       </div>
                     )}
