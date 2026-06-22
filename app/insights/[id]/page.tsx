@@ -656,16 +656,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
 
         {/* Social Share & Likes Bar */}
         <div className={styles.shareBar}>
-          <span className={styles.shareStats}>55 views • 0 comments</span>
-          
           <div className={styles.shareIcons}>
-            <button 
-              onClick={handleLike} 
-              className={`${styles.likeBtn} ${liked ? styles.likeActive : ''}`}
-            >
-              <Heart size={18} fill={liked ? '#ff4500' : 'none'} />
-              <span>{likesCount} Likes</span>
-            </button>
 
             <button className={styles.shareBtn} onClick={handleCopyLink} title="Copy link">
               {copied ? <Check size={18} style={{ color: '#00b4d8' }} /> : <Copy size={18} />}
@@ -708,63 +699,6 @@ export default function BlogPostPage({ params }: { params: Promise<{ id: string 
           </div>
         </div>
 
-        {/* Comments Section */}
-        <section className={styles.commentsSection}>
-          <h3 className={styles.commentsHeader}>Comments ({commentsList.length})</h3>
-
-          {/* Comment Form */}
-          <form onSubmit={handleAddComment} className={styles.commentInputWrapper}>
-            <textarea 
-              placeholder="What are your thoughts on this policy notion?"
-              rows={3}
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              className={styles.commentTextarea}
-            />
-            <button type="submit" className={styles.commentSubmitBtn}>
-              Add Comment
-            </button>
-          </form>
-
-          {/* Comments List */}
-          <AnimatePresence mode="popLayout">
-            {commentsLoading ? (
-              <div className={styles.loaderWrapper}>
-                <Loader2 className={styles.spinner} size={28} />
-                <span>Loading comments...</span>
-              </div>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                {commentsList.map((comment, index) => (
-                  <motion.div 
-                    key={comment.author + index}
-                    initial={{ opacity: 0, y: 15 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    style={{
-                      background: 'rgba(11, 34, 40, 0.02)',
-                      padding: '20px',
-                      borderRadius: '16px',
-                      border: '1px solid rgba(11, 34, 40, 0.04)'
-                    }}
-                  >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                      <span style={{ fontFamily: 'Poppins', fontWeight: 500, fontSize: '0.95rem' }}>
-                        {comment.author} <span style={{ opacity: 0.5, fontWeight: 300, fontSize: '0.85rem' }}>({comment.role})</span>
-                      </span>
-                      <span style={{ fontSize: '0.8rem', opacity: 0.5, fontFamily: 'var(--font-inter)' }}>
-                        {comment.time}
-                      </span>
-                    </div>
-                    <p style={{ fontSize: '0.95rem', lineHeight: '1.6', opacity: 0.85, margin: 0 }}>
-                      {comment.text}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            )}
-          </AnimatePresence>
-        </section>
       </article>
 
       {/* FOOTER */}

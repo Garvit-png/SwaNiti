@@ -31,12 +31,12 @@ import Footer from '../components/Footer'
 export default function InsightsPage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
-  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [selectedCategory, setSelectedCategory] = useState('Most Recent')
   const heroCardRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<Array<HTMLAnchorElement | null>>([])
 
   // Category list
-  const categories = ['All', 'Policy', 'Youth', 'Education', 'Movement']
+  const categories = ['Most Recent', 'All', 'Policy', 'Youth', 'Education', 'Movement']
 
   // Handle hero mouse move pattern
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -49,13 +49,17 @@ export default function InsightsPage() {
   }
 
   // Filtered blogs
-  const filteredBlogs = allBlogs.filter((blog) => {
-    const matchesCategory = selectedCategory === 'All' || blog.category === selectedCategory
+  let filteredBlogs = [...allBlogs].reverse().filter((blog) => {
+    const matchesCategory = selectedCategory === 'All' || selectedCategory === 'Most Recent' || blog.category === selectedCategory
     const matchesSearch =
       blog.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       blog.excerpt.toLowerCase().includes(searchQuery.toLowerCase())
     return matchesCategory && matchesSearch
   })
+  
+  if (selectedCategory === 'Most Recent' && !searchQuery) {
+    filteredBlogs = filteredBlogs.slice(0, 4)
+  }
 
   // Animation intersection observer for blog cards
   useEffect(() => {
@@ -190,7 +194,7 @@ export default function InsightsPage() {
                 <p>We couldn't find any articles matching your search criteria. Try a different category or search term.</p>
                 <button
                   className={styles.clearSearchBtn}
-                  onClick={() => { setSearchQuery(''); setSelectedCategory('All') }}
+                  onClick={() => { setSearchQuery(''); setSelectedCategory('Most Recent') }}
                 >
                   Reset Filters
                 </button>
