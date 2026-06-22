@@ -1,23 +1,5 @@
 [
   {
-    "id": "teset",
-    "title": "teset",
-    "excerpt": "teste",
-    "category": "Policy",
-    "readTime": "5 min read",
-    "patternType": "orange",
-    "gridClass": "blogCardMedium",
-    "coverUrl": "/images/blogs/teset-6f29ba6e45aae8b4d2fd50ab19923e44.jpg",
-    "contentHtml": "<img src=\"https://raw.githubusercontent.com/Garvit-png/SwaNiti/main/public/images/blogs/inline/inline-1782132249379-6f29ba6e45aae8b4d2fd50ab19923e44.jpg\" class=\"\" style=\"width: 25%;\">&nbsp;<a href=\" https://antigravity.google/auth-success?app=antigravity-ide\">Test</a>&nbsp;",
-    "blogType": "editor",
-    "date": "Jun 22, 2026",
-    "author": {
-      "name": "test",
-      "role": "test",
-      "photo": "/logo.png"
-    }
-  },
-  {
     "id": "dummy",
     "title": "dummy",
     "excerpt": "dummy",
