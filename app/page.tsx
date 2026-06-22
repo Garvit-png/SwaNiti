@@ -196,24 +196,32 @@ export default function Home() {
     { text: 'Nation Building', color: 'cyan' },
   ]
 
-  const projects = [
+  const craftItems = [
     {
-      title: "Sva-Bharat Movement",
-      desc: "Change in Bharat begins with a movement, not just a policy. Sva-Bharat Movement by SvaNiti channels the aspirations of the people, uniting ideas and voices through regional and campus ambassadors to shape a transformative future.",
+      num: "01",
+      title: "Vague Thinking to Ideas",
+      desc: "We transform emerging thoughts, aspirations, and observations into clear, actionable ideas that can shape the future.",
     },
     {
-      title: "Viksit Bharat Darshan Yatra",
-      desc: "Viksit Bharat Darshan Yatra honors the Prime Minister's mission for a Developed India by 2047, emphasizing self-discovery through solo, purposeful, and philosophical journeys, shaping individuals with purpose for Viksit Yuva for Viksit Bharat.",
+      num: "02",
+      title: "Building Frameworks",
+      desc: "We develop intellectual, educational, social, and policy frameworks that bring structure and direction to systems challenges.",
     },
     {
-      title: "LifeSite (जीवन-स्थल) Conceptualization",
-      desc: "LifeSite originated from a seven-year pilot research project initiated by our founder, aimed at exploring an education system that transcends traditional schools, colleges, and universities, addressing the needs of the current era.",
-      organic: true,
+      num: "03",
+      title: "Pilot Initiatives",
+      desc: "We test promising ideas through real-world experimentation, learning from practice before advocating for scale.",
     },
     {
-      title: "Notion of Ministry of Creative Economy Affairs",
-      desc: "The creative economy holds the potential to be a powerful multiplier for our economy, unlocking new opportunities in employment, tourism, exports, innovation, and social inclusion. Our proposal to establish a dedicated ministry aims to strengthen initiatives and streamline regulations within this dynamic sector.",
-    }
+      num: "04",
+      title: "Youth Transformation",
+      desc: "We nurture curious individuals into thoughtful leaders, innovators, explorers, and contributors to society.",
+    },
+    {
+      num: "05",
+      title: "Movement Building",
+      desc: "We cultivate communities around shared purpose, enabling ideas to grow beyond individuals and create collective impact.",
+    },
   ]
 
   return (
@@ -301,53 +309,77 @@ export default function Home() {
 
 
 
-      {/* SECTION 3: WHAT WE DO */}
+      {/* SECTION 3: OUR CRAFT */}
       <section id="projects" className="sr-page relative overflow-x-hidden">
         <div className="sr-projects-container" style={{ perspective: '1000px' }}>
           {/* Section Heading */}
           <div className="sr-section-notch-outer">
-            <div className="sr-section-notch-inner">What <strong>We Do</strong></div>
+            <div className="sr-section-notch-inner">Our <strong>Craft</strong></div>
           </div>
 
-          <div className="sr-projects-grid relative z-10">
-            {projects.map((project, i) => (
+          <div className="sr-craft-grid relative z-10">
+            {craftItems.map((item, i) => (
               <motion.div
                 key={i}
                 initial="hidden"
                 whileInView="show"
                 viewport={{ once: true, amount: 0.2 }}
                 variants={{
-                  hidden: { opacity: 0, y: 80, x: -20, rotate: -2 },
+                  hidden: { opacity: 0, y: 40 },
                   show: {
                     opacity: 1,
                     y: 0,
-                    x: 0,
-                    rotate: 0,
                     transition: {
-                      duration: 0.8,
+                      duration: 0.7,
                       ease: [0.16, 1, 0.3, 1],
-                      delay: i * 0.1
+                      delay: i * 0.08
                     }
                   }
                 }}
                 whileHover={{
-                  y: -10,
-                  scale: 1.03,
-                  boxShadow: "0 20px 40px rgba(0, 0, 0, 0.08)",
+                  y: -5,
+                  boxShadow: "0 15px 30px rgba(11,34,40,0.06)",
                   transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
                 }}
-                className={`sr-project-card ${project.organic ? 'organic' : ''} transition-colors duration-300 relative overflow-hidden`}
+                className="sr-craft-card"
               >
-                <h3>{project.title}</h3>
-                <p>{project.desc}</p>
-                <div className="sr-card-learn-more">
-                  <span className="font-semibold">Learn More</span>
-                  <div className="sr-arrow-box small">
-                    <ArrowRight size={16} />
+                <h3>{item.num} / {item.title}</h3>
+                <p>{item.desc}</p>
+              </motion.div>
+            ))}
+
+            <Link href="/projects" style={{ display: 'contents' }}>
+              <motion.div
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.7,
+                      ease: [0.16, 1, 0.3, 1],
+                      delay: 5 * 0.08
+                    }
+                  }
+                }}
+                whileHover={{
+                  y: -5,
+                  boxShadow: "0 15px 30px rgba(11,34,40,0.06)",
+                  transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
+                }}
+                className="sr-craft-card sr-craft-explore-card"
+              >
+                <div className="sr-craft-explore-card-content">
+                  <div className="sr-craft-explore-title">Explore More</div>
+                  <div className="sr-craft-explore-arrow-circle">
+                    <ArrowRight size={18} />
                   </div>
                 </div>
               </motion.div>
-            ))}
+            </Link>
           </div>
         </div>
       </section>

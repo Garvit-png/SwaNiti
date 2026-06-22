@@ -4,6 +4,9 @@ import { useState, useEffect, useRef } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Image from 'next/image'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
 import '../about.css'
 
 export default function AboutPage() {
@@ -11,6 +14,34 @@ export default function AboutPage() {
   const [tappedCard, setTappedCard] = useState<number | null>(null)
   const [visibleCards, setVisibleCards] = useState<Set<number>>(new Set())
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+
+  const craftItems = [
+    {
+      num: "01",
+      title: "Vague Thinking to Ideas",
+      desc: "We transform emerging thoughts, aspirations, and observations into clear, actionable ideas that can shape the future.",
+    },
+    {
+      num: "02",
+      title: "Building Frameworks",
+      desc: "We develop intellectual, educational, social, and policy frameworks that bring structure and direction to systems challenges.",
+    },
+    {
+      num: "03",
+      title: "Pilot Initiatives",
+      desc: "We test promising ideas through real-world experimentation, learning from practice before advocating for scale.",
+    },
+    {
+      num: "04",
+      title: "Youth Transformation",
+      desc: "We nurture curious individuals into thoughtful leaders, innovators, explorers, and contributors to society.",
+    },
+    {
+      num: "05",
+      title: "Movement Building",
+      desc: "We cultivate communities around shared purpose, enabling ideas to grow beyond individuals and create collective impact.",
+    },
+  ]
 
   useEffect(() => {
     if (!cardRefs.current) return
@@ -66,20 +97,23 @@ export default function AboutPage() {
         <div className="sr-approach-wrapper">
           <div className="sr-approach-container">
             <div className="sr-notch-tab-wrapper">
-              <div className="sr-notch-tab">Our Approach</div>
+              <div className="sr-notch-tab">Our Methodology</div>
+            </div>
+            <div className="sr-approach-intro">
+              <p>We do not begin with solutions. We begin with curiosity, zest, and a willingness to see differently. Our methodology reflects the mindset through which we explore ideas, understand systems, and imagine the future beyond quick fixes.</p>
             </div>
             <div className="sr-approach-grid">
               <div className="sr-approach-card">
-                <h3>01 / First Principles</h3>
-                <p>We strip complex policy questions down to their core realities, questioning foundational assumptions rather than relying on legacy methods.</p>
+                <h3>01 / First-Principles Thinking</h3>
+                <p>We begin with questions, not assumptions. By examining challenges at their roots, we uncover insights that often remain hidden beneath conventional thinking.</p>
               </div>
               <div className="sr-approach-card">
-                <h3>02 / Grassroots Direct</h3>
-                <p>True public policy is built from the ground. Having traveled over 100,000 km, we base our proposals on lived human realities across Bharat.</p>
+                <h3>02 / Unconventional Approaches</h3>
+                <p>We look beyond policy cycles and conventional wisdom. By exploring emerging opportunities, overlooked perspectives, and unconventional pathways, we seek to imagine futures that do not yet exist.</p>
               </div>
               <div className="sr-approach-card">
-                <h3>03 / Actionable Advocacy</h3>
-                <p>We bridge the gap between academic theory and executive implementation, drafting clear, modular roadmaps ready for direct governance adoption.</p>
+                <h3>03 / Systems Thinking</h3>
+                <p>We see society as an interconnected ecosystem where education, policy, culture, economy, and leadership continuously influence one another. Understanding these connections enables us to create more effective pathways for change.</p>
               </div>
             </div>
           </div>
@@ -130,6 +164,81 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* 4.5. OUR CRAFT SECTION (Copied from home page) */}
+      <section className="sr-page relative overflow-x-hidden">
+        <div className="sr-projects-container" style={{ perspective: '1000px', margin: '40px auto', maxWidth: '1500px' }}>
+          {/* Section Heading */}
+          <div className="sr-section-notch-outer">
+            <div className="sr-section-notch-inner">Our <strong>Craft</strong></div>
+          </div>
+
+          <div className="sr-craft-grid relative z-10">
+            {craftItems.map((item, i) => (
+              <motion.div
+                key={i}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.7,
+                      ease: [0.16, 1, 0.3, 1],
+                      delay: i * 0.08
+                    }
+                  }
+                }}
+                whileHover={{
+                  y: -5,
+                  boxShadow: "0 15px 30px rgba(11,34,40,0.06)",
+                  transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
+                }}
+                className="sr-craft-card"
+              >
+                <h3>{item.num} / {item.title}</h3>
+                <p>{item.desc}</p>
+              </motion.div>
+            ))}
+
+            <Link href="/projects" style={{ display: 'contents' }}>
+              <motion.div
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, amount: 0.2 }}
+                variants={{
+                  hidden: { opacity: 0, y: 40 },
+                  show: {
+                    opacity: 1,
+                    y: 0,
+                    transition: {
+                      duration: 0.7,
+                      ease: [0.16, 1, 0.3, 1],
+                      delay: 5 * 0.08
+                    }
+                  }
+                }}
+                whileHover={{
+                  y: -5,
+                  boxShadow: "0 15px 30px rgba(11,34,40,0.06)",
+                  transition: { duration: 0.3, ease: [0.16, 1, 0.3, 1] }
+                }}
+                className="sr-craft-card sr-craft-explore-card"
+              >
+                <div className="sr-craft-explore-card-content">
+                  <div className="sr-craft-explore-title">Explore More</div>
+                  <div className="sr-craft-explore-arrow-circle">
+                    <ArrowRight size={18} />
+                  </div>
+                </div>
+              </motion.div>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* 5. TEAM SECTION */}
       <section className="sr-team-section">
         <div className="sr-team-outer">
@@ -142,7 +251,8 @@ export default function AboutPage() {
                 { name: 'Aadil Belim', role: 'Founder &\nChief Vision Officer', photo: '/aadil-bw.jpg', hoverPhoto: '/aadil.jpg', link: 'https://www.linkedin.com/in/aadilniti/' },
                 { name: 'Uzma A', role: 'Director &\nChief Culture Officer', photo: '/uzma-bw.jpg', hoverPhoto: '/uzma.jpg', link: 'https://www.linkedin.com/in/uzma-belim-45577a229/' },
                 { name: 'Akshit Gadhia', role: 'Compliance Officer', photo: '/akshit-bw.jpg', hoverPhoto: '/akshit.jpg', link: 'https://www.linkedin.com/in/akshit-gadhia-b380a2180/' },
-                { name: 'Sagar Narayan', role: 'Research Associate', photo: '/sagar-bw.jpg', hoverPhoto: '/sagar.jpg', link: 'https://www.linkedin.com/in/sagarnaarayan/' }
+                { name: 'Sagar Narayan', role: 'Research Associate', photo: '/sagar-bw.jpg', hoverPhoto: '/sagar.jpg', link: 'https://www.linkedin.com/in/sagarnaarayan/' },
+                { name: 'Pallavi Kaushik', role: 'Project Manager, Sva-Bharat Movement', photo: '/pallavi-bw.jpg', hoverPhoto: '/pallavi.jpg', link: 'https://www.linkedin.com/in/pallavi-kaushik-capm-4420471b7/' }
               ].map((member, i) => (
                 <div
                   key={i}
@@ -196,23 +306,8 @@ export default function AboutPage() {
             <div className="sr-notch-tab-wrapper">
               <div className="sr-notch-tab">Collaborations &amp; Engagements</div>
             </div>
-            <div className="sr-partners-grid">
-              <div className="sr-partner-card">
-                <h4>PBC 2024</h4>
-                <p>Rishihood University</p>
-              </div>
-              <div className="sr-partner-card">
-                <h4>The Nudge</h4>
-                <p>Nudge Charcha 2024</p>
-              </div>
-              <div className="sr-partner-card">
-                <h4>Sva-Bharat</h4>
-                <p>Sva-Bharat Foundation</p>
-              </div>
-              <div className="sr-partner-card">
-                <h4>IDUME</h4>
-                <p>IDUME Education System</p>
-              </div>
+            <div className="sr-partners-coming-soon">
+              UPDATING SOON
             </div>
           </div>
         </div>
