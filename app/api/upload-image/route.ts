@@ -49,6 +49,12 @@ export async function POST(req: NextRequest) {
         const err = await imageRes.json()
         return NextResponse.json({ error: 'Failed to upload image to GitHub: ' + err.message }, { status: 500 })
       }
+      
+      // Return the raw GitHub URL so it's instantly accessible in production
+      return NextResponse.json({ 
+        success: true, 
+        url: `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${imagePath}` 
+      })
     } else if (isDev) {
       // Local fallback
       const fullImagePath = path.join(process.cwd(), imagePath)
