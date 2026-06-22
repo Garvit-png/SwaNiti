@@ -253,12 +253,13 @@ export default function AdminPortal() {
       if (!text) return
       const url = prompt('Enter link URL (e.g. https://example.com):')
       if (url) {
-        execCommand('insertHTML', `<a href="${url}" style="color: #2563eb; text-decoration: underline;">${text}</a>&nbsp;`)
+        execCommand('insertHTML', `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline;">${text}</a>&nbsp;`)
       }
     } else {
       const url = prompt('Enter link URL (e.g. https://example.com):')
       if (url) {
-        execCommand('createLink', url)
+        const text = selection.toString()
+        execCommand('insertHTML', `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline;">${text}</a>`)
       }
     }
   }
@@ -279,7 +280,8 @@ export default function AdminPortal() {
     // If text is selected and a URL is pasted, turn it into a link
     if (isUrl && selection && !selection.isCollapsed && editorRef.current?.contains(selection.anchorNode)) {
       e.preventDefault()
-      execCommand('createLink', pastedText.trim())
+      const text = selection.toString()
+      execCommand('insertHTML', `<a href="${pastedText.trim()}" target="_blank" rel="noopener noreferrer" style="color: #2563eb; text-decoration: underline;">${text}</a>`)
     }
   }
 
