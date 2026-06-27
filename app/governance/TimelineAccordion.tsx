@@ -7,28 +7,23 @@ import styles from './governance.module.css'
 const TIMELINE_DATA = [
   {
     id: '01',
-    year: '2023-2024',
+    year: '2024-2025',
     documents: [
-      { title: 'Annual Impact Report 2023-24', size: '2.4 MB', type: 'PDF', pdfUrl: '/documents/sample.pdf' },
-      { title: 'Audited Financial Statements', size: '1.1 MB', type: 'PDF', pdfUrl: '/documents/sample.pdf' },
-      { title: 'Board Resolution Highlights', size: '450 KB', type: 'PDF', pdfUrl: '/documents/sample.pdf' }
+      { title: 'Annual Impact Report 2024-25', size: '22 MB', type: 'PDF', pdfUrl: '/documents/annual-report-2024-2025.pdf' }
     ]
   },
   {
     id: '02',
-    year: '2022-2023',
+    year: '2023-2024',
     documents: [
-      { title: 'Annual Impact Report 2022-23', size: '3.1 MB', type: 'PDF', pdfUrl: '/documents/sample.pdf' },
-      { title: 'Audited Financial Statements', size: '1.4 MB', type: 'PDF', pdfUrl: '/documents/sample.pdf' },
+      { title: 'Annual Impact Report 2023-24', size: '3.1 MB', type: 'PDF', pdfUrl: '/documents/annual-report-2023-2024.pdf' }
     ]
   },
   {
     id: '03',
-    year: '2021-2022',
+    year: '2022-2023',
     documents: [
-      { title: 'Annual Impact Report 2021-22', size: '1.8 MB', type: 'PDF', pdfUrl: '/documents/sample.pdf' },
-      { title: 'Audited Financial Statements', size: '890 KB', type: 'PDF', pdfUrl: '/documents/sample.pdf' },
-      { title: 'Foundational Charter', size: '1.2 MB', type: 'PDF', pdfUrl: '/documents/sample.pdf' }
+      { title: 'Annual Impact Report 2022-23', size: '2.8 MB', type: 'PDF', pdfUrl: '/documents/annual-report-2022-2023.pdf' }
     ]
   }
 ]
@@ -142,10 +137,17 @@ export default function TimelineAccordion() {
                               <span>View</span>
                             </a>
                           )}
-                          <button className={styles.downloadBtn} aria-label={`Download ${doc.title}`}>
-                            <Download size={18} strokeWidth={1.5} />
-                            <span>Download</span>
-                          </button>
+                          {doc.pdfUrl && (
+                            <a 
+                              href={doc.pdfUrl}
+                              download
+                              className={styles.downloadBtn} 
+                              aria-label={`Download ${doc.title}`}
+                            >
+                              <Download size={18} strokeWidth={1.5} />
+                              <span>Download</span>
+                            </a>
+                          )}
                         </div>
                       </div>
                     </div>
