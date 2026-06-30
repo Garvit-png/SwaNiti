@@ -45,7 +45,7 @@ export default function Navbar({ activePath = '/', onMenuClick }: NavbarProps) {
 
   const navLinks = [
     { label: 'About', href: '/about' },
-    { label: 'Projects', href: '/projects' },
+    { label: 'Initiatives', href: '/projects' },
     { label: 'Insights', href: '/insights' },
     { label: 'Governance', href: '/governance' },
   ]
@@ -171,7 +171,7 @@ export default function Navbar({ activePath = '/', onMenuClick }: NavbarProps) {
               <nav className="sr-menu-nav-links">
                 {[
                   { num: '01', label: 'About', href: '/about' },
-                  { num: '02', label: 'Projects', href: '/projects' },
+                  { num: '02', label: 'Initiatives', href: '/projects' },
                   { num: '03', label: 'Insights', href: '/insights' },
                   { num: '04', label: 'Governance', href: '/governance' },
                 ].map((item, index) => (

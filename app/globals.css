@@ -73,7 +73,14 @@ body {
   color: var(--sr-ink);
   font-family: var(--font-inter);
   -webkit-font-smoothing: antialiased;
+}
+
+*, *::before, *::after {
   cursor: url('/cursor.png') 20 20, auto;
+}
+
+a, button, [role="button"], input, select, textarea, a *, button * {
+  cursor: url('/cursor.png') 20 20, pointer;
 }
 
 a {

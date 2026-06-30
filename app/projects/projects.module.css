@@ -1,3 +1,6 @@
+/* ─────────────────────────────────────────────
+   PAGE
+───────────────────────────────────────────── */
 .page {
   min-height: 100vh;
   background: #fdfcf7;
@@ -6,6 +9,9 @@
   overflow-x: hidden;
 }
 
+/* ─────────────────────────────────────────────
+   HERO
+───────────────────────────────────────────── */
 .heroSection {
   padding: 20px 40px 0;
 }
@@ -51,6 +57,9 @@
   background: #000000;
 }
 
+/* ─────────────────────────────────────────────
+   INITIATIVE LIST
+───────────────────────────────────────────── */
 .projectList {
   width: min(1400px, calc(100% - 32px));
   margin: 26px auto 0;
@@ -59,24 +68,33 @@
   gap: 60px;
 }
 
+/* ─────────────────────────────────────────────
+   CARD (single panel with top-left notch tag)
+───────────────────────────────────────────── */
 .card {
   display: flex;
   align-items: stretch;
-  min-height: 360px;
+  min-height: 340px;
   background: #FDF4CE;
-  border: 1.5px solid #1a1a1a;
   border-radius: 28px;
-  overflow: hidden;
-  box-shadow: 0 16px 40px rgba(214, 174, 38, 0.08);
+  overflow: visible;
+  position: relative;
+  /* Use box-shadow ring instead of border so the notch corners sit clean */
+  box-shadow:
+    4px 4px 0px 0px #1a1a1a;
   opacity: 0;
   transform: translateX(-50px);
   transition:
     opacity 0.65s ease-out,
     transform 0.65s ease-out,
-    box-shadow 0.2s ease,
-    border-color 0.2s ease;
+    box-shadow 0.2s ease;
   transition-delay: var(--card-delay);
   will-change: opacity, transform;
+}
+
+/* clip the card itself so inner content doesn't overflow */
+.card > * {
+  overflow: hidden;
 }
 
 .cardReverse {
@@ -90,7 +108,8 @@
 }
 
 .card:hover {
-  box-shadow: 0 24px 55px rgba(214, 174, 38, 0.16);
+  box-shadow:
+    6px 6px 0px 0px #1a1a1a;
   transform: translateY(-4px);
 }
 
@@ -98,128 +117,387 @@
   transform: translateY(-4px);
 }
 
-.content,
-.accentBox {
-  position: relative;
-  flex: 1;
+/* ─────────────────────────────────────────────
+   TOP-LEFT NOTCH TAG  (same technique as sr-section-notch-outer)
+   The tag sits in the top-left corner of the card, cut out with
+   inverse border-radius pseudo-elements on the card background.
+───────────────────────────────────────────── */
+.cardNotch {
+  position: absolute;
+  /* Overlap the card's 1.5px box-shadow border fully */
+  top: -2px;
+  left: -2px;
+  z-index: 10;
+  /* Match card border-radius top-left */
+  border-top-left-radius: 28px;
+  border-bottom-right-radius: 20px;
+  /* Background matches the page background so it "cuts" into the card */
+  background: #fdfcf7;
+  padding: 14px 22px 14px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+/* Inverse corner — right side of the notch */
+/* Extra 2px on size + spread to hide the card's box-shadow border ring */
+.cardNotch::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -22px;
+  width: 22px;
+  height: 22px;
+  background: transparent;
+  border-top-left-radius: 22px;
+  box-shadow: -11px -11px 0 11px #fdfcf7;
+}
+
+/* Inverse corner — bottom of the notch */
+.cardNotch::after {
+  content: "";
+  position: absolute;
+  bottom: -22px;
+  left: 0;
+  width: 22px;
+  height: 22px;
+  background: transparent;
+  border-top-left-radius: 22px;
+  box-shadow: -11px -11px 0 11px #fdfcf7;
+}
+
+/* The pill label inside the notch */
+.cardNotchLabel {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────────
+   CONTENT PANEL
+───────────────────────────────────────────── */
 .content {
-  flex-basis: 60%;
-  padding: 48px 42px 42px 48px;
+  flex: 1.2;
+  /* Extra top padding to clear the notch tag */
+  padding: 78px 52px 44px 52px;
   display: flex;
   flex-direction: column;
+  gap: 0;
 }
 
 .contentReverse {
-  padding: 48px 48px 42px 42px;
+  padding: 78px 52px 44px 52px;
 }
 
-.number {
-  position: absolute;
-  top: 10px;
-  right: 22px;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(5rem, 10vw, 6.5rem);
+.initiativeTitle {
+  font-family: var(--font-lexend), sans-serif;
+  font-size: clamp(1.4rem, 2vw, 1.85rem);
   font-weight: 700;
-  line-height: 0.85;
-  color: #000000;
-  pointer-events: none;
-  user-select: none;
-}
-
-.numberRight {
-  right: 22px;
-}
-
-.tag {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  padding: 8px 14px;
-  border-radius: 999px;
-  background: #fff8cc;
-  color: #7a6200;
-  border: 1px solid rgba(122, 98, 0, 0.08);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  color: #0f172a;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
 }
 
 .content p {
   position: relative;
-  max-width: 630px;
-  margin-top: 16px;
-  font-size: 1.25rem;
+  max-width: 640px;
+  margin-top: 0;
+  font-size: 1.1rem;
   line-height: 1.8;
-  color: #111827; /* Darker text for readability */
+  color: #1f2937;
+  flex: 1;
 }
 
-.learnMore {
+/* ─────────────────────────────────────────────
+   IMAGE PANEL
+───────────────────────────────────────────── */
+.imagePanel {
+  flex: 1;
+  min-height: 100%;
   position: relative;
-  align-self: flex-end;
-  margin-top: auto;
-  padding: 14px 32px;
-  background: var(--sr-ink);
+  overflow: hidden;
+}
+
+.imagePanel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card .imagePanel {
+  border-left: 2px solid #1a1a1a;
+}
+
+.cardReverse .imagePanel {
+  border-left: none;
+  border-right: 2px solid #1a1a1a;
+}
+
+/* ─────────────────────────────────────────────
+   BUTTON ROW
+───────────────────────────────────────────── */
+.buttonRow {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.detailsBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 30px;
+  background: var(--sr-ink, #0f2429);
+  border: none;
   border-radius: 8px;
   color: #ffffff;
   font-size: 0.95rem;
   font-weight: 500;
+  cursor: pointer;
   transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+  text-decoration: none;
 }
 
-.learnMore:hover {
-  background: var(--sr-ink);
+.detailsBtn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px rgba(15, 36, 41, 0.18);
+}
+
+.outlineBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 30px;
+  background: transparent;
+  border: 2px solid var(--sr-ink, #0f2429);
+  border-radius: 8px;
+  color: var(--sr-ink, #0f2429);
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  font-family: inherit;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.outlineBtn:hover {
+  background: var(--sr-ink, #0f2429);
   color: #ffffff;
   transform: scale(1.05);
-  box-shadow: 0 10px 20px rgba(15, 36, 41, 0.15);
+  box-shadow: 0 10px 20px rgba(15, 36, 41, 0.18);
 }
 
-.accentBox {
-  flex-basis: 40%;
-  background: #fff8cc;
+/* Hides the native cursor only on buttons that have a custom cursor image */
+.outlineBtnNoCursor,
+.outlineBtnNoCursor * {
+  cursor: none !important;
+}
+
+/* ─────────────────────────────────────────────
+   MODAL OVERLAY
+───────────────────────────────────────────── */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(10, 20, 25, 0.62);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 24px;
+  animation: overlayFadeIn 0.25s ease;
+}
+
+@keyframes overlayFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─────────────────────────────────────────────
+   MODAL BOX
+───────────────────────────────────────────── */
+.modal {
+  width: min(680px, 100%);
+  background: #fdfcf7;
+  border: 1.5px solid #1a1a1a;
+  border-radius: 24px;
   overflow: hidden;
-  position: relative;
+  box-shadow: 0 40px 80px rgba(10, 20, 25, 0.35);
+  animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
 }
 
-.imageOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0f2429;
-  opacity: 0.65;
-  z-index: 1;
+@keyframes modalSlideUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 
-.imageTitle {
-  position: absolute;
-  z-index: 2;
-  font-family: var(--font-lexend), sans-serif;
-  font-size: clamp(2rem, 3vw, 2.8rem);
-  font-weight: 500;
+.modalHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 36px 36px 24px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modalTag {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 999px;
   color: #ffffff;
-  text-align: center;
-  padding: 30px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.modalTitle {
+  font-family: var(--font-lexend), sans-serif;
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-weight: 700;
+  color: #0f172a;
   line-height: 1.2;
   letter-spacing: -0.02em;
+  margin: 0;
 }
 
-.accentBox span {
-  font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(3.5rem, 6vw, 4.5rem);
-  font-weight: 700;
-  line-height: 1;
-  color: #000000;
-  letter-spacing: -0.08em;
-  transform: translateY(4px);
+.modalClose {
+  flex-shrink: 0;
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #d1d5db;
+  border-radius: 50%;
+  background: transparent;
+  color: #374151;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  margin-top: 4px;
 }
 
+.modalClose:hover {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.modalBody {
+  padding: 28px 36px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  max-height: 45vh;
+}
+
+.modalBody p {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #1f2937;
+  margin: 0;
+}
+
+.modalFooter {
+  padding: 20px 36px 30px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  border-top: 1px solid #e5e7eb;
+}
+
+.modalPrimaryBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 26px;
+  background: var(--sr-ink, #0f2429);
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+}
+
+.modalPrimaryBtn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 20px rgba(15, 36, 41, 0.18);
+  color: #ffffff;
+}
+
+.modalSecondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 26px;
+  background: transparent;
+  border: 1.5px solid #1a1a1a;
+  border-radius: 8px;
+  color: #0f172a;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
+}
+
+.modalSecondaryBtn:hover {
+  background: #FDF4CE;
+  transform: scale(1.04);
+  color: #0f172a;
+}
+
+/* ─────────────────────────────────────────────
+   CUSTOM CURSOR
+───────────────────────────────────────────── */
+.customCursor {
+  position: fixed;
+  width: 64px;
+  height: 64px;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%) scale(1);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3)) saturate(1.4) contrast(1.2) brightness(0.9);
+  animation: cursorIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes cursorIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.hideCursor,
+.hideCursor * {
+  cursor: none !important;
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE — TABLET
+───────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .heroSection {
     padding: 16px 24px 0;
@@ -235,41 +513,30 @@
 
   .projectList {
     width: min(100%, calc(100% - 48px));
+    gap: 40px;
   }
 
   .card,
   .cardReverse {
-    flex-direction: column-reverse;
     min-height: auto;
+    flex-direction: column-reverse;
   }
 
   .content,
   .contentReverse {
     flex-basis: auto;
-    padding: 36px 24px 28px;
-  }
-
-  .accentBox {
-    width: 100%;
-    min-height: 280px;
-    flex-basis: auto;
-  }
-
-  .accentBox span {
-    font-size: clamp(4.5rem, 18vw, 6.5rem);
-  }
-
-  .number,
-  .numberRight {
-    display: none;
+    padding: 72px 28px 28px;
   }
   
-  .tag, .content h2, .content p, .learnMore {
-    position: relative;
-    z-index: 1;
+  .imagePanel {
+    min-height: 200px;
+    border-bottom: 2px solid #1a1a1a;
   }
 }
 
+/* ─────────────────────────────────────────────
+   RESPONSIVE — MOBILE
+───────────────────────────────────────────── */
 @media (max-width: 640px) {
   .heroSection {
     padding: 16px 20px 0;
@@ -301,28 +568,40 @@
     border-radius: 22px;
   }
 
-  .content,
-  .contentReverse {
-    padding: 30px 18px 24px;
-  }
-
-  .imageTitle {
-    font-size: 1.8rem;
-    padding: 20px;
-  }
-
   .content p {
-    font-size: 1rem;
-    margin-bottom: 24px;
+    font-size: 0.97rem;
   }
 
-  .accentBox {
+  .initiativeTitle {
+    font-size: 1.25rem;
+  }
+
+  .buttonRow {
+    margin-top: 24px;
+  }
+
+  .detailsBtn {
     width: 100%;
-    min-height: 240px;
+    justify-content: center;
   }
 
-  .learnMore {
-    width: auto;
-    align-self: flex-start;
+  .modalHeader {
+    padding: 24px 20px 18px;
+  }
+
+  .modalBody {
+    padding: 20px;
+    max-height: 38vh;
+  }
+
+  .modalFooter {
+    padding: 16px 20px 24px;
+    flex-direction: column;
+  }
+
+  .modalPrimaryBtn,
+  .modalSecondaryBtn {
+    width: 100%;
+    justify-content: center;
   }
 }
