@@ -51,7 +51,7 @@ const initiatives: Initiative[] = [
     websiteLink: 'https://www.viksitbharatyatra.com/',
     cursorImg: '/images/viksit-bharat-cursor.png',
     image: '/projects/viksit.png',
-    imagePos: 'center 5%',
+    imagePos: 'center 47%',
   },
   {
     id: 'lifesite',
