@@ -19,6 +19,7 @@ type Initiative = {
   websiteLink: string
   cursorImg?: string
   image: string
+  imagePos?: string
 }
 
 const initiatives: Initiative[] = [
@@ -35,6 +36,7 @@ const initiatives: Initiative[] = [
     websiteLink: 'https://www.svabharat.in/',
     cursorImg: '/images/svabharat-cursor.png',
     image: '/projects/svabharat.jpg',
+    imagePos: 'center 40%',
   },
   {
     id: 'viksit-bharat',
@@ -49,6 +51,7 @@ const initiatives: Initiative[] = [
     websiteLink: 'https://www.viksitbharatyatra.com/',
     cursorImg: '/images/viksit-bharat-cursor.png',
     image: '/projects/viksit.png',
+    imagePos: 'center 5%',
   },
   {
     id: 'lifesite',
@@ -62,6 +65,7 @@ const initiatives: Initiative[] = [
     websiteCta: 'Experience LifeSite →',
     websiteLink: 'https://www.lifesite.in/',
     image: '/projects/lifesite.png',
+    imagePos: 'center 40%',
   },
   {
     id: 'creative-economy',
@@ -76,6 +80,7 @@ const initiatives: Initiative[] = [
     websiteLink: 'https://www.cepl.in/',
     cursorImg: '/images/cepl-cursor.png',
     image: '/projects/economy.jpg',
+    imagePos: 'center 35%',
   },
 ]
 
@@ -195,7 +200,11 @@ export default function InitiativesPage() {
 
               {/* Image panel */}
               <div className={styles.imagePanel}>
-                <img src={initiative.image} alt={initiative.title} />
+                <img 
+                  src={initiative.image} 
+                  alt={initiative.title} 
+                  style={{ objectPosition: initiative.imagePos || 'center center' }} 
+                />
               </div>
             </article>
           )

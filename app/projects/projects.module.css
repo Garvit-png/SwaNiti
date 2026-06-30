@@ -234,11 +234,16 @@
 
 .card .imagePanel {
   border-left: 2px solid #1a1a1a;
+  border-top-right-radius: 28px;
+  border-bottom-right-radius: 28px;
 }
 
 .cardReverse .imagePanel {
   border-left: none;
   border-right: 2px solid #1a1a1a;
+  border-top-left-radius: 28px;
+  border-bottom-left-radius: 28px;
+  
 }
 
 /* ─────────────────────────────────────────────
@@ -525,9 +530,13 @@
     padding: 72px 28px 28px;
   }
   
-  .imagePanel {
-    min-height: 200px;
+  .card .imagePanel,
+  .cardReverse .imagePanel {
+    min-height: 280px;
     border-bottom: 2px solid #1a1a1a;
+    border-left: none;
+    border-right: none;
+    border-radius: 28px 28px 0 0;
   }
 }
 
