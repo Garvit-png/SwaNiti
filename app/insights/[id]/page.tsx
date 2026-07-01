@@ -319,7 +319,7 @@ const blogsData: Record<string, BlogDetails> = {
   },
   'darshan-yatra-discovery': {
     id: 'darshan-yatra-discovery',
-    title: "Viksit Bharat Darshan Yatra: Transforming Youth through Self-Discovery",
+    title: "Viksit Bharat Yatra: Transforming Youth through Self-Discovery",
     coverTitle: "Transforming Youth through Self-Discovery",
     coverSub: "Honoring Prime Minister's Mission for a Developed India by 2047",
     coverUrl: "www.svaniti.in/darshan-yatra",
@@ -335,7 +335,7 @@ const blogsData: Record<string, BlogDetails> = {
     contentHtml: (
       <>
         <p>
-          The Viksit Bharat Darshan Yatra is a flagship youth empowerment movement that encourages young citizens to embark on journeys of self-discovery, civic engagement, and national integration. Backed by the vision of a developed India by 2047, this project challenges the youth to step out of their classrooms and experience the diverse realities, heritage, and growth stories of Bharat firsthand.
+          The Viksit Bharat Yatra is a flagship youth empowerment movement that encourages young citizens to embark on journeys of self-discovery, civic engagement, and national integration. Backed by the vision of a developed India by 2047, this project challenges the youth to step out of their classrooms and experience the diverse realities, heritage, and growth stories of Bharat firsthand.
         </p>
         <p>
           Through curated solo travel itineraries, fellows explore rural innovations, historical landmarks, and localized governance models. This experiential learning process fosters philosophical reflection, problem-solving skills, and a deep-seated commitment to nation-building.

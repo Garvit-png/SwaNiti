@@ -41,10 +41,10 @@ const initiatives: Initiative[] = [
   {
     id: 'viksit-bharat',
     title: 'Viksit Bharat Yatra',
-    tag: 'Youth Transformation Initiative',
+    tag: 'Youth Initiative',
     tagColor: '#1a2a3a',
-    desc: 'Viksit Bharat Darshan Yatra is a growing movement of explorers reimagining travel as a journey of learning, reflection, and purpose. By experiencing Bharat firsthand, participants cultivate new perspectives, transform themselves, and contribute to the vision of a Viksit Bharat.',
-    fullDesc: 'Viksit Bharat Darshan Yatra is a growing movement of explorers reimagining travel as a journey of learning, reflection, and purpose. By experiencing Bharat firsthand, participants cultivate new perspectives, transform themselves, and contribute to the vision of a Viksit Bharat.\n\nHonoring the PM\'s mission for a Developed India by 2047, the Yatra fosters self-discovery through solo, purposeful philosophical journeys for Viksit Yuva. Each journey is a transformative encounter with the land, its people, and its stories — turning travel into a rite of purpose.',
+    desc: 'Viksit Bharat Yatra is a growing movement of explorers reimagining travel as a journey of learning, reflection, and purpose. By experiencing Bharat firsthand, participants cultivate new perspectives, transform themselves, and contribute to the vision of a Viksit Bharat.',
+    fullDesc: 'Viksit Bharat Yatra is a growing movement of explorers reimagining travel as a journey of learning, reflection, and purpose. By experiencing Bharat firsthand, participants cultivate new perspectives, transform themselves, and contribute to the vision of a Viksit Bharat.\n\nHonoring the PM\'s mission for a Developed India by 2047, the Yatra fosters self-discovery through solo, purposeful philosophical journeys for Viksit Yuva. Each journey is a transformative encounter with the land, its people, and its stories — turning travel into a rite of purpose.',
     exploreCta: 'Explore the Journey →',
     exploreLink: '/projects/viksit-bharat',
     websiteCta: 'Visit Yatra Website →',
@@ -225,14 +225,25 @@ export default function InitiativesPage() {
           <div className={styles.modal}>
             {/* Modal Header */}
             <div className={styles.modalHeader}>
-              <div>
-                <span
-                  className={styles.modalTag}
-                  style={{ background: activeModal.tagColor }}
-                >
-                  {activeModal.tag}
-                </span>
-                <h2 className={styles.modalTitle}>{activeModal.title}</h2>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', width: '100%', paddingRight: '20px' }}>
+                <div>
+                  <span
+                    className={styles.modalTag}
+                    style={{ background: activeModal.tagColor }}
+                  >
+                    {activeModal.tag}
+                  </span>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginTop: '10px' }}>
+                    <h2 className={styles.modalTitle} style={{ margin: 0 }}>{activeModal.title}</h2>
+                    {(activeModal.cursorImg || activeModal.image) && (
+                      <img 
+                        src={activeModal.cursorImg || activeModal.image} 
+                        alt={`${activeModal.title} logo`}
+                        style={{ width: '48px', height: '48px', objectFit: 'contain', borderRadius: '50%' }}
+                      />
+                    )}
+                  </div>
+                </div>
               </div>
               <button
                 className={styles.modalClose}
@@ -255,13 +266,6 @@ export default function InitiativesPage() {
 
             {/* Modal Footer CTAs */}
             <div className={styles.modalFooter}>
-              <Link
-                href={activeModal.exploreLink}
-                className={styles.modalPrimaryBtn}
-                onClick={() => setActiveModal(null)}
-              >
-                {activeModal.exploreCta}
-              </Link>
               <a
                 href={activeModal.websiteLink}
                 className={styles.modalSecondaryBtn}
