@@ -252,7 +252,7 @@ export default function AboutPage() {
                 { name: 'Uzma A', role: 'Director &\nChief Culture Officer', photo: '/uzma-bw.jpg', hoverPhoto: '/uzma.jpg', link: 'https://www.linkedin.com/in/uzma-belim-45577a229/' },
                 { name: 'Akshit Gadhia', role: 'Compliance Officer', photo: '/akshit-bw.jpg', hoverPhoto: '/akshit.jpg', link: 'https://www.linkedin.com/in/akshit-gadhia-b380a2180/' },
                 { name: 'Sagar Narayan', role: 'Research Associate', photo: '/sagar-bw.jpg', hoverPhoto: '/sagar.jpg', link: 'https://www.linkedin.com/in/sagarnaarayan/' },
-                { name: 'Pallavi Kaushik', role: 'Project Manager, Sva-Bharat Movement', photo: '/pallavi-bw.jpg', hoverPhoto: '/pallavi.jpg', link: 'https://www.linkedin.com/in/pallavi-kaushik-capm-4420471b7/' }
+                { name: 'Pallavi Kaushik', role: 'Project Manager, Sva-Bharat Movement', photo: '/pallavi-bw.jpg', hoverPhoto: '/pallavi.jpg', link: 'https://www.linkedin.com/in/pallavi-kaushik-pmp-4420471b7/' }
               ].map((member, i) => (
                 <div
                   key={i}
