@@ -79,7 +79,13 @@ export default function Home() {
 
   const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
+    // For phone: allow only digits and max 10 characters
+    if (name === 'phone') {
+      const digitsOnly = value.replace(/\D/g, '').slice(0, 10)
+      setFormData(prev => ({ ...prev, phone: digitsOnly }))
+    } else {
+      setFormData(prev => ({ ...prev, [name]: value }))
+    }
     // Clear error for this field as user types
     if (formErrors[name]) {
       setFormErrors(prev => { const n = { ...prev }; delete n[name]; return n })
@@ -91,10 +97,14 @@ export default function Home() {
     const errors: Record<string, string> = {}
 
     if (!formData.name.trim()) errors.name = 'Please enter your name'
-    if (!formData.phone.trim()) errors.phone = 'Please enter your contact number'
+    if (!formData.phone.trim()) {
+      errors.phone = 'Please enter your contact number'
+    } else if (!/^\d{10}$/.test(formData.phone)) {
+      errors.phone = 'Mobile number must be exactly 10 digits'
+    }
     if (!formData.email.trim()) {
       errors.email = 'Please enter your email'
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    } else if (!/^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(formData.email)) {
       errors.email = 'Please enter a valid email address'
     }
     if (!formData.message.trim()) errors.message = 'Please write your notion note'
@@ -534,11 +544,13 @@ export default function Home() {
                   <label htmlFor="contact-phone">Contact No. *</label>
                   <input
                     id="contact-phone"
-                    type="text"
+                    type="tel"
                     name="phone"
                     value={formData.phone}
                     onChange={handleFormChange}
-                    placeholder="+91 XXXXX XXXXX"
+                    placeholder="10 digit mobile number"
+                    maxLength={10}
+                    inputMode="numeric"
                   />
                   {formErrors.phone && (
                     <motion.span initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} className="sr-field-error">
