@@ -1583,34 +1583,46 @@ a {
 
 /* Footer Developer Contact (inside mission column) */
 .sr-footer-dev-contact {
-  display: inline;
-  text-decoration: none;
-  font-size: 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 24px;
+}
+
+.sr-footer-dev-title {
+  font-size: 1rem;
   font-weight: 700;
   color: var(--sr-ink);
+  opacity: 0.9;
+  letter-spacing: 0.01em;
+}
+
+.sr-footer-dev-name {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--sr-ink);
+  text-decoration: none;
   opacity: 0.75;
   transition: opacity 0.2s;
 }
 
-.sr-footer-dev-contact:hover {
+.sr-footer-dev-name:hover {
   opacity: 1;
   text-decoration: underline;
 }
 
-.sr-footer-dev-label {
-  font-size: 0.72rem;
-  color: var(--sr-ink);
-  opacity: 0.55;
+.sr-footer-dev-email {
+  font-size: 0.8rem;
   font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0.02em;
+  color: var(--sr-ink);
+  text-decoration: none;
+  opacity: 0.55;
+  transition: opacity 0.2s;
 }
 
-.sr-footer-dev-name {
-  font-size: 0.9rem;
-  color: var(--sr-ink);
-  font-weight: 700;
-  line-height: 1;
+.sr-footer-dev-email:hover {
+  opacity: 1;
+  text-decoration: underline;
 }
 
 .sr-footer-links h4,

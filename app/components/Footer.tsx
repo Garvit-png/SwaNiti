@@ -60,14 +60,23 @@ export default function Footer() {
 
         <div className="sr-footer-mission">
           <strong>Think-Tank for Education<br />&amp; Public Policy</strong>
-          <a
-            href="https://github.com/Garvit-png"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="sr-footer-dev-contact"
-          >
-            Developer&apos;s Contact — <strong>Garvit Gandhi</strong>
-          </a>
+          <div className="sr-footer-dev-contact">
+            <span className="sr-footer-dev-title">Developer&apos;s Contact</span>
+            <a
+              href="https://github.com/Garvit-png"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="sr-footer-dev-name"
+            >
+              Garvit Gandhi
+            </a>
+            <a
+              href="mailto:garvitgandhi0313@gmail.com"
+              className="sr-footer-dev-email"
+            >
+              garvitgandhi0313@gmail.com
+            </a>
+          </div>
         </div>
 
         <div className="sr-footer-links">
