@@ -1577,6 +1577,40 @@ a {
   font-size: 1.1rem;
   line-height: 1.4;
   font-weight: 600;
+  display: block;
+  margin-bottom: 16px;
+}
+
+/* Footer Developer Contact (inside mission column) */
+.sr-footer-dev-contact {
+  display: inline;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--sr-ink);
+  opacity: 0.75;
+  transition: opacity 0.2s;
+}
+
+.sr-footer-dev-contact:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.sr-footer-dev-label {
+  font-size: 0.72rem;
+  color: var(--sr-ink);
+  opacity: 0.55;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.sr-footer-dev-name {
+  font-size: 0.9rem;
+  color: var(--sr-ink);
+  font-weight: 700;
+  line-height: 1;
 }
 
 .sr-footer-links h4,
@@ -2495,4 +2529,50 @@ a {
   html {
     @apply font-sans;
   }
+}
+
+/* Developer Contact Link */
+.sr-dev-contact-link {
+  text-decoration: none;
+  background: rgba(200, 251, 251, 0.4);
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: var(--sr-ink);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s, transform 0.2s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  border: 1px solid rgba(11, 34, 40, 0.12);
+}
+
+.sr-dev-contact-link:hover {
+  background: #fdf5e6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(11, 34, 40, 0.1);
+}
+
+.sr-dev-contact-label {
+  font-size: 0.78rem;
+  opacity: 0.65;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.sr-dev-contact-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--sr-ink);
+  line-height: 1;
+}
+
+/* Mobile menu developer name sub-label */
+.sr-dev-mobile-name {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 400;
+  opacity: 0.6;
+  margin-top: 2px;
 }

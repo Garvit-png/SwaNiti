@@ -60,6 +60,14 @@ export default function Footer() {
 
         <div className="sr-footer-mission">
           <strong>Think-Tank for Education<br />&amp; Public Policy</strong>
+          <a
+            href="https://github.com/Garvit-png"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="sr-footer-dev-contact"
+          >
+            Developer&apos;s Contact — <strong>Garvit Gandhi</strong>
+          </a>
         </div>
 
         <div className="sr-footer-links">

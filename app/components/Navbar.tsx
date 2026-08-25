@@ -77,7 +77,6 @@ export default function Navbar({ activePath = '/', onMenuClick }: NavbarProps) {
               {link.label}
             </Link>
           ))}
-
         </nav>
         
         <button 
